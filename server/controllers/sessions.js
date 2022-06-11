@@ -66,11 +66,25 @@ const BAD_CREDENTIALS_STATUS = 403
 //   });
 // });
 
-
-
-router.get("/", (req, res) => {
+function isAuthenticated(req, res, next) {
+  if (req.session.authenticated) next();
+  else next("route");
+}
+router.get("/", isAuthenticated, (req, res) => {
   //  Called on ever page refresh to check if the user is already logged in.
-  // console.log(req.session) //TODO: delete console.log
+  // console.log(req.session) //
+  // console.log("req.hostname", req.hostname);
+  // console.log("req.sessionID", req.sessionID);
+  // console.log("req.session.name", req.session.cookie);
+  // console.log("req.session.authenticated", req.session.authenticated);
+  console.log("User already logged in "); //
+  res.json({
+    name: req.session.name,
+    email: req.session.email,
+  });
+});
+router.get("/", (req, res) => {
+  //  If the user is not authenticated then come to this route. FIXME: clean up 
   res.json({
     name: req.session.name,
     email: req.session.email,

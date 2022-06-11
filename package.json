@@ -4,8 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "npx monitor": "npx nodemon server/server.js"
+    "start db server then application": "service postgresql start && npx nodemon server/server.js",
+    "start npx monitor": "npx nodemon server/server.js",
+    "--------------------------------":"-",
+    "stop postgresql": "service postgresql stop",
+    "start postgresql": "service postgresql start",
+    "-------------------------------":"-",    
+    "database_reset": "psql project3_db < ./server/db/schema_init.sql && psql project3_db < ./server/db/schema"
+
   },
   "repository": {
     "type": "git",

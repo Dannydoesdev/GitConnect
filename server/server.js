@@ -62,7 +62,7 @@ if (process.env.DATABASE) {
   app.listen(PORT, () => {
     console.log(`Listening on http://localhost:${PORT}`);
   });
-  console.log(`DATABSE ONLINE: ${process.env.DATABASE}`);
+  console.log(`DATABASE ONLINE: ${process.env.DATABASE}`);
 } else {
   console.log(
     "No Database has been setup. Go to the .env file and place the database name"

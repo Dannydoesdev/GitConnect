@@ -1,0 +1,63 @@
+/*
+    The css for the index.html
+*/
+
+html {
+  margin: auto;
+  /* background-image:url('../images/under_construction.jpg'); */
+  background-image: url("../images/html_background.jpg");
+  background-size: cover;
+}
+body {
+  margin: auto;
+  text-align: center;
+}
+.formStructure {
+  margin: auto;
+  width: 80%;
+}
+.addChallenge {
+  margin: auto;
+  justify-content: center;
+}
+
+.inputClass {
+  width: 90%;
+}
+
+#thedescription {
+  height: 150px;
+  margin: 1% 0;
+  width: 90%;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: none;
+}
+#addChallengeButton {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 90%;
+}
+.thetitleFieldset {
+  padding: 3px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.formLabelText {
+  text-align: right;
+  font-size: 26px;
+  padding: 0 5px 0 0;
+}
+.addNewTitle {
+  text-align: center;
+  border-bottom: 1px solid grey;
+}
+#listHeading {
+  color: white;
+}
