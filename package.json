@@ -1,0 +1,34 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "npx monitor": "npx nodemon server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dannydoesdev/project3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dannydoesdev/project3/issues"
+  },
+  "homepage": "https://github.com/Dannydoesdev/project3#readme",
+   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-pg-simple": "^7.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "pg": "^8.7.3",
+    "postgres": "^3.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.8.1"
+  }
+}
