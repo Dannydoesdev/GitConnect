@@ -52,9 +52,9 @@ app.use(
     }),
   })
 );
-// const usersController = require("./controllers/users");
+const usersController = require("./controllers/users");
 const sessionController = require("./controllers/sessions");
-// app.use("/api/users", usersController);
+app.use("/api/users", usersController);
 app.use("/api/session", sessionController);
 // ********************************************************************************************************************
 // DEVELOPER comms
