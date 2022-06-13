@@ -1,17 +1,17 @@
 {
   "name": "project3",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "# DESCRIPTION",
+  "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "start db server then application": "service postgresql start && npx nodemon server/server.js",
     "start npx monitor": "npx nodemon server/server.js",
-    "--------------------------------":"-",
+    "--------------------------------": "-",
     "stop postgresql": "service postgresql stop",
     "start postgresql": "service postgresql start",
-    "-------------------------------":"-",    
+    "-------------------------------": "-",
     "database_reset": "psql project3_db < ./server/db/schema_init.sql && psql project3_db < ./server/db/schema"
-
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "url": "https://github.com/Dannydoesdev/project3/issues"
   },
   "homepage": "https://github.com/Dannydoesdev/project3#readme",
-   "dependencies": {
+  "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-pg-simple": "^7.0.0",
     "cors": "^2.8.5",
@@ -35,6 +35,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.16",
-    "ts-node": "^10.8.1"
+    "ts-node": "^10.8.1",
+    "axios": "^0.27.2",
+    "axios-mock-adapter": "^1.21.1"
   }
 }
