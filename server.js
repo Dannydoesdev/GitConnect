@@ -10,7 +10,7 @@ const { exit } = require("process");
 const express = require("express");
 const expressSession = require("express-session");
 const pgSession = require("connect-pg-simple")(expressSession);
-const db = require("./db/db");
+const db = require("./server/db/db");
 // ********************************************************************************************************************
 // CONSTANTS
 const appSecretKey = process.env.EXPRESS_SESSION_SECRET_KEY;
@@ -52,8 +52,8 @@ app.use(
     }),
   })
 );
-const usersController = require("./controllers/users");
-const sessionController = require("./controllers/sessions");
+const usersController = require("./server/controllers/users");
+const sessionController = require("./server/controllers/sessions");
 app.use("/api/users", usersController);
 app.use("/api/session", sessionController);
 // ********************************************************************************************************************
