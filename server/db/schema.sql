@@ -56,7 +56,6 @@ CREATE TABLE messages ( -- messages left for users
     themsg TEXT NOT NULL,
     timetoexpire DATE,
     msgread BIT NOT NULL
-
 );
 -- REPOS..
 CREATE TABLE repoParamaters ( -- Repos and their paramaters. 
@@ -68,4 +67,3 @@ CREATE TABLE repoParamaters ( -- Repos and their paramaters.
     tags TEXT,
     titleimage TEXT
 );
-;
