@@ -1,12 +1,16 @@
-# TITLE
+# GITCONNECT
 
-# DESCRIPTION
+---   
+## DESCRIPTION
 
-# FEATURES
+---   
+## FEATURES
 
-# FUNCTIONALITY
+---   
+## FUNCTIONALITY
 
-# GETTING STARTED
+---   
+## GETTING STARTED
 
 Generating a secret key from the command line. This will be used in conjuction with the postgresql database to security purposes.
 ~~~ 
