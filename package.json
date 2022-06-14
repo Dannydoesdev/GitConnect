@@ -8,10 +8,10 @@
     "start db server then application": "service postgresql start && npx nodemon server/server.js",
     "start npx monitor": "npx nodemon server/server.js",
     "--------------------------------": "-",
+    "start postgresql": "service postgresql start",    
     "stop postgresql": "service postgresql stop",
-    "start postgresql": "service postgresql start",
     "-------------------------------": "-",
-    "database_reset": "psql project3_db < ./server/db/schema_init.sql && psql project3_db < ./server/db/schema.sql"
+    "database_full_reset": "bash server/db/scripts/initialisedb.sh"
   },
   "repository": {
     "type": "git",

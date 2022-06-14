@@ -1,0 +1,2 @@
+-- This file contains the data for testing while developing the socialmediaTypes
+-- Once the site is fully functional, this file can be excluded from any database initialisation.
