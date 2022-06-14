@@ -31,6 +31,7 @@ CREATE TABLE users ( -- All users that have access to Login
     aboutmetitle TEXT,
     aboutme TEXT,
     mobile VARCHAR(16),
+    portfoliolink TEXT,
     CONSTRAINT validate_email CHECK (email LIKE '%___@___%__%')
 );
 CREATE TABLE hashed_passwords ( -- Separate table to store only hashed passwords and user ids. Security reasons
