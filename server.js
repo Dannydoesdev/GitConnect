@@ -6,10 +6,15 @@
 // ********************************************************************************************************************
 // SET UP THE INCLUDES
 require("dotenv").config();
-const { exit } = require("process");
+
+//commented out for now - was causing an error with something I was doing - Danny
+
+// const { exit } = require("process");
+
 const express = require("express");
 const expressSession = require("express-session");
 const pgSession = require("connect-pg-simple")(expressSession);
+const percentRound = require("percent-round");
 const db = require("./server/db/db");
 // ********************************************************************************************************************
 // CONSTANTS
