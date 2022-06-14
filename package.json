@@ -11,7 +11,7 @@
     "stop postgresql": "service postgresql stop",
     "start postgresql": "service postgresql start",
     "-------------------------------": "-",
-    "database_reset": "psql project3_db < ./server/db/schema_init.sql && psql project3_db < ./server/db/schema"
+    "database_reset": "psql project3_db < ./server/db/schema_init.sql && psql project3_db < ./server/db/schema.sql"
   },
   "repository": {
     "type": "git",
