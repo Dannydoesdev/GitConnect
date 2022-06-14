@@ -1,10 +1,10 @@
 -- INITIALISE THE STATIC data for the database
 
 -- USER TYPES
-INSERT INTO usertypes (typename,typedescription) VALUES('Developer','Software developers conceive of, design, and build computer programs');
-INSERT INTO usertypes (typename,typedescription) VALUES('Recruiter','Experts in the finding, screening and attracting of applicants for open positions.');
-INSERT INTO usertypes (typename,typedescription) VALUES('Database Administrator','Takes care of the GitConnect database');
-INSERT INTO usertypes (typename,typedescription) VALUES('Site God','Typically the developers of this site');
+INSERT INTO usertypes (id, typename,typedescription) VALUES(3,'Developer','Software developers conceive of, design, and build computer programs');
+INSERT INTO usertypes (id,typename,typedescription) VALUES(4,'Recruiter','Experts in the finding, screening and attracting of applicants for open positions.');
+INSERT INTO usertypes (id,typename,typedescription) VALUES(2,'Database Administrator','Takes care of the GitConnect database');
+INSERT INTO usertypes (id,typename,typedescription) VALUES(1,'Site God','Typically the developers of this site');
 
 -- PROFILE TYPE
 INSERT INTO profiletype (id,thedescription) VALUES(1,'Public');
@@ -22,6 +22,7 @@ INSERT INTO socialmediatypes (mediatype,homepage) VALUES ('Tumblr','https://www.
 INSERT INTO socialmediatypes (mediatype,homepage) VALUES ('Flickr','https://www.flickr.com/');
 INSERT INTO socialmediatypes (mediatype,homepage) VALUES ('Reddit','https://www.reddit.com/');
 INSERT INTO socialmediatypes (mediatype,homepage) VALUES ('Snapchat','https://www.snapchat.com/');
+INSERT INTO socialmediatypes (mediatype,homepage) VALUES ('stackoverflow','https://stackoverflow.com/');
 
 -- PROGRAMMING LANGUAGES
 INSERT INTO programminglanguages (languagename) VALUES ('HTML & CSS');

@@ -1,6 +1,7 @@
+SET client_min_messages = 'error';
 -- DATABASE TYPES --------------------------------------------------------
 CREATE TABLE usertypes (-- The types of users could be Developer, Recruiter, Researcher
-    id SERIAL PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL,
     typename VARCHAR(30) NOT NULL,
     typedescription VARCHAR(100) NOT NULL 
 );
@@ -20,11 +21,11 @@ CREATE TABLE programminglanguages ( -- List of potential programming languages
 -- USERS        --------------------------------------------------------
 CREATE TABLE users ( -- All users that have access to Login
     id SERIAL PRIMARY KEY,
-    githubID VARCHAR(20) NOT NULL,
+    githubID INT NOT NULL,
     email TEXT UNIQUE,
     userType SMALLINT REFERENCES userTypes(id) NOT NULL,
     profiletype SMALLINT REFERENCES profiletype(id),
-    firstName VARCHAR(20)NOT NULL ,
+    firstName VARCHAR(20) NOT NULL,
     lastName VARCHAR(30),
     photo TEXT,
     aboutmetitle TEXT,
@@ -37,7 +38,7 @@ CREATE TABLE hashed_passwords ( -- Separate table to store only hashed passwords
     hashed_password TEXT NOT NULL
 );
 CREATE TABLE socialmedialinks ( -- Each users social media links kept here
-    id SMALLINT NOT NULL,
+    id SMALLINT REFERENCES users(id),
     socialmediatype SMALLINT REFERENCES socialmediaTypes(id),
     link TEXT NOT NULL 
 );
@@ -45,7 +46,17 @@ CREATE TABLE userlanguages ( -- Users programming languages
     userID SMALLINT REFERENCES users(id) NOT NULL,
     languageID SMALLINT REFERENCES programmingLanguages(id) NOT NULL
 );
+CREATE TABLE messages ( -- messages left for users
+    id SERIAL PRIMARY KEY,
+    msgfrom SMALLINT REFERENCES users(id) NOT NULL,
+    msgtooID SMALLINT REFERENCES users(id) NOT NULL,
+    datereceived DATE NOT NULL,
+    timereceived TIME NOT NULL,
+    themsg TEXT NOT NULL,
+    timetoexpire DATE,
+    msgread BIT NOT NULL
 
+);
 -- REPOS..
 CREATE TABLE repoParamaters ( -- Repos and their paramaters. 
     repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
@@ -56,3 +67,4 @@ CREATE TABLE repoParamaters ( -- Repos and their paramaters.
     tags TEXT,
     titleimage TEXT
 );
+;
