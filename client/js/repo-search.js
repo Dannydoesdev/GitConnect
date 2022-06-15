@@ -90,10 +90,10 @@ function findRepo(userName, repoName) {
 
   axios({
     method: "get",
-    headers: {
-      // "Content-Type": "application/x-www-form-urlencoded",  // making CORS issue
-      Authorization: TOKEN,
-    },
+    // headers: {
+    //   // "Content-Type": "application/x-www-form-urlencoded",  // making CORS issue
+    //   Authorization: TOKEN,
+    // },
     url: repoURL,
   }).then((response) => {
     console.log(response);
