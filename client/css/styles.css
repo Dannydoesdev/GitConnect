@@ -18,3 +18,30 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
+#navbar {
+  background-color: #212224ff;
+  height: 45px;
+  display: flex;
+  flex-direction: row; 
+}
+
+#navbar > img {
+  position: relative;
+  left: 10%;
+  height: 85%;
+  padding: 4px;
+}
+
+.navbar-links {
+  color: #a1a1a1ff;
+}
+
+/* https://www.reddit.com/r/css/comments/nkjeyb/6_dark_mode_color_palettes_with_examples_css_and/
+CSS HEX
+--rich-black-fogra-39: #111213ff;
+--eerie-black: #212224ff;
+--quick-silver: #a1a1a1ff;
+--white: #ffffffff;
+--blue-crayola: #2f71e8ff;
+--cyan-process: #29b9f0ff; */
