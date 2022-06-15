@@ -34,7 +34,10 @@ body {
 
 .navbar-links {
   color: #a1a1a1ff;
-  margin: auto;
+  margin: auto 40px;
+  /* placeholder */
+  position: relative;
+  left: 500px;
 }
 
 /* https://www.reddit.com/r/css/comments/nkjeyb/6_dark_mode_color_palettes_with_examples_css_and/

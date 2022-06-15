@@ -11,4 +11,14 @@ function renderNav() {
     browse.classList.add('navbar-links')
     browse.textContent = "BROWSE"
     navBar.appendChild(browse)
+
+    const search = document.createElement('h4')
+    search.classList.add('navbar-links')
+    search.textContent = "SEARCH"
+    navBar.appendChild(search)
+
+    const lorem = document.createElement('h4')
+    lorem.classList.add('navbar-links')
+    lorem.textContent = "LOREM"
+    navBar.appendChild(lorem)
 }
