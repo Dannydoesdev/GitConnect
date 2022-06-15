@@ -1,27 +1,31 @@
-# TITLE
+# GITCONNECT
 
-# DESCRIPTION
+---   
+## DESCRIPTION
 
-# FEATURES
+---   
+## FEATURES
 
-# FUNCTIONALITY
+---   
+## FUNCTIONALITY
 
-# GETTING STARTED
+---   
+## GETTING STARTED
 
 Generating a secret key from the command line. This will be used in conjuction with the postgresql database to security purposes.
 ~~~ 
-(base) root@JERICHO-PC: "echo -n 'the seed phrase' | sha256sum"
+echo -n 'the seed phrase' | sha256sum
 ~~~
 
 Creating the database. 
 - Stop the postgresql database if it is running
-- In the terminal window type the following to create the new database.
+- In the terminal window type the following to create the new database. Replacing 'database_name' with your own personal choice
 ~~~ 
-(base) root@JERICHO-PC: 'createdb project3_db' 
+createdb database_name
 ~~~
-- Be sure to copy the database name and place in the .env file for the DATABASE variable as seen below   
+- Be sure to copy the database name and place in the .env file for the DATABASE variable as seen below. replacing 'database_name' with your own database name as created above.   
 ~~~
-DATABASE=project3_db
+DATABASE=database_name
 ~~~   
 
 # DEPENDENCIES
