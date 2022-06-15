@@ -77,7 +77,7 @@ function isAuthenticated(req, res, next) {
   else next("route");
 }
 router.get("/", isAuthenticated, (req, res) => {
-  //  Called on ever page refresh to check if the user is already logged in.
+  //  Called on every /session request.
   // console.log(req.session) //
   // console.log("req.hostname", req.hostname);
   // console.log("req.sessionID", req.sessionID);
@@ -97,9 +97,13 @@ router.get("/", (req, res) => {
     success:false
   });
 });
-router.delete("/", (req, res) => {
+router.delete("/", isAuthenticated,(req, res) => {
   //  LOG the user OUT. Deletes the session cookie.
   req.session.destroy();
   res.json({ success: true });
+});
+router.delete("/",  (req, res) => {
+  //  Attempt to delete however the user wasnt even logged in to begin with
+  res.json({ success: false });
 });
 module.exports = router;

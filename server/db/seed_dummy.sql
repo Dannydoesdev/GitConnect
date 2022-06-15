@@ -9,4 +9,4 @@ INSERT INTO users (githubID,email,userType,profiletype,firstName,lastName,photo,
 VALUES(50442868,'daniel.t.mcgee@gmail.com',1,1,'Danny','','https://avatars.githubusercontent.com/u/50442868?v=4','DEVELOPER','More about me stuff','04123423456','');
 
 
-INSERT INTO hashed_passwords (id,hashed_password) VALUES (1,'skippy');
+INSERT INTO hashed_passwords (id,hashed_password) VALUES (1,'$2b$10$1lzng8qKwE83WoshE/EHPu2E15DO/BMtZOUyVH1VnVtQLGGFv7paC');
