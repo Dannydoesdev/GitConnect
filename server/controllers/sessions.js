@@ -50,10 +50,10 @@ router.post(`/login`, (req, res) => {
               delete dbres.rows[0].hashed_password;
               console.log("The user has successfully logged in"); //TODO: delete console.log
               req.session.authenticated = true;
-              req.session.id = dbres.rows[0].id;
+              // req.session.id = dbres.rows[0].id;
               req.session.body = dbres.rows[0];
 
-              req.cookie("gitConnectId",dbres.rows[0].id)
+              res.cookie("gitConnectId",dbres.rows[0].id)
               res.cookie("email", dbres.rows[0].email);
               res.cookie("name", dbres.rows[0].firstname, { httpOnly: false });
               res.status(200).json(req.session);
