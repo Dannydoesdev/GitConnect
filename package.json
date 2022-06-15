@@ -11,7 +11,7 @@
     "start postgresql": "service postgresql start",    
     "stop postgresql": "service postgresql stop",
     "-------------------------------": "-",
-    "database_dummy_data_reset": "psql project3_db < server/db/db_init_dummy_only.sql && psql project3_db < server/db/schema.sql",
+    "database_dummy_data_reset": "psql project3_db < server/db/db_init_dummy_only.sql && psql project3_db < server/db/schema.sql && psql project3_db < server/db/seed_dummy.sql",
     "database_full_reset": "bash server/db/scripts/initialisedb.sh"
   },
   "repository": {
