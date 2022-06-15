@@ -115,40 +115,46 @@ function listUserRepos(userName) {
         document.getElementById('results').append(profileImg);
 
         response.data.map((result) => {
-
+            let repoName = result.name;
+            let userName = result.owner.login;
             console.log(result)
             document.getElementById('results').innerHTML += `<div id="${result.name}" class="repo-list">`
             document.getElementById(`${result.name}`).innerHTML += `<li><h5>Repo name: ${result.name}</h5></li><li>Repo description: ${result.description}</li><li>Repo link: <a href=${result.html_url}>${result.html_url}</a></li><li>Repo main language: ${result.language}</li></div><br>`
 
-            //VERY SILLY NEED TO CLEANUP
-            axios.get(result.languages_url).then((response) => {
-                console.log(response);
-                let langObj = {};
-                let langPctArr = [];
-                let langNameArr = [];
-                for (let [lang, pct] of Object.entries(response.data)) {
-                    langPctArr.push(pct);
-                    langNameArr.push(lang);
-                }
-                console.log(langPctArr);
-                console.log(percentRound(langPctArr))
-                let roundedLangPctArr = percentRound(langPctArr);
-                console.log(roundedLangPctArr);
-                langObj.lang = langNameArr;
-                langObj.pct = roundedLangPctArr;
-                let langObjArr = []
-                langObjArr.push(langObj);
-                langObjArr.map((langObj) => {
-                    document.getElementById(`${result.name}`).innerHTML += `<li>${langObj.lang}: ${langObj.pct}%</li>`
-                })
-                console.log(langObjArr)
-                console.log(langObj);
-            });
-                // response.data.map((language) => {
-                //     document.getElementById(`${result.name}`).innerHTML += `<li>${language.name}: ${percentRound(language.percent, 2)}%</li>`
+            languagePct(userName, repoName);
+
+            //have moved this into a function below
+            // axios.get(result.languages_url).then((response) => {
+               
+            //     let langPctArr = [];
+            //     let langNameArr = [];
+            //     for (let [lang, pct] of Object.entries(response.data)) {
+            //         langPctArr.push(pct);
+            //         langNameArr.push(lang);
+            //     }
+
+            //     let roundedLangPctArr = percentRound(langPctArr);
+
+            //     for (let i = 0; i < langNameArr.length; i++) {
+            //         if (roundedLangPctArr[i] > 5) {
+            //             document.getElementById(`${result.name}`).innerHTML += `<li>${langNameArr[i]}: ${roundedLangPctArr[i]}%</li>`
+            //         }
+            //     }
+
+
+                //CLEANED UP THIS MESS
+                // let langObj = {};
+                // langObj.lang = langNameArr;
+                // langObj.pct = roundedLangPctArr;
+                // let langObjArr = []
+                // langObjArr.push(langObj);
+                // langObjArr.map((langObj) => {
+                //     document.getElementById(`${result.name}`).innerHTML += `<li>${langObj.lang}: ${langObj.pct}%</li>`
                 // })
-                // console.log(response);
-                // document.getElementById(`${result.name}`).innerHTML += `<li>Repo languages: ${response.data}</li>`
+                // console.log(langObjArr)
+                // console.log(langObj);
+            // });
+
             }
             )
 
@@ -174,5 +180,30 @@ function findRepo(userName, repoName) {
         document.getElementById('results').innerHTML +=
         `<li><h5>Repo name: ${response.data.name}</h5></li><li>Repo description: ${response.data.description}</li><li>Repo link: <a href=${response.data.html_url}>${response.data.html_url}</a</li><br>`
           
+    });
+}
+
+//Currently requires div id to be the same as the repo name to work
+function languagePct(userName, repoName) {
+
+    const langURL = `https://api.github.com/repos/${userName}/${repoName}/languages`
+
+    axios.get(langURL).then((response) => {
+
+        let langPctArr = [];
+        let langNameArr = [];
+        for (let [lang, pct] of Object.entries(response.data)) {
+            langPctArr.push(pct);
+            langNameArr.push(lang);
+        }
+
+        let roundedLangPctArr = percentRound(langPctArr);
+
+        for (let i = 0; i < langNameArr.length; i++) {
+            if (roundedLangPctArr[i] > 5) {
+                document.getElementById(`${repoName}`).innerHTML += `<li>${langNameArr[i]}: ${roundedLangPctArr[i]}%</li>`
+            }
+       
+        }
     });
 }
