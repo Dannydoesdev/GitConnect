@@ -34,12 +34,12 @@ router.post(`/login`, (req, res) => {
   console.log("req.sessionID = ", req.sessionID,email); //TODO: delete console.log
 
   db.query(
-    `SELECT email,userType,firstName,photo,hashed_password  FROM ${USERS_TABLE_NAME} WHERE email = $1;`,
-    [email]
+    `SELECT email,users.id,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
+    [email],
   )
     .then((dbres) => {
       if (req.session.authenticated) {
-        console.log("User already logged in "); //TODO: delete console.log
+        console.log("This user is already logged in "); //TODO: delete console.log
         res.json(req.session);
       } else {
         bcrypt.compare(
