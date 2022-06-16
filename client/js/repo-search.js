@@ -3,8 +3,6 @@
 // import axios from 'https://cdn.skypack.dev/axios';
 // import { axios } from 'https://cdn.skypack.dev/axios';
 
-
-
 // create an input box for searching a users repos
 const allUserReposSearchBox = document.createElement('input');
 allUserReposSearchBox.setAttribute('type', 'text');

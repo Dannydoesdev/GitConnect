@@ -29,7 +29,7 @@ router.post(`/register`, (req, res) => {
     req.body.name.length > 20 ||
     req.body.email.length > 100 ||
     req.body.password.length > 20 ||
-    req.body.password.length < 10
+    req.body.password.length < 4
   ) {
     res
       .status(400)
@@ -69,7 +69,8 @@ router.post(`/register`, (req, res) => {
 
 router.get(`/getUsers`, (req, res) => {
   // TODO: REmove this so random people cannot view all the users in the database.
-  dbSelectQuery(`SELECT * FROM ${USERS_TABLE_NAME}`, res);
+  ret = dbSelectQuery(`SELECT * FROM ${USERS_TABLE_NAME}`, res);
+  res.json(ret)
 });
 
 // ********************************************************************************************************************
