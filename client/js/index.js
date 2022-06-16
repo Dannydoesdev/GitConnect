@@ -6,11 +6,11 @@ const signUp = document.getElementById('sign-up')
 const navbarLogo = document.getElementById('navbar-logo')
 const navbarSearch = document.getElementById('navbar-search')
 
-navbarLogo.addEventListener('click', event => {
+navbarLogo.addEventListener('click', (event) => {
     window.location = '/'
 })
 
-signUp.addEventListener('click', event => {
+signUp.addEventListener('click', (event) => {
     renderRego();
 })
 
