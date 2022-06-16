@@ -59,8 +59,10 @@ app.use(
 );
 const usersController = require("./server/controllers/users");
 const sessionController = require("./server/controllers/sessions");
+const gitHubController = require("./server/controllers/github");
 app.use("/api/users", usersController);
 app.use("/api/session", sessionController);
+app.use("/api/gitConnect", gitHubController);
 // ********************************************************************************************************************
 // DEVELOPER comms
 if (process.env.DATABASE) {
@@ -73,3 +75,4 @@ if (process.env.DATABASE) {
     "No Database has been setup. Go to the .env file and place the database name"
   );
 }
+
