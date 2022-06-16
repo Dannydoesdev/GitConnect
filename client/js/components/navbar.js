@@ -14,6 +14,7 @@ function renderNav() {
     const search = document.createElement('h4')
     search.classList.add('navbar-links')
     search.textContent = "SEARCH"
+    search.setAttribute('id', 'navbar-search')
     navBar.appendChild(search)
 
     const lorem = document.createElement('h4')

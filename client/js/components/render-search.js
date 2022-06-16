@@ -3,69 +3,52 @@
 // import axios from 'https://cdn.skypack.dev/axios';
 // import { axios } from 'https://cdn.skypack.dev/axios';
 
-// create an input box for searching a users repos
-const allUserReposSearchBox = document.createElement('input');
-allUserReposSearchBox.setAttribute('type', 'text');
-allUserReposSearchBox.setAttribute('id', 'all-user-repos-search');
-allUserReposSearchBox.setAttribute('placeholder', 'Search for a users repo - enter github username');
 
-// submit button for the user repo search input
-const allUserReposSubmit = document.createElement('button');
-allUserReposSubmit.setAttribute('id', 'search-user-repos-submit');
-allUserReposSubmit.innerText = 'Search for users repos';
+function renderSearch() {
 
-// add event listener that takes in the value of the search input and runs the listUserRepos function then clears input
-allUserReposSubmit.addEventListener('click', () => {
-    let userName = document.getElementById('all-user-repos-search').value;
-    listUserRepos(userName);
-    document.getElementById('all-user-repos-search').value = '';
-})
+    //get main section
+    const mainPage = document.getElementById('main');
 
-// create an input box for searching a specific repo
-// NOTE - this has basically been made redundant with individual repos getting called from event listeners in the listUserRepos fn - commenting out and can remove later
+    //clear main section
+    mainPage.innerHTML = '';
+        
+    // create an input box for searching a users repos
+    const allUserReposSearchBox = document.createElement('input');
+    allUserReposSearchBox.setAttribute('type', 'text');
+    allUserReposSearchBox.setAttribute('id', 'all-user-repos-search');
+    allUserReposSearchBox.setAttribute('placeholder', 'Search for a users repo - enter github username');
 
-// const repoSearchBox = document.createElement('input');
-// repoSearchBox.setAttribute('type', 'text');
-// repoSearchBox.setAttribute('id', 'repo-search');
-// repoSearchBox.setAttribute('placeholder', 'Search for a specific repo - enter repo name');
+    // submit button for the user repo search input
+    const allUserReposSubmit = document.createElement('button');
+    allUserReposSubmit.setAttribute('id', 'search-user-repos-submit');
+    allUserReposSubmit.innerText = 'Search for users repos';
 
+    // add event listener that takes in the value of the search input and runs the listUserRepos function then clears input
+    allUserReposSubmit.addEventListener('click', () => {
+        let userName = document.getElementById('all-user-repos-search').value;
+        listUserRepos(userName);
+        document.getElementById('all-user-repos-search').value = '';
+    })
+        
+    // temporary pre-filled value for dev testing
+    allUserReposSearchBox.setAttribute('value', 'dannydoesdev');
+    // repoSearchBox.setAttribute('value', 'project3');
 
-// submit button for the repo search input
+    // create a div to store search boxes and inputs
+    const searchBoxes = document.createElement('div');
+    searchBoxes.setAttribute('id', 'search-boxes');
 
-// const repoSearchSubmit = document.createElement('button');
-// repoSearchSubmit.setAttribute('id', 'repo-search-submit');
-// repoSearchSubmit.innerText = 'Search for this repo';
-
-
-// add event listener that takes in the value of the user search input plus repo search input and runs the findRepo function then clears input
-//NOTE that github API requires both parameters to find a repo
-
-// repoSearchSubmit.addEventListener('click', () => {
-//     let repoName = document.getElementById('repo-search').value; 
-//     let userName = document.getElementById('all-user-repos-search').value;
-//     findRepo(userName, repoName);
-// })
+    // append all to div
+    searchBoxes.appendChild(allUserReposSearchBox);
+    searchBoxes.appendChild(allUserReposSubmit);
 
 
-// temporary pre-filled value for dev testing
-allUserReposSearchBox.setAttribute('value', 'dannydoesdev');
-// repoSearchBox.setAttribute('value', 'project3');
-
-// create a div to store search boxes and inputs
-const searchBoxes = document.createElement('div');
-searchBoxes.setAttribute('id', 'search-boxes');
-
-// append all to div
-searchBoxes.appendChild(allUserReposSearchBox);
-searchBoxes.appendChild(allUserReposSubmit);
-
-// searchBoxes.appendChild(repoSearchBox);
-// searchBoxes.appendChild(repoSearchSubmit);
+    // append the searchboxes to the main section
+    mainPage.appendChild(searchBoxes);
 
 
-// append the searchboxes to the main section
-const mainPage = document.getElementById('main');
-mainPage.appendChild(searchBoxes);
+}
+
 
 
 
