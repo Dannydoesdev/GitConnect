@@ -4,15 +4,19 @@ renderHome();
 const login = document.getElementById('login')
 const signUp = document.getElementById('sign-up')
 const navbarLogo = document.getElementById('navbar-logo')
+const navbarSearch = document.getElementById('navbar-search')
 
-navbarLogo.addEventListener('click', event => {
+navbarLogo.addEventListener('click', (event) => {
     window.location = '/'
 })
 
-signUp.addEventListener('click', event => {
+signUp.addEventListener('click', (event) => {
     renderRego();
 })
 
+navbarSearch.addEventListener('click', (event) => {
+    renderSearch();
+})
 
  
 // const hero = document.createElement('div')
