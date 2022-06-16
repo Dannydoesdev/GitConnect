@@ -1,4 +1,5 @@
-renderNav()
+renderNav();
+renderHome();
 
 // const hero = document.createElement('div')
 // hero.style.border = "4px solid #52606D"
