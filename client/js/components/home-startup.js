@@ -10,7 +10,7 @@ function renderHome() {
 
     // setting logo
     const homeLogo = document.createElement('img')
-    homeLogo.src = "../../img/gclogo.png"
+    homeLogo.src = "./img/gclogo.png"
     homeLogo.setAttribute('id', 'home-logo')
     main.appendChild(homeLogo)
 
