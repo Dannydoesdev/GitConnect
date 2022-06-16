@@ -1,5 +1,17 @@
-renderNav()
+renderNav();
+renderHome();
 
+
+
+
+
+
+
+
+
+
+
+// -------- ignore this for now --------- //
 // const hero = document.createElement('div')
 // hero.style.border = "4px solid #52606D"
 // hero.style.height = "400px"
