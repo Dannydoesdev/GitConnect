@@ -17,16 +17,18 @@ Generating a secret key from the command line. This will be used in conjuction w
 echo -n 'the seed phrase' | sha256sum
 ~~~
 
-Creating the database. 
+Creating & Setting up the database. 
+### Step 1.
 - Stop the postgresql database if it is running
-- In the terminal window type the following to create the new database. Replacing 'database_name' with your own personal choice
+- In the terminal window type the following to create the new database.
 ~~~ 
-createdb database_name
+createdb project3_db
 ~~~
 - Be sure to copy the database name and place in the .env file for the DATABASE variable as seen below. replacing 'database_name' with your own database name as created above.   
 ~~~
-DATABASE=database_name
+DATABASE=project3_db
 ~~~   
+### Step 2
 
 # DEPENDENCIES
 
