@@ -84,19 +84,6 @@ const mainPage = document.getElementById('main');
 mainPage.appendChild(searchBoxes);
 
 
-function findRepo(userName, repoName) {
-    console.log('hi')
-    const repoURL = `https://api.github.com/repos/${userName}/${repoName}`;
-
-    axios.get(repoURL).then((response) => {
-        console.log(response);
-        document.getElementById('results').innerHTML = '';
-
-        document.getElementById('results').innerHTML +=
-        `<li><h5>Repo name: ${response.data.name}</h5></li><li>Repo description: ${response.data.description}</li><li>Repo link: <a href=${response.data.html_url}>${response.data.html_url}</a</li><br>`
-          
-    });
-}
 
 
 function listUserRepos(userName) {
@@ -114,27 +101,135 @@ function listUserRepos(userName) {
         document.getElementById('results').append(h3);
         document.getElementById('results').append(profileImg);
 
-        //create a list of all the repos
+        // //using for loop to fix issue
+        // for (let i = 0; i < response.data.length; i++) {
+        //     let repoName = response.data[i].name;
+        //     let repoLink = response.data[i].html_url;
+        //     let repoDesc = response.data[i].description;
+        //     let repoLang = response.data[i].language;
+        //     let userName = response.data[i].owner.login;
+
+        //     let resultsList = document.createElement('results');
+        //     // document.getElementById('results').innerHTML += `<div id="${repoName}" class="repo-list">`
+        //     let repoDiv = document.createElement('div');
+        //     repoDiv.id = repoName;
+
+        //     // //get div
+        //     // let repoDiv = document.getElementById(repoName)
+        //     //create h5
+        //     let h5 = document.createElement('h5');
+        //     h5.innerText = repoName;
+        //     //create a
+        //     let a = document.createElement('a');
+        //     a.href = repoLink;
+        //     a.innerText = repoLink;
+        //     //create p
+        //     let p = document.createElement('p');
+        //     p.innerText = repoDesc;
+        //     //create p
+        //     let p2 = document.createElement('p');
+        //     p2.innerText = repoLang;
+
+    
+        //     repoDiv.append(h5);
+        //     repoDiv.append(a);
+        //     repoDiv.append(p);
+        //     repoDiv.append(p2);
+        //     document.getElementById('results').append(repoDiv);
+
+        //     // repoDiv.innerHTML +=
+        //     //     `
+        //     //     <li><h5>Repo name: ${repoName}</h5></li>
+        //     //     <li>Repo description: ${repoDesc}</li>
+        //     //     <li>Repo link: <a href=${repoLink}>${repoLink}</a></li>
+        //     //     <li>Repo main language: ${repoLang}</li><br>
+
+        //     //     `
+            
+        //     languagePct(userName, repoName);
+            
+        //       const selectRepoButton = document.createElement('button');
+        //     console.log(repoDiv)
+        //     selectRepoButton.onclick = findRepo(userName, repoName);
+        //      selectRepoButton.innerText = 'Select this repo';
+        //     console.log(selectRepoButton)
+        //     // selectRepoButton.addEventListener('click', () => {
+        //     //     console.log('hey')
+        //     //     findRepo(userName, repoName);
+        //     // });
+        //     console.log('hi')
+        //     repoDiv.appendChild(selectRepoButton);
+        //     console.log(repoDiv)
+        //     console.log(selectRepoButton.innerText)
+        //     //     repoDiv.innerHTML = 
+        // //         `
+        // //     <li><h5>Repo name: ${result.name}</h5></li>
+        // //     <li>Repo description: ${result.description}</li>
+        // //     <li>Repo link: <a href=${result.html_url}>${result.html_url}</a></li>
+        // //     <li>Repo main language: ${result.language}</li></div><br>
+        // //     Select this repo: <button id="${result.name}-button">Search</button>
+        // //     `
+            
+        // }
+
+        // create a list of all the repos
         response.data.map((result) => {
             let repoName = result.name;
             let userName = result.owner.login;
+            let repoLink = result.html_url;
+            let repoDesc = result.description;
+            let repoLang = result.language;
+            
+
+            let resultsList = document.createElement('results');
+            // document.getElementById('results').innerHTML += `<div id="${repoName}" class="repo-list">`
+            let repoDiv = document.createElement('div');
+            repoDiv.id = repoName;
+            
+            //add repo and user name dataset to div
+            repoDiv.dataset.repoName = repoName;
+            repoDiv.dataset.userName = userName;
+
+
+            // //get div
+            // let repoDiv = document.getElementById(repoName)
+            //create h5
+            let h5 = document.createElement('h5');
+            h5.innerText = repoName;
+            //create a
+            let a = document.createElement('a');
+            a.href = repoLink;
+            a.innerText = repoLink;
+            //create p
+            let p = document.createElement('p');
+            p.innerText = repoDesc;
+            //create p
+            let p2 = document.createElement('p');
+            p2.innerText = repoLang;
+
+    
+            repoDiv.append(h5);
+            repoDiv.append(a);
+            repoDiv.append(p);
+            repoDiv.append(p2);
+            document.getElementById('results').append(repoDiv);
 
             console.log(result)
 
             //create div for each repo with id of repoName
-            document.getElementById('results').innerHTML += `<div id="${result.name}" class="repo-list">`
+            // document.getElementById('results').innerHTML += `<div id="${result.name}" class="repo-list">`
             //get div
-            let repoDiv = document.getElementById(result.name)
+            // let repoDiv = document.getElementById(result.name)
 
-            //div content
-            repoDiv.innerHTML = 
-                `
-            <li><h5>Repo name: ${result.name}</h5></li>
-            <li>Repo description: ${result.description}</li>
-            <li>Repo link: <a href=${result.html_url}>${result.html_url}</a></li>
-            <li>Repo main language: ${result.language}</li></div><br>
-            Select this repo: <button id="${result.name}-button">Search</button>
-            `
+            // div content
+            // repoDiv.innerHTML = 
+            //     `
+            // <li><h5>Repo name: ${result.name}</h5></li>
+            // <li>Repo description: ${result.description}</li>
+            // <li>Repo link: <a href=${result.html_url}>${result.html_url}</a></li>
+            // <li>Repo main language: ${result.language}</li></div><br>
+            // Select this repo: <button id="${result.name}-button">Search</button>
+            // `
            //note - don't need last line above - was just testing diff ways to do this
 
             //add percentages from other function (WORKING)
@@ -142,33 +237,91 @@ function listUserRepos(userName) {
 
             //Multiple ways to try to get the individual repo info to click through to repo search fn findRepo
 
-            repoDiv.addEventListener('click', () => {
-                findRepo(userName, repoName);
-            })
-            let queryRepoButton = document.getElementById(`${result.name}-button`);
-            queryRepoButton.addEventListener('click', () => {
-                findRepo(userName, repoName);
-            })
+            // repoDiv.addEventListener('click', (event) => {
+            //     findRepo(event);
+            // })
+            // let queryRepoButton = document.getElementById(`${result.name}-button`);
+            // queryRepoButton.addEventListener('click', () => {
+            //     findRepo(userName, repoName);
+            // })
 
-            //ONLY APPLIES TO LAST REPO FOR SOME REASON
+            // ONLY APPLIES TO LAST REPO FOR SOME REASON
 
-             //button to select repo and run findRepo function
+            //  button to select repo and run findRepo function
             //  let selectRepoButton = document.createElement('button');
             
             //  selectRepoButton.innerText = 'Select this repo';
  
-            // selectRepoButton.addEventListener('click', () => {
+            // selectRepoButton.addEventListener('click', (event) => {
             //     console.log('hey')
-            //     findRepo(userName, repoName);
+            //     findRepo(event);
             // });
 
-            // repoDiv.appendChild(selectRepoButton);
         })  
+
+        for (let repoDiv of response.data) {
+            console.log('hi')
+            console.log(repoDiv)
+            thisRepoDiv = document.getElementById(repoDiv.name);
+            
+
+            const button = document.createElement('button');
+            button.innerText = 'Select this repo';
+            thisRepoDiv.appendChild(button);
+            console.log(button)
+            // button.onclick = findRepo(userName, repoName);
+            button.addEventListener("click", (event) => {
+                console.log('hey')
+                console.log(event.target)
+
+              
+            })
+            
+        
+                console.log(thisRepoDiv)
+        }
+            //  selectRepoButton.innerText = 'Select this repo';
+ 
+            // selectRepoButton.addEventListener('click', (event) => {
+            //     console.log('hey')
+            //     findRepo(event);
+            // });
+
+        
+    
+            // console.log(thisRepoDiv);
+            // thisRepoDiv.addEventListener('click', (event) => {
+            //     console.log('hey')
+            //     console.log(event)
+            //     findRepo(event);
+            // })
+            // console.log(repoDiv.dataset.repoName)
+
+
+            
+
+            // repoDiv.appendChild(selectRepoButton);
+    
         })
 }
 
 
          
+function findRepo(clickedRepo) {
+    console.log(clickedRepo)
+    console.log(clickedRepo.target)
+    console.log('hi')
+    // const repoURL = `https://api.github.com/repos/${userName}/${repoName}`;
+
+    // axios.get(repoURL).then((response) => {
+    //     console.log(response);
+    //     document.getElementById('results').innerHTML = '';
+
+    //     document.getElementById('results').innerHTML +=
+    //     `<li><h5>Repo name: ${response.data.name}</h5></li><li>Repo description: ${response.data.description}</li><li>Repo link: <a href=${response.data.html_url}>${response.data.html_url}</a</li><br>`
+          
+    // });
+}
 
 
 //Currently requires div id to be the same as the repo name to work
