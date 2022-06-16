@@ -3,11 +3,16 @@ renderHome();
 
 const login = document.getElementById('login')
 const signUp = document.getElementById('sign-up')
+const navbarLogo = document.getElementById('navbar-logo')
+
+navbarLogo.addEventListener('click', event => {
+    window.location = '/'
+})
 
 signUp.addEventListener('click', event => {
-    event.preventDefault();
     renderRego();
 })
+
 
  
 // const hero = document.createElement('div')

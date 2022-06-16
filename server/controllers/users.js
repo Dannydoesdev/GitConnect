@@ -29,7 +29,7 @@ router.post(`/register`, (req, res) => {
     req.body.name.length > 20 ||
     req.body.email.length > 100 ||
     req.body.password.length > 20 ||
-    req.body.password.length < 10
+    req.body.password.length < 4
   ) {
     res
       .status(400)

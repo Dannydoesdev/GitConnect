@@ -4,6 +4,7 @@ function renderNav() {
     const navBar = document.getElementById('navbar')
     const logo = document.createElement('img')
     logo.src = "./img/gclogo.png"
+    logo.setAttribute('id', 'navbar-logo')
     navBar.appendChild(logo)
     const browse = document.createElement('h4')
     browse.classList.add('navbar-links')
