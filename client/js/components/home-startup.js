@@ -20,10 +20,12 @@ function renderHome() {
 
     const login = document.createElement('h4')
     login.textContent = "Login"
+    login.setAttribute('id', 'login')
     login.classList.add('home-login-signup')
 
     const signUp = document.createElement('h4')
     signUp.textContent = "Sign Up"
+    signUp.setAttribute('id', 'sign-up')
     signUp.classList.add('home-login-signup')
     
     main.appendChild(loginContainer)
