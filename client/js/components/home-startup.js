@@ -1,5 +1,5 @@
-const { sign } = require("crypto")
-const { nextTick } = require("process")
+// const { sign } = require("crypto")
+// const { nextTick } = require("process")
 
 // to render the home page
 function renderHome() {
@@ -10,7 +10,7 @@ function renderHome() {
 
     // setting logo
     const homeLogo = document.createElement('img')
-    homeLogo.src = "../../img/gclogo.png"
+    homeLogo.src = "./img/gclogo.png"
     homeLogo.setAttribute('id', 'home-logo')
     main.appendChild(homeLogo)
 

@@ -86,7 +86,7 @@ router.get("/", isAuthenticated, (req, res) => {
   // console.log("req.sessionID", req.sessionID);
   // console.log("req.session.name", req.session.cookie);
   // console.log("req.session.authenticated", req.session.authenticated);
-  console.log("User already logged in "); //
+  console.log("User already logged in"); //
   res.json({
     name: req.session.name,
     email: req.session.email,

@@ -9,6 +9,10 @@
 ---   
 ## FUNCTIONALITY
 
+
+---
+### SECURITY
+Gitconnect server makes the gitHub API calls using a private token for authentication. This token is kept in the .enc file under the label 'TOKEN'
 ---   
 ## GETTING STARTED
 
@@ -31,5 +35,9 @@ DATABASE=project3_db
 ### Step 2
 
 # DEPENDENCIES
+
+# PROJECT RESOURCES
+miro.com
+
 
 

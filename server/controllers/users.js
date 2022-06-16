@@ -69,7 +69,8 @@ router.post(`/register`, (req, res) => {
 
 router.get(`/getUsers`, (req, res) => {
   // TODO: REmove this so random people cannot view all the users in the database.
-  dbSelectQuery(`SELECT * FROM ${USERS_TABLE_NAME}`, res);
+  ret = dbSelectQuery(`SELECT * FROM ${USERS_TABLE_NAME}`, res);
+  res.json(ret)
 });
 
 // ********************************************************************************************************************
