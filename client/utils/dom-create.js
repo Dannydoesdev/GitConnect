@@ -8,7 +8,16 @@ export function makeAnEl(type, attrs, children) {
 
     // if the attribute is a class add to classlist of element
     if (attr == 'class' || attr == 'className') {
-      el.classList.add(attrs[attr])
+      
+      // refactored so multiple classes can be added (like class: ['class1', 'class2']) esp helpful for bootstrap
+      // detect if array (js sees 'object') and add the classlist for each element in that arr
+      if (typeof attrs[attr] == 'object') {
+        let classArray = attrs[attr];     
+        classArray.forEach(att => el.classList.add(att))
+      }
+      else {
+        el.classList.add(attrs[attr])
+      }
     }
     // if a style object is used - 
     // loop through object and convert the keys with camelcase to dashcase for CSS
@@ -23,7 +32,10 @@ export function makeAnEl(type, attrs, children) {
     // set the value of the value to be element.dataset.key = value
     else if (attr == 'data') {
       Object.keys(attrs[attr]).forEach((key) => {
-        el.dataset[key.replace(/[A-Z]/g, m => "-" + m.toLowerCase())] = attrs[attr][key];
+        console.log(key)
+        console.log(attrs[attr][key])
+        el.dataset[key] = attrs[attr][key];
+        // el.dataset[key.replace(/[A-Z]/g, m => "-" + m.toLowerCase())] = attrs[attr][key];
       })
     } else {
       // set the attribute on the element as is
