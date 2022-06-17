@@ -3,8 +3,11 @@
 // import axios from 'https://cdn.skypack.dev/axios';
 // import { axios } from 'https://cdn.skypack.dev/axios';
 
+import { makeAnEl } from '../../utils/dom-create.js';
 
-function renderSearch() {
+
+
+export function renderSearch() {
 
     //get main section
     const mainPage = document.getElementById('main');
@@ -24,12 +27,18 @@ function renderSearch() {
     allUserReposSubmit.innerText = 'Search for users repos';
 
     // add event listener that takes in the value of the search input and runs the listUserRepos function then clears input
+    // allUserReposSubmit.addEventListener('click', () => {
+    //     let userName = document.getElementById('all-user-repos-search').value;
+    //     listUserRepos(userName);
+    //     document.getElementById('all-user-repos-search').value = '';
+    // })
+        
     allUserReposSubmit.addEventListener('click', () => {
         let userName = document.getElementById('all-user-repos-search').value;
-        listUserRepos(userName);
+        renderRepoListBs(userName);
         document.getElementById('all-user-repos-search').value = '';
     })
-        
+
     // temporary pre-filled value for dev testing
     allUserReposSearchBox.setAttribute('value', 'dannydoesdev');
     // repoSearchBox.setAttribute('value', 'project3');
@@ -49,7 +58,93 @@ function renderSearch() {
 
 }
 
+function renderRepoListBs(userName) {
+    // get main section
+    const mainPage = document.getElementById('main');
+    const resultsList = document.getElementById('results')
 
+    // clear main section
+    resultsList.innerHTML = '';
+
+    // create a div to store the list of repos
+    const repoList = makeAnEl('section', {
+        id: 'repo-list',
+    });
+
+    const allReposURL = `http://api.github.com/users/${userName}/repos`;
+
+    // send get request to gihub api with the above URL
+    axios.get(allReposURL).then((response) => {
+    
+        const profileImg = makeAnEl('img', {
+            src: response.data[0].owner.avatar_url,
+            id: 'profile-img'
+    })
+    
+        const repoHeading = makeAnEl('h3', {
+            innerText: `Repo list of: ${response.data[0].owner.login}`
+        })
+
+        mainPage.appendChild(profileImg)
+        mainPage.appendChild(repoHeading)
+
+        // create h2 and set innertext to username returned from github API
+    //  let h2 = document.createElement('h3');
+    //  h2.innerText = `Repo list of: ${response.data[0].owner.login}`
+    //  resultsList.appendChild(h2);
+    //  resultsList.appendChild(profileImg);
+        
+        
+// {/* <div class="card" style="width: 18rem;">
+//   <div class="card-body">
+//     <h5 class="card-title">Card title</h5>
+//     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+//     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+//     <a href="#" class="card-link">Card link</a>
+//     <a href="#" class="card-link">Another link</a>
+//   </div>
+// </div> */}
+
+    
+    })
+
+    const section = makeAnEl('section', {
+        name: 'test-section',
+        id: 'test-section',
+        innerText: 'hello there',
+        className: 'test-section',
+        style: {
+          backgroundColor: 'red',
+          color: 'white',
+          fontSize: '20px',
+          fontWeight: 'bold',
+          padding: '20px',
+        },
+        data: {
+          test: 'test',
+        },
+    },
+      // third paramter is an array of children to auto append, call the same function each time to use
+      [
+        makeAnEl('h1', {
+          innerText: 'test this h1',
+          className: 'test-section-h1',
+        }),
+        makeAnEl('p', {
+          innerText: 'test this p',
+          className: 'test-section-p',
+          style: {
+            color: 'blue',
+            fontSize: '20px',
+          },
+          data: {
+            test: 'test-p',
+          }
+        }),
+      ]
+    );
+
+}
 
 
 // fn to search for a users repos - requires a username parameter

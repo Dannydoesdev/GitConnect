@@ -1,3 +1,5 @@
+import { renderSearch } from './components/render-repo-search.js'
+
 renderNav();
 renderHome();
 
