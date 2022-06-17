@@ -55,7 +55,6 @@ export function renderSearch() {
     // append the searchboxes to the main section
     mainPage.appendChild(searchBoxes);
 
-
 }
 
 function renderRepoListBs(userName) {
@@ -64,17 +63,6 @@ function renderRepoListBs(userName) {
     // get main section
     const mainPage = document.getElementById('main');
     mainPage.innerHTML = '';
-
-    // const resultsList = makeAnEl('div', {
-    //     id: 'results-test',
-    //     class: ['container-fluid', 'bg-dark', 'text-white']
-    // })
-
-
-    // const resultsList = document.getElementById('results')
-
-    // clear main section
-    // resultsList.innerHTML = '';
 
     // create a bootstrap style container to hold the page info
     const container = makeAnEl('div', {
@@ -98,12 +86,14 @@ function renderRepoListBs(userName) {
         // create profileimg var - img type with GH profile img as src
         const profileImg = makeAnEl('img', {
             src: response.data[0].owner.avatar_url,
-            id: 'profile-img'
+            id: 'profile-img',
+            class: ['rounded', 'mx-auto', 'd-block']
         })
 
         // create repo heading var - rapo owner name
         const repoHeading = makeAnEl('h3', {
-            innerText: `Repo list of: ${response.data[0].owner.login}`
+            innerText: `Repo list of: ${response.data[0].owner.login}`,
+            class: 'text-center',
         })
 
         row.appendChild(profileImg)
@@ -131,7 +121,6 @@ function renderRepoListBs(userName) {
                     data: {
                         repoName: repoName,
                         userName: userName,
-                
                     },
                 }, [
                     makeAnEl('div', {
@@ -155,137 +144,19 @@ function renderRepoListBs(userName) {
                             href: repoLink,
                             style: {
                                 color: 'white',
-                                textDecoration: 'underline',
-                                fontSize: '12px',
+                                fontSize: '18px',
                             },
                         }),
                     ]),
                 ]),
             ]);
             
-            languagePct(userName, repoName);
+            console.log(languagePct(userName, repoName));
             row.appendChild(repoDiv);
 
-
-
-            // let repoDiv = makeAnEl('div', {
-            //     id: repoName,
-            //     class: 'card',
-            //     data: {
-            //         repoName: repoName,
-            //         userName: userName,
-                
-            //     },
-            // }, [
-            //     makeAnEl('div', {
-            //         class: 'card-body',
-     
-            //     }, [
-                    
-            //     ]),
-            //     makeAnEl('h3', {
-            //         innerText: `Repo name: ${repoName}`,
-
-            //     }),
-            //     makeAnEl('a', {
-            //         innerText: `Link to repo on Github`,
-            //         href: repoLink,
-            //         style: {
-            //             color: 'white',
-            //             textDecoration: 'underline',
-            //             fontSize: '12px',
-            //         },
-            //     }),
-            //     makeAnEl('p', {
-            //         innerText: `Repo description: ${repoDesc}`,
-            //     }),
-            //     makeAnEl('p', {
-            //         innerText: `Repo main language: ${repoLang}`,
-            //     }),
-            // ]);
-
-            // //create heading for repo name
-            // let h3 = document.createElement('h3');
-            // h3.innerText = `Repo name: ${repoName}`;
-
-            // //create a tag for the link to repo on GH
-            // let a = document.createElement('a');
-            // a.href = repoLink;
-            // a.innerText = `Link to repo on Github`
-
-            // //create p for the repo description
-            // let p = document.createElement('p');
-            // p.innerText = `Repo description: ${repoDesc}`;
-            
-            // //create p for repos main language
-            // let p2 = document.createElement('p');
-            // p2.innerText = `Repo main language: ${repoLang}`;
-
-            // // append the above to the repo dive
-            // repoDiv.append(h3);
-            // repoDiv.append(a);
-            // repoDiv.append(p);
-            // repoDiv.append(p2);
-
-            // //append the repo div to the results list
-            // document.getElementById('results').append(repoDiv);
-
-
-            // add percentages from other function (WORKING)
-            // languagePct(userName, repoName);
-
         })  
-
-        
-// {/* <div class="card" style="width: 18rem;">
-//   <div class="card-body">
-//     <h5 class="card-title">Card title</h5>
-//     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-//     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//     <a href="#" class="card-link">Card link</a>
-//     <a href="#" class="card-link">Another link</a>
-//   </div>
-// </div> */}
-
     
     })
-
-    // const section = makeAnEl('section', {
-    //     name: 'test-section',
-    //     id: 'test-section',
-    //     innerText: 'hello there',
-    //     className: 'test-section',
-    //     style: {
-    //       backgroundColor: 'red',
-    //       color: 'white',
-    //       fontSize: '20px',
-    //       fontWeight: 'bold',
-    //       padding: '20px',
-    //     },
-    //     data: {
-    //       test: 'test',
-    //     },
-    // },
-    //   // third paramter is an array of children to auto append, call the same function each time to use
-    //   [
-    //     makeAnEl('h1', {
-    //       innerText: 'test this h1',
-    //       className: 'test-section-h1',
-    //     }),
-    //     makeAnEl('p', {
-    //       innerText: 'test this p',
-    //       className: 'test-section-p',
-    //       style: {
-    //         color: 'blue',
-    //         fontSize: '20px',
-    //       },
-    //       data: {
-    //         test: 'test-p',
-    //       }
-    //     }),
-    //   ]
-    // );
-
 }
 
 
@@ -503,7 +374,10 @@ function languagePct(userName, repoName) {
         let roundedLangPctArr = percentRound(langPctArr);
 
         //  get repodiv (currently MUST have id of the reponame) - this could be removed and handled when calling instead, thus only returning the arrays, but works for now
-        let repoDiv = document.getElementById(`${repoName}`)
+        // let repoDiv = document.getElementById(`${repoName}`)
+
+        // Now using the card body class to append (post bootstrap)
+        let repoDiv = document.querySelector(`#${repoName} > .card-body`)
 
         // create h5 to let users know what this is
         let h5 = document.createElement('h5')
@@ -517,7 +391,7 @@ function languagePct(userName, repoName) {
                 
                 let li = document.createElement('li');
                 li.innerText = `${langNameArr[i]}: ${roundedLangPctArr[i]}%`;
-                return li
+      
                 // append the li to the repoDiv
                 repoDiv.appendChild(li);
             }
