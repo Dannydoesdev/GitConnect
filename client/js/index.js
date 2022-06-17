@@ -20,6 +20,9 @@ navbarSearch.addEventListener('click', (event) => {
     renderSearch();
 })
 
+login.addEventListener('click', () => {
+    renderLogin();
+})
  
 // const hero = document.createElement('div')
 // hero.style.border = "4px solid #52606D"
