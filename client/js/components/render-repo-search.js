@@ -3,8 +3,11 @@
 // import axios from 'https://cdn.skypack.dev/axios';
 // import { axios } from 'https://cdn.skypack.dev/axios';
 
+import { makeAnEl } from '../../utils/dom-create.js';
 
-function renderSearch() {
+
+
+export function renderSearch() {
 
     //get main section
     const mainPage = document.getElementById('main');
@@ -24,12 +27,18 @@ function renderSearch() {
     allUserReposSubmit.innerText = 'Search for users repos';
 
     // add event listener that takes in the value of the search input and runs the listUserRepos function then clears input
+    // allUserReposSubmit.addEventListener('click', () => {
+    //     let userName = document.getElementById('all-user-repos-search').value;
+    //     listUserRepos(userName);
+    //     document.getElementById('all-user-repos-search').value = '';
+    // })
+        
     allUserReposSubmit.addEventListener('click', () => {
         let userName = document.getElementById('all-user-repos-search').value;
-        listUserRepos(userName);
-        document.getElementById('all-user-repos-search').value = '';
+        renderRepoListBs(userName);
+        // document.getElementById('all-user-repos-search').value = '';
     })
-        
+
     // temporary pre-filled value for dev testing
     allUserReposSearchBox.setAttribute('value', 'dannydoesdev');
     // repoSearchBox.setAttribute('value', 'project3');
@@ -46,10 +55,109 @@ function renderSearch() {
     // append the searchboxes to the main section
     mainPage.appendChild(searchBoxes);
 
-
 }
 
+function renderRepoListBs(userName) {
+    const allReposURL = `http://api.github.com/users/${userName}/repos`;
+    
+    // get main section
+    const mainPage = document.getElementById('main');
+    mainPage.innerHTML = '';
 
+    // create a bootstrap style container to hold the page info
+    const container = makeAnEl('div', {
+        id: 'repo-list',
+        class: ['container-fluid', 'bg-dark', 'text-white']
+    })
+
+    // crreate a bootstrap style row as required
+    const row = makeAnEl('div', {
+        class: 'row',
+    });
+
+
+    mainPage.appendChild(container)
+    container.appendChild(row)
+   
+
+    // send get request to gihub api with the above URL
+    axios.get(allReposURL).then((response) => {
+    
+        // create profileimg var - img type with GH profile img as src
+        const profileImg = makeAnEl('img', {
+            src: response.data[0].owner.avatar_url,
+            id: 'profile-img',
+            class: ['rounded', 'mx-auto', 'd-block']
+        })
+
+        // create repo heading var - rapo owner name
+        const repoHeading = makeAnEl('h3', {
+            innerText: `Repo list of: ${response.data[0].owner.login}`,
+            class: 'text-center',
+        })
+
+        row.appendChild(profileImg)
+        row.appendChild(repoHeading)
+
+        // map the response data so each result can be appended to the DOM
+        response.data.map((result) => {
+            // console.log(result)
+            // set standard variables from response that we want to utilise
+            let repoName = result.name;
+            let userName = result.owner.login;
+            let repoLink = result.html_url;
+            let repoDesc = result.description;
+            let repoLang = result.language;
+
+            // create a div for each repo that is returned
+            // nest the card layout as required via the makeAnEl fn
+            // add desired styling to card element
+            let repoDiv = makeAnEl('div', {
+                class: 'col-md-4',
+            }, [
+                makeAnEl('div', {
+                    id: repoName,
+                    class: ['card', 'border-light', 'text-center', 'text-white', 'bg-dark'],
+                    data: {
+                        repoName: repoName,
+                        userName: userName,
+                    },
+                }, [
+                    makeAnEl('div', {
+                        class: 'card-body',
+                    }, [
+                        makeAnEl('h3', {
+                            innerText: `Repo name: ${repoName}`,
+                            class: 'card-title',
+                        }),
+                        makeAnEl('p', {
+                            class: ['card-subtitle'],
+                            innerText: `Repo main language: ${repoLang}`,
+                        }),
+                        makeAnEl('p', {
+                            innerText: `Repo description: ${repoDesc}`,
+                            class: 'card-text',
+                        }),
+                        makeAnEl('a', {
+                            class: 'card-link',
+                            innerText: `Link to repo on Github`,
+                            href: repoLink,
+                            style: {
+                                color: 'white',
+                                fontSize: '18px',
+                            },
+                        }),
+                    ]),
+                ]),
+            ]);
+            
+            console.log(languagePct(userName, repoName));
+            row.appendChild(repoDiv);
+
+        })  
+    
+    })
+}
 
 
 // fn to search for a users repos - requires a username parameter
@@ -266,7 +374,10 @@ function languagePct(userName, repoName) {
         let roundedLangPctArr = percentRound(langPctArr);
 
         //  get repodiv (currently MUST have id of the reponame) - this could be removed and handled when calling instead, thus only returning the arrays, but works for now
-        let repoDiv = document.getElementById(`${repoName}`)
+        // let repoDiv = document.getElementById(`${repoName}`)
+
+        // Now using the card body class to append (post bootstrap)
+        let repoDiv = document.querySelector(`#${repoName} > .card-body`)
 
         // create h5 to let users know what this is
         let h5 = document.createElement('h5')
@@ -276,11 +387,11 @@ function languagePct(userName, repoName) {
         // loop through the langnameArr and for each element create an li with the content of the name and corresponding element [i] in the rounded pct arr
 
         for (let i = 0; i < langNameArr.length; i++) {
-            if (roundedLangPctArr[i] > 5) {
+            if (roundedLangPctArr[i] > 3) {
                 
                 let li = document.createElement('li');
-                li.innerText = `${langNameArr[i]}: ${roundedLangPctArr[i]}`;
-
+                li.innerText = `${langNameArr[i]}: ${roundedLangPctArr[i]}%`;
+      
                 // append the li to the repoDiv
                 repoDiv.appendChild(li);
             }
