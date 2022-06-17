@@ -80,12 +80,6 @@ function isAuthenticated(req, res, next) {
   else next("route");
 }
 router.get("/", isAuthenticated, (req, res) => {
-  //  Called on every /session request.
-  // console.log(req.session) //
-  // console.log("req.hostname", req.hostname);
-  // console.log("req.sessionID", req.sessionID);
-  // console.log("req.session.name", req.session.cookie);
-  // console.log("req.session.authenticated", req.session.authenticated);
   console.log("User already logged in"); //
   res.json({
     name: req.session.name,
@@ -97,6 +91,7 @@ router.get("/", (req, res) => {
   res.json({
     name: req.session.name,
     email: req.session.email,
+    message:"User not authenticated",
     success:false
   });
 });
