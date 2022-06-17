@@ -71,6 +71,7 @@ EXPRESS_SESSION_SECRET_KEY=<your key goes here>
 
 # PROJECT RESOURCES
 miro.com
+[Heroku Cheat sheet](https://gist.git.generalassemb.ly/katie/2b04e662ffc32713aad1b07747aceed9)
 
 
 

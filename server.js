@@ -19,7 +19,7 @@ const db = require("./server/db/db");
 // ********************************************************************************************************************
 // CONSTANTS
 const appSecretKey = process.env.EXPRESS_SESSION_SECRET_KEY;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const app = express(); // Initialise the app
 // ********************************************************************************************************************
 // SET UP THE APP
