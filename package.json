@@ -4,11 +4,11 @@
   "description": "# DESCRIPTION",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "start db server then application": "service postgresql start && npx nodemon server/server.js",
     "start npx monitor": "npx nodemon server/server.js",
     "--------------------------------": "-",
-    "start postgresql": "service postgresql start",    
+    "start postgresql": "service postgresql start",
     "stop postgresql": "service postgresql stop",
     "-------------------------------": "-",
     "database_dummy_data_reset": "psql project3_db < server/db/db_init_dummy_only.sql && psql project3_db < server/db/schema.sql && psql project3_db < server/db/seed_dummy.sql",
