@@ -14,10 +14,6 @@ function renderLogin() {
                     <label for="">Password: </label><br>
                     <input type="password" name="password">
                 </fieldset>
-                <fieldset>
-                    <label for="">Confirm Password: </label><br>
-                    <input type="password" name="confirm-password">
-                </fieldset>
                 <button>Login</button>
     `
     main.appendChild(formContainer)
@@ -32,13 +28,9 @@ let form = document.getElementById('login-form')
         // needs to be coded later but will do just for now
         const data = {
             email: formData.get('email'),
-            password: formData.get('password'),
-            confirmPassword: formData.get('confirm-password'),
+            password: formData.get('password')
         }
-        axios.get('/api/users/register', data)
-        .then((addSession) => {
-            axios.post('/api/session/login', data)
-        })
+        axios.post('/api/users/login', data)
         .then((response) => {
             window.location = '/';
         })
