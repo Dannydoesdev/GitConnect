@@ -1,5 +1,7 @@
 import { renderLogin } from "./render-login.js";
 import { renderRego } from "./render-rego.js";
+import { renderProfileMain } from "./render-profile.js";
+
 // to render the home page
 export function renderHome() {
   const main = document.getElementById("main");
@@ -40,7 +42,8 @@ export function renderHome() {
   searchBar.setAttribute("id", "search-bar");
   searchContainer.appendChild(searchBar);
 
-  const sendingrequest = async () => { // Must wait till axios receives a response before processing more code
+  const sendingrequest = async () => {
+    // Must wait till axios receives a response before processing more code
     // temporary
     const resp = await axios
       .get("/api/session")
@@ -65,17 +68,7 @@ export function renderHome() {
           });
         } else {
           // YES the user is logged in
-          const logout = document.createElement("h4");
-          console.log(result.data)
-          logout.textContent = "Logout "+result.data.firstname;
-          logout.setAttribute("id", "logout");
-          logout.classList.add("home-login-signup");
-          loginContainer.appendChild(logout);
-          logout.addEventListener("click", () => {
-            axios.delete("/api/session").then(() => {
-              window.location = "/";
-            });
-          });
+          renderProfileMain(result.data.firstname);
         }
       })
       .catch((error) => {
