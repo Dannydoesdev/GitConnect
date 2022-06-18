@@ -12,9 +12,7 @@ export function renderProjectEdit() {
             <form action="/" id="edit-project-form" method="POST">
                 <div class="form-group mb-4">
                     <label for="project-name">Project Name</label>
-                    <input type="text" class="form-control" id="project-name" name="project-name" placeholder="Enter your projects name"
-                    value="Testing project name"
-                    >
+                    <input type="text" class="form-control" id="project-name" name="project-name" placeholder="Enter your projects name">
                 </div>
                 <div class="form-group mb-4">
                     <label for="project-description">Project description</label>

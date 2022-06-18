@@ -61,10 +61,12 @@ const usersController = require("./server/controllers/users");
 const sessionController = require("./server/controllers/sessions");
 const gitHubController = require("./server/controllers/github");
 const projectController = require("./server/controllers/projects");
+const profileController = require("./server/controllers/profiles");
 app.use("/api/users", usersController);
 app.use("/api/session", sessionController);
 app.use("/api/gitConnect", gitHubController);
 app.use("/api/projects", projectController);
+app.use("/api/profiles", profileController);
 // ********************************************************************************************************************
 // DEVELOPER comms
 if (process.env.DATABASE) {
