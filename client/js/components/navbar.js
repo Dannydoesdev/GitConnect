@@ -30,4 +30,10 @@ export function renderNav() {
     lorem.classList.add('navbar-links')
     lorem.textContent = "LOREM"
     navBar.appendChild(lorem)
+
+    axios.get('/api/session').then(results => {
+        if (results) {
+            console.log(results)
+        }
+    })
 }
