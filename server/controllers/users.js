@@ -43,21 +43,12 @@ router.post(`/register`, (req, res) => {
   console.log(req.body)
 
   db.query(
-    `INSERT INTO ${USERS_TABLE_NAME} (githubID,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
-    [
-      req.body.githubID,
-      req.body.userType,
-      req.body.profiletype,
-      req.body.email,
-      req.body.name,
-    ]
+    `INSERT INTO ${USERS_TABLE_NAME} (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
+    [req.body.githubName, req.body.userType, req.body.profiletype, req.body.email, req.body.name]
   )
     .then((dbres) => {
-  
       // Retrieve the recently added user ID
-      db.query(`SELECT id FROM ${USERS_TABLE_NAME} WHERE email = $1;`, [
-        req.body.email,
-      ]).then((dbres) => {
+      db.query(`SELECT id FROM ${USERS_TABLE_NAME} WHERE email = $1;`, [req.body.email]).then((dbres) => {
         db.query(
           `INSERT INTO hashed_passwords (id,hashed_password) VALUES ($1,$2);`,
           [dbres.rows[0].id, hash] // insert the new user id and hashed password into password table

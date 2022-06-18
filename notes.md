@@ -5,3 +5,8 @@ git push --set-upstream origin <'name the new branch'>
 
 # Recording video of the screen
 ctrl + alt + R to record the window
+
+
+# Github
+force main to align with repo
+git reset --hard origin/main
