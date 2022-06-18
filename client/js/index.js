@@ -24,9 +24,9 @@ navbarSearch.addEventListener('click', (event) => {
 })
 
 
-login.addEventListener('click', () => {
-    renderLogin();
-})
+// login.addEventListener('click', () => {
+//     renderLogin();
+// })
 
 navbarEditRepo.addEventListener('click', () => {
     renderProjectEdit();
