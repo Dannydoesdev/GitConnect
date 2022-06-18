@@ -4,7 +4,8 @@
   "description": "# DESCRIPTION",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "start nodemon": "nodemon server.js",
     "start db server then application": "service postgresql start && npx nodemon server/server.js",
     "start npx monitor": "npx nodemon server/server.js",
     "--------------------------------": "-",
@@ -33,11 +34,11 @@
     "express-session": "^1.17.3",
     "percent-round": "^2.3.1",
     "pg": "^8.7.3",
-    "postgres": "^3.2.4"
+    "postgres": "^3.2.4",
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.13.0",
-    "axios": "^0.27.2",
     "axios-mock-adapter": "^1.21.1",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
