@@ -68,6 +68,7 @@ router.post(`/login`, (req, res) => {
       }
     })
     .catch((reason) => {
+      console.log("REASON",reason)
       // The user was not found in the database
       res
         .status(BAD_CREDENTIALS_STATUS)
