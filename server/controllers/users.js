@@ -115,6 +115,12 @@ function createHash(email, password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
 
+// recommend using this for simplicity
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+}
+
+
 function isValidPassword(plainTextPassword, passwordHash) {
   // Returns true or false
   return bcrypt.compareSync(plainTextPassword, passwordHash)

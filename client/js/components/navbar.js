@@ -1,4 +1,4 @@
-function renderNav() {
+export function renderNav() {
     // generate navigation bar and header - to move into components
     const main = document.getElementById('main')
     const navBar = document.getElementById('navbar')

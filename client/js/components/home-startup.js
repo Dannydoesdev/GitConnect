@@ -1,5 +1,5 @@
 // to render the home page
-function renderHome() {
+export function renderHome() {
     const main = document.getElementById('main')
 
     // temporariiy removing search-boxes (sorry Danny)
