@@ -1,7 +1,8 @@
+// Inspired and refactored from Jens Adria's createAnElement fn
+
 // Create elements easier, take in 3 parameters - 
 // the type (or element name) as string + the attributes as an object + the children as an array of elements
-// return a new element to append where you've called the fn
-// think of this as (element type, attributes, childrenToAppend)
+// return a new element to append where you've called the fn think of this as (element type, attributes, childrenToAppend)
 export function makeAnEl(type, attrs, children) {
   const el = document.createElement(type);
   if (attrs) Object.keys(attrs).forEach((attr) => {
@@ -28,14 +29,10 @@ export function makeAnEl(type, attrs, children) {
       })
     }
     // if the attribute is a data attribute -
-    // convert the key to dashcase (html standard)
     // set the value of the value to be element.dataset.key = value
     else if (attr == 'data') {
       Object.keys(attrs[attr]).forEach((key) => {
-        console.log(key)
-        console.log(attrs[attr][key])
         el.dataset[key] = attrs[attr][key];
-        // el.dataset[key.replace(/[A-Z]/g, m => "-" + m.toLowerCase())] = attrs[attr][key];
       })
     } else {
       // set the attribute on the element as is
@@ -50,13 +47,46 @@ export function makeAnEl(type, attrs, children) {
 }
 
 // simple version of makeAnEl - takes in a string and returns a new element
-const h1 = makeAnEl('h1', {
-  class: 'header',
-  textContent: 'h1'
-});
+const h1 = makeAnEl('h1')
 
-let main = document.getElementById('id-im-appending-to')
-// main.append(h1)
+//or
+
+const h3 = makeAnEl('h3', {
+  textContent: 'this is a h3',
+  id: 'h3',
+})
+
+//or
+
+const h1Div = makeAnEl('div', {
+  id: 'h1-div',
+}, [
+  makeAnEl('h1', {
+    textContent: 'hello there',
+    id: 'this-h1',
+    class: ['class1', 'class2'],
+    data: {
+      darkmode: 'yes'
+    },
+  })
+]
+)
+
+// examples without makeanEl
+const h2 = document.createElement('h2')
+h2.textContent = 'hello there'
+h2.id = 'this-h2'
+h2.classList.add('class1')
+h2.classList.add('class2')
+h2.dataset.darkmode = 'yes';
+
+
+
+// let main = document.getElementById('results')
+// main.appendChild(h1Div)
+// main.appendChild(h2)
+
+// console.log(main)
 
 
 // full version:
@@ -68,7 +98,7 @@ const section = makeAnEl('section', {
     name: 'test-section',
     id: 'test-section',
     innerText: 'hello there',
-    className: 'test-section',
+    class: ['test-section', 'dark-mode', 'large-font'],
     style: {
       backgroundColor: 'red',
       color: 'white',
@@ -78,6 +108,7 @@ const section = makeAnEl('section', {
     },
     data: {
       test: 'test',
+      id: '1234',
     },
 },
   // third paramter is an array of children to auto append, call the same function each time to use
@@ -88,7 +119,7 @@ const section = makeAnEl('section', {
     }),
     makeAnEl('p', {
       innerText: 'test this p',
-      className: 'test-section-p',
+      className: ['test-section-p', 'dark-mode'],
       style: {
         color: 'blue',
         fontSize: '20px',
@@ -100,6 +131,5 @@ const section = makeAnEl('section', {
   ]
 );
 
-
 // append the new element to the dom
-//main.appendChild(section)
+// main.appendChild(section)
