@@ -1,4 +1,9 @@
-import { renderSearch } from './components/render-repo-search.js'
+// import { renderSearch } from './components/render-repo-search.js'
+import {renderNav} from './components/navbar.js'
+import { renderHome } from "./components/home-startup.js";
+import { renderRego } from "./components/render-rego.js";
+import { renderSearch } from "./components/render-repo-search.js";
+import { renderLogin } from "./components/render-login.js";
 
 renderNav();
 renderHome();
