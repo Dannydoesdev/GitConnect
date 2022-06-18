@@ -1,5 +1,6 @@
 import { makeAnEl } from "../../utils/dom-create.js"
 
+
 export function renderNav() {
     // generate navigation bar and header - to move into components
     const main = document.getElementById('main')

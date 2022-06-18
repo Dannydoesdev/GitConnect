@@ -34,12 +34,12 @@ router.post(`/login`, (req, res) => {
   console.log("req.sessionID = ", req.sessionID,email); //TODO: delete console.log
 
   db.query(
-    `SELECT email,users.id,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
+    `SELECT email,users.id,firstname,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
     [email],
   )
     .then((dbres) => {
       if (req.session.authenticated) {
-        console.log("This user is already logged in "); //TODO: delete console.log
+        console.log("This user is already logged in ", req.session.body.firstname); //TODO: delete console.log
         res.json(req.session);
       } else {
         bcrypt.compare(
@@ -52,10 +52,10 @@ router.post(`/login`, (req, res) => {
               req.session.authenticated = true;
               // req.session.id = dbres.rows[0].id;
               req.session.body = dbres.rows[0];
-
+              console.log("DATA FROM DATABASE",dbres.rows[0])
               res.cookie("gitConnectId",dbres.rows[0].id)
               res.cookie("email", dbres.rows[0].email);
-              res.cookie("name", dbres.rows[0].firstname, { httpOnly: false });
+              res.cookie("firstname", dbres.rows[0].firstname, { httpOnly: false });
               res.status(200).json(req.session);
             } else {
               //  Wrong password correct email.
@@ -68,7 +68,6 @@ router.post(`/login`, (req, res) => {
       }
     })
     .catch((reason) => {
-      console.log("REASON",reason)
       // The user was not found in the database
       res
         .status(BAD_CREDENTIALS_STATUS)
@@ -81,12 +80,19 @@ function isAuthenticated(req, res, next) {
   else next("route");
 }
 router.get("/", isAuthenticated, (req, res) => {
-  console.log("User already logged in"); //
-  res.json({
-    name: req.session.name,
-    email: req.session.email,
+  res.status(200).json({
+    githubname:req.session.body.gitHubName,
+    id: req.session.body.id,
+    email: req.session.body.email,
+    success:true
   });
 });
+router.get("/delete", isAuthenticated, (req, res) => {
+  //  LOG the user OUT. Deletes the session cookie.
+  req.session.destroy();
+  res.json({ success: true });
+});
+
 router.get("/", (req, res) => {
   //  If the user is not authenticated then come to this route. FIXME: clean up 
   res.json({
