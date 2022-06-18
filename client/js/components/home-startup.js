@@ -1,8 +1,6 @@
-// const { sign } = require("crypto")
-// const { nextTick } = require("process")
-
 import { renderLogin } from "./render-login.js"
 import { renderRego } from "./render-rego.js"
+
 
 // to render the home page
 export function renderHome() {

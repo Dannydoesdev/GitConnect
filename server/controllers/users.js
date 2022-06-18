@@ -44,12 +44,13 @@ router.post(`/register`, (req, res) => {
 
   const hash = generateHash(req.body.password)
   db.query(
-    `INSERT INTO ${USERS_TABLE_NAME} (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
+    `INSERT INTO users (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
     [req.body.githubName, req.body.userType, req.body.profiletype, req.body.email, req.body.name]
   )
     .then((dbres) => {
+      // console.log("*****************",dbres);
       // Retrieve the recently added user ID
-      db.query(`SELECT id FROM ${USERS_TABLE_NAME} WHERE email = $1;`, [req.body.email]).then((dbres) => {
+      db.query(`SELECT id FROM users WHERE email = $1;`, [req.body.email]).then((dbres) => {
         db.query(
           `INSERT INTO hashed_passwords (id,hashed_password) VALUES ($1,$2);`,
           [dbres.rows[0].id, hash] // insert the new user id and hashed password into password table
@@ -66,8 +67,8 @@ router.post(`/register`, (req, res) => {
 
 router.get(`/getUsers`, (req, res) => {
   // TODO: REmove this so random people cannot view all the users in the database.
-  ret = dbSelectQuery(`SELECT * FROM ${USERS_TABLE_NAME}`, res);
-  res.json(ret)
+  ret = dbSelectQuery(`SELECT * FROM users;`, res);
+  // res.json(ret)
 });
 
 

@@ -6,7 +6,6 @@
 import { makeAnEl } from '../../utils/dom-create.js';
 
 
-
 export function renderSearch() {
 
     //get main section

@@ -58,13 +58,16 @@ CREATE TABLE messages ( -- messages left for users
     msgread BIT NOT NULL
 );
 -- REPOS..
-CREATE TABLE repoParamaters ( -- Repos and their paramaters. 
+CREATE TABLE repoparameters ( -- Repos and their paramaters. 
     repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
     gitHubRepoName TEXT,
     userID SMALLINT REFERENCES users(id),
     status BIT NOT NULL, -- Available for viewing Y or N
+    projectName TEXT,
     description TEXT,
-    story TEXT,
+    process TEXT,
+    challenges TEXT,
+    outcomes TEXT,
     tags TEXT,
     titleimage TEXT
 );
