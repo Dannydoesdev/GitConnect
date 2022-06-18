@@ -68,8 +68,8 @@ router.post(`/login`, (req, res) => {
               req.session.authenticated = true;
               // req.session.id = dbres.rows[0].id;
               req.session.body = dbres.rows[0];
-              console.log("DATA FROM DATABASE",dbres.rows[0])
-              res.cookie("gitConnectId",dbres.rows[0].id)
+              console.log("DATA FROM DATABASE", dbres.rows[0])
+              res.cookie("gitConnectId", dbres.rows[0].id)
               res.cookie("email", dbres.rows[0].email);
               res.cookie("firstname", dbres.rows[0].firstname, { httpOnly: false });
               res.status(200).json(req.session);
@@ -79,14 +79,10 @@ router.post(`/login`, (req, res) => {
                 .status(BAD_CREDENTIALS_STATUS)
                 .json({ status: false, message: BAD_CREDENTIALS });
             }
-
-
-          }
-        });
-      }
+          })
+      };
     })
-    .catch((reason) => {
-      // The user was not found in the database
+    .catch((reason) => {// The user was not found in the database
       res.status(BAD_CREDENTIALS_STATUS).json({ status: false, message: BAD_CREDENTIALS });
     });
 });
