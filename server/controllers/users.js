@@ -10,9 +10,19 @@ const bcrypt = require("bcrypt");
 const db = require("../db/db.js");
 const router = express.Router();
 const USERS_TABLE_NAME = "users";
-
 // ********************************************************************************************************************
-// CREATE THE ROUTER
+/*
+  To register a new users, you MUST pass the following params as a minimum. The hashed password is stored on a separate table
+  params
+  {
+      githubName: Their github name 
+      userType: Type of users (enter '3' for Developer )
+      profiletype: the type of profile they have on GitConnect (set to '1' Public)
+      email: <users name>
+      password: <users password>
+  }
+*/
+
 router.post(`/register`, (req, res) => {
   // REGISTER A NEW USER
   if (!req.body.name || !req.body.email || !req.body.password) {
@@ -37,30 +47,28 @@ router.post(`/register`, (req, res) => {
       .json({ status: false, message: "Incorrect password length" });
     return;
   }
- // old hashing method
-  // const hash = createHash(req.body.email, req.body.password, 5); // create the hashed password from password and email.
-  // //  Register the new user. Add them to the user database
-  // console.log(req.body)
-
-  const hash = generateHash(req.body.password)
+  // create the hashed password from password and email.
+  const hash = createHash(req.body.email, req.body.password, 5); 
+  // Add the new user to the database so as to get their unique ID
   db.query(
-    `INSERT INTO users (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
+    `INSERT INTO ${USERS_TABLE_NAME} (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
     [req.body.githubName, req.body.userType, req.body.profiletype, req.body.email, req.body.name]
   )
+    // Retrieve the recently added user ID
     .then((dbres) => {
-      // console.log("*****************",dbres);
-      // Retrieve the recently added user ID
-      db.query(`SELECT id FROM users WHERE email = $1;`, [req.body.email]).then((dbres) => {
+      db.query(`SELECT id FROM ${USERS_TABLE_NAME} WHERE email = $1;`, [req.body.email]).then((dbres) => {
         db.query(
+          // Store the new user ID and their hashed password in the hashed_password table
           `INSERT INTO hashed_passwords (id,hashed_password) VALUES ($1,$2);`,
           [dbres.rows[0].id, hash] // insert the new user id and hashed password into password table
         ).then((dbresults) => {
-          res.json({ status: true, message: "New user added" });
+          res.json({ status: true, message: "New user added" }); // respond new user successfully added.
         });
       });
     })
     .catch((reason) => {
-      console.log("ERROR ---> ", reason);
+      // If we reach here it will usually be due to a database error
+      console.log("ERROR ---> ", reason); // TODO: delete console log
       res.status(400).json({ message: reason.detail });
     });
 });
@@ -71,24 +79,11 @@ router.get(`/getUsers`, (req, res) => {
   // res.json(ret)
 });
 
-
 // ********************************************************************************************************************
 // INTERNAL FUNCTIONS
 function createHash(email, password) {
   return bcrypt.hashSync(password + email.toUpperCase(), 10, null);
 }
-
-// recommend using this for simplicity
-function generateHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-}
-
-
-function isValidPassword(plainTextPassword, passwordHash) {
-  // Returns true or false
-  return bcrypt.compareSync(plainTextPassword, passwordHash)
-}
-
 function dbSelectQuery(theQuery, res) {
   //  Function to execute SQL code in the database
   result = db
@@ -102,5 +97,4 @@ function dbSelectQuery(theQuery, res) {
     });
   return result;
 }
-
 module.exports = router;
