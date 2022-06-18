@@ -26,6 +26,13 @@ export function renderNav() {
     })
     navBar.appendChild(editRepoForm)
 
+    const editProfileForm = makeAnEl('h4', {
+        className: 'navbar-links',
+        textContent: 'EDIT PROFILE',
+        id: 'navbar-edit-profile'
+    })
+    navBar.appendChild(editProfileForm)
+
     const lorem = document.createElement('h4')
     lorem.classList.add('navbar-links')
     lorem.textContent = "LOREM"
