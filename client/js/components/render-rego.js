@@ -1,11 +1,11 @@
-function renderRego() {
+export function renderRego() {
   // clear main HTML
   const main = document.getElementById("main");
   main.innerHTML = "";
 
   const formContainer = document.createElement("div");
   formContainer.innerHTML = `
-        <form id="sign-up-form">
+        <form id="sign-up-form" class="forms">
                 <fieldset>
                     <label for="">Git Username: </label><br>
                     <input type="text" name="username">

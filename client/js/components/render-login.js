@@ -1,4 +1,4 @@
-function renderLogin() {
+export function renderLogin() {
     // clear main HTML
     const main = document.getElementById('main')
     main.innerHTML = ""
