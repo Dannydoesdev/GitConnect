@@ -81,10 +81,10 @@ function isAuthenticated(req, res, next) {
 }
 router.get("/", isAuthenticated, (req, res) => {
   res.status(200).json({
-    githubname:req.session.body.gitHubName,
+    firstname: req.session.body.firstname,
     id: req.session.body.id,
     email: req.session.body.email,
-    success:true
+    success: true,
   });
 });
 router.get("/delete", isAuthenticated, (req, res) => {

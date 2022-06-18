@@ -66,7 +66,8 @@ export function renderHome() {
         } else {
           // YES the user is logged in
           const logout = document.createElement("h4");
-          logout.textContent = "Logout";
+          console.log(result.data)
+          logout.textContent = "Logout "+result.data.firstname;
           logout.setAttribute("id", "logout");
           logout.classList.add("home-login-signup");
           loginContainer.appendChild(logout);
