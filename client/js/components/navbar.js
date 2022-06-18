@@ -1,12 +1,19 @@
 import { makeAnEl } from "../../utils/dom-create.js";
+import { renderProjectEdit } from "./render-project-edit.js";
+import { renderProfileEdit } from "./render-profile-edit.js";
+import { renderSearch } from "./render-repo-search.js";
 
 export function renderNav() {
-  const main = document.getElementById("main");
+//   const main = document.getElementById("main");
   const navBar = document.getElementById("navbar");
   const logo = document.createElement("img");
+
   logo.src = "./img/gclogo.png";
   logo.setAttribute("id", "navbar-logo");
   navBar.appendChild(logo);
+  logo.addEventListener("click", (event) => {
+    window.location = "/";
+  });
 
   const sendingrequest = async () => {
     // temporary
@@ -17,6 +24,9 @@ export function renderNav() {
           textContent: "EDIT PROFILE",
           id: "navbar-edit-profile",
         });
+        editProfileForm.addEventListener("click", () => {
+          renderProfileEdit();
+        });
         navBar.appendChild(editProfileForm);
         const editRepoForm = makeAnEl("h4", {
           className: "navbar-links",
@@ -24,6 +34,9 @@ export function renderNav() {
           id: "navbar-edit-repo",
         });
         navBar.appendChild(editRepoForm);
+        editRepoForm.addEventListener("click", () => {
+          renderProjectEdit();
+        });
       } else {
         console.log("RESULTS", result.data.success);
       }
@@ -43,6 +56,9 @@ export function renderNav() {
   search.textContent = "SEARCH";
   search.setAttribute("id", "navbar-search");
   navBar.appendChild(search);
+  search.addEventListener("click", (event) => {
+    renderSearch();
+  });
 
   const lorem = document.createElement("h4");
   lorem.classList.add("navbar-links");

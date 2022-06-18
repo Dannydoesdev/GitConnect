@@ -40,7 +40,7 @@ export function renderHome() {
   searchBar.setAttribute("id", "search-bar");
   searchContainer.appendChild(searchBar);
 
-  const sendingrequest = async () => {
+  const sendingrequest = async () => { // Must wait till axios receives a response before processing more code
     // temporary
     const resp = await axios
       .get("/api/session")
