@@ -37,11 +37,12 @@ router.post(`/register`, (req, res) => {
       .json({ status: false, message: "Incorrect password length" });
     return;
   }
- 
-  const hash = createHash(req.body.email, req.body.password, 5); // create the hashed password from password and email.
-  //  Register the new user. Add them to the user database
-  console.log(req.body)
+ // old hashing method
+  // const hash = createHash(req.body.email, req.body.password, 5); // create the hashed password from password and email.
+  // //  Register the new user. Add them to the user database
+  // console.log(req.body)
 
+  const hash = generateHash(req.body.password)
   db.query(
     `INSERT INTO ${USERS_TABLE_NAME} (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
     [req.body.githubName, req.body.userType, req.body.profiletype, req.body.email, req.body.name]
@@ -69,46 +70,46 @@ router.get(`/getUsers`, (req, res) => {
   res.json(ret)
 });
 
-router.post('/login', (req, res) => {
-  // get the email and password from the body of the request
-      const email = req.body.email
-      const passwordInit = req.body.password
-      const hash = createHash(req.body.email, req.body.password, 5);
-      // check the email and password in the DB
-      if (!email || email == "") {
-          res.status(400).json({ success: false, message: "Email is required."})
-      } else if (!passwordInit || passwordInit == "") {
-          res.status(400).json({ success: false, message: "Password is required."})
-      } else {
-          db.query(`SELECT * FROM ${USERS_TABLE_NAME} WHERE email = ($1)`, [email])
-          .then((results) => {
-            // console.log(results, "results[0]")
-              if (results.rows[0]) {
-                  const {id, name, email} = results.rows[0]
-                  db.query(`SELECT hashed_password FROM hashed_passwords WHERE id = ($1)`, [id])
-                  .then((dbres) => {
-                    if ((dbres.rows[0].id) && (dbres.rows[0].hashed_password == hash)) {
-                        req.session.id = id
-                        req.session.name = name
-                        req.session.email = email
-                        res.json({ message : "Session Claimed" })
-                    } else if ((dbres.rows[0].id) && (dbres.rows[0].hashed_password != hash)) {
-                        console.log('Wrong password')
-                        res.json({ message : "Wrong Password" })
-                    } else {
-                        res.json({ message : "Email does not exist" })
+// router.post('/login', (req, res) => {
+//   // get the email and password from the body of the request
+//       const email = req.body.email
+//       const passwordInit = req.body.password
+//       // check the email and password in the DB
+//       if (!email || email == "") {
+//           res.status(400).json({ success: false, message: "Email is required."})
+//       } else if (!passwordInit || passwordInit == "") {
+//           res.status(400).json({ success: false, message: "Password is required."})
+//       } else {
+//           db.query(`SELECT * FROM ${USERS_TABLE_NAME} WHERE email = ($1)`, [email])
+//           .then((results) => {
+//             // console.log(results, "results[0]")
+//               if (results.rows[0]) {
+//                   const {id, name, email} = results.rows[0]
+//                   db.query(`SELECT * FROM hashed_passwords WHERE id = ($1)`, [id])
+//                   .then((dbres) => {
+//                     if ((dbres.rows[0].id) && (isValidPassword(passwordInit, dbres.rows[0].hashed_password))) {
+//                         req.session.id = id
+//                         // req.session.name = name
+//                         req.session.email = email
+//                         req.session.authenticated = true;
+//                         res.status(200).json({ message : "Session Claimed" })
+//                     } else if ((dbres.rows[0].id) && (!isValidPassword(passwordInit, dbres.rows[0].hashed_password))) {
+//                         console.log('Wrong password')
+//                         res.json({ message : "Wrong Password" })
+//                     } else {
+//                         res.json({ message : "Email does not exist" })
+//                     }
+//                   })
+//               } else {
+//                     res.status(401).json({ success: false, message: "Email does not exist" })
+//               }
+//           })
+//           .catch(err => {
+//               res.status(500).json({ message: "Unknown error occurred." })
+//           })
+//       }
+//   })
 
-                    }
-                  })
-              } else {
-                    res.status(401).json({ success: false, message: "Email does not exist" })
-              }
-          })
-          .catch(err => {
-              res.status(500).json({ message: "Unknown error occurred." })
-          })
-      }
-  })
 // ********************************************************************************************************************
 // INTERNAL FUNCTIONS
 function createHash(email, password) {
