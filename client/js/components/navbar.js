@@ -1,46 +1,68 @@
-import { makeAnEl } from "../../utils/dom-create.js"
+import { makeAnEl } from "../../utils/dom-create.js";
+import { renderProjectEdit } from "./render-project-edit.js";
+import { renderProfileEdit } from "./render-profile-edit.js";
+import { renderSearch } from "./render-repo-search.js";
 
 export function renderNav() {
-    // generate navigation bar and header - to move into components
-    const main = document.getElementById('main')
-    const navBar = document.getElementById('navbar')
-    const logo = document.createElement('img')
-    logo.src = "./img/gclogo.png"
-    logo.setAttribute('id', 'navbar-logo')
-    navBar.appendChild(logo)
-    const browse = document.createElement('h4')
-    browse.classList.add('navbar-links')
-    browse.textContent = "BROWSE"
-    navBar.appendChild(browse)
+//   const main = document.getElementById("main");
+  const navBar = document.getElementById("navbar");
+  const logo = document.createElement("img");
 
-    const search = document.createElement('h4')
-    search.classList.add('navbar-links')
-    search.textContent = "SEARCH"
-    search.setAttribute('id', 'navbar-search')
-    navBar.appendChild(search)
+  logo.src = "./img/gclogo.png";
+  logo.setAttribute("id", "navbar-logo");
+  navBar.appendChild(logo);
+  logo.addEventListener("click", (event) => {
+    window.location = "/";
+  });
 
-    const editRepoForm = makeAnEl('h4', {
-        className: 'navbar-links',
-        textContent: 'EDIT REPO',
-        id: 'navbar-edit-repo'
-    })
-    navBar.appendChild(editRepoForm)
+  const sendingrequest = async () => {
+    // temporary
+    const resp = await axios.get("/api/session").then((result) => {
+      if (result.data.success) {
+        const editProfileForm = makeAnEl("h4", {
+          className: "navbar-links",
+          textContent: "EDIT PROFILE",
+          id: "navbar-edit-profile",
+        });
+        editProfileForm.addEventListener("click", () => {
+          renderProfileEdit();
+        });
+        navBar.appendChild(editProfileForm);
+        const editRepoForm = makeAnEl("h4", {
+          className: "navbar-links",
+          textContent: "EDIT REPO",
+          id: "navbar-edit-repo",
+        });
+        navBar.appendChild(editRepoForm);
+        editRepoForm.addEventListener("click", () => {
+          renderProjectEdit();
+        });
+      } else {
+        console.log("RESULTS", result.data.success);
+      }
+    });
 
-    const editProfileForm = makeAnEl('h4', {
-        className: 'navbar-links',
-        textContent: 'EDIT PROFILE',
-        id: 'navbar-edit-profile'
-    })
-    navBar.appendChild(editProfileForm)
+    // setting main name
+  };
 
-    const lorem = document.createElement('h4')
-    lorem.classList.add('navbar-links')
-    lorem.textContent = "LOREM"
-    navBar.appendChild(lorem)
+  // generate navigation bar and header - to move into components
+  const browse = document.createElement("h4");
+  browse.classList.add("navbar-links");
+  browse.textContent = "BROWSE";
+  navBar.appendChild(browse);
 
-    axios.get('/api/session').then(results => {
-        if (results) {
-            console.log(results)
-        }
-    })
+  const search = document.createElement("h4");
+  search.classList.add("navbar-links");
+  search.textContent = "SEARCH";
+  search.setAttribute("id", "navbar-search");
+  navBar.appendChild(search);
+  search.addEventListener("click", (event) => {
+    renderSearch();
+  });
+
+  const lorem = document.createElement("h4");
+  lorem.classList.add("navbar-links");
+  lorem.textContent = "LOREM";
+  navBar.appendChild(lorem);
+  sendingrequest();
 }
