@@ -112,7 +112,7 @@ router.post('/login', (req, res) => {
 // ********************************************************************************************************************
 // INTERNAL FUNCTIONS
 function createHash(email, password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  return bcrypt.hashSync(password + email.toUpperCase(), 10, null);
 }
 
 // recommend using this for simplicity
