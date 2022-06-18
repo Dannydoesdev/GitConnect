@@ -1,3 +1,5 @@
+import { makeAnEl } from "../../utils/dom-create.js"
+
 export function renderNav() {
     // generate navigation bar and header - to move into components
     const main = document.getElementById('main')
@@ -16,6 +18,13 @@ export function renderNav() {
     search.textContent = "SEARCH"
     search.setAttribute('id', 'navbar-search')
     navBar.appendChild(search)
+
+    const editRepoForm = makeAnEl('h4', {
+        className: 'navbar-links',
+        textContent: 'EDIT REPO',
+        id: 'navbar-edit-repo'
+    })
+    navBar.appendChild(editRepoForm)
 
     const lorem = document.createElement('h4')
     lorem.classList.add('navbar-links')
