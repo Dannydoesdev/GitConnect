@@ -1,9 +1,19 @@
 /* SERVER
-    FILE: SESSIONS API handeler 
-    AUTHOR:  
-    DATE:   
-    DESCRIPTION:*/
-// ********************************************************************************************************************
+    FILE: SESSIONS API handeler  
+    DATE:   2022
+    DESCRIPTION: Session control for GitConnect
+    USAGE: Loggin into GitConnect. Loggin out of Gitconnect. Creating sessions 
+      router.post('/login'):   
+      params are as follows
+        {
+          email: <the users email>,
+          password: <the users unencrypted password>
+        }
+        The password length is validated. 
+        returns success(200) OK if successful login
+        
+     */
+// ***************************      *****************************************************************************************
 // SET UP THE INCLUDES
 const express = require("express");
 const bcrypt = require("bcrypt");
@@ -31,56 +41,53 @@ router.post(`/login`, (req, res) => {
       .json({ status: false, message: "Incorrect Password length" });
     return;
   }
-  console.log("req.sessionID = ", req.sessionID,email); //TODO: delete console.log
-
+  /*
+    PRE condition: validated password and email. 
+    POST: 
+    1)  If the user has an account and authenticates return stats 200 OK. Also a cookies containing gitConnectId,email and name
+    2)  Else if the user does not authenticate, a message of BAD CREDENTIALS along with the associated status code.
+  */
   db.query(
-    `SELECT email,users.id,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
-    [email],
+    `SELECT email,${USERS_TABLE_NAME}.id,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
+    [email]
   )
     .then((dbres) => {
       if (req.session.authenticated) {
         console.log("This user is already logged in "); //TODO: delete console.log
         res.json(req.session);
       } else {
-        bcrypt.compare(
-          password + email.toUpperCase(),
-          dbres.rows[0].hashed_password,
-          function (err, result) {
-            if (result) {
-              delete dbres.rows[0].hashed_password;
-              console.log("The user has successfully logged in"); //TODO: delete console.log
-              req.session.authenticated = true;
-              // req.session.id = dbres.rows[0].id;
-              req.session.body = dbres.rows[0];
-
-              res.cookie("gitConnectId",dbres.rows[0].id)
-              res.cookie("email", dbres.rows[0].email);
-              res.cookie("name", dbres.rows[0].firstname, { httpOnly: false });
-              res.status(200).json(req.session);
-            } else {
-              //  Wrong password correct email.
-              res
-                .status(BAD_CREDENTIALS_STATUS)
-                .json({ status: false, message: BAD_CREDENTIALS });
-            }
+        bcrypt.compare(password + email.toUpperCase(), dbres.rows[0].hashed_password, function (err, result) {
+          if (result) {
+            delete dbres.rows[0].hashed_password; //  Delete the hashed password so we do not return it to the users browswer
+            console.log("The user has successfully logged in"); //TODO: delete console.log
+            req.session.authenticated = true;
+            req.session.body = dbres.rows[0];
+            res.cookie("gitConnectId", dbres.rows[0].id);
+            res.cookie("email", dbres.rows[0].email);
+            res.cookie("name", dbres.rows[0].firstname, { httpOnly: false });
+            res.status(200).json(req.session);
+          } else {
+            //  Wrong password correct email.
+            res.status(BAD_CREDENTIALS_STATUS).json({ status: false, message: BAD_CREDENTIALS });
           }
-        );
+        });
       }
     })
     .catch((reason) => {
-      console.log("REASON",reason)
+      console.log("REASON", reason);
       // The user was not found in the database
-      res
-        .status(BAD_CREDENTIALS_STATUS)
-        .json({ status: false, message: BAD_CREDENTIALS });
+      res.status(BAD_CREDENTIALS_STATUS).json({ status: false, message: BAD_CREDENTIALS });
     });
 });
 
-function isAuthenticated(req, res, next) {
+
+//  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//  System below
+function __isAuthenticated(req, res, next) {
   if (req.session.authenticated) next();
   else next("route");
 }
-router.get("/", isAuthenticated, (req, res) => {
+router.get("/", __isAuthenticated, (req, res) => {
   console.log("User already logged in"); //
   res.json({
     name: req.session.name,
@@ -96,7 +103,7 @@ router.get("/", (req, res) => {
     success:false
   });
 });
-router.delete("/", isAuthenticated,(req, res) => {
+router.delete("/", __isAuthenticated,(req, res) => {
   //  LOG the user OUT. Deletes the session cookie.
   req.session.destroy();
   res.json({ success: true });
