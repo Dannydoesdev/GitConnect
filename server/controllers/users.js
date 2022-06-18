@@ -115,6 +115,16 @@ function createHash(email, password) {
   return bcrypt.hashSync(password + email.toUpperCase(), 10, null);
 }
 
+// recommend using this for simplicity
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+}
+
+
+function isValidPassword(plainTextPassword, passwordHash) {
+  // Returns true or false
+  return bcrypt.compareSync(plainTextPassword, passwordHash)
+}
 
 function dbSelectQuery(theQuery, res) {
   //  Function to execute SQL code in the database
