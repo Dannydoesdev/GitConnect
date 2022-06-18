@@ -70,46 +70,6 @@ router.get(`/getUsers`, (req, res) => {
   // res.json(ret)
 });
 
-router.post('/login', (req, res) => {
-  // get the email and password from the body of the request
-      const email = req.body.email
-      const passwordInit = req.body.password
-      const hash = createHash(req.body.email, req.body.password, 5);
-      // check the email and password in the DB
-      if (!email || email == "") {
-          res.status(400).json({ success: false, message: "Email is required."})
-      } else if (!passwordInit || passwordInit == "") {
-          res.status(400).json({ success: false, message: "Password is required."})
-      } else {
-          db.query(`SELECT * FROM ${USERS_TABLE_NAME} WHERE email = ($1)`, [email])
-          .then((results) => {
-            // console.log(results, "results[0]")
-              if (results.rows[0]) {
-                  const {id, name, email} = results.rows[0]
-                  db.query(`SELECT hashed_password FROM hashed_passwords WHERE id = ($1)`, [id])
-                  .then((dbres) => {
-                    if ((dbres.rows[0].id) && (dbres.rows[0].hashed_password == hash)) {
-                        req.session.id = id
-                        req.session.name = name
-                        req.session.email = email
-                        res.json({ message : "Session Claimed" })
-                    } else if ((dbres.rows[0].id) && (dbres.rows[0].hashed_password != hash)) {
-                        console.log('Wrong password')
-                        res.json({ message : "Wrong Password" })
-                    } else {
-                        res.json({ message : "Email does not exist" })
-
-                    }
-                  })
-              } else {
-                    res.status(401).json({ success: false, message: "Email does not exist" })
-              }
-          })
-          .catch(err => {
-              res.status(500).json({ message: "Unknown error occurred." })
-          })
-      }
-  })
 // ********************************************************************************************************************
 // INTERNAL FUNCTIONS
 function createHash(email, password) {
