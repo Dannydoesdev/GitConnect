@@ -30,16 +30,13 @@ let form = document.getElementById('login-form')
             email: formData.get('email'),
             password: formData.get('password')
         }
-        axios.post('/api/users/login', data)
+        axios.post('/api/session/login', data)
         .then((response) => {
             window.location = '/';
         })
         .catch(err => {
             console.log(err);
             console.log(err.response.data)
-            let errorMessage = err.response.data.message;
-            alert(errorMessage);
-            console.log(errorMessage)
             console.log('error');
         })
     })
