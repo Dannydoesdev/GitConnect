@@ -45,7 +45,7 @@ export function renderHome() {
     const resp = await axios
       .get("/api/session")
       .then((result) => {
-          if (!result.data.success) {
+        if (!result.data.success) {
           const login = document.createElement("h4");
           login.textContent = "Login";
           login.setAttribute("id", "login");
