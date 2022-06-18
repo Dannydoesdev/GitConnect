@@ -5,12 +5,12 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "start nodemon": "nodemon server.js",
-    "start db server then application": "service postgresql start && npx nodemon server/server.js",
-    "start npx monitor": "npx nodemon server/server.js",
+    "start_nodemon": "nodemon server.js",
+    "start_db_then_app": "service postgresql start && npx nodemon server/server.js",
+    "start_npx_monitor": "npx nodemon server/server.js",
     "--------------------------------": "-",
-    "start postgresql": "service postgresql start",
-    "stop postgresql": "service postgresql stop",
+    "start_postgresql": "service postgresql start",
+    "stop_postgresql": "service postgresql stop",
     "-------------------------------": "-",
     "database_dummy_data_reset": "psql project3_db < server/db/db_init_dummy_only.sql && psql project3_db < server/db/schema.sql && psql project3_db < server/db/seed_dummy.sql",
     "database_full_reset": "bash server/db/scripts/initialisedb.sh"

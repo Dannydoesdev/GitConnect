@@ -37,11 +37,12 @@ router.post(`/register`, (req, res) => {
       .json({ status: false, message: "Incorrect password length" });
     return;
   }
- 
-  const hash = createHash(req.body.email, req.body.password, 5); // create the hashed password from password and email.
-  //  Register the new user. Add them to the user database
-  console.log(req.body)
+ // old hashing method
+  // const hash = createHash(req.body.email, req.body.password, 5); // create the hashed password from password and email.
+  // //  Register the new user. Add them to the user database
+  // console.log(req.body)
 
+  const hash = generateHash(req.body.password)
   db.query(
     `INSERT INTO users (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
     [req.body.githubName, req.body.userType, req.body.profiletype, req.body.email, req.body.name]

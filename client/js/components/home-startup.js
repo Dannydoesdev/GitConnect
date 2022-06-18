@@ -1,6 +1,9 @@
 // const { sign } = require("crypto")
 // const { nextTick } = require("process")
 
+import { renderLogin } from "./render-login.js"
+import { renderRego } from "./render-rego.js"
+
 // to render the home page
 export function renderHome() {
     const main = document.getElementById('main')
@@ -23,14 +26,40 @@ export function renderHome() {
     login.setAttribute('id', 'login')
     login.classList.add('home-login-signup')
 
+    // temporary
+    const logout = document.createElement('h4')
+    logout.textContent = "Logout"
+    logout.setAttribute('id', 'logout')
+    logout.classList.add('home-login-signup')
+
     const signUp = document.createElement('h4')
     signUp.textContent = "Sign Up"
     signUp.setAttribute('id', 'sign-up')
     signUp.classList.add('home-login-signup')
     
     main.appendChild(loginContainer)
-    loginContainer.appendChild(login)
-    loginContainer.appendChild(signUp)
+    axios.get('/api/session').then(result => {
+        if (!result.data.email) {
+            loginContainer.appendChild(login)
+            login.addEventListener('click', () => {
+                renderLogin();
+            })
+            loginContainer.appendChild(signUp)
+            signUp.addEventListener('click', () => {
+                renderRego();
+            })
+
+        } else {
+            loginContainer.appendChild(logout)
+            logout.addEventListener('click', () => {
+                axios.delete('/api/session').then(() => {
+                    window.location = '/'
+                });
+            })
+        }
+    })
+    
+
 
     // setting main name
     const heading = document.createElement('h1')

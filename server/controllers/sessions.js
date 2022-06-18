@@ -25,7 +25,7 @@ router.post(`/login`, (req, res) => {
     res.status(400).json({ status: false, message: "Missing Password" });
     return;
   }
-  if (password.length < 10 || password.length > 255) {
+  if (password.length < 4 || password.length > 255) {
     res
       .status(400)
       .json({ status: false, message: "Incorrect Password length" });
