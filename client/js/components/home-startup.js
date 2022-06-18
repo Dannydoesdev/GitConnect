@@ -46,6 +46,7 @@ export function renderHome() {
       .get("/api/session")
       .then((result) => {
         if (!result.data.success) {
+          // No this user is not logged in
           const login = document.createElement("h4");
           login.textContent = "Login";
           login.setAttribute("id", "login");
@@ -63,6 +64,7 @@ export function renderHome() {
             renderRego();
           });
         } else {
+          // YES the user is logged in
           const logout = document.createElement("h4");
           logout.textContent = "Logout";
           logout.setAttribute("id", "logout");
