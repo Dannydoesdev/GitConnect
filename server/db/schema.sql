@@ -21,7 +21,7 @@ CREATE TABLE programminglanguages ( -- List of potential programming languages
 -- USERS        --------------------------------------------------------
 CREATE TABLE users ( -- All users that have access to Login
     id SERIAL PRIMARY KEY,
-    githubID INT UNIQUE,
+    githubName TEXT UNIQUE,
     email TEXT UNIQUE,
     userType SMALLINT REFERENCES userTypes(id) NOT NULL,
     profiletype SMALLINT REFERENCES profiletype(id),
@@ -60,6 +60,7 @@ CREATE TABLE messages ( -- messages left for users
 -- REPOS..
 CREATE TABLE repoParamaters ( -- Repos and their paramaters. 
     repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
+    gitHubRepoName TEXT,
     userID SMALLINT REFERENCES users(id),
     status BIT NOT NULL, -- Available for viewing Y or N
     description TEXT,
