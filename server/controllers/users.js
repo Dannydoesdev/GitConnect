@@ -112,9 +112,13 @@ router.post('/login', (req, res) => {
 // ********************************************************************************************************************
 // INTERNAL FUNCTIONS
 function createHash(email, password) {
-  return bcrypt.hashSync(password + email.toUpperCase(), 10, null);
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
 
+function isValidPassword(plainTextPassword, passwordHash) {
+  // Returns true or false
+  return bcrypt.compareSync(plainTextPassword, passwordHash)
+}
 
 function dbSelectQuery(theQuery, res) {
   //  Function to execute SQL code in the database
