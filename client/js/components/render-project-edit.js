@@ -3,19 +3,18 @@ import { makeAnEl } from '../../utils/dom-create.js';
 export function renderProjectEdit() {
     const main = document.getElementById('main');
     main.innerHTML = '';
-    // const projectEdit = makeAnEl('div', {
-    // }
-    // <div class="container-fluid ms-1 bg-dark text-white">
     
     main.innerHTML = `
     <div class="container bg-dark text-white">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h1>Project Title</h1>
-            <form action="/" method="POST">
+            <form action="/" id="edit-project-form" method="POST">
                 <div class="form-group mb-4">
-                    <label for="projectname">Project Name</label>
-                    <input type="text" class="form-control" id="projectname" name="projectname" placeholder="Enter your projects name">
+                    <label for="project-name">Project Name</label>
+                    <input type="text" class="form-control" id="project-name" name="project-name" placeholder="Enter your projects name"
+                    value="Testing project name"
+                    >
                 </div>
                 <div class="form-group mb-4">
                     <label for="project-description">Project description</label>
@@ -40,5 +39,35 @@ export function renderProjectEdit() {
 </div>
     `
   
-    
+let form = document.getElementById("edit-project-form");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+
+    const data = {
+        projectName: formData.get("project-name"),
+        description: formData.get("project-description"),
+        process: formData.get("project-process"),
+        challenges: formData.get("project-challenges"),
+        outcomes: formData.get("project-outcomes"),
+        status: 1,
+    };
+      
+      console.log(data);
+
+    axios
+      .post("/api/projects", data)
+        .then((response) => {
+          console.log(response)
+        //   window.location = '/api/projects';
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response.data);
+        let errorMessage = err.response.data.message;
+        alert(errorMessage);
+        console.log(errorMessage);
+        console.log("error");
+      });
+  });
 }

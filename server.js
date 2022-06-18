@@ -24,7 +24,7 @@ const app = express(); // Initialise the app
 // ********************************************************************************************************************
 // SET UP THE APP
 app.use("/", (req, res, next) => {
-  // 3 paramaters = middlewear
+  // 3 paramaters = middleware
   console.log("*************************************************************");
   console.log(`SERVER COMMUNICATION ${new Date()} ${req.method}`);
   console.log(`METHOD = ${req.method}`);
@@ -37,7 +37,7 @@ app.use("/", (req, res, next) => {
 });
 app.use((err, req, res, next) => {
   // 4 parameters = error handeler
-  console.log(`I am ERROR middlewear ${new Date()} ${req.method} ${req.path}`);
+  console.log(`I am ERROR middleware ${new Date()} ${req.method} ${req.path}`);
   console.log(err);
   res.status(500).json({ message: "Unknown SERVER/INSERT error occurred" });
   next();
@@ -60,9 +60,11 @@ app.use(
 const usersController = require("./server/controllers/users");
 const sessionController = require("./server/controllers/sessions");
 const gitHubController = require("./server/controllers/github");
+const projectController = require("./server/controllers/projects");
 app.use("/api/users", usersController);
 app.use("/api/session", sessionController);
 app.use("/api/gitConnect", gitHubController);
+app.use("/api/projects", projectController);
 // ********************************************************************************************************************
 // DEVELOPER comms
 if (process.env.DATABASE) {
