@@ -29,7 +29,7 @@ export function renderFirstTimeRegistration(gitHubName) {
     const resp = async () => {
         const userRepoData=  await gitConnectAPI.getRepoDetailFromGitConnect(gitHubName);
         if(!userRepoData.data.length){
-                    console.log("user has no data")
+            console.log("user has no data")
 
         } else {
             console.log("user has data")
