@@ -1,17 +1,5 @@
-export function whichPageToShow(thePageToShow, gitHubName) {
-  switch (thePageToShow) {
-    case 1:
-      renderFirstTimeRegistration(gitHubName);
-      break;
-    case 2:
-      // code block
-      break;
-    default:
-    // code block
-  }
-}
 
-function renderFirstTimeRegistration(gitHubName) {
+export function renderFirstTimeRegistration(gitHubName) {
   const main = document.getElementById("main");
   main.innerHTML = `
   
