@@ -37,7 +37,7 @@ export function renderRego() {
       email: formData.get("email"),
       password: formData.get("password"),
       confirmPassword: formData.get("confirm-password"),
-      name: formData.get("username"),
+      gitHubName: formData.get("username"),
       userType: 1,
       profiletype: 1,
     };
