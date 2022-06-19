@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "nm": "nodemon server.js",
     "start_nodemon": "nodemon server.js",
     "start_db_then_app": "service postgresql start && npx nodemon server/server.js",
     "start_npx_monitor": "npx nodemon server/server.js",
