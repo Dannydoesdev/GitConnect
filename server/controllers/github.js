@@ -39,6 +39,7 @@ router.post(`/gitdetails`, __isAuthenticated, (req, res) => {
   /*  Params {
         name:<repo name>
   }*/
+    const name = req.body.name;
   axios({
     method: "get",
     headers: { Authorization: `token ${TOKEN}` },

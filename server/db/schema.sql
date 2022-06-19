@@ -32,6 +32,17 @@ CREATE TABLE users ( -- All users that have access to Login
     aboutme TEXT,
     mobile VARCHAR(16),
     portfoliolink TEXT,
+    githubutrl TEXT,
+    gitHubAvatar TEXT,
+    gitHubrepos_url TEXT,
+    gitHubFullName TEXT,
+    gitHubCompany TEXT,
+    gitHubBlog TEXT,
+    gitHubTwitter TEXT,
+    gitHubHirable TEXT,
+    gitHubLocation TEXT,
+    gitHubBio TEXT,
+    gitHubMemberSince TEXT
     CONSTRAINT validate_email CHECK (email LIKE '%___@___%__%')
 );
 CREATE TABLE hashed_passwords ( -- Separate table to store only hashed passwords and user ids. Security reasons

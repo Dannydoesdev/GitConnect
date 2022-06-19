@@ -24,19 +24,24 @@ export function renderFirstTimeRegistration(gitHubName) {
   document.getElementById("logoutButton").addEventListener("click", () => {
     logout();
   });
-//  Perform all rendering within the below async
+  //  Perform all rendering within the below async
   (async () => {
     const resp = async () => {
-        const userRepoData=  await gitConnectAPI.getRepoDetailFromGitConnect(gitHubName);
-        if(!userRepoData.data.length){
-            console.log("user has no data")
-
-        } else {
-            console.log("user has data")
-        }
+      const userRepoData = await gitConnectAPI.getRepoDetailFromGitConnect(gitHubName);
+      console.log(userRepoData)
+      if (!userRepoData.data.length) {
+        console.log("user has no data");
+      } else {
+        console.log("user has data");
+      }
     };
     await resp();
   })();
-    
-    
+
+
 }
+  function logout() {
+    axios.delete("/api/session").then(() => {
+      window.location = "/";
+    });
+  };
