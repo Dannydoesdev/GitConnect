@@ -48,41 +48,36 @@ router.post(`/login`, (req, res) => {
     2)  Else if the user does not authenticate, a message of BAD CREDENTIALS along with the associated status code.
   */
   db.query(
-    `SELECT email,users.id,firstname,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
-    [email],
-
+    `SELECT email,githubName,users.id,firstname,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
+    [email]
   )
     .then((dbres) => {
       if (req.session.authenticated) {
         console.log("This user is already logged in ", req.session.body.firstname); //TODO: delete console.log
         res.json(req.session);
       } else {
-
-        bcrypt.compare(
-          password + email.toUpperCase(),
-          dbres.rows[0].hashed_password,
-          function (err, result) {
-            if (result) {
-              delete dbres.rows[0].hashed_password;
-              console.log("The user has successfully logged in"); //TODO: delete console.log
-              req.session.authenticated = true;
-              // req.session.id = dbres.rows[0].id;
-              req.session.body = dbres.rows[0];
-              console.log("DATA FROM DATABASE", dbres.rows[0])
-              res.cookie("gitConnectId", dbres.rows[0].id)
-              res.cookie("email", dbres.rows[0].email);
-              res.cookie("firstname", dbres.rows[0].firstname, { httpOnly: false });
-              res.status(200).json(req.session);
-            } else {
-              //  Wrong password correct email.
-              res
-                .status(BAD_CREDENTIALS_STATUS)
-                .json({ status: false, message: BAD_CREDENTIALS });
-            }
-          })
-      };
+        bcrypt.compare(password + email.toUpperCase(), dbres.rows[0].hashed_password, function (err, result) {
+          if (result) {
+            delete dbres.rows[0].hashed_password;
+            console.log("The user has successfully logged in"); //TODO: delete console.log
+            req.session.authenticated = true;
+            // req.session.id = dbres.rows[0].id;
+            req.session.body = dbres.rows[0];
+            console.log(dbres.rows[0])
+            console.log("DATA FROM DATABASE", dbres.rows[0]);
+            res.cookie("gitConnectId", dbres.rows[0].id);
+            res.cookie("email", dbres.rows[0].email);
+            res.cookie("gitHubName", dbres.rows[0].githubname, { httpOnly: false });
+            res.status(200).json(req.session);
+          } else {
+            //  Wrong password correct email.
+            res.status(BAD_CREDENTIALS_STATUS).json({ status: false, message: BAD_CREDENTIALS });
+          }
+        });
+      }
     })
-    .catch((reason) => {// The user was not found in the database
+    .catch((reason) => {
+      // The user was not found in the database
       res.status(BAD_CREDENTIALS_STATUS).json({ status: false, message: BAD_CREDENTIALS });
     });
 });
@@ -97,11 +92,10 @@ function isAuthenticated(req, res, next) {
 
 router.get("/", isAuthenticated, (req, res) => {
   res.status(200).json({
-    firstname: req.session.body.firstname,
+    githubname: req.session.body.githubname,
     id: req.session.body.id,
     email: req.session.body.email,
     success: true,
-
   });
 });
 router.get("/delete", isAuthenticated, (req, res) => {

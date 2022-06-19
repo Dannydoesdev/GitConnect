@@ -21,11 +21,11 @@ CREATE TABLE programminglanguages ( -- List of potential programming languages
 -- USERS        --------------------------------------------------------
 CREATE TABLE users ( -- All users that have access to Login
     id SERIAL PRIMARY KEY,
-    githubName TEXT UNIQUE,
+    githubName TEXT,
     email TEXT UNIQUE,
     userType SMALLINT REFERENCES userTypes(id) NOT NULL,
     profiletype SMALLINT REFERENCES profiletype(id),
-    firstName VARCHAR(20) NOT NULL,
+    firstName VARCHAR(20),
     lastName VARCHAR(30),
     photo TEXT,
     aboutmetitle TEXT,

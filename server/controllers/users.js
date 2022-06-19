@@ -25,7 +25,7 @@ const USERS_TABLE_NAME = "users";
 
 router.post(`/register`, (req, res) => {
   // REGISTER A NEW USER
-  if (!req.body.name || !req.body.email || !req.body.password) {
+  if (!req.body.gitHubName || !req.body.email || !req.body.password) {
     // Ensure data is present
     res.status(400).json({ status: false, message: "Missing information" });
     return;
@@ -37,14 +37,12 @@ router.post(`/register`, (req, res) => {
   }
   if (
     // Validate password and name lengths
-    req.body.name.length > 20 ||
+    req.body.gitHubName.length > 20 ||
     req.body.email.length > 100 ||
     req.body.password.length > 20 ||
     req.body.password.length < 4
   ) {
-    res
-      .status(400)
-      .json({ status: false, message: "Incorrect password length" });
+    res.status(400).json({ status: false, message: "Incorrect password length" });
     return;
   }
   // create the hashed password from password and email.
@@ -52,7 +50,7 @@ router.post(`/register`, (req, res) => {
   // Add the new user to the database so as to get their unique ID
   db.query(
     `INSERT INTO ${USERS_TABLE_NAME} (githubName,userType,profiletype,email,firstName) VALUES ($1,$2,$3,$4,$5);`,
-    [req.body.githubName, req.body.userType, req.body.profiletype, req.body.email, req.body.name]
+    [req.body.gitHubName, req.body.userType, req.body.profiletype, req.body.email, req.body.name]
   )
     // Retrieve the recently added user ID
     .then((dbres) => {
