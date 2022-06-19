@@ -76,6 +76,9 @@ router.get(`/getUsers`, (req, res) => {
   ret = dbSelectQuery(`SELECT * FROM users;`, res);
   // res.json(ret)
 });
+router.post(`/myrepos`, (req, res) => {
+  dbSelectQuery(`SELECT * FROM repoparameters;`,res);
+});
 
 // ********************************************************************************************************************
 // INTERNAL FUNCTIONS
@@ -91,8 +94,9 @@ function dbSelectQuery(theQuery, res) {
     })
     .catch((reason) => {
       console.log("INTERNAL DATABASE ERROR", reason);
-      res.status(500).json({ message: "Cannot find data" });
+      res.status(500).json({ message: "No data in database" });
     });
   return result;
 }
+
 module.exports = router;

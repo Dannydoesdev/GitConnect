@@ -68,7 +68,6 @@ export function renderHome() {
           });
         } else {
           // YES the user is logged in
-          console.log(result.data)
           whichPageToShow(1,result.data.githubname);
         }
       })

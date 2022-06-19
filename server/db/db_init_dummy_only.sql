@@ -11,4 +11,4 @@ DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS userlanguages;
 DROP TABLE IF EXISTS socialmedialinks;
 DROP TABLE IF EXISTS hashed_passwords;
-DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS users;

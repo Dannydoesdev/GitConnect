@@ -19,9 +19,9 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const db = require("../db/db.js");
 const router = express.Router();
-const BAD_CREDENTIALS = "BAD CREDENTIALS"
-const BAD_CREDENTIALS_STATUS = 403
-const USERS_TABLE_NAME = "users"
+const BAD_CREDENTIALS = "BAD CREDENTIALS";
+const BAD_CREDENTIALS_STATUS = 403;
+const USERS_TABLE_NAME = "users";
 // ********************************************************************************************************************
 // CREATE THE ROUTER
 router.post(`/login`, (req, res) => {
@@ -36,9 +36,7 @@ router.post(`/login`, (req, res) => {
     return;
   }
   if (password.length < 4 || password.length > 255) {
-    res
-      .status(400)
-      .json({ status: false, message: "Incorrect Password length" });
+    res.status(400).json({ status: false, message: "Incorrect Password length" });
     return;
   }
   /*
@@ -63,7 +61,7 @@ router.post(`/login`, (req, res) => {
             req.session.authenticated = true;
             // req.session.id = dbres.rows[0].id;
             req.session.body = dbres.rows[0];
-            console.log(dbres.rows[0])
+            console.log(dbres.rows[0]);
             console.log("DATA FROM DATABASE", dbres.rows[0]);
             res.cookie("gitConnectId", dbres.rows[0].id);
             res.cookie("email", dbres.rows[0].email);
@@ -104,21 +102,21 @@ router.get("/delete", isAuthenticated, (req, res) => {
   res.json({ success: true });
 });
 
-router.get("/", (req, res) => {
-  //  If the user is not authenticated then come to this route. FIXME: clean up 
+router.get(["/", `/myrepos`], (req, res) => {
+  //  If the user is not authenticated then come to this route. FIXME: clean up
   res.json({
     name: req.session.name,
     email: req.session.email,
-    message:"User not authenticated",
-    success:false
+    message: "User not authenticated",
+    success: false,
   });
 });
-router.delete("/", isAuthenticated,(req, res) => {
+router.delete("/", isAuthenticated, (req, res) => {
   //  LOG the user OUT. Deletes the session cookie.
   req.session.destroy();
   res.json({ success: true });
 });
-router.delete("/",  (req, res) => {
+router.delete("/", (req, res) => {
   //  Attempt to delete however the user wasnt even logged in to begin with
   res.json({ success: false });
 });
