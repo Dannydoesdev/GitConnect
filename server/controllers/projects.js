@@ -6,8 +6,50 @@ const BAD_CREDENTIALS_STATUS = 403
 const USERS_TABLE_NAME = "users"
 const PROJECTS_TABLE_NAME = "repoParameters"
 
-//Handle POST requests to /api/projects to create a new project
-router.post("/", (req, res) => {
+
+//Handle POST requests to /api/projects to create project after searching repos
+router.post("/addRepo", (req, res) => {
+    // githubname: req.session.body.githubname
+    const githubname = req.session.body.githubname
+    const id = req.session.body.id
+    console.log(req.body.githubname)
+    // NEED TO PUT THIS SEARCH BEHIND A LOGGED IN USER ONLY
+    if (!id) {
+        res.status(401).json({ sucess: false, message: "Must be logged in" });
+    } else {
+            
+        let projectName = req.body.reponame;
+        console.log(projectName)
+
+        // DONT THINK WE NEED repoID - or can be a serial primary key
+        let repoID = Math.floor(Math.random() * 100);
+        let status = 1;
+        console.log(id);
+        
+        
+        let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4)`;
+        let values = [id, projectName, repoID, status];
+        console.log(values);
+
+        db.query(sql, values)
+        .then(dbres => {
+            console.log('project created')
+            res.json({ sucess: true, message: "Project created" });
+        }
+    )
+        .catch(reason => {
+            console.log(reason)
+            res.status(500).json({ sucess: false, message: 'Unknown error occured' });
+        })
+
+    }
+
+})
+
+
+
+//Handle POST requests to /api/projects/editform to allow users to add custom info to project via edit form
+router.post("/editform/:projectid", (req, res) => {
     
     // removing session check for testing purposes
 
@@ -41,6 +83,8 @@ router.post("/", (req, res) => {
             let repoID = Math.floor(Math.random() * 100);
             // let status = 1;
             
+
+            // NOTE UPDATE THIS TO BE AN UPDATE STATEMENT WHEN THE PROJECT CREATION IS WORKING
             let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
             let values = [projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID];
             console.log(values);
