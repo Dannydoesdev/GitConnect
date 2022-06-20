@@ -1,7 +1,7 @@
 import { renderLogin } from "./render-login.js";
 import { renderRego } from "./render-rego.js";
-import { whichPageToShow } from "./Function-whichPageToShow.js";
-import { page } from "./constants.js";
+import { whichPageToShow,page } from "./Function-whichPageToShow.js";
+
 
 // to render the home page
 export function renderHome() {

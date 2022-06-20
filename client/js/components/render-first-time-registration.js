@@ -4,9 +4,7 @@
 */
 import * as gitConnectAPI from "./gitConnect-api-calls.js";
 import * as gitHubApiCalls from "./gitHubApiCalls.js";
-import { whichPageToShow } from "./Function-whichPageToShow.js"
-import { page } from "./constants.js";
-
+import { whichPageToShow,page } from "./Function-whichPageToShow.js"
 
 export function renderFirstTimeRegistration(gitHubName) {
   const main = document.getElementById("main");
