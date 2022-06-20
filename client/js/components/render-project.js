@@ -1,4 +1,4 @@
-export function renderProject() {
+export function renderProject(projectName) {
     // clear main HTML
     const main = document.getElementById("main");
     main.innerHTML = "";

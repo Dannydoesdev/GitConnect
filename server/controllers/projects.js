@@ -63,8 +63,13 @@ router.post("/editform/:repoName", (req, res) => {
         let process = req.body.process;
         let challenges = req.body.challenges;
         let outcomes = req.body.outcomes;
-        let status = req.body.status;
-        let id = req.session.body.id
+    let status = req.body.status;
+    
+    let id = 3;
+
+// THIS IS BROKEN - NEED TO FIX
+    // let id = req.session.body.id;
+   
 
         if (!projectName) {
             res.status(400).json({ sucess: false, message: "Please provide a project name" });
@@ -83,13 +88,13 @@ router.post("/editform/:repoName", (req, res) => {
             let userID = id;
             let repoID = Math.floor(Math.random() * 100);
             // let status = 1;
-            
+            console.log(userID)
 
             // NOTE UPDATE THIS TO BE AN UPDATE STATEMENT WHEN THE PROJECT CREATION IS WORKING
             // let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
             // let values = [projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID];
             
-            let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET projectName = $1, description = $2, process = $3, challenges = $4, outcomes = $5, status = $6 WHERE userID = $7 AND gitHubRepoName = $8`;
+            let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET projectName = $1, description = $2, process = $3, challenges = $4, outcomes = $5, status = $6 WHERE userID = $7 AND gitHubRepoName = $8;`;
             let values =  [projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName];
             console.log(values);
             db.query(sql, values)

@@ -3,7 +3,7 @@ import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
 import { renderProject } from "./render-project.js";
-import { renderProfile } from "./render-profile.js";
+import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
 
 export function renderNav() {
@@ -21,7 +21,10 @@ export function renderNav() {
   const sendingrequest = async () => { // This is done as we have to wait for the response from the GitConnect server before rendering the page
     // temporary
     const resp = await axios.get("/api/session").then((result) => {
-      if (result.data.success) {
+        if (result.data.success) {
+            console.log(result)
+            const githubName = result.data.githubname;
+            console.log(githubName)
         const editProfileForm = makeAnEl("h4", {
           className: "navbar-links",
           textContent: "EDIT PROFILE",
@@ -40,14 +43,27 @@ export function renderNav() {
         editRepoForm.addEventListener("click", () => {
           renderProjectEdit();
         });
+            
+            //This is currently to view 'logged-in users own' profile
         const viewProfile = makeAnEl("h4", {
             className: "navbar-links",
             textContent: "VIEW PROFILE",
             id: "navbar-view-profile",
           });
         navBar.appendChild(viewProfile);
-        viewProfile.addEventListener("click", () => {
-          renderProfile();
+            viewProfile.addEventListener("click", () => {
+            console.log(githubName)
+          renderProfile(githubName);
+        });
+            
+        const viewProfileTemplate = makeAnEl("h4", {
+            className: "navbar-links",
+            textContent: "VIEW MOCKUP",
+            id: "navbar-view-mockup",
+          });
+        navBar.appendChild(viewProfileTemplate);
+        viewProfileTemplate.addEventListener("click", () => {
+          renderProfileTemplate();
         });
         const viewProject = makeAnEl("h4", {
             className: "navbar-links",
@@ -81,9 +97,9 @@ export function renderNav() {
     renderSearch();
   });
 
-  const lorem = document.createElement("h4");
-  lorem.classList.add("navbar-links");
-  lorem.textContent = "LOREM";
-  navBar.appendChild(lorem);
+//   const lorem = document.createElement("h4");
+//   lorem.classList.add("navbar-links");
+//   lorem.textContent = "LOREM";
+//   navBar.appendChild(lorem);
   sendingrequest();
 }
