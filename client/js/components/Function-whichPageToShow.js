@@ -5,25 +5,26 @@ import { renderFirstTimeRegistration } from "./render-first-time-registration.js
 import { renderRego } from "./render-rego.js";
 import { renderLogin } from "./render-login.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
-
-
+import { renderHome } from "./home-startup.js";
+import { render } from "./constants.js";
 
 export function whichPageToShow(thePageToShow, gitHubName) {
   switch (thePageToShow) {
-    case 1:
+    case render.FirstTimeRegistration:
       renderFirstTimeRegistration(gitHubName); // The landing page when the user first registers
       break;
-    case 2:
+    case render.Rego:
       renderRego();
-      // code block
       break;
-    case 3:
+    case render.Login:
       renderLogin();
       break;
-    case 4:
+    case render.ProfileEdit:
       renderProfileEdit();
       break;
+    case render.Home:
+      renderHome();
+      break;
     default:
-    // code block
   }
 }

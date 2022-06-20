@@ -1,6 +1,7 @@
 import { renderLogin } from "./render-login.js";
 import { renderRego } from "./render-rego.js";
 import { whichPageToShow } from "./Function-whichPageToShow.js";
+import { render } from "./constants.js";
 
 // to render the home page
 export function renderHome() {
@@ -68,7 +69,7 @@ export function renderHome() {
           });
         } else {
           // YES the user is logged in
-          whichPageToShow(1,result.data.githubname);
+          whichPageToShow(render.FirstTimeRegistration, result.data.githubname);
         }
       })
       .catch((error) => {

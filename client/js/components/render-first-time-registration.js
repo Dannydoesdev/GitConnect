@@ -28,20 +28,18 @@ export function renderFirstTimeRegistration(gitHubName) {
   (async () => {
     const resp = async () => {
       const userRepoData = await gitConnectAPI.getRepoDetailFromGitConnect(gitHubName);
-      console.log(userRepoData)
+      console.log(userRepoData);
       if (!userRepoData.data.length) {
-        console.log("user has no data");
+        console.log("user has no repo data");
       } else {
-        console.log("user has data");
+        console.log("user has repo data");
       }
     };
     await resp();
   })();
-
-
 }
-  function logout() {
-    axios.delete("/api/session").then(() => {
-      window.location = "/";
-    });
-  };
+function logout() {
+  axios.delete("/api/session").then(() => {
+    window.location = "/";
+  });
+}
