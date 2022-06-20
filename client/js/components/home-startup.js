@@ -66,10 +66,12 @@ export function renderHome() {
           signUp.addEventListener("click", () => {
             renderRego();
           });
-        } else {
-          // YES the user is logged in
-          renderProfileMain(result.data.firstname);
-        }
+        } 
+        // disabling for now, this function should run after signup
+        // else {
+        //   // YES the user is logged in
+        //   renderProfileMain(result.data.firstname);
+        // }
       })
       .catch((error) => {
         console.log(error);

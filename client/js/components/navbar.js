@@ -2,6 +2,7 @@ import { makeAnEl } from "../../utils/dom-create.js";
 import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
+import { renderProfileMain } from "./render-profile.js";
 
 export function renderNav() {
 //   const main = document.getElementById("main");
@@ -19,11 +20,22 @@ export function renderNav() {
     // temporary
     const resp = await axios.get("/api/session").then((result) => {
       if (result.data.success) {
+        const myProfile = makeAnEl("h4", {
+          className: "navbar-links",
+          textContent: "My Profile",
+          id: "navbar-my-profile"
+        });
+        navBar.appendChild(myProfile);
+        myProfile.addEventListener('click', () => {
+          // need to call specific username here
+          renderProfileMain();
+        })
         const editProfileForm = makeAnEl("h4", {
           className: "navbar-links",
           textContent: "EDIT PROFILE",
           id: "navbar-edit-profile",
         });
+        navBar.appendChild(editProfileForm);
         editProfileForm.addEventListener("click", () => {
           renderProfileEdit();
         });
@@ -60,9 +72,6 @@ export function renderNav() {
     renderSearch();
   });
 
-  const lorem = document.createElement("h4");
-  lorem.classList.add("navbar-links");
-  lorem.textContent = "LOREM";
-  navBar.appendChild(lorem);
+  
   sendingrequest();
 }

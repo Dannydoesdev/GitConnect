@@ -45,24 +45,29 @@ export function renderLanding() {
         .then(results => {
             console.log(results)
 
-            // const repoCol = makeAnEl('div', {
-            //     class: "col-3",
-            //     textContent: "hello"
-            // })
-            // const repoRow = makeAnEl('div', {
-            //     class: ["row", "px-3", "py-5"]
-            // }, [repoCol])
-            // results.appendChild(repoRow)
-
-            // not too sure how to retrieve the data here
-            const repoId = results.data
-                .map(param => param.repoid)
-            const repoName = results.data
-                .map(param => param.githubreponame)
-            const projectName = results.data
-                .map(param => param.projectname)
-            const description = results.data
-                .map(param => param.description)
+            // need to limit loop
+            results.data.map((result) => {
+                // console.log(result)
+                // set standard variables from response that we want to utilise
+                let repoName = result.githubreponame;
+                let projectName = result.projectname;
+                let description = result.description;
+                let table = [repoName, projectName, description]
+                console.log(table)
+            })
+            
+    //         repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
+    // gitHubRepoName TEXT,
+    // userID SMALLINT REFERENCES users(id),
+    // status BIT NOT NULL, -- Available for viewing Y or N
+    // projectName TEXT,
+    // description TEXT,
+    // process TEXT,
+    // challenges TEXT,
+    // outcomes TEXT,
+    // tags TEXT,
+    // titleimage TEXT
+            
             
         })
         .catch(err => {

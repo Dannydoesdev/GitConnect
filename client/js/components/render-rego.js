@@ -47,6 +47,7 @@ export function renderRego() {
         axios.post("/api/session/login", data);
       })
       .then((response) => {
+        // instead of returning to home, we need to call renderProfileMain() using a specific usernme
         window.location = "/";
       })
       .catch((err) => {
