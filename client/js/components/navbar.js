@@ -3,6 +3,7 @@ import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
 import { renderProject } from "./render-project.js";
+import { renderProfile } from "./render-profile.js";
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
 
 export function renderNav() {
@@ -38,6 +39,15 @@ export function renderNav() {
         navBar.appendChild(editRepoForm);
         editRepoForm.addEventListener("click", () => {
           renderProjectEdit();
+        });
+        const viewProfile = makeAnEl("h4", {
+            className: "navbar-links",
+            textContent: "VIEW PROFILE",
+            id: "navbar-view-profile",
+          });
+        navBar.appendChild(viewProfile);
+        viewProfile.addEventListener("click", () => {
+          renderProfile();
         });
         const viewProject = makeAnEl("h4", {
             className: "navbar-links",

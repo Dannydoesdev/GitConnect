@@ -49,7 +49,7 @@ router.post("/addRepo", (req, res) => {
 
 
 //Handle POST requests to /api/projects/editform to allow users to add custom info to project via edit form
-router.post("/editform/:projectid", (req, res) => {
+router.post("/editform/:repoName", (req, res) => {
     
     // removing session check for testing purposes
 
@@ -57,13 +57,14 @@ router.post("/editform/:projectid", (req, res) => {
     // if (!sessionId) {
     //     res.status(401).json({ sucess: false, message: "Must be logged in" });
     // } else {
-
+        let repoName = req.params.repoName;
         let projectName = req.body.projectName;
         let description = req.body.description;
         let process = req.body.process;
         let challenges = req.body.challenges;
         let outcomes = req.body.outcomes;
         let status = req.body.status;
+        let id = req.session.body.id
 
         if (!projectName) {
             res.status(400).json({ sucess: false, message: "Please provide a project name" });
@@ -78,15 +79,18 @@ router.post("/editform/:projectid", (req, res) => {
         }
         else {
             // testing manual insertion of some info
-            let gitHubRepoName = 'flyre'
-            let userID = 1;
+            let gitHubRepoName = repoName;
+            let userID = id;
             let repoID = Math.floor(Math.random() * 100);
             // let status = 1;
             
 
             // NOTE UPDATE THIS TO BE AN UPDATE STATEMENT WHEN THE PROJECT CREATION IS WORKING
-            let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
-            let values = [projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID];
+            // let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
+            // let values = [projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID];
+            
+            let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET projectName = $1, description = $2, process = $3, challenges = $4, outcomes = $5, status = $6 WHERE userID = $7 AND gitHubRepoName = $8`;
+            let values =  [projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName];
             console.log(values);
             db.query(sql, values)
                 .then(dbres => {
