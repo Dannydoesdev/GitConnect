@@ -21,17 +21,28 @@ CREATE TABLE programminglanguages ( -- List of potential programming languages
 -- USERS        --------------------------------------------------------
 CREATE TABLE users ( -- All users that have access to Login
     id SERIAL PRIMARY KEY,
-    githubName TEXT UNIQUE,
+    githubName TEXT,
     email TEXT UNIQUE,
     userType SMALLINT REFERENCES userTypes(id) NOT NULL,
     profiletype SMALLINT REFERENCES profiletype(id),
-    firstName VARCHAR(20) NOT NULL,
+    firstName VARCHAR(20),
     lastName VARCHAR(30),
     photo TEXT,
     aboutmetitle TEXT,
     aboutme TEXT,
     mobile VARCHAR(16),
     portfoliolink TEXT,
+    githubutrl TEXT,
+    gitHubAvatar TEXT,
+    gitHubrepos_url TEXT,
+    gitHubFullName TEXT,
+    gitHubCompany TEXT,
+    gitHubBlog TEXT,
+    gitHubTwitter TEXT,
+    gitHubHirable TEXT,
+    gitHubLocation TEXT,
+    gitHubBio TEXT,
+    gitHubMemberSince TEXT
     CONSTRAINT validate_email CHECK (email LIKE '%___@___%__%')
 );
 CREATE TABLE hashed_passwords ( -- Separate table to store only hashed passwords and user ids. Security reasons

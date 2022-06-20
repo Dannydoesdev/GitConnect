@@ -3,7 +3,7 @@
 SET client_min_messages = 'error';
 
 -- REPOS
-DROP TABLE IF EXISTS repoParamaters;
+DROP TABLE IF EXISTS repoparameters;
 
 -- USERS 
 DROP TABLE IF EXISTS messages,userlanguages,socialmedialinks,hashed_passwords,users;

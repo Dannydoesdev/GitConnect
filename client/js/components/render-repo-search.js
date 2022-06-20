@@ -83,6 +83,8 @@ function renderRepoListBs(userName) {
     // send get request to gihub api with the above URL
     axios.get(allReposURL).then((response) => {
     
+        console.log(response)
+
         // create profileimg var - img type with GH profile img as src
         const profileImg = makeAnEl('img', {
             src: response.data[0].owner.avatar_url,
@@ -96,8 +98,29 @@ function renderRepoListBs(userName) {
             class: 'text-center',
         })
 
+        const addSelectedReposBtn = makeAnEl('button', {
+            id: 'add-selected-repos-btn',
+            class: ['btn', 'btn-primary', 'btn-outline-light', 'btn-lg', 'mx-auto', 'd-block'],
+            innerText: 'Add selected repos to project'
+        })
+
+        addSelectedReposBtn.addEventListener('click', () => {
+            let selectedReposArr = [];
+            let selectedRepos = document.querySelectorAll("input[type='checkbox']");
+            selectedRepos.forEach((repo) => {
+                if (repo.checked) {
+                    // console.log(repo.data)
+                    selectedReposArr.push(repo.value);
+                }
+            })
+            console.log(selectedReposArr);
+            // send selected repos to the server
+            selectedReposArr.forEach(repo => addSelectedRepos(repo))
+        })
+
         row.appendChild(profileImg)
         row.appendChild(repoHeading)
+        row.appendChild(addSelectedReposBtn)
 
         // map the response data so each result can be appended to the DOM
         response.data.map((result) => {
@@ -113,7 +136,7 @@ function renderRepoListBs(userName) {
             // nest the card layout as required via the makeAnEl fn
             // add desired styling to card element
             let repoDiv = makeAnEl('div', {
-                class: 'col-md-4',
+                class: ['col-md-4', 'py-2'],
             }, [
                 makeAnEl('div', {
                     id: repoName,
@@ -150,14 +173,59 @@ function renderRepoListBs(userName) {
                     ]),
                 ]),
             ]);
+
+
+
+//             <div class="form-check form-switch">
+//   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+//   <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+// </div>
             
-            console.log(languagePct(userName, repoName));
+            languagePct(userName, repoName)
             row.appendChild(repoDiv);
+
+            let switchRepoButton = makeAnEl('div', {
+                class: ['form-check', 'form-switch'],
+                id: `${repoName}`,
+            }, [
+                makeAnEl('input', {
+                    class: 'form-check-input',
+                    type: 'checkbox',
+                    id: `${repoName}`,
+                    value: `${repoName}`,
+                    data: {
+                        userName: userName,
+                        repoName: repoName,
+                    },
+                }),
+                makeAnEl('label', {
+                    class: 'form-check-label',
+                    for: `${userName}-${repoName}`,
+                    innerText: `Add ${repoName} to project list`,
+                }),
+            ]);
+
+            repoDiv.appendChild(switchRepoButton);
 
         })  
     
     })
 }
+
+
+
+function addSelectedRepos(reponame) {
+    const addRepoURL = `http://localhost:3000/api/projects/addRepo`;
+    const repoData = {
+        reponame: reponame,
+    }
+    axios.post(addRepoURL, repoData).then((response) => {
+        console.log(response);
+    }
+    )
+}
+
+
 
 
 // fn to search for a users repos - requires a username parameter
