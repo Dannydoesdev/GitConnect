@@ -4,8 +4,9 @@
 */
 import * as gitConnectAPI from "./gitConnect-api-calls.js";
 import * as gitHubApiCalls from "./gitHubApiCalls.js";
-import { whichPageToShow } from "./Function-whichPageToShow.js";
+import { whichPageToShow } from "./Function-whichPageToShow.js"
 import { page } from "./constants.js";
+
 
 export function renderFirstTimeRegistration(gitHubName) {
   const main = document.getElementById("main");
@@ -40,8 +41,9 @@ export function renderFirstTimeRegistration(gitHubName) {
     logout();
   });
   document.getElementById("addRepoButton").addEventListener("click", () => {
-    whichPageToShow(page.ProjectEdit, gitHubName); // TODO: correct page.ProjectEdit to show correct stuff
-  })(
+    addRepos();
+  });
+  (
     //  Perform all rendering within the below async
     async () => {
       const resp = async () => {
@@ -87,4 +89,7 @@ function logout() {
     window.location = "/";
   });
 }
-
+function addRepos() {
+  whichPageToShow(render.ProfileEdit, gitHubName);
+  console.log("it worked");
+}
