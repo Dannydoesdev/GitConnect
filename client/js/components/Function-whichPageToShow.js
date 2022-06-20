@@ -7,13 +7,16 @@ import { renderLogin } from "./render-login.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderHome } from "./home-startup.js";
 import { renderProjectEdit } from "./render-project-edit.js";
+import { renderSearch } from "./render-repo-search.js";
+
 export const page = {
   FirstTimeRegistration: 1,
-  Rego: 5,
   Login: 2,
   ProfileEdit: 3,
   Home: 4,
+  Rego: 5, 
   ProjectEdit: 6,
+  SearchRepos:7
 };
 export function whichPageToShow(thePageToShow, gitHubName) {
   switch (thePageToShow) {

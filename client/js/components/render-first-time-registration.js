@@ -22,9 +22,9 @@ export function renderFirstTimeRegistration(gitHubName) {
         <img id="userProfileimg" class="profilePic" alt="no pic" src="">
         <div id="profile-name-wrapper"><h4 id="profileName">${gitHubName}</h4></div>
         <div id="userBio"></div>
-        <div><i id="githubicon" class='fa fa-github'><a style='margin:0 5px;' id="usersGitHubPage"></a></i></div>
-        <div><a id="usersExternalProfileLink">place holder</a></div>
-        <div><a id="usersContact">place holder</a></div>
+        <div class="profileLinks"><i id="githubicon style="text-align:left;" class='fa fa-github'><a style='margin:0 5px;' id="usersGitHubPage"></a></i></div>
+        <div class="profileLinks"><i id="githubicon" class='fa fa-github'><a style='margin:0 5px;' id="usersExternalProfileLink">place holder</a></i></div>
+        <div class="profileLinks"><i id="githubicon" class='fa fa-github'><a style='margin:0 5px;' id="usersContact">place holder</a></i></div>
       </div>
       <div id="midPanel">
         <div id="yourprofiledoesnthaveanylinks"><a>Your profile doesnt have any links</a></div>
