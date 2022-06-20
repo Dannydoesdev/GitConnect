@@ -1,6 +1,7 @@
 import { renderLogin } from "./render-login.js";
 import { renderRego } from "./render-rego.js";
 import { whichPageToShow } from "./Function-whichPageToShow.js";
+import { page } from "./constants.js";
 
 // to render the home page
 export function renderHome() {
@@ -68,11 +69,15 @@ export function renderHome() {
           });
         } else {
           // YES the user is logged in
-          whichPageToShow(1,result.data.githubname);
+          console.log("HERE ARE THE RESPONSE FROM TEH SERVER AFTER REGISTRATION", result); //TODO: delete console log
+          document.cookie = `gitHubName=${result.data.githubname}`;
+          document.cookie = `email=${result.data.email}`;
+          document.cookie = `email=${result.data.gitConnectId}`;
+          whichPageToShow(page.FirstTimeRegistration, result.data.githubname);
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error); //TODO: delete console log
       });
 
     // setting main name

@@ -14,8 +14,11 @@
         
      */
 // ***************************      *****************************************************************************************
+
+
 // SET UP THE INCLUDES
 const express = require("express");
+
 const bcrypt = require("bcrypt");
 const db = require("../db/db.js");
 const router = express.Router();
@@ -45,6 +48,7 @@ router.post(`/login`, (req, res) => {
     1)  If the user has an account and authenticates return stats 200 OK. Also a cookies containing gitConnectId,email and name
     2)  Else if the user does not authenticate, a message of BAD CREDENTIALS along with the associated status code.
   */
+
   db.query(
     `SELECT email,githubName,users.id,firstname,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
     [email]
@@ -59,14 +63,13 @@ router.post(`/login`, (req, res) => {
             delete dbres.rows[0].hashed_password;
             console.log("The user has successfully logged in"); //TODO: delete console.log
             req.session.authenticated = true;
-            // req.session.id = dbres.rows[0].id;
             req.session.body = dbres.rows[0];
-            console.log(dbres.rows[0]);
-            console.log("DATA FROM DATABASE", dbres.rows[0]);
             res.cookie("gitConnectId", dbres.rows[0].id);
             res.cookie("email", dbres.rows[0].email);
             res.cookie("gitHubName", dbres.rows[0].githubname, { httpOnly: false });
             res.status(200).json(req.session);
+
+
           } else {
             //  Wrong password correct email.
             res.status(BAD_CREDENTIALS_STATUS).json({ status: false, message: BAD_CREDENTIALS });
@@ -79,7 +82,6 @@ router.post(`/login`, (req, res) => {
       res.status(BAD_CREDENTIALS_STATUS).json({ status: false, message: BAD_CREDENTIALS });
     });
 });
-
 
 //  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 //  System below

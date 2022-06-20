@@ -2,19 +2,20 @@
 const API_END = `/api/users/myrepos`;
 
 //  PUBLIC API CALLS
-export function getRepoDetailFromGitConnect(githubname) { // function to get the users repo details 
+export function getRepoDetailFromGitConnect(githubname) {
+  // function to get the users repo details
   const sendingrequest = async () => {
     // Must wait till axios receives a response before processing more code
     // temporary
-    return await axios 
+    return await axios
       .post(API_END)
       .then((result) => {
-        //console.log(getCookie("gitHubName"));  
-          return result
+        //console.log(getCookie("gitHubName"));
+        return result;
       })
       .catch((err) => {});
   };
-return sendingrequest()
+  return sendingrequest();
 }
 
 // PRIVATE FUNCTIONS for the API calls
@@ -33,4 +34,3 @@ function getCookie(cname) {
   }
   return "";
 }
-
