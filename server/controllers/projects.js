@@ -16,21 +16,16 @@ router.post("/addRepo", (req, res) => {
     // NEED TO PUT THIS SEARCH BEHIND A LOGGED IN USER ONLY
     if (!id) {
         res.status(401).json({ sucess: false, message: "Must be logged in" });
-    } else {
-            
+    } else {  
         let projectName = req.body.reponame;
         console.log(projectName)
-
         // DONT THINK WE NEED repoID - or can be a serial primary key
-        let repoID = Math.floor(Math.random() * 100);
+        let repoID = Math.floor(Math.random() * 1000);
         let status = 1;
         console.log(id);
-        
-        
-        let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4)`;
+        let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4);`;
         let values = [id, projectName, repoID, status];
         console.log(values);
-
         db.query(sql, values)
         .then(dbres => {
             console.log('project created')
@@ -41,9 +36,7 @@ router.post("/addRepo", (req, res) => {
             console.log(reason)
             res.status(500).json({ sucess: false, message: 'Unknown error occured' });
         })
-
     }
-
 })
 
 
@@ -85,7 +78,7 @@ router.post("/editform/:projectid", (req, res) => {
             
 
             // NOTE UPDATE THIS TO BE AN UPDATE STATEMENT WHEN THE PROJECT CREATION IS WORKING
-            let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
+            let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
             let values = [projectName, description, process, challenges, outcomes, status, userID, gitHubRepoName, repoID];
             console.log(values);
             db.query(sql, values)
