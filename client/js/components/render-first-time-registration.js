@@ -41,7 +41,7 @@ export function renderFirstTimeRegistration(gitHubName) {
     logout();
   });
   document.getElementById("addRepoButton").addEventListener("click", () => {
-    addRepos();
+      whichPageToShow(page.ProfileEdit, gitHubName);
   });
   (
     //  Perform all rendering within the below async
@@ -89,7 +89,4 @@ function logout() {
     window.location = "/";
   });
 }
-function addRepos() {
-  whichPageToShow(render.ProfileEdit, gitHubName);
-  console.log("it worked");
-}
+
