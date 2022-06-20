@@ -2,6 +2,9 @@ export function renderProfileMain(usersName) {
   const main = document.getElementById("main");
   main.innerHTML = "";
 
+  const results = document.getElementById('results')
+  results.innerHTML = ""
+  
   main.innerHTML = `
   
       <div id="profile-welcome-title">  

@@ -49,6 +49,7 @@ export function renderNav() {
         editRepoForm.addEventListener("click", () => {
           renderProjectEdit();
         });
+       
       } else {
         console.log("RESULTS", result.data.success);
       }
@@ -58,10 +59,12 @@ export function renderNav() {
   };
 
   // generate navigation bar and header - to move into components
-  const browse = document.createElement("h4");
-  browse.classList.add("navbar-links");
-  browse.textContent = "BROWSE";
-  navBar.appendChild(browse);
+  
+  // ---- no longer needed for now ----
+  // const browse = document.createElement("h4");
+  // browse.classList.add("navbar-links");
+  // browse.textContent = "BROWSE";
+  // navBar.appendChild(browse);
 
   const search = document.createElement("h4");
   search.classList.add("navbar-links");

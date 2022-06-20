@@ -3,6 +3,9 @@ export function renderRego() {
   const main = document.getElementById("main");
   main.innerHTML = "";
 
+  const results = document.getElementById('results')
+  results.innerHTML = ""
+  
   const formContainer = document.createElement("div");
   formContainer.innerHTML = `
         <form id="sign-up-form" class="forms">
