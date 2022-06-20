@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- Import axios -->
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<!-- Import bootstrap -->
+	<!-- <link rel="stylesheet" href="../static/bstyles.css"> -->
+    <!-- Going to test bootstrap 5.2 beta -->
+	<!-- Bootstrap stylesheets from CDN -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+	<!-- Bootstrap JS scripts from CDN -->
+	<script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="bootstrap-css-test.css">
+
+</head>
+<body>
+
+<!-- testing stuff in bootstrap - can remove this file later -->
+
+<!-- DARK MODE HERO -->
+
+<div class="row">
+  <div class="col-md-12">
+      <div class="bg-dark text-secondary px-4 py-5 text-center">
+          <div class="py-5">
+            <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
+            <div class="col-lg-6 mx-auto">
+              <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
+                <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+<!-- OFFCANVAS - pop up heroku shell (allow scrolling? no) -->
+
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+  Link with href
+</a>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+  Button with data-bs-target
+</button>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+    </div>
+    <div class="dropdown mt-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+        Dropdown button
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Enable body scrolling</button>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">Enable backdrop (default)</button>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Colored with scrolling</h5>
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="offcanvas-body">
+  <p>Try scrolling the rest of the page to see this option in action.</p>
+</div>
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Offcanvas with backdrop</h5>
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="offcanvas-body">
+  <p>.....</p>
+</div>
+</div>
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdroped with scrolling</h5>
+  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
+<div class="offcanvas-body">
+  <p>Try scrolling the rest of the page to see this option in action.</p>
+</div>
+</div>
+
+
+<!-- Containers -->
+
+<!-- Our default .container class is a responsive, fixed-width container, meaning its max-width changes at each breakpoint. -->
+
+<div class="container">
+    <!-- Content here -->
+  </div>
+
+
+<!-- Responsive containers allow you to specify a class that is 100% wide until the specified breakpoint is reached, after which we apply max-widths for each of the higher breakpoints. For example, .container-sm is 100% wide to start until the sm breakpoint is reached, where it will scale up with md, lg, xl, and xxl. -->
+
+<div class="container-sm">100% wide until small breakpoint</div>
+<div class="container-md">100% wide until medium breakpoint</div>
+<div class="container-lg">100% wide until large breakpoint</div>
+<div class="container-xl">100% wide until extra large breakpoint</div>
+<div class="container-xxl">100% wide until extra extra large breakpoint</div>
+<br><br>
+<!-- Use .container-fluid to get a full width container that covers the entire width of the viewport. -->
+
+<div class="container-fluid">
+    ...
+  </div>
+
+  <br><br>
+<!-- Flex on rows to move things around -->
+
+<div class="row justify-content-start">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+  <div class="row justify-content-evenly">
+    <div class="col-4">
+      One of two columns
+    </div>
+    <div class="col-4">
+      One of two columns
+    </div>
+  </div>
+
+  <br><br>
+<!-- Horizontal alignment on col using align with flex -->
+
+  <div class="row">
+    <div class="col align-self-start">
+      One of three columns
+    </div>
+    <div class="col align-self-center">
+      One of three columns
+    </div>
+    <div class="col align-self-end">
+      One of three columns
+    </div>
+  </div>
+  <br><br>
+
+  <!-- Vertical alignment on row with flex -->
+<!-- Note align items does vertical on row and horizontal on col -->
+
+  <div class="d-flex align-items-start bg-light mb-3" style="height: 100px;">
+    <div class="col">One of three columns</div>
+    <div class="col">One of three columns</div>
+    <div class="col">One of three columns</div>
+  </div>
+  <div class="d-flex align-items-center bg-light mb-3" style="height: 100px;">
+    <div class="col">One of three columns</div>
+    <div class="col">One of three columns</div>
+    <div class="col">One of three columns</div>
+  </div>
+  <div class="d-flex align-items-end bg-light mb-3" style="height: 100px;">
+    <div class="col">One of three columns</div>
+    <div class="col">One of three columns</div>
+    <div class="col">One of three columns</div>
+  </div>
+  <br><br>
+
+<!-- Offset (layout columns without starting at the left edge) -->
+<!-- 
+Offset classes
+Move columns to the right using .offset-md-*classes. These classes increase the left margin of a column by *columns. For example, .offset-md-4moves .col-md-4over four columns. -->
+
+<div class="row">
+    <div class="col-md-4">.col-md-4</div>
+    <div class="col-md-4 offset-md-4">.col-md-4 .offset-md-4</div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>
+    <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">.col-md-6 .offset-md-3</div>
+  </div>
+
+  <br><br>
+<!-- reset offsets at breakpoints -->
+
+<div class="row">
+    <div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
+    <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">.col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
+    <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0">.col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0</div>
+  </div>
+
+  <br><br>
+<!-- Centerering various items -->
+
+<!-- Center column (uses flexbox) -->
+
+
+<!--Grid row-->
+<div class="row d-flex justify-content-center">
+    <!--Grid column-->
+    <div class="col-md-6">
+      This column is centered
+    </div>
+    <!--Grid column-->
+  </div>
+  <!--Grid row-->
+
+  <br><br>
+<!-- Force breakpoint to new line -->
+
+<div class="row">
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+  
+    <!-- Force next columns to break to new line -->
+    <div class="w-100"></div>
+  
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+  </div>
+
+  <br><br>
+<!-- With the move to flexbox, you can use margin utilities such as .me-auto to force sibling columns away from each other. -->
+
+  <div class="row">
+    <div class="col-md-4">.col-md-4</div>
+    <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 ms-md-auto">.col-md-3 .ms-md-auto</div>
+    <div class="col-md-3 ms-md-auto">.col-md-3 .ms-md-auto</div>
+  </div>
+  <div class="row">
+    <div class="col-auto me-auto">.col-auto .me-auto</div>
+    <div class="col-auto">.col-auto</div>
+  </div>
+  <br><br>
+
+<!-- Center text -->
+
+<div class="text-center">
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae nihil hic
+      delectus excepturi ipsam reprehenderit iusto rem, quam, repellendus accusantium culpa
+      reiciendis sit dolorum aut aperiam a architecto. Fuga, sit.
+    </p>
+  </div>
+
+  <br><br>
+<!-- Center button -->
+
+<div class="text-center">
+    <button type="button" class="btn btn-primary">Primary</button>
+  </div>
+  <br><br>
+
+  <!-- Center image -->
+
+  <div class="text-center">
+    <img src="https://mdbcdn.b-cdn.net/img/logo/mdb192x192.webp" class="img-fluid" alt="" />
+  </div>
+
+  <br><br>
+<!-- Lots of flexbox -->
+
+<section class="w-100 p-4 pb-4">
+
+    <div class="d-flex justify-content-start bg-light mb-3">
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+    </div>
+    <div class="d-flex justify-content-end bg-light mb-3">
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+    </div>
+    <div class="d-flex justify-content-center bg-light mb-3">
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+    </div>
+    <div class="d-flex justify-content-between bg-light mb-3">
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+    </div>
+    <div class="d-flex justify-content-around bg-light mb-3">
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+    </div>
+    <div class="d-flex justify-content-evenly bg-light">
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+      <div class="p-2 col-example">Flex item</div>
+    </div>
+  </section>
+
+  <br><br>
+<!-- Gutters -->
+
+<!-- Just horizontal gutter -->
+
+<div class="container px-4">
+    <div class="row gx-5">
+      <div class="col">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col">
+        <div class="p-3">Custom column padding</div>
+      </div>
+    </div>
+  </div>
+
+<!-- Horizontal + vertical gutters -->
+
+<div class="container">
+    <div class="row g-2">
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+<!-- Vertical gutters -->
+
+  <div class="container overflow-hidden">
+    <div class="row gy-5">
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+<!-- <div class="container bg-dark text-white">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>Project Title</h1>
+            <form action="/" method="POST">
+                <div class="form-group">
+                    <label for="projectname">Project Name</label>
+                    <input type="text" class="form-control" id="projectname" name="projectname" placeholder="Enter your projects name">
+                </div>
+                <div class="form-group">
+                    <label for="project-description">Project description</label>
+                    <textarea type="text" class="form-control" id="project-description" name="project-description" placeholder="What was this project for? What problem were you solving? How did it go?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project-process">Process</label>
+                    <textarea type="text" class="form-control" id="project-process" name="project-process" placeholder="What steps did you take during the project - how did you prepare? Did you use any design or project planning tools?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project-challenges">Challenges</label>
+                    <textarea type="text" class="form-control" id="project-challenges" name="project-challenges" placeholder="What unexpected/expected challenges did you face? How did you navigate them?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="project-outcomes">Outcomes</label>
+                    <textarea type="text" class="form-control" id="project-outcomes" name="project-outcomes" placeholder="What was the project outcome? Was it successful? What did you learn and any reflections?"></textarea>
+                </div>
+                <input type="submit" class="btn btn-lg btn-outline-light align-self-center" value="Submit">
+            </form>
+        </div>
+    </div>
+</div> -->
+
+<!-- Taken from https://mdbootstrap.com/docs/standard/layout/grid/ -->
+
+<div class="row">
+    <div class="col-md-8">
+      <div class="pb-3">
+        .col-md-8
+      </div>
+      <div class="row">
+        <div class="col-md-6">.col-md-6</div>
+        <div class="col-md-6">.col-md-6</div>
+      </div>
+    </div>
+    <div class="col-md-4">.col-md-4</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-4">.col-4</div>
+    <div class="col-4">.col-4</div>
+    <div class="col-4">.col-4</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-4">.col-sm-4</div>
+    <div class="col-sm-4">.col-sm-4</div>
+    <div class="col-sm-4">.col-sm-4</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4">.col-md-4</div>
+    <div class="col-md-4">.col-md-4</div>
+    <div class="col-md-4">.col-md-4</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-4">.col-lg-4</div>
+    <div class="col-lg-4">.col-lg-4</div>
+    <div class="col-lg-4">.col-lg-4</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xl-4">.col-xl-4</div>
+    <div class="col-xl-4">.col-xl-4</div>
+    <div class="col-xl-4">.col-xl-4</div>
+  </div>
+
+</body>
+
+

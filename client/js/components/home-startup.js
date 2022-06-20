@@ -1,6 +1,7 @@
 import { renderLogin } from "./render-login.js";
 import { renderRego } from "./render-rego.js";
-import { renderProfileMain } from "./render-profile.js";
+import { whichPageToShow,page } from "./Function-whichPageToShow.js";
+
 
 // to render the home page
 export function renderHome() {
@@ -66,15 +67,23 @@ export function renderHome() {
           signUp.addEventListener("click", () => {
             renderRego();
           });
-        } 
+        // } 
         // disabling for now, this function should run after signup
         // else {
         //   // YES the user is logged in
         //   renderProfileMain(result.data.firstname);
         // }
+        } else {
+          // YES the user is logged in
+          console.log("HERE ARE THE RESPONSE FROM TEH SERVER AFTER REGISTRATION", result); //TODO: delete console log
+          document.cookie = `gitHubName=${result.data.githubname}`;
+          document.cookie = `email=${result.data.email}`;
+          document.cookie = `email=${result.data.gitConnectId}`;
+          whichPageToShow(page.FirstTimeRegistration, result.data.githubname);
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error); //TODO: delete console log
       });
 
     // setting main name

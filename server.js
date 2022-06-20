@@ -6,7 +6,6 @@
 // ********************************************************************************************************************
 // SET UP THE INCLUDES
 require("dotenv").config();
-
 //commented out for now - was causing an error with something I was doing - Danny
 
 // const { exit } = require("process");
@@ -25,15 +24,22 @@ const app = express(); // Initialise the app
 // SET UP THE APP
 app.use("/", (req, res, next) => {
   // 3 paramaters = middleware
-  console.log("*************************************************************");
-  console.log(`SERVER COMMUNICATION ${new Date()} ${req.method}`);
-  console.log(`METHOD = ${req.method}`);
-  console.log(`PATH = ${req.path}`);
-  console.log(`PARAMETERS = `);
-  console.log(req.body);
-  console.log(req.session);
-  console.log("*************************************************************");
-  next();
+  if (
+    !req.path.startsWith("/js/") &&
+    !req.path.startsWith("/css/") &&
+    !req.path.startsWith("/api/session") &&
+    !req.path.startsWith("/img/gclogo.png")
+  ) {
+    console.log("*************************************************************");
+    console.log(`SERVER COMMUNICATION ${new Date()} ${req.method}`);
+    console.log(`METHOD = ${req.method}`);
+    console.log(`PATH = ${req.path}`);
+    console.log(`PARAMETERS = `);
+    console.log(req.body);
+    console.log(req.session);
+    console.log("*************************************************************");
+  }
+    next();  
 });
 app.use((err, req, res, next) => {
   // 4 parameters = error handeler

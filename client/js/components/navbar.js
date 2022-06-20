@@ -3,6 +3,9 @@ import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
 import { renderProfileMain } from "./render-profile.js";
+import { renderProject } from "./render-project.js";
+// import { whichPageToShow, page } from "./Function-whichPageToShow";
+
 
 export function renderNav() {
 //   const main = document.getElementById("main");
@@ -16,7 +19,7 @@ export function renderNav() {
     window.location = "/";
   });
 
-  const sendingrequest = async () => {
+  const sendingrequest = async () => { // This is done as we have to wait for the response from the GitConnect server before rendering the page
     // temporary
     const resp = await axios.get("/api/session").then((result) => {
       if (result.data.success) {
@@ -48,6 +51,15 @@ export function renderNav() {
         navBar.appendChild(editRepoForm);
         editRepoForm.addEventListener("click", () => {
           renderProjectEdit();
+        });
+        const viewProject = makeAnEl("h4", {
+            className: "navbar-links",
+            textContent: "VIEW PROJECT",
+            id: "navbar-view-project",
+          });
+        navBar.appendChild(viewProject);
+        viewProject.addEventListener("click", () => {
+          renderProject();
         });
       } else {
         console.log("RESULTS", result.data.success);
