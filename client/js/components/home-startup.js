@@ -67,6 +67,12 @@ export function renderHome() {
           signUp.addEventListener("click", () => {
             renderRego();
           });
+        // } 
+        // disabling for now, this function should run after signup
+        // else {
+        //   // YES the user is logged in
+        //   renderProfileMain(result.data.firstname);
+        // }
         } else {
           // YES the user is logged in
           console.log("HERE ARE THE RESPONSE FROM TEH SERVER AFTER REGISTRATION", result); //TODO: delete console log

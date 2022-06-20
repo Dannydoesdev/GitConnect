@@ -2,7 +2,14 @@
 //   const main = document.getElementById("main");
 //   main.innerHTML = "";
 
+<<<<<<< HEAD
+  const results = document.getElementById('results')
+  results.innerHTML = ""
+  
+  main.innerHTML = `
+=======
 //   main.innerHTML = `
+>>>>>>> 8637abd120dfda203dfc674acebdbf4c2297f03c
   
 //       <div id="profile-welcome-title">  
 //         <h4 id="logout" class="home-login-signup" >Welcome to your GitConnect</h4>  

@@ -2,8 +2,10 @@ import { makeAnEl } from "../../utils/dom-create.js";
 import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
+import { renderProfileMain } from "./render-profile.js";
 import { renderProject } from "./render-project.js";
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
+
 
 export function renderNav() {
 //   const main = document.getElementById("main");
@@ -21,11 +23,22 @@ export function renderNav() {
     // temporary
     const resp = await axios.get("/api/session").then((result) => {
       if (result.data.success) {
+        const myProfile = makeAnEl("h4", {
+          className: "navbar-links",
+          textContent: "My Profile",
+          id: "navbar-my-profile"
+        });
+        navBar.appendChild(myProfile);
+        myProfile.addEventListener('click', () => {
+          // need to call specific username here
+          renderProfileMain();
+        })
         const editProfileForm = makeAnEl("h4", {
           className: "navbar-links",
           textContent: "EDIT PROFILE",
           id: "navbar-edit-profile",
         });
+        navBar.appendChild(editProfileForm);
         editProfileForm.addEventListener("click", () => {
           renderProfileEdit();
         });
@@ -57,10 +70,12 @@ export function renderNav() {
   };
 
   // generate navigation bar and header - to move into components
-  const browse = document.createElement("h4");
-  browse.classList.add("navbar-links");
-  browse.textContent = "BROWSE";
-  navBar.appendChild(browse);
+  
+  // ---- no longer needed for now ----
+  // const browse = document.createElement("h4");
+  // browse.classList.add("navbar-links");
+  // browse.textContent = "BROWSE";
+  // navBar.appendChild(browse);
 
   const search = document.createElement("h4");
   search.classList.add("navbar-links");
@@ -71,9 +86,6 @@ export function renderNav() {
     renderSearch();
   });
 
-  const lorem = document.createElement("h4");
-  lorem.classList.add("navbar-links");
-  lorem.textContent = "LOREM";
-  navBar.appendChild(lorem);
+  
   sendingrequest();
 }

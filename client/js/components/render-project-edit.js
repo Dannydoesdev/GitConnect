@@ -4,6 +4,9 @@ export function renderProjectEdit() {
     const main = document.getElementById('main');
     main.innerHTML = '';
     
+    const results = document.getElementById('results')
+    results.innerHTML = ""
+
     main.innerHTML = `
     <div class="container bg-dark text-white">
     <div class="row">

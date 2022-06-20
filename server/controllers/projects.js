@@ -96,5 +96,14 @@ router.post("/editform/:projectid", (req, res) => {
     // }
 }); 
 
+router.get('/', (req, res) => {
+    let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME}`
+    db.query(sql).then(results => {
+        res.status(200).json(results.rows)
+    })
+    .catch(err => {
+        res.status(404).json({ message: "Cannot locate repos"})
+    })
+})
 
 module.exports = router;
