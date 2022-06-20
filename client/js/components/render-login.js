@@ -3,6 +3,9 @@ export function renderLogin() {
     const main = document.getElementById('main')
     main.innerHTML = ""
 
+    const results = document.getElementById('results')
+    results.innerHTML = ""
+
     const formContainer = document.createElement('div')
     formContainer.innerHTML = `
         <form id="login-form">

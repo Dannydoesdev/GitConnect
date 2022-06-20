@@ -8,11 +8,12 @@ import { makeAnEl } from '../../utils/dom-create.js';
 
 export function renderSearch() {
 
-    //get main section
+    //clear main/results section
     const mainPage = document.getElementById('main');
-
-    //clear main section
     mainPage.innerHTML = '';
+
+    const results = document.getElementById('results')
+    results.innerHTML = ""
         
     // create an input box for searching a users repos
     const allUserReposSearchBox = document.createElement('input');

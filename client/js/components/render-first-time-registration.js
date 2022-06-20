@@ -47,16 +47,6 @@ export function renderFirstTimeRegistration(gitHubName) {
       const resp = async () => {
         const GitConnectUserRepoData = await gitConnectAPI.getRepoDetailFromGitConnect(gitHubName);
         console.log(GitConnectUserRepoData);
-        if (!GitConnectUserRepoData.data.length) {
-          console.log("user has no repo data in GitConnect base"); // TODO: delete this console.log
-          console.log(GitConnectUserRepoData); // TODO: delete this console.log  its the repo data from GitConnect
-          //  TODO: At this point the user is only registered if a valid github member
-          //  If they have no repo data in our database its because its first time register or no repos on github
-          //  FIXME: This code assumes its always a first time register for now. Later this needs to be changed.
-          // Get the client to pull all their repo data
-
-          // const usersGitHubRepos = await gitHubApiCalls.getTheUsersReposFromGitHub(gitHubName)
-          // console.log("GITHUB REPO RESULTS",usersGitHubRepos);
           (async () => {
             const resp2 = async () => {
               const usersGitHubOverview = await gitHubApiCalls.getTheUsersDetailsFromGitHub(gitHubName);
@@ -73,7 +63,18 @@ export function renderFirstTimeRegistration(gitHubName) {
               // document.getElementById("usersContact").textContent = usersGitHubOverview.data.email;
             };
             await resp2();
-          })();
+          })();        
+        if (!GitConnectUserRepoData.data.length) {
+          console.log("user has no repo data in GitConnect base"); // TODO: delete this console.log
+          console.log(GitConnectUserRepoData); // TODO: delete this console.log  its the repo data from GitConnect
+          //  TODO: At this point the user is only registered if a valid github member
+          //  If they have no repo data in our database its because its first time register or no repos on github
+          //  FIXME: This code assumes its always a first time register for now. Later this needs to be changed.
+          // Get the client to pull all their repo data
+
+          // const usersGitHubRepos = await gitHubApiCalls.getTheUsersReposFromGitHub(gitHubName)
+          // console.log("GITHUB REPO RESULTS",usersGitHubRepos);
+
         } else {
           console.log("user has repo data");
         }

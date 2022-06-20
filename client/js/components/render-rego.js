@@ -3,6 +3,9 @@ export function renderRego() {
   const main = document.getElementById("main");
   main.innerHTML = "";
 
+  const results = document.getElementById('results')
+  results.innerHTML = ""
+  
   const formContainer = document.createElement("div");
   formContainer.innerHTML = `
         <form id="sign-up-form" class="forms">
@@ -48,6 +51,7 @@ export function renderRego() {
         axios.post("/api/session/login", data);
       })
       .then((response) => {
+        // instead of returning to home, we need to call renderProfileMain() using a specific usernme
         window.location = "/";
       })
       .catch((err) => {
