@@ -4,9 +4,7 @@
 */
 import * as gitConnectAPI from "./gitConnect-api-calls.js";
 import * as gitHubApiCalls from "./gitHubApiCalls.js";
-import { whichPageToShow } from "./Function-whichPageToShow.js"
-import { page } from "./constants.js";
-
+import { whichPageToShow,page } from "./Function-whichPageToShow.js"
 
 export function renderFirstTimeRegistration(gitHubName) {
   const main = document.getElementById("main");
@@ -24,9 +22,9 @@ export function renderFirstTimeRegistration(gitHubName) {
         <img id="userProfileimg" class="profilePic" alt="no pic" src="">
         <div id="profile-name-wrapper"><h4 id="profileName">${gitHubName}</h4></div>
         <div id="userBio"></div>
-        <div><i id="githubicon" class='fa fa-github'><a style='margin:0 5px;' id="usersGitHubPage"></a></i></div>
-        <div><a id="usersExternalProfileLink">place holder</a></div>
-        <div><a id="usersContact">place holder</a></div>
+        <div class="profileLinks"><i id="githubicon style="text-align:left;" class='fa fa-github'><a style='margin:0 5px;' id="usersGitHubPage"></a></i></div>
+        <div class="profileLinks"><i id="githubicon" class='fa fa-github'><a style='margin:0 5px;' id="usersExternalProfileLink">place holder</a></i></div>
+        <div class="profileLinks"><i id="githubicon" class='fa fa-github'><a style='margin:0 5px;' id="usersContact">place holder</a></i></div>
       </div>
       <div id="midPanel">
         <div id="yourprofiledoesnthaveanylinks"><a>Your profile doesnt have any links</a></div>
@@ -41,7 +39,7 @@ export function renderFirstTimeRegistration(gitHubName) {
     logout();
   });
   document.getElementById("addRepoButton").addEventListener("click", () => {
-    addRepos();
+      whichPageToShow(page.ProfileEdit, gitHubName);
   });
   (
     //  Perform all rendering within the below async
@@ -89,7 +87,4 @@ function logout() {
     window.location = "/";
   });
 }
-function addRepos() {
-  whichPageToShow(render.ProfileEdit, gitHubName);
-  console.log("it worked");
-}
+
