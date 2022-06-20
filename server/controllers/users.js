@@ -56,7 +56,7 @@ router.post(`/register`, (req, res) => {
 
   // First get the rest of the user data from GitHub if it exists.
   const sendingrequest = async () => {
-    await axios
+    await axios // get some user details from github
       .get(gitHubApi.getUserDetails + req.body.gitHubName)
       .then((result) => {
         if (result.data) {
@@ -95,8 +95,16 @@ router.post(`/register`, (req, res) => {
                 ).then((dbresults) => {
                   console.log(
                     "************************************ NEW REGISTERED USER IS ADDED. SENDING DATA BACK TO CLIENT"
-                  );
-                  res.status(200).json({ status: true, message: "New user added", data: dbresults.rows[0] }); // respond new user successfully added.
+                  ); // TODO: delete console.log
+                  res
+                    .status(200)
+                    .json({
+                      status: true,
+                      firstTimeRego: "yes",
+                      message: "New user added",
+                      data: dbresults.rows[0],
+                      githubprofilepic: result.data.avatar_url,
+                    }); // respond new user successfully added.
                 });
               });
             })

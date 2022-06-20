@@ -48,6 +48,7 @@ router.post(`/login`, (req, res) => {
     1)  If the user has an account and authenticates return stats 200 OK. Also a cookies containing gitConnectId,email and name
     2)  Else if the user does not authenticate, a message of BAD CREDENTIALS along with the associated status code.
   */
+
   db.query(
     `SELECT email,githubName,users.id,firstname,hashed_password FROM ${USERS_TABLE_NAME} JOIN hashed_passwords ON users.id = hashed_passwords.id WHERE email = $1;`,
     [email]

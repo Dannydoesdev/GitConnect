@@ -44,6 +44,7 @@ export function renderRego() {
     axios
       .post("/api/users/register", data)
       .then((addSession) => {
+        // Delete all cookies
         axios.post("/api/session/login", data);
       })
       .then((response) => {
