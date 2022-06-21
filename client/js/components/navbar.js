@@ -2,7 +2,7 @@ import { makeAnEl } from "../../utils/dom-create.js";
 import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
-import { renderProfileMain } from "./render-profile.js";
+
 import { renderProject } from "./render-project.js";
 import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
@@ -29,16 +29,16 @@ export function renderNav() {
             const githubName = result.data.githubname;
             console.log(githubName)
 
-        const myProfile = makeAnEl("h4", {
-          className: "navbar-links",
-          textContent: "My Profile",
-          id: "navbar-my-profile"
-        });
-        navBar.appendChild(myProfile);
-        myProfile.addEventListener('click', () => {
-          // need to call specific username here
-          renderProfileMain();
-        })
+        // const myProfile = makeAnEl("h4", {
+        //   className: "navbar-links",
+        //   textContent: "My Profile",
+        //   id: "navbar-my-profile"
+        // });
+        // navBar.appendChild(myProfile);
+        // myProfile.addEventListener('click', () => {
+        //   // need to call specific username here
+        //   renderProfileMain();
+        // })
 
         const editProfileForm = makeAnEl("h4", {
           className: "navbar-links",
