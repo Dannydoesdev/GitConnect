@@ -23,7 +23,7 @@ export function renderProfileEdit() {
     results.innerHTML = ""
     
     main.innerHTML = `
-    <div class="container bg-dark text-white">
+    <div class="container bg-dark text-white px-10 py-10">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h1>Update Profile</h1>

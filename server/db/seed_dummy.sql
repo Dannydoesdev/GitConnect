@@ -14,6 +14,6 @@ VALUES('misakigrim','garmonweng@gmail.com',1,1,'Garmon','','https://avatars.gith
 INSERT INTO hashed_passwords (id,hashed_password) VALUES (1,'$2b$10$1lzng8qKwE83WoshE/EHPu2E15DO/BMtZOUyVH1VnVtQLGGFv7paC');
 
 INSERT INTO repoparameters (repoID, gitHubRepoName, userID, status, projectName, description)
-VALUES (330517540, 'katharosada', 2, B'1', 'splootcode', 'An experimental coding interface that''s tree-based.');
+VALUES (330517540, 'splootcode', 2, B'1', 'Sploot Code', 'An experimental coding interface that''s tree-based.');
 INSERT INTO repoparameters (repoID, gitHubRepoName, userID, status, projectName, description)
-VALUES (9791118, 'katharosada', 2, B'1', 'learn-cryptography', 'This is an AppEngine app for learning basic crytography through analysing and decrypting a series of texts.');
+VALUES (9791118, 'learn-cryptography', 2, B'1', 'Learn Cryptography', 'This is an AppEngine app for learning basic crytography through analysing and decrypting a series of texts.');

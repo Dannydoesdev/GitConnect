@@ -15,7 +15,7 @@ export function renderLanding() {
                 <div class="card-body" style="background-color: #212224ff;">
                     <h5 class="card-title">Project Title</h5>
                     <p class="card-text">By <span class="link-out">/dannydoesdev</span>.</p>
-                    <a href="#" class="btn btn-secondary">Dive</a>
+                    <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@ export function renderLanding() {
                 <div class="card-body" style="background-color: #212224ff;">
                     <h5 class="card-title">Project Title</h5>
                     <p class="card-text">By <span class="link-out">/cjunk</span>.</p>
-                    <a href="#" class="btn btn-dark">Dive</a>
+                    <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@ export function renderLanding() {
                 <div class="card-body" style="background-color: #212224ff;">
                     <h5 class="card-title">Project Title</h5>
                     <p class="card-text">By <span class="link-out">/misakigrim</span>.</p>
-                    <a href="#" class="btn btn-dark">Dive</a>
+                    <a href="#" class="btn btn-md sbtn-outline-light align-self-center">Dive</a>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@ export function renderLanding() {
                         <h5 class="card-title">${projectName}</h5>
                         <p class="card-text">By <span class="link-out">/${repoName}</span>.</p>
                         <p class="card-text">${description}</p>
-                        <a href="#" class="btn btn-dark">Dive</a>
+                        <a href="#" class="btn btn-outline-light align-self-center">Dive</a>
                     </div>
                 </div>
                 `

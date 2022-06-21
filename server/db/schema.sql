@@ -70,12 +70,12 @@ CREATE TABLE messages ( -- messages left for users
 );
 -- REPOS..
 CREATE TABLE repoparameters ( -- Repos and their paramaters. 
-    repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
-    gitHubRepoName TEXT,
+    repoID TEXT PRIMARY KEY UNIQUE NOT NULL, -- eg math.random
+    gitHubRepoName TEXT, -- namr of repo (not user)
     userID SMALLINT REFERENCES users(id),
     status BIT NOT NULL, -- Available for viewing Y or N
-    projectName TEXT,
-    description TEXT,
+    projectName TEXT, -- gitconnect project name
+    description TEXT, -- other stuff should be gitconnect NOT github
     process TEXT,
     challenges TEXT,
     outcomes TEXT,

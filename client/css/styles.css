@@ -53,11 +53,9 @@ body {
 
 
 #navbar-logo {
-  position: relative;
-  left: 10%;
-  height: 90%;
+  max-width: 20%; 
   border: 1px solid #a1a1a1ff;
-  border-radius: 50px;
+  border-radius: 100px;
   -webkit-transition: -webkit-transform .8s ease-in-out;
   -ms-transition: -ms-transform .8s ease-in-out;
   transition: transform .8s ease-in-out; 

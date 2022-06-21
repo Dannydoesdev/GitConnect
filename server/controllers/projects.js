@@ -109,10 +109,12 @@ router.post("/editform/:repoName", (req, res) => {
 }); 
 
 router.get('/', (req, res) => {
-    let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME}`
-    db.query(sql).then(results => {
-        res.status(200).json(results.rows)
-    })
+    let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} JOIN ${USERS_TABLE_NAME} ON users.id = repoparameters.userid;`
+    db.query(sql)
+    .then(results => {
+        console.log(results)
+            res.status(200).json(results)
+        })
     .catch(err => {
         res.status(404).json({ message: "Cannot locate repos"})
     })
