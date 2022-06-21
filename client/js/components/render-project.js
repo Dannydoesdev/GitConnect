@@ -3,6 +3,9 @@ export function renderProject(projectName) {
     const main = document.getElementById("main");
     main.innerHTML = "";
 
+    const results = document.getElementById('results')
+    results.innerHTML = "";
+
     main.innerHTML = `
     <!-- Increase py on hero to make bigger vertically -->
     <div class="container bg-dark text-white border">

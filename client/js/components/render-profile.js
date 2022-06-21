@@ -6,6 +6,9 @@ export function renderProfile(username) {
     const main = document.getElementById("main");
     main.innerHTML = "";
 
+    const results = document.getElementById('results')
+    results.innerHTML = ""
+
     // API RETURN:
 
     // id SERIAL PRIMARY KEY,

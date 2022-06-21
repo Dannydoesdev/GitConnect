@@ -7,6 +7,9 @@ import * as gitHubApiCalls from "./gitHubApiCalls.js";
 import { whichPageToShow,page } from "./Function-whichPageToShow.js"
 
 export function renderFirstTimeRegistration(gitHubName) {
+  const results = document.getElementById('results')
+  results.innerHTML = "";
+  
   const main = document.getElementById("main");
   main.innerHTML = `
   <head>
