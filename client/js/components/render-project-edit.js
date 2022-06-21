@@ -1,6 +1,7 @@
 import { makeAnEl } from '../../utils/dom-create.js';
+import { renderProject } from './render-project.js';
 
-export function renderProjectEdit() {
+export function renderProjectEdit(projectName) {
     const main = document.getElementById('main');
     main.innerHTML = '';
     
@@ -55,12 +56,11 @@ let form = document.getElementById("edit-project-form");
     };
       
       console.log(data);
-
     axios
-      .post("/api/projects", data)
+      .post(`/api/projects/editform/${projectName}`, data)
         .then((response) => {
           console.log(response)
-        //   window.location = '/api/projects';
+          renderProject(projectName)
       })
       .catch((err) => {
         console.log(err);

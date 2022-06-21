@@ -4,7 +4,7 @@ const router = express.Router();
 const BAD_CREDENTIALS = "BAD CREDENTIALS"
 const BAD_CREDENTIALS_STATUS = 403
 const USERS_TABLE_NAME = "users"
-const PROFILES_TABLE_NAME = "repoParameters"
+const PROJECTS_TABLE_NAME = "repoParameters"
 
 //Handle POST requests to /api/projects to create profiles
 router.post("/", (req, res) => {
@@ -15,8 +15,6 @@ router.post("/", (req, res) => {
     // if (!sessionId) {
     //     res.status(401).json({ sucess: false, message: "Must be logged in" });
     // } else {
-
-    
         let firstName = req.body.firstName;
         let lastName = req.body.lastName;
         let aboutme = req.body.aboutme;
@@ -33,7 +31,7 @@ router.post("/", (req, res) => {
             // testing manual insertion of some info
             let userID = 2;
             
-            let sql = `UPDATE ${USERS_TABLE_NAME} SET firstName = $1, lastName = $2, aboutme = $3 WHERE id = $4`;
+            let sql = `UPDATE ${USERS_TABLE_NAME} SET firstName = $1, lastName = $2, aboutme = $3 WHERE id = $4;`;
             let values = [firstName, lastName, aboutme, userID];
             console.log(values);
             
@@ -51,6 +49,52 @@ router.post("/", (req, res) => {
     // }
 }); 
 
+// WILL NEED TO BE ABLE TO do this anonymously (IE JUST A BROWSING USER - can split to another call maybe)
+router.get("/profilepage/:userName", (req, res) => {
+    console.log(req.params.userName)
+    let userName = req.params.userName;
+    const loggedinUserName = req.session.body.githubname;
+    const id = req.session.body.id;
+    console.log(userName + id)
+
+    // Need to keep track of info from both project and profiles table
+    let profileObject = {};
+
+    let sql = `SELECT * FROM ${USERS_TABLE_NAME} WHERE githubname = $1;`;
+    let values = [userName];
+
+    if (userName === loggedinUserName) {
+        console.log("logged in user")
+        profileObject.currentUser = true;
+    }
+    db.query(sql, values)
+        .then(dbres => {
+            profileObject.user = dbres.rows[0];
+            // res.json(dbres.rows);
+        })
+        .then(() => {
+            sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} WHERE userID = $1;`;
+            values = [id];
+
+            db.query(sql, values)
+                .then(dbres => {
+                    // console.log(dbres.rows);
+                    profileObject.projects = dbres.rows;
+                    // console.log(profileObject);
+                    // res.json(dbres.rows);
+                    res.json(profileObject);
+                })
+                    
+                .catch(reason => {
+                    console.log(reason)
+                    res.status(500).json({ sucess: false, message: 'Unknown error occured' });
+                }
+                )
+        })
+});
+
+
+    
 
 
 module.exports = router;
