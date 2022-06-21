@@ -54,7 +54,7 @@ app.use(express.json());
 app.use(
   expressSession({
     secret: appSecretKey,
-    cookie: { maxAge: 20000000 },
+    cookie: { maxAge: 200000000 },
     resave: false,
     saveUninitialized: true,
     store: new pgSession({

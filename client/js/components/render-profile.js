@@ -66,6 +66,15 @@ export function renderProfile(username) {
             // console.log(project)
         })
 
+        // projectResults.map((result) => {
+        //     let id = result.userid
+        //     let sql = `SELECT * FROM projects WHERE userid = ${id}`
+        //     db.query(sql).then((result) => {
+        //         usersAndProject.projects.userid = result.githubname
+        //     })
+        // })
+
+
         let projectOne = projectData[0];
         console.log(projectOne)
         let projectTwo = projectData[1];
