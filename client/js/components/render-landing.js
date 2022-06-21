@@ -9,7 +9,7 @@ export function renderLanding() {
     results.innerHTML = `
     <div class="row px-3 py-5" style="background-color: #222222;">
     <h2 style="color: #FFFFFF;">Featured</h2>
-        <div class="col-4">
+        <div class="col-md-4 col-sm-6">
             <div class="card" style={width: 18rem}>
             <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
                 <div class="card-body" style="background-color: #212224ff;">
@@ -19,7 +19,7 @@ export function renderLanding() {
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-sm-6">
             <div class="card" style={width: 18rem;}>
             <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
                 <div class="card-body" style="background-color: #212224ff;">
@@ -29,7 +29,7 @@ export function renderLanding() {
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-md-4 col-sm-6">
             <div class="card" style={width: 18rem;}>
             <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
                 <div class="card-body" style="background-color: #212224ff;">
@@ -42,18 +42,40 @@ export function renderLanding() {
     </div>
     `
     axios.get('/api/projects')
-        .then(results => {
-            console.log(results)
+        .then(dbRes => {
+            console.log(dbRes)
+            const repoResults = makeAnEl('div', {
+                class: ["row", "px-3", "py-5"],
+            })
+            results.appendChild(repoResults)
 
             // need to limit loop
-            results.data.map((result) => {
+            dbRes.data.map((user) => {
                 // console.log(result)
                 // set standard variables from response that we want to utilise
-                let repoName = result.githubreponame;
-                let projectName = result.projectname;
-                let description = result.description;
-                let table = [repoName, projectName, description]
-                console.log(table)
+                let repoName = user.githubreponame;
+                let projectName = user.projectname;
+                let description = user.description;
+                
+                const repoCol = makeAnEl('div', {
+                    class: ["col-md-3", "col-sm-6"]
+                })
+                repoResults.appendChild(repoCol)
+    
+                const userCard = makeAnEl('div')
+                userCard.innerHTML = `
+                <div class="card" style={width: 18rem; --bs-card-border-width: 0;}>
+                    <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
+                    <div class="card-body" style="background-color: #212224ff;">
+                        <h5 class="card-title">${projectName}</h5>
+                        <p class="card-text">By <span class="link-out">/${repoName}</span>.</p>
+                        <p class="card-text">${description}</p>
+                        <a href="#" class="btn btn-dark">Dive</a>
+                    </div>
+                </div>
+                `
+                repoCol.appendChild(userCard)
+                
             })
             
     //         repoID TEXT PRIMARY KEY UNIQUE NOT NULL,

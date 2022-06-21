@@ -9,6 +9,7 @@ import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 
 
 export function renderNav() {
+
 //   const main = document.getElementById("main");
 
 //   const logo = document.createElement("img");
@@ -32,9 +33,24 @@ export function renderNav() {
 
     logoContainer.appendChild(logo);
     navBar.appendChild(logoContainer);
+
+//   const navBar = document.getElementById("navbar");
+//   navBar.classList.add("container-fluid")
+  
+
+//   const logo = makeAnEl('img', {
+//     src: "./img/gclogo.png",
+//     classList: ['navbar-links', 'col'],
+//     id: "navbar-logo"
+//   })
+ 
+//   navBar.appendChild(logo);
+
   logo.addEventListener("click", (event) => {
     window.location = "/";
   });
+
+  const row = makeAnEl('div', [logo])
 
   const sendingrequest = async () => { // This is done as we have to wait for the response from the GitConnect server before rendering the page
     // temporary
@@ -147,6 +163,7 @@ export function renderNav() {
         //   textContent: "EDIT PROFILE",
         //   id: "navbar-edit-profile",
         // });
+
         // navBar.appendChild(editProfileForm);
         editProfileForm.addEventListener("click", () => {
           renderProfileEdit();
@@ -158,22 +175,56 @@ export function renderNav() {
         //   id: "navbar-edit-repo",
         // });
         // navBar.appendChild(editRepoForm);
+
+        // navBar.appendChild(myProfile);
+        // myProfile.addEventListener('click', () => {
+        //   // need to call specific username here
+        //   renderProfileMain();
+        // })
+
+//         const editProfileForm = makeAnEl("h4", {
+//           className: ["navbar-links", "col"],
+//           textContent: "EDIT PROFILE",
+//           id: "navbar-edit-profile",
+//         });
+//         navBar.appendChild(editProfileForm);
+//         editProfileForm.addEventListener("click", () => {
+//           renderProfileEdit();
+//         });
+//         navBar.appendChild(editProfileForm);
+//         const editRepoForm = makeAnEl("h4", {
+//           className:["navbar-links", "col"],
+//           textContent: "EDIT REPO",
+//           id: "navbar-edit-repo",
+//         });
+//         navBar.appendChild(editRepoForm);
+
         editRepoForm.addEventListener("click", () => {
           renderProjectEdit();
         });
             
             //This is currently to view 'logged-in users own' profile
+
         // const viewProfile = makeAnEl("h4", {
         //     className: "navbar-links",
         //     textContent: "VIEW PROFILE",
         //     id: "navbar-view-profile",
         //   });
         // navBar.appendChild(viewProfile);
+
+//         const viewProfile = makeAnEl("h4", {
+//             className: ["navbar-links", "col"],
+//             textContent: "VIEW PROFILE",
+//             id: "navbar-view-profile",
+//           });
+//         navBar.appendChild(viewProfile);
+// >>>>>>> main
             viewProfile.addEventListener("click", () => {
             console.log(githubName)
           renderProfile(githubName);
         });
             
+
         // const viewProfileTemplate = makeAnEl("h4", {
         //     className: "navbar-links",
         //     textContent: "VIEW MOCKUP",
@@ -189,6 +240,23 @@ export function renderNav() {
         //     id: "navbar-view-project",
         //   });
         // navBar.appendChild(viewProject);
+
+//         const viewProfileTemplate = makeAnEl("h4", {
+//             className: ["navbar-links", "col"],
+//             textContent: "VIEW MOCKUP",
+//             id: "navbar-view-mockup",
+//           });
+//         navBar.appendChild(viewProfileTemplate);
+//         viewProfileTemplate.addEventListener("click", () => {
+//           renderProfileTemplate();
+//         });
+//         const viewProject = makeAnEl("h4", {
+//             className: ["navbar-links", "col"],
+//             textContent: "VIEW PROJECT",
+//             id: "navbar-view-project",
+//           });
+//         navBar.appendChild(viewProject);
+
         viewProject.addEventListener("click", () => {
           renderProject();
         });

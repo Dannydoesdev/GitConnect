@@ -27,9 +27,13 @@ body {
   align-items: flex-start;
 } */
 
-#navbar-logo {
+
+/* COMMENTING OUT FOR GARMONS CODE - RECOMMENT IF WEIRD  */
+/* #navbar-logo {
   max-width: 20%;
 }
+ */
+
 
 /* 
 #navbar {
@@ -38,6 +42,7 @@ body {
   display: flex;
   flex-direction: row; 
 }
+
 */
 /* #navbar-logo {
   position: relative;
@@ -45,6 +50,26 @@ body {
   height: 85%;
   padding: 4px;
 } */
+
+
+#navbar-logo {
+  position: relative;
+  left: 10%;
+  height: 90%;
+  border: 1px solid #a1a1a1ff;
+  border-radius: 50px;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+  -ms-transition: -ms-transform .8s ease-in-out;
+  transition: transform .8s ease-in-out; 
+  /* https://codepen.io/CodeXYZ/pen/xbdxyO */
+}
+
+#navbar-logo:hover {
+  transform:rotate(45deg);
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+}
+
 
 /* .navbar-links {
   color: #a1a1a1ff;
