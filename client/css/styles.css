@@ -1,8 +1,9 @@
 /* adding to flush edges */
+ /* just setting color temporarily */
 body {
   margin: 0;
   background-color: #111213ff;
-  color: #a1a1a1ff; /* just setting color temporarily */
+  color: #a1a1a1ff;
 }
 
 /* .repo-list {
@@ -19,19 +20,37 @@ body {
   margin-right: 20px; */
 }
 
-#search-boxes{
+/* #search-boxes{
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
+} */
 
+
+/* COMMENTING OUT FOR GARMONS CODE - RECOMMENT IF WEIRD  */
+/* #navbar-logo {
+  max-width: 20%;
+}
+ */
+
+
+/* 
 #navbar {
   background-color: #212224ff;
   height: 45px;
   display: flex;
   flex-direction: row; 
 }
+
+*/
+/* #navbar-logo {
+  position: relative;
+  left: 10%;
+  height: 85%;
+  padding: 4px;
+} */
+
 
 #navbar-logo {
   position: relative;
@@ -51,13 +70,14 @@ body {
   -webkit-transform:rotate(45deg);
 }
 
-.navbar-links {
+
+/* .navbar-links {
   color: #a1a1a1ff;
   margin: auto 40px;
-  /* placeholder */
+
   position: relative;
   left: 200px;
-}
+}  */
 
 /* https://www.reddit.com/r/css/comments/nkjeyb/6_dark_mode_color_palettes_with_examples_css_and/
 CSS HEX
