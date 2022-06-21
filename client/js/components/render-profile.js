@@ -47,7 +47,9 @@ export function renderProfile(username) {
         // } else {
         //     console.log("RESULTS", result.data.success);
         // }
-
+        let projectOneGhName
+        let projectOneDescription
+        let projectTwoGhName   
 
         let profileData = result.data.user;
         // console.log(profileData)
@@ -67,7 +69,6 @@ export function renderProfile(username) {
         //TYPO IN DB
         let githubUrl = profileData.githubutrl;
 
-
         let projectData = result.data.projects;
         // console.log(projectData)
         projectData.forEach((project) => {
@@ -82,38 +83,52 @@ export function renderProfile(username) {
         //     })
         // })
 
-
         let projectOne = projectData[0];
         console.log(projectOne)
         let projectTwo = projectData[1];
         let projectThree = projectData[2];
+        
 
-        let projectOneGhName = projectOne.githubreponame;
-        let projectOneTitle = projectOne.title;
-        let projectOneDescription = projectOne.description;
-        let projectOneImage = projectOne.titleimage;
-        //should add link in db
-        let projectOneLink = projectOne.link;
-        let projectOneChallenges = projectOne.challenges;
-        let projectOneProcess = projectOne.process;
-        let projectOneOutcomes = projectOne.outcomes;
+        console.log(projectData)
+        if (projectData.length > 1) {
+            console.log('more than 2 projects')
+          
+            projectOneDescription = projectOne.description;
+            projectTwoGhName = projectTwo.githubreponame;
+            projectOneGhName = projectOne.githubreponame;
+            console.log(projectOneGhName)
+                // let projectOneGhName = projectOne.githubreponame;
+                let projectOneTitle = projectOne.title;
+       
+                // let projectOneDescription = projectOne.description;
+                    let projectOneImage = projectOne.titleimage;
+                    //should add link in db
+                    let projectOneLink = projectOne.link;
+                    let projectOneChallenges = projectOne.challenges;
+                    let projectOneProcess = projectOne.process;
+                    let projectOneOutcomes = projectOne.outcomes;
+        
+                
+                // let projectTwoGhName = projectTwo.githubreponame;
+                    let projectTwoTitle = projectTwo.title;
+                    let projectTwoDescription = projectTwo.description;
+                    let projectTwoImage = projectTwo.titleimage;
+                    //should add link in db
+                    let projectTwoLink = projectTwo.link;
+                    let projectTwoChallenges = projectTwo.challenges;
+                    let projectTwoProcess = projectTwo.process;
+                    let projectTwoOutcomes = projectTwo.outcomes;
+        }
+           
+           
+        
 
-        let projectTwoGhName = projectTwo.githubreponame;
-        let projectTwoTitle = projectTwo.title;
-        let projectTwoDescription = projectTwo.description;
-        let projectTwoImage = projectTwo.titleimage;
-        //should add link in db
-        let projectTwoLink = projectTwo.link;
-        let projectTwoChallenges = projectTwo.challenges;
-        let projectTwoProcess = projectTwo.process;
-        let projectTwoOutcomes = projectTwo.outcomes;
+            //EDIT IF LOGGED IN:
+            // suggest limiting projects to 3 for simplicity for now
 
-        //EDIT IF LOGGED IN:
-        // suggest limiting projects to 3 for simplicity for now
-
-        let editProjectOne = '';
-        let editProjectTwo = '';
-        let addRepoBtn = '';
+            let editProjectOne = '';
+            let editProjectTwo = '';
+            let addRepoBtn = '';
 
         if (result.data.currentUser) {
             console.log('this is the current user')
@@ -136,7 +151,7 @@ export function renderProfile(username) {
             });
             console.log(editProjectOne)
             console.log(editProjectTwo)
-
+            console.log(projectOneGhName)
         } else {
             console.log('this is not the current user')
             editProjectOne = makeAnEl('btn', {
@@ -152,9 +167,9 @@ export function renderProfile(username) {
 
           
 
-        //JUST AN IDEA
-        let projectList = projectData.map((project) => {
-            return `
+            //JUST AN IDEA
+            let projectList = projectData.map((project) => {
+                return `
             <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">${project.title}</h5>
@@ -163,16 +178,52 @@ export function renderProfile(username) {
             </div>
         </div>
             `
-        })
+            })
 
-        //ignore this bit for now
-        let projectListHTML = projectList.join("");
-        // console.log(projectListHTML)
-        let projectListContainer = document.createElement("div");
-        projectListContainer.innerHTML = projectListHTML;
-        // main.appendChild(projectListContainer);
-        // END IDEA
+            //ignore this bit for now
+            let projectListHTML = projectList.join("");
+            // console.log(projectListHTML)
+            let projectListContainer = document.createElement("div");
+            projectListContainer.innerHTML = projectListHTML;
+            // main.appendChild(projectListContainer);
+            // END IDEA
+        if (projectData.length < 2) {
+            console.log('less than 2 projects')
 
+            console.log('making repo button')
+
+            // ADD REPO IF NOT WORKING - TO FIX
+            let addRepoBtn = '';
+            if (result.data.currentUser) {
+                console.log('not making repo button take 2')
+                addRepoBtn = makeAnEl('btn', {
+                    class: ['btn', 'btn-lg', 'btn-outline-success'],
+                    innerText: `Add a project from Github`,
+                    id: 'add-project-btn',
+                });
+                // console.log(addRepoBtn)
+            } else {
+                console.log('not making repo button')
+                let editProjectOne = '';
+                let editProjectTwo = '';
+                let addRepoBtn = '';
+
+                editProjectOne = makeAnEl('btn', {
+                    display: 'none',
+                });
+                editProjectTwo = makeAnEl('btn', {
+                    display: 'none',
+                });
+                addRepoBtn = makeAnEl('btn', {
+                    display: 'none',
+                });
+
+            }
+            // console.log(addRepoBtn)
+
+        };
+
+        // console.log('repobtn' + addRepoBtn)
     main.innerHTML = `
             <div class="container-lg">
             <div class="row">
@@ -193,8 +244,8 @@ export function renderProfile(username) {
             <!-- Sidebar stuff -->
             <div class="row">
                 <div class="col-md-2  d-flex flex-column text-center border">
-                    <img src="${avatar}" class="mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
-                    <h3>${githubName}</h3>
+                    <img src="${avatar ? avatar : ''}" class="mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
+                    <h3>${githubName ? githubName : 'Name not found'}</h3>
                     <p>Devs location</p>
                     <br><br>
                     <a href='${githubUrl}'>Visit my Git</a>
@@ -220,7 +271,7 @@ export function renderProfile(username) {
 
                     <div class="row border py-2">
                         <div class="col-md-12 text-center mb-2">
-                            <h2>${projectOneGhName}</h2>
+                            <h2>${projectOneGhName ? projectOneGhName : 'no project here'}</h2>
                         </div>
                     </div>
     
@@ -243,8 +294,8 @@ export function renderProfile(username) {
                             <div class="row text-center py-4 border">
                                 <div class="col">
                                     <h4>Project Description</h4>
-                                    <p>${projectOneDescription} OR Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                </div>
+                                    <p>${projectOneDescription ? projectOneDescription : 'no description here'} OR Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                                </div>projectOneGhNameprojectOneDescription
 
                                 <!-- <div class="col">
                                     <h4>Project Process</h4>
@@ -326,7 +377,7 @@ export function renderProfile(username) {
 
                     <div class="row">
                         <div class="col-md-12 border text-center mb-2">
-                            <h2>${projectTwoGhName}</h2>
+                            <h2>${projectTwoGhName ? projectTwoGhName : 'no project here'}</h2>
                         </div>
                     </div>
 
@@ -360,6 +411,13 @@ export function renderProfile(username) {
             </div>
         </div>
     `;
+       //MOVE INTO AN IF LOGGED ON LATER ( BROKEN RIGHT NOW) 
+//    const addRepoBtn = makeAnEl('btn', {
+//         class: ['btn', 'btn-lg', 'btn-outline-success'],
+//         innerText: `Add a project from Github`,
+//         id: 'add-project-btn',
+//     });
+        
         document.getElementById('repo-buttons').appendChild(addRepoBtn);
         addRepoBtn.addEventListener('click', () => {
             renderRepoListBs(`${githubName}`)
