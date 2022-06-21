@@ -2,7 +2,7 @@ import { makeAnEl } from "../../utils/dom-create.js";
 import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
-
+import { logOut } from "./home-startup.js";
 import { renderProject } from "./render-project.js";
 import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
@@ -10,12 +10,28 @@ import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 
 export function renderNav() {
 //   const main = document.getElementById("main");
-  const navBar = document.getElementById("navbar");
-  const logo = document.createElement("img");
 
-  logo.src = "./img/gclogo.png";
-  logo.setAttribute("id", "navbar-logo");
-  navBar.appendChild(logo);
+//   const logo = document.createElement("img");
+//   logo.src = "./img/gclogo.png";
+//   logo.setAttribute("id", "navbar-logo");
+    
+    const navBar = document.getElementById("navbartest");
+    
+    // creating a bootstrap container for logo
+    const logoContainer = makeAnEl("a", {
+        className: "navbar-brand",
+        href: "#"
+    });
+    
+    const logo = makeAnEl("img", {
+        src: "./img/gclogo.png",
+        className: "img-fluid",
+        id: "navbar-logo",
+        alt: "Gitconnect logo"
+    });
+
+    logoContainer.appendChild(logo);
+    navBar.appendChild(logoContainer);
   logo.addEventListener("click", (event) => {
     window.location = "/";
   });
@@ -29,64 +45,150 @@ export function renderNav() {
             const githubName = result.data.githubname;
             console.log(githubName)
 
-        // const myProfile = makeAnEl("h4", {
-        //   className: "navbar-links",
-        //   textContent: "My Profile",
-        //   id: "navbar-my-profile"
-        // });
-        // navBar.appendChild(myProfile);
-        // myProfile.addEventListener('click', () => {
-        //   // need to call specific username here
-        //   renderProfileMain();
-        // })
+            // const myProfile = makeAnEl("h4", {
+            //   className: "navbar-links",
+            //   textContent: "My Profile",
+            //   id: "navbar-my-profile"
+            // });
+            // navBar.appendChild(myProfile);
+            // myProfile.addEventListener('click', () => {
+            //   // need to call specific username here
+            //   renderProfileMain();
+            // })
+            
+            //     <ul class="navbar-nav">
+            //     <li class="nav-item">
+            //       <a class="nav-link active" aria-current="page" href="#">Home</a>
+            //     </li>
+            //     <li class="nav-item">
+            //       <a class="nav-link" href="#">Features</a>
+            //     </li>
+            //     <li class="nav-item">
+            //       <a class="nav-link" href="#">Pricing</a>
+            //     </li>
+            //     <li class="nav-item">
+            //       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            //     </li>
+            //   </ul>
+            //     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            //     <span class="navbar-toggler-icon"></span>
+            //   </button >
+      
+            const toggleResponsiveDropDown = makeAnEl("button", {
+                class: "navbar-toggler",
+                type: "button",
+                data: {
+                    bsToggle: "collapse",
+                    bsTarget: "#navbarNavAltMarkup",
+                },
+            }, [
+                makeAnEl("span", {
+                    class: "navbar-toggler-icon",
+                }),
+            ]
+            )
+            navBar.appendChild(toggleResponsiveDropDown);
+            
+            const allNavItemsContainer = makeAnEl("div", {
+                className: ['collapse', 'navbar-collapse'],
+                id: "navbarNavAltMarkup",
+            })
+            const allNavItems = makeAnEl("div", {
+                className: "navbar-nav",
+                // id: "navbar-nav"
+            });
+            const editProfileForm = makeAnEl("a", {
+                className: "nav-link",
+                textContent: "EDIT PROFILE",
+                href: "#",
+                id: "navbar-edit-profile",
+            });
 
-        const editProfileForm = makeAnEl("h4", {
-          className: "navbar-links",
-          textContent: "EDIT PROFILE",
-          id: "navbar-edit-profile",
-        });
-        navBar.appendChild(editProfileForm);
+            const editRepoForm = makeAnEl("a", {
+                className: "nav-link",
+                textContent: "EDIT REPO",
+                href: "#",
+                id: "navbar-edit-repo",
+              });  
+       
+              const viewProfile = makeAnEl("a", {
+                className: "nav-link",
+                  textContent: "VIEW PROFILE",
+                  href: "#",
+                id: "navbar-view-profile",
+              });
+            
+              const viewProject = makeAnEl("a", {
+                className: "nav-link",
+                  textContent: "VIEW PROJECT",
+                  href: "#",
+                id: "navbar-view-project",
+              });
+            
+            allNavItemsContainer.appendChild(allNavItems);
+            allNavItems.appendChild(editProfileForm);
+            allNavItems.appendChild(editRepoForm);
+            allNavItems.appendChild(viewProfile);
+            allNavItems.appendChild(viewProject);
+            navBar.appendChild(allNavItemsContainer);
+            
+            // doesnt search anything yet
+            const searchBar = document.createElement("form")
+            searchBar.setAttribute("class", "d-flex")
+            searchBar.innerHTML = `            
+            <input class="form-control ms-5 me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          `
+            
+            navBar.appendChild(searchBar)
+            // allNavItems.appendChild(searchBar);
+        // const editProfileForm = makeAnEl("h4", {
+        //   className: "navbar-links",
+        //   textContent: "EDIT PROFILE",
+        //   id: "navbar-edit-profile",
+        // });
+        // navBar.appendChild(editProfileForm);
         editProfileForm.addEventListener("click", () => {
           renderProfileEdit();
         });
-        navBar.appendChild(editProfileForm);
-        const editRepoForm = makeAnEl("h4", {
-          className: "navbar-links",
-          textContent: "EDIT REPO",
-          id: "navbar-edit-repo",
-        });
-        navBar.appendChild(editRepoForm);
+        // navBar.appendChild(editProfileForm);
+        // const editRepoForm = makeAnEl("h4", {
+        //   className: "navbar-links",
+        //   textContent: "EDIT REPO",
+        //   id: "navbar-edit-repo",
+        // });
+        // navBar.appendChild(editRepoForm);
         editRepoForm.addEventListener("click", () => {
           renderProjectEdit();
         });
             
             //This is currently to view 'logged-in users own' profile
-        const viewProfile = makeAnEl("h4", {
-            className: "navbar-links",
-            textContent: "VIEW PROFILE",
-            id: "navbar-view-profile",
-          });
-        navBar.appendChild(viewProfile);
+        // const viewProfile = makeAnEl("h4", {
+        //     className: "navbar-links",
+        //     textContent: "VIEW PROFILE",
+        //     id: "navbar-view-profile",
+        //   });
+        // navBar.appendChild(viewProfile);
             viewProfile.addEventListener("click", () => {
             console.log(githubName)
           renderProfile(githubName);
         });
             
-        const viewProfileTemplate = makeAnEl("h4", {
-            className: "navbar-links",
-            textContent: "VIEW MOCKUP",
-            id: "navbar-view-mockup",
-          });
-        navBar.appendChild(viewProfileTemplate);
-        viewProfileTemplate.addEventListener("click", () => {
-          renderProfileTemplate();
-        });
-        const viewProject = makeAnEl("h4", {
-            className: "navbar-links",
-            textContent: "VIEW PROJECT",
-            id: "navbar-view-project",
-          });
-        navBar.appendChild(viewProject);
+        // const viewProfileTemplate = makeAnEl("h4", {
+        //     className: "navbar-links",
+        //     textContent: "VIEW MOCKUP",
+        //     id: "navbar-view-mockup",
+        //   });
+        // navBar.appendChild(viewProfileTemplate);
+        // viewProfileTemplate.addEventListener("click", () => {
+        //   renderProfileTemplate();
+        // });
+        // const viewProject = makeAnEl("h4", {
+        //     className: "navbar-links",
+        //     textContent: "VIEW PROJECT",
+        //     id: "navbar-view-project",
+        //   });
+        // navBar.appendChild(viewProject);
         viewProject.addEventListener("click", () => {
           renderProject();
         });
@@ -107,10 +209,10 @@ export function renderNav() {
   // navBar.appendChild(browse);
 
   const search = document.createElement("h4");
-  search.classList.add("navbar-links");
+  search.classList.add("navbar-item");
   search.textContent = "SEARCH";
   search.setAttribute("id", "navbar-search");
-  navBar.appendChild(search);
+//   navBar.appendChild(search);
   search.addEventListener("click", (event) => {
     renderSearch();
   });

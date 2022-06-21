@@ -91,3 +91,9 @@ export function renderHome() {
 
   sendingrequest();
 }
+
+export function logOut() {
+    axios.delete("/api/session").then(() => {
+      window.location = "/";
+    });
+  }
