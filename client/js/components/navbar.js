@@ -4,7 +4,12 @@ import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
 import { logOut } from "./home-startup.js";
 import { renderProject } from "./render-project.js";
+
 // import { renderProfile, renderProfileTemplate } from "./render-profile.js";
+import { renderProfile, renderProfileTemplate } from "./render-profile.js";
+import { renderRego } from "./render-rego.js";
+import { renderLogin } from "./render-login.js";
+
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
 
 
@@ -16,7 +21,7 @@ export function renderNav() {
 //   logo.src = "./img/gclogo.png";
 //   logo.setAttribute("id", "navbar-logo");
     
-    const navBar = document.getElementById("navbartest");
+    const navBar = document.getElementById("navbar");
     
     // creating a bootstrap container for logo
     const logoContainer = makeAnEl("a", {
@@ -50,7 +55,32 @@ export function renderNav() {
     window.location = "/";
   });
 
-  const row = makeAnEl('div', [logo])
+    // const row = makeAnEl('div', [logo])
+    const toggleResponsiveDropDown = makeAnEl("button", {
+        class: "navbar-toggler",
+        type: "button",
+        data: {
+            bsToggle: "collapse",
+            bsTarget: "#navbarNavAltMarkup",
+        },
+    }, [
+        makeAnEl("span", {
+            class: "navbar-toggler-icon",
+        }),
+    ]
+    )
+    navBar.appendChild(toggleResponsiveDropDown);
+    
+    const allNavItemsContainer = makeAnEl("div", {
+        className: ['collapse', 'navbar-collapse'],
+        id: "navbarNavAltMarkup",
+    })
+    const allNavItems = makeAnEl("div", {
+        className: "navbar-nav",
+        // id: "navbar-nav"
+    });
+    allNavItemsContainer.appendChild(allNavItems);
+    navBar.appendChild(allNavItemsContainer);
 
   const sendingrequest = async () => { // This is done as we have to wait for the response from the GitConnect server before rendering the page
     // temporary
@@ -90,29 +120,31 @@ export function renderNav() {
             //     <span class="navbar-toggler-icon"></span>
             //   </button >
       
-            const toggleResponsiveDropDown = makeAnEl("button", {
-                class: "navbar-toggler",
-                type: "button",
-                data: {
-                    bsToggle: "collapse",
-                    bsTarget: "#navbarNavAltMarkup",
-                },
-            }, [
-                makeAnEl("span", {
-                    class: "navbar-toggler-icon",
-                }),
-            ]
-            )
-            navBar.appendChild(toggleResponsiveDropDown);
+            // const toggleResponsiveDropDown = makeAnEl("button", {
+            //     class: "navbar-toggler",
+            //     type: "button",
+            //     data: {
+            //         bsToggle: "collapse",
+            //         bsTarget: "#navbarNavAltMarkup",
+            //     },
+            // }, [
+            //     makeAnEl("span", {
+            //         class: "navbar-toggler-icon",
+            //     }),
+            // ]
+            // )
+            // navBar.appendChild(toggleResponsiveDropDown);
             
-            const allNavItemsContainer = makeAnEl("div", {
-                className: ['collapse', 'navbar-collapse'],
-                id: "navbarNavAltMarkup",
-            })
-            const allNavItems = makeAnEl("div", {
-                className: "navbar-nav",
-                // id: "navbar-nav"
-            });
+            // const allNavItemsContainer = makeAnEl("div", {
+            //     className: ['collapse', 'navbar-collapse'],
+            //     id: "navbarNavAltMarkup",
+            // })
+            // const allNavItems = makeAnEl("div", {
+            //     className: "navbar-nav",
+            //     // id: "navbar-nav"
+            // });
+
+
             const editProfileForm = makeAnEl("a", {
                 className: "nav-link",
                 textContent: "EDIT PROFILE",
@@ -125,6 +157,13 @@ export function renderNav() {
                 textContent: "EDIT REPO",
                 href: "#",
                 id: "navbar-edit-repo",
+            });  
+            
+            const addRepoForm = makeAnEl("a", {
+                className: "nav-link",
+                textContent: "ADD REPO",
+                href: "#",
+                id: "navbar-add-repo",
               });  
        
               const viewProfile = makeAnEl("a", {
@@ -141,12 +180,25 @@ export function renderNav() {
                 id: "navbar-view-project",
               });
             
-            allNavItemsContainer.appendChild(allNavItems);
+              const logOutNav = makeAnEl("a", {
+                className: ["nav-link", "float-end"],
+                  textContent: "LOG OUT",
+                  href: "#",
+                id: "navbar-log-out",
+              });
+            
+         
             allNavItems.appendChild(editProfileForm);
             allNavItems.appendChild(editRepoForm);
+            allNavItems.appendChild(addRepoForm);
             allNavItems.appendChild(viewProfile);
             allNavItems.appendChild(viewProject);
-            navBar.appendChild(allNavItemsContainer);
+            allNavItems.appendChild(logOutNav);
+
+            logOutNav.addEventListener("click", () => {
+                logOut();
+            });
+
             
             // doesnt search anything yet
             const searchBar = document.createElement("form")
@@ -168,6 +220,10 @@ export function renderNav() {
         editProfileForm.addEventListener("click", () => {
           renderProfileEdit();
         });
+            
+            addRepoForm.addEventListener("click", () => {
+                renderSearch();
+            });
         // navBar.appendChild(editProfileForm);
         // const editRepoForm = makeAnEl("h4", {
         //   className: "navbar-links",
@@ -260,7 +316,35 @@ export function renderNav() {
         viewProject.addEventListener("click", () => {
           renderProject();
         });
-      } else {
+        } else {
+
+
+            const logInNav = makeAnEl("a", {
+                className: "nav-link",
+                  textContent: "LOG IN",
+                  href: "#",
+                id: "navbar-log-in",
+              });
+            
+            logInNav.addEventListener("click", () => {
+                renderLogin();
+            });
+
+            const registerNav = makeAnEl("a", {
+                className: "nav-link",
+                  textContent: "REGISTER",
+                  href: "#",
+                id: "navbar-register",
+              });
+            
+
+            registerNav.addEventListener("click", () => {
+                renderRego();
+            });
+
+            allNavItems.appendChild(logInNav);
+            allNavItems.appendChild(registerNav);
+            
         console.log("RESULTS", result.data.success);
       }
     });
