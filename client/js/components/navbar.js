@@ -4,9 +4,12 @@ import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
 import { logOut } from "./home-startup.js";
 import { renderProject } from "./render-project.js";
+
+// import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 import { renderRego } from "./render-rego.js";
 import { renderLogin } from "./render-login.js";
+
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
 
 
@@ -361,7 +364,7 @@ export function renderNav() {
   search.classList.add("navbar-item");
   search.textContent = "SEARCH";
   search.setAttribute("id", "navbar-search");
-//   navBar.appendChild(search);
+  navBar.appendChild(search);
   search.addEventListener("click", (event) => {
     renderSearch();
   });
