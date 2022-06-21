@@ -360,14 +360,14 @@ export function renderNav() {
   // browse.textContent = "BROWSE";
   // navBar.appendChild(browse);
 
-  const search = document.createElement("h4");
-  search.classList.add("navbar-item");
-  search.textContent = "SEARCH";
-  search.setAttribute("id", "navbar-search");
-  navBar.appendChild(search);
-  search.addEventListener("click", (event) => {
-    renderSearch();
-  });
+  // const search = document.createElement("h4");
+  // search.classList.add("navbar-item");
+  // search.textContent = "SEARCH";
+  // search.setAttribute("id", "navbar-search");
+  // navBar.appendChild(search);
+  // search.addEventListener("click", (event) => {
+  //   renderSearch();
+  // });
 
 
   sendingrequest();
