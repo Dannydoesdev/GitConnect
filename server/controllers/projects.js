@@ -113,7 +113,7 @@ router.get('/', (req, res) => {
     db.query(sql)
     .then(results => {
         console.log(results)
-            res.status(200).json(results)
+            res.status(200).json(results.rows)
         })
     .catch(err => {
         res.status(404).json({ message: "Cannot locate repos"})

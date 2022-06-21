@@ -35,7 +35,7 @@ export function renderLanding() {
                 <div class="card-body" style="background-color: #212224ff;">
                     <h5 class="card-title">Project Title</h5>
                     <p class="card-text">By <span class="link-out">/misakigrim</span>.</p>
-                    <a href="#" class="btn btn-md sbtn-outline-light align-self-center">Dive</a>
+                    <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@ export function renderLanding() {
             dbRes.data.map((user) => {
                 // console.log(result)
                 // set standard variables from response that we want to utilise
-                let repoName = user.githubreponame;
+                let username = user.githubname;
                 let projectName = user.projectname;
                 let description = user.description;
                 
@@ -68,7 +68,7 @@ export function renderLanding() {
                     <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
                     <div class="card-body" style="background-color: #212224ff;">
                         <h5 class="card-title">${projectName}</h5>
-                        <p class="card-text">By <span class="link-out">/${repoName}</span>.</p>
+                        <p class="card-text">By <span class="link-out">/${username}</span>.</p>
                         <p class="card-text">${description}</p>
                         <a href="#" class="btn btn-outline-light align-self-center">Dive</a>
                     </div>
