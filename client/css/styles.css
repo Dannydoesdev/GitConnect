@@ -1,7 +1,7 @@
 /* adding to flush edges */
  /* just setting color temporarily */
 body {
-  margin: 0;
+  /* margin: 0; */
   background-color: #111213ff;
   color: #a1a1a1ff;
 }
@@ -53,9 +53,7 @@ body {
 
 
 #navbar-logo {
-  position: relative;
-  left: 10%;
-  height: 90%;
+  max-width: 20%;
   border: 1px solid #a1a1a1ff;
   border-radius: 50px;
   -webkit-transition: -webkit-transform .8s ease-in-out;
