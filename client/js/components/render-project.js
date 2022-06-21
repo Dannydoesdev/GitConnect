@@ -5,7 +5,8 @@ export function renderProject(projectName) {
 
     const results = document.getElementById('results')
     results.innerHTML = "";
-
+    results.removeAttribute('class');
+    
     main.innerHTML = `
     <!-- Increase py on hero to make bigger vertically -->
     <div class="container bg-dark text-white border">

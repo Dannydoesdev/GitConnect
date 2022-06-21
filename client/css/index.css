@@ -11,8 +11,8 @@
 } */
 
 body {
-  margin: auto;
-  text-align: center;
+  /* margin: auto;
+  text-align: center; */
   font-family: 'Roboto', sans-serif;;
 }
 .formStructure {
@@ -23,10 +23,10 @@ body {
   margin: auto;
   justify-content: center;
 }
-
+ 
 .inputClass {
   width: 90%;
-}
+} 
 
 #thedescription {
   height: 150px;
@@ -41,7 +41,8 @@ fieldset {
 
 textarea {
   resize: none;
-}
+} 
+
 #addChallengeButton {
   grid-column-start: 2;
   grid-column-end: 3;

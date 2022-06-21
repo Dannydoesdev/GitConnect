@@ -25,8 +25,13 @@ export function renderRego() {
                     <label for="">Confirm Password: </label><br>
                     <input type="password" name="confirm-password">
                 </fieldset>
-                <button>Sign Up</button>
+                <input type="submit" class="btn btn-lg btn-outline-light align-self-center" value="Submit">
+                
     `;
+  
+    // REMOVED THIS BUTTON
+    // <button>Sign Up</button>
+  
   main.appendChild(formContainer);
 
   let form = document.getElementById("sign-up-form");
