@@ -1,12 +1,16 @@
 
 import { makeAnEl } from '../../utils/dom-create.js';
 import { renderProjectEdit } from './render-project-edit.js';
+import { renderRepoListBs } from './render-repo-search.js';
 
 export function renderProfile(username) {
+    console.log(username)
+    username = username.toLowerCase();
     const main = document.getElementById("main");
     main.innerHTML = "";
 
     const results = document.getElementById('results')
+    results.removeAttribute('class');
     results.innerHTML = ""
 
     // API RETURN:
@@ -50,7 +54,8 @@ export function renderProfile(username) {
         for (let data in profileData) {
             // console.log(`${data} ${profileData[data]}`)
         }
-        let email = profileData.email;
+        console.log(profileData)
+        // let email = profileData.email;
         // console.log(profileData)
         let avatar = profileData.githubavatar;
         // console.log(userType)
@@ -106,9 +111,9 @@ export function renderProfile(username) {
         //EDIT IF LOGGED IN:
         // suggest limiting projects to 3 for simplicity for now
 
-        let editProjectOne = ''
-        let editProjectTwo = ''
-        
+        let editProjectOne = '';
+        let editProjectTwo = '';
+        let addRepoBtn = '';
 
         if (result.data.currentUser) {
             console.log('this is the current user')
@@ -124,15 +129,23 @@ export function renderProfile(username) {
                 id: 'edit-project-2',
                 onclick: `renderEditProject(${projectTwoGhName})`
             });
+            addRepoBtn = makeAnEl('btn', {
+                class: ['btn', 'btn-lg', 'btn-outline-success'],
+                innerText: `Add a project from Github`,
+                id: 'add-project-btn',
+            });
             console.log(editProjectOne)
             console.log(editProjectTwo)
 
         } else {
             console.log('this is not the current user')
-            let editProjectOne = makeAnEl('btn', {
+            editProjectOne = makeAnEl('btn', {
                 display: 'none',
             });
-            let editProjectTwo = makeAnEl('btn', {
+            editProjectTwo = makeAnEl('btn', {
+                display: 'none',
+            });
+            addRepoBtn = makeAnEl('btn', {
                 display: 'none',
             });
         }
@@ -168,6 +181,7 @@ export function renderProfile(username) {
                         <h1 class="display-5 fw-bold text-white">Cover Image</h1>
                         <div class="col-lg-6 mx-auto">
                             <p class="fs-5 mb-4">Cover image of profile</p>
+                            <div id="repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center"></div>
                         </div>
                     </div>
                 </div>
@@ -196,8 +210,8 @@ export function renderProfile(username) {
                                 <p class="fs-5 mb-4">Image goes here</p>
 
                                 <!-- Just testing buttons here-->
-                    <div id="hero-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center">
-                    </div>
+                                <div id="edit-repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -346,9 +360,14 @@ export function renderProfile(username) {
             </div>
         </div>
     `;
-        
-        document.getElementById('hero-buttons').appendChild(editProjectOne)
-        document.getElementById('hero-buttons').appendChild(editProjectTwo)
+        document.getElementById('repo-buttons').appendChild(addRepoBtn);
+        addRepoBtn.addEventListener('click', () => {
+            renderRepoListBs(`${githubName}`)
+        });
+
+
+        document.getElementById('edit-repo-buttons').appendChild(editProjectOne)
+        document.getElementById('edit-repo-buttons').appendChild(editProjectTwo)
         editProjectOne.addEventListener('click', () => {
             renderProjectEdit(`${projectOneGhName}`)
         });
