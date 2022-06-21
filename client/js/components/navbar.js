@@ -9,16 +9,22 @@ import { renderProfile, renderProfileTemplate } from "./render-profile.js";
 
 
 export function renderNav() {
-//   const main = document.getElementById("main");
   const navBar = document.getElementById("navbar");
-  const logo = document.createElement("img");
+  navBar.classList.add("container-fluid")
+  
 
-  logo.src = "./img/gclogo.png";
-  logo.setAttribute("id", "navbar-logo");
+  const logo = makeAnEl('img', {
+    src: "./img/gclogo.png",
+    classList: ['navbar-links', 'col'],
+    id: "navbar-logo"
+  })
+ 
   navBar.appendChild(logo);
   logo.addEventListener("click", (event) => {
     window.location = "/";
   });
+
+  const row = makeAnEl('div', [logo])
 
   const sendingrequest = async () => { // This is done as we have to wait for the response from the GitConnect server before rendering the page
     // temporary
@@ -41,7 +47,7 @@ export function renderNav() {
         // })
 
         const editProfileForm = makeAnEl("h4", {
-          className: "navbar-links",
+          className: ["navbar-links", "col"],
           textContent: "EDIT PROFILE",
           id: "navbar-edit-profile",
         });
@@ -51,7 +57,7 @@ export function renderNav() {
         });
         navBar.appendChild(editProfileForm);
         const editRepoForm = makeAnEl("h4", {
-          className: "navbar-links",
+          className:["navbar-links", "col"],
           textContent: "EDIT REPO",
           id: "navbar-edit-repo",
         });
@@ -62,7 +68,7 @@ export function renderNav() {
             
             //This is currently to view 'logged-in users own' profile
         const viewProfile = makeAnEl("h4", {
-            className: "navbar-links",
+            className: ["navbar-links", "col"],
             textContent: "VIEW PROFILE",
             id: "navbar-view-profile",
           });
@@ -73,7 +79,7 @@ export function renderNav() {
         });
             
         const viewProfileTemplate = makeAnEl("h4", {
-            className: "navbar-links",
+            className: ["navbar-links", "col"],
             textContent: "VIEW MOCKUP",
             id: "navbar-view-mockup",
           });
@@ -82,7 +88,7 @@ export function renderNav() {
           renderProfileTemplate();
         });
         const viewProject = makeAnEl("h4", {
-            className: "navbar-links",
+            className: ["navbar-links", "col"],
             textContent: "VIEW PROJECT",
             id: "navbar-view-project",
           });

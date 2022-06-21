@@ -38,10 +38,10 @@ export function renderHome() {
   searchLogo.setAttribute("id", "search-logo");
   searchContainer.appendChild(searchLogo);
 
-  const searchBar = document.createElement("input");
-  searchBar.value = "Search";
-  searchBar.setAttribute("id", "search-bar");
-  searchContainer.appendChild(searchBar);
+  // const searchBar = document.createElement("input");
+  // searchBar.value = "Search";
+  // searchBar.setAttribute("id", "search-bar");
+  // searchContainer.appendChild(searchBar);
 
   const sendingrequest = async () => {
     // Must wait till axios receives a response before processing more code
