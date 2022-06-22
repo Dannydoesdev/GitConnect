@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Import axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Import bootstrap -->
+    <!-- <link rel="stylesheet" href="../static/bstyles.css"> -->
+    <!-- Going to test bootstrap 5.2 beta -->
+    <!-- Bootstrap stylesheets from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+    <!-- Bootstrap JS scripts from CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Custom cards</h2>
+
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            <div class="col">
+                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('./gclogo.png');">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">GitConnect - A customised Github portfolio
+                            creation experience</h2>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+                                <img src="https://avatars.githubusercontent.com/u/50442868?s=400&u=4a87c39503744e669751f3ac47bc5c31b5e47000&v=4"
+                                    alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                            </li>
+                            <li class="d-flex align-items-center me-3">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#geo-fill" /></svg>
+                                <small>DannyDoesDev</small>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#calendar3" /></svg>
+                                <small>NODE</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+
+
+
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Custom cards</h2>
+
+        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            <div class="col">
+                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('unsplash-photo-1.jpg');">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Simpdle - Wordle done simple</h2>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+                                <img src="https://avatars.githubusercontent.com/u/50442868?s=400&u=4a87c39503744e669751f3ac47bc5c31b5e47000&v=4"
+                                    alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                            </li>
+                            <li class="d-flex align-items-center me-3">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#geo-fill" /></svg>
+                                <small>DannyDoesDev</small>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#calendar3" /></svg>
+                                <small>JS</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('unsplash-photo-2.jpg');">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Flyre - Connecting local talent with local
+                            events</h2>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+                                <img src="https://avatars.githubusercontent.com/u/50442868?s=400&u=4a87c39503744e669751f3ac47bc5c31b5e47000&v=4"
+                                    alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                            </li>
+                            <li class="d-flex align-items-center me-3">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#geo-fill" /></svg>
+                                <small>DannyDoesDev</small>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#calendar3" /></svg>
+                                <small>PY</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('unsplash-photo-3.jpg');">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">GitConnect - A customised Github portfolio
+                            creation experience</h2>
+                        <ul class="d-flex list-unstyled mt-auto">
+                            <li class="me-auto">
+                                <img src="https://avatars.githubusercontent.com/u/50442868?s=400&u=4a87c39503744e669751f3ac47bc5c31b5e47000&v=4"
+                                    alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                            </li>
+                            <li class="d-flex align-items-center me-3">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#geo-fill" /></svg>
+                                <small>DannyDoesDev</small>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <svg class="bi me-2" width="1em" height="1em">
+                                    <use xlink:href="#calendar3" /></svg>
+                                <small>NODE</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
