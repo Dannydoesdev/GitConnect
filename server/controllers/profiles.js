@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
         } 
         else {
             // testing manual insertion of some info
-            let userID = 2;
+            let userID = req.session.body.id;
             
             let sql = `UPDATE ${USERS_TABLE_NAME} SET firstName = $1, lastName = $2, aboutme = $3 WHERE id = $4;`;
             let values = [firstName, lastName, aboutme, userID];
