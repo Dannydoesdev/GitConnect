@@ -15,6 +15,7 @@ const expressSession = require("express-session");
 const pgSession = require("connect-pg-simple")(expressSession);
 const percentRound = require("percent-round");
 const db = require("./server/db/db");
+const bodyParser = require('body-parser');
 // ********************************************************************************************************************
 // CONSTANTS
 const appSecretKey = process.env.EXPRESS_SESSION_SECRET_KEY;
@@ -22,6 +23,7 @@ const PORT = process.env.PORT || 3000;
 const app = express(); // Initialise the app
 // ********************************************************************************************************************
 // SET UP THE APP
+
 app.use("/", (req, res, next) => {
   // 3 paramaters = middleware
   if (
@@ -51,6 +53,7 @@ app.use((err, req, res, next) => {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("client")); // to use the 'client' folder to serve the home html
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(
   expressSession({
     secret: appSecretKey,
@@ -68,11 +71,14 @@ const sessionController = require("./server/controllers/sessions");
 const gitHubController = require("./server/controllers/github");
 const projectController = require("./server/controllers/projects");
 const profileController = require("./server/controllers/profiles");
+const cloudinaryController = require("./server/controllers/cloudinary");
+
 app.use("/api/users", usersController);
 app.use("/api/session", sessionController);
 app.use("/api/gitConnect", gitHubController);
 app.use("/api/projects", projectController);
 app.use("/api/profiles", profileController);
+app.use("/api/userimages", cloudinaryController);
 // ********************************************************************************************************************
 // DEVELOPER comms
 if (process.env.DATABASE) {

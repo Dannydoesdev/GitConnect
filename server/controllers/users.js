@@ -15,7 +15,9 @@ const db = require("../db/db.js");
 const router = express.Router();
 const axios = require("axios");
 const USERS_TABLE_NAME = "users";
-
+require("dotenv").config();
+const cloudinary = require("cloudinary").v2;
+cloudinary.cloudinary_js_config();
 // ********************************************************************************************************************
 /*
   To register a new users, you MUST pass the following params as a minimum. The hashed password is stored on a separate table
@@ -157,5 +159,7 @@ function dbSelectQuery(theQuery, res) {
     });
   return result;
 }
-
+// router.post(`/images`, fileUpload.array('image', 5), function (req, res, next) {
+//   console.log("Images ", req.file);
+// });
 module.exports = router;

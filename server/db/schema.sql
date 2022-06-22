@@ -80,5 +80,6 @@ CREATE TABLE repoparameters ( -- Repos and their paramaters.
     challenges TEXT,
     outcomes TEXT,
     tags TEXT,
-    titleimage TEXT
+    titleimage TEXT,
+    projectImageUrl TEXT
 );
