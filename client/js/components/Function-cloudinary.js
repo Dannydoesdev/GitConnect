@@ -7,6 +7,7 @@
 
 //  import * as imageUploader from "./Function-cloudinary.js"
 //  USAGE: place in the button controller.
+//  Also.....ensure there is a input for the user to select the file  <input type="file" name="upload" multiple="multiple" /><br/>
 //  SYNTAX: imageUploader.uploadProfileImage(<FORM DATA>)
 
 
@@ -36,11 +37,10 @@ function __uploadImageToGitConnect(theForm,type) {
         .then((response) => {
           console.log(response);
           //   window.location = '/api/projects';
+          return true
         })
         .catch((err) => {
-          console.log(err);
           console.log(err.response.data);
-          let errorMessage = err.response.data.message;
-          alert(errorMessage);
+          return false
         });
 }
