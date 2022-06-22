@@ -1,20 +1,16 @@
-# GITCONNECT
-
-endpoints
-
-- api/gitconnect/gitdetails
-- api/username/repos
-
+# **GITCONNECT**
 ---
-
-## **DESCRIPTION**
-
 A personalised GitHub portfolio creating experience.
 
----
+![alt text](https://res.cloudinary.com/dc7oti3kw/image/upload/v1655872201/CaptureGitCOnnect_s7jrvr.jpg)
+
+# **INSTALATION**
+
+
+
 
 ## **FEATURES**
-
+---
     Showcase your repos
     Upload repo images
     Create repo stories
@@ -26,29 +22,28 @@ A personalised GitHub portfolio creating experience.
     Pull your repos from Gitgub
     Link to your social media, portfolio
 
----
+## **DEMO**
+[![Demo CountPages alpha](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=yHM5VaXtpVY)
 
 ## **FUNCTIONALITY**
-
 ---
 
 ## ** TECHNICAL FUNCTIONALITY**
-
+---
     Images are uploaded from the client side to to the server then dispatched and hosted on Cloudinary
     GitConnect deployed onto Heroku.
 
----
+
 
 ## **SECURITY**
-
+---
     Gitconnect server makes the gitHub API calls using a private token for authentication. This token is kept in the .env file under the label 'TOKEN'
 
----
+
 
 ## **SETTING UP THE SERVER**
-
+---
 create an environemntal variables file named '.env' in your root project folder and copy and paste the below into this file.
-
 ```
 PORT=
 DATABASE=
@@ -101,7 +96,7 @@ EXPRESS_SESSION_SECRET_KEY=<your key goes here>
 ---
 
 ## **SETTING UP THE CLOUDINARY**
-
+---
 - Create an account on cloudinary
 - copy the api, cloud name and access token into your .env file.
 
@@ -120,9 +115,18 @@ fs.unlinkSync(file.upload.tempFilePath);
 ```
 
 # DEPENDENCIES
+---
 
 # PROJECT RESOURCES
-
+---
 miro.com
 [Heroku Cheat sheet](https://gist.git.generalassemb.ly/katie/2b04e662ffc32713aad1b07747aceed9)
 [Cloudinary] (https://cloudinary.com/)
+
+
+<br>
+endpoints
+
+- api/gitconnect/gitdetails
+- api/username/repos
+
