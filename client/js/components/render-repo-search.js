@@ -1,7 +1,7 @@
 // trying something - will remove later
 
-// import axios from 'https://cdn.skypack.dev/axios';
-// import { axios } from 'https://cdn.skypack.dev/axios';
+// import axios from 'http://cdn.skypack.dev/axios';
+// import { axios } from 'http://cdn.skypack.dev/axios';
 
 import { makeAnEl } from '../../utils/dom-create.js';
 import { renderProfile } from './render-profile.js'
@@ -60,7 +60,7 @@ export function renderSearch() {
 }
 
 export function renderRepoListBs(userName) {
-    const allReposURL = `http://api.github.com/users/${userName}/repos`;
+    const allReposURL = `https://api.github.com/users/${userName}/repos`;
     
     // get main section
     const mainPage = document.getElementById('main');
@@ -189,7 +189,7 @@ export function renderRepoListBs(userName) {
 //   <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
 // </div>
             
-            languagePct(userName, repoName)
+            // languagePct(userName, repoName)
             row.appendChild(repoDiv);
 
             let switchRepoButton = makeAnEl('div', {
@@ -222,7 +222,7 @@ export function renderRepoListBs(userName) {
 
 function addSelectedRepos(reponame, userName) {
     console.log(`username in add selected repos is ${userName}`)
-    const addRepoURL = `http://localhost:3000/api/projects/addRepo`;
+    const addRepoURL = `/api/projects/addRepo`;
     const repoData = {
         reponame: reponame,
     }
@@ -237,7 +237,7 @@ function addSelectedRepos(reponame, userName) {
 
 // fn to search for a users repos - requires a username parameter
 function listUserRepos(userName) {
-    const allReposURL = `http://api.github.com/users/${userName}/repos`;
+    const allReposURL = `https://api.github.com/users/${userName}/repos`;
 
     // send get request to gihub api with the above URL
     axios.get(allReposURL).then((response) => {
