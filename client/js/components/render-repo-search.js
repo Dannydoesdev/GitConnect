@@ -1,7 +1,7 @@
 // trying something - will remove later
 
-// import axios from 'https://cdn.skypack.dev/axios';
-// import { axios } from 'https://cdn.skypack.dev/axios';
+// import axios from 'http://cdn.skypack.dev/axios';
+// import { axios } from 'http://cdn.skypack.dev/axios';
 
 import { makeAnEl } from '../../utils/dom-create.js';
 import { renderProfile } from './render-profile.js'
@@ -189,7 +189,7 @@ export function renderRepoListBs(userName) {
 //   <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
 // </div>
             
-            languagePct(userName, repoName)
+            // languagePct(userName, repoName)
             row.appendChild(repoDiv);
 
             let switchRepoButton = makeAnEl('div', {
@@ -222,7 +222,7 @@ export function renderRepoListBs(userName) {
 
 function addSelectedRepos(reponame, userName) {
     console.log(`username in add selected repos is ${userName}`)
-    const addRepoURL = `https://localhost:3000/api/projects/addRepo`;
+    const addRepoURL = `/api/projects/addRepo`;
     const repoData = {
         reponame: reponame,
     }
@@ -355,7 +355,7 @@ function findRepo(clickedRepo) {
     let userName = clickedRepo.target.parentNode.dataset.userName
 
     // send the username and repo name from dataset info to github url
-    const repoURL = `https://api.github.com/repos/${userName}/${clickedRepoName}`;
+    const repoURL = `http://api.github.com/repos/${userName}/${clickedRepoName}`;
     let resultsList =   document.getElementById('results')
     
     //get individual repo info and return
@@ -428,7 +428,7 @@ function findRepo(clickedRepo) {
 function languagePct(userName, repoName) {
 
     // get url with vars
-    const langURL = `https://api.github.com/repos/${userName}/${repoName}/languages`
+    const langURL = `http://api.github.com/repos/${userName}/${repoName}/languages`
 
     // send to github api
     axios.get(langURL).then((response) => {
