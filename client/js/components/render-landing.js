@@ -137,8 +137,8 @@ export function renderLanding() {
                     userCard.innerHTML = `
                     <div class="col">
                         <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg border-0"
-                            style="background-image: url('${makeAnImg(600, 350)}');">
-                            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
+                            style="background-image: url('${makeAnImg(600, 350)}'); min-height: 272px; max-height: 320px;">
+                            <div id="selected-div-${repoid}" class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
                                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${repoName}</h2>
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li id="profile-picture-landing" class="me-auto">
@@ -162,6 +162,7 @@ export function renderLanding() {
                 // repoCol.appendChild(userCard)
                 cardRow.appendChild(userCard)
 
+
                 // document.getElementById('profile-picture-landing').addEventListener('click', (event) => {
                 //     renderProfile(userid);
                 // })
@@ -169,6 +170,14 @@ export function renderLanding() {
                 // document.getElementById('username-landing').addEventListener('click', event => {
                 //     renderProject(repoid);
                 // });
+
+                const selectedDiv = document.getElementById(`selected-div-${repoid}`)
+                selectedDiv.addEventListener('mouseover', (target) => {
+                    selectedDiv.style.backgroundColor = "rgba(0,0,0,0)"
+                })
+                selectedDiv.addEventListener('mouseout', (target) => {
+                    selectedDiv.style.backgroundColor = "rgba(0,0,0,0.14)"
+                })
 
             })
             
