@@ -44,6 +44,7 @@ router.post("/addRepo", (req, res) => {
 });
 
 //Handle POST requests to /api/projects/editform to allow users to add custom info to project via edit form
+
 router.post("/editform/", (req, res) => {
 //   removing session check for testing purposes
 
@@ -144,4 +145,18 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get('/:repoid', (req, res) => {
+    const repoid = req.params.repoid
+    console.log(repoid)
+    let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} JOIN ${USERS_TABLE_NAME} ON users.id = repoparameters.userid WHERE repoparameters.repoid = $1;`
+    db.query(sql,[repoid])
+    .then(results => {
+        // console.log(results)
+            res.status(200).json(results.rows)
+        })
+    .catch(err => {
+        res.status(404).json({ message: "Cannot locate repo"})
+    })
+})
 module.exports = router;
+

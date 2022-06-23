@@ -1,128 +1,135 @@
 import { makeAnEl } from "../../utils/dom-create.js";
+import { makeAnImg } from '../../utils/dom-create.js';
+import { renderProject } from "./render-project.js";
+
 
 export function renderLanding() {
-  // storing cards in results
-  const results = document.getElementById("results");
-  const main = document.getElementById("main");
-  main.innerHTML = "";
-  // results.classList.add('container-md','my-5')
 
-  // need to code as javascript
-  // results.innerHTML = `
-  // <div class="row px-3 py-5" style="background-color: #222222;">
-  // <h2 style="color: #FFFFFF;">Featured</h2>
-  //     <div class="col-md-4 col-sm-6">
-  //         <div class="card" style={width: 18rem}>
-  //         <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
-  //             <div class="card-body" style="background-color: #212224ff;">
-  //                 <h5 class="card-title">Project Title</h5>
-  //                 <p class="card-text">By <span class="link-out">/dannydoesdev</span>.</p>
-  //                 <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
-  //             </div>
-  //         </div>
-  //     </div>
-  //     <div class="col-md-4 col-sm-6">
-  //         <div class="card" style={width: 18rem;}>
-  //         <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
-  //             <div class="card-body" style="background-color: #212224ff;">
-  //                 <h5 class="card-title">Project Title</h5>
-  //                 <p class="card-text">By <span class="link-out">/cjunk</span>.</p>
-  //                 <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
-  //             </div>
-  //         </div>
-  //     </div>
-  //     <div class="col-md-4 col-sm-6">
-  //         <div class="card" style={width: 18rem;}>
-  //         <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
-  //             <div class="card-body" style="background-color: #212224ff;">
-  //                 <h5 class="card-title">Project Title</h5>
-  //                 <p class="card-text">By <span class="link-out">/misakigrim</span>.</p>
-  //                 <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
-  //             </div>
-  //         </div>
-  //     </div>
-  // </div>
-  // `
+    // storing cards in results
+    const results = document.getElementById('results')
+    const main = document.getElementById('main')
+    main.innerHTML = '';
+    // results.classList.add('container-md','my-5')
 
-  const cardContainer = makeAnEl(
-    "div",
-    {
-      class: ["container", "px-4", "py-5"],
-      id: "custom-cards",
-    },
-    [
-      makeAnEl("h1", {
-        class: ["pb-2", "text-white", "border-bottom"],
-        innerText: "GitConnect Projects;",
-      }),
-    ]
-  );
+    // need to code as javascript
+    // results.innerHTML = `
+    // <div class="row px-3 py-5" style="background-color: #222222;">
+    // <h2 style="color: #FFFFFF;">Featured</h2>
+    //     <div class="col-md-4 col-sm-6">
+    //         <div class="card" style={width: 18rem}>
+    //         <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
+    //             <div class="card-body" style="background-color: #212224ff;">
+    //                 <h5 class="card-title">Project Title</h5>
+    //                 <p class="card-text">By <span class="link-out">/dannydoesdev</span>.</p>
+    //                 <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
+    //             </div>
+    //         </div>
+    //     </div>
+    //     <div class="col-md-4 col-sm-6">
+    //         <div class="card" style={width: 18rem;}>
+    //         <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
+    //             <div class="card-body" style="background-color: #212224ff;">
+    //                 <h5 class="card-title">Project Title</h5>
+    //                 <p class="card-text">By <span class="link-out">/cjunk</span>.</p>
+    //                 <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
+    //             </div>
+    //         </div>
+    //     </div>
+    //     <div class="col-md-4 col-sm-6">
+    //         <div class="card" style={width: 18rem;}>
+    //         <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
+    //             <div class="card-body" style="background-color: #212224ff;">
+    //                 <h5 class="card-title">Project Title</h5>
+    //                 <p class="card-text">By <span class="link-out">/misakigrim</span>.</p>
+    //                 <a href="#" class="btn btn-md btn-outline-light align-self-center">Dive</a>
+    //             </div>
+    //         </div>
+    //     </div>
+    // </div>
+    // `
+ 
+    const cardContainer = makeAnEl('div', {
+        class: ['container-xxl', 'px-1', 'py-5'],
+        id: 'custom-cards',
+    }, [
+        makeAnEl('h1', {
+            class: ['pb-2', 'text-white', 'border-bottom'],
+            innerText: 'GitConnect Projects;',
+        }),
+    ])
 
-  // <div class="container px-4 py-5" id="custom-cards">
-  //<h2 class="pb-2 border-bottom">Custom cards</h2>
-  // <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    // <div class="container px-4 py-5" id="custom-cards">
+   //<h2 class="pb-2 border-bottom">Custom cards</h2>
+// <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    
+    
+    const cardRow = makeAnEl('div', {
+        class: ['row', 'row-cols-1', 'row-cols-lg-3', 'align-items-stretch', 'g-4', 'py-5'],
+    });
 
-  const cardRow = makeAnEl("div", {
-    class: ["row", "row-cols-1", "row-cols-lg-3", "align-items-stretch", "g-4", "py-5"],
-  });
+    results.appendChild(cardContainer)
+    cardContainer.appendChild(cardRow)
 
-  results.appendChild(cardContainer);
-  cardContainer.appendChild(cardRow);
+//     const makeAnImg = (num) => {
+//         num = Math.floor(Math.random() * 100)
+//         return `https://picsum.photos/900/1350?&random=${num}`
+        
+// //         <img src="https://picsum.photos/200/300?random=1">
+// // <img src="https://picsum.photos/200/300?random=2"></img>
+//     }
 
-  const makeAnImg = (num) => {
-    num = Math.floor(Math.random() * 100);
-    return `https://picsum.photos/900/1350?&random=${num}`;
 
-    //         <img src="https://picsum.photos/200/300?random=1">
-    // <img src="https://picsum.photos/200/300?random=2"></img>
-  };
+    axios.get('/api/projects')
+        .then(dbRes => {
+            console.log(dbRes)
+            const repoResults = makeAnEl('div', {
+                class: ["row", "px-3", "py-5"],
+            })
+            // results.appendChild(repoResults)
 
-  axios
-    .get("/api/projects")
-    .then((dbRes) => {
-      console.log(dbRes);
-      const repoResults = makeAnEl("div", {
-        class: ["row", "px-3", "py-5"],
-      });
-      // results.appendChild(repoResults)
+            // need to limit loop
+            dbRes.data.map((user) => {
+                // console.log(result)
+                // set standard variables from response that we want to utilise
+                console.log(user);
+                let repoid = user.repoid
+                let username = user.githubname;
+                let projectName = user.projectname;
+                let description = user.description;
+                let avatar = user.githubavatar;
+                let repoName = user.githubreponame;
+                let location = user.githublocation;
 
-      // need to limit loop
-      dbRes.data.map((user) => {
-        // console.log(result)
-        // set standard variables from response that we want to utilise
-        console.log(user);
-        let username = user.githubname;
-        let projectName = user.projectname;
-        let description = user.description;
-        let avatar = user.githubavatar;
-        let repoName = user.githubreponame;
-        let location = user.githublocation;
-
-        const repoCol = makeAnEl("div", {
-          class: ["col-md-3", "col-sm-6"],
-        });
-        // repoResults.appendChild(repoCol)
-
-        const userCard = makeAnEl("div");
-        const userCardOld = makeAnEl("div");
-
-        userCardOld.innerHTML = `
-                <div class="card" style={width: 18rem; --bs-card-border-width: 0;}>
-                    <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
-                    <div class="card-body" style="background-color: #212224ff;">
-                        <h5 class="card-title">${repoName}</h5>
-                        <p class="card-text">By <span class="link-out">/${username}</span>.</p>
-                        <p class="card-text">${description}</p>
-                        <a href="#" class="btn btn-outline-light align-self-center">Dive</a>
-                    </div>
-                </div>
-                `;
+                console.log(repoid)
+                
+                const repoCol = makeAnEl('div', {
+                    class: ["col-md-3", "col-sm-6"]
+                })
+                // repoResults.appendChild(repoCol)
+    
+                const userCard = makeAnEl('div')
+                // const userCardOld = makeAnEl('div')
+                
+                // userCardOld.innerHTML = `
+                // <div class="card" style={width: 18rem; --bs-card-border-width: 0;}>
+                //     <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
+                //     <div class="card-body" style="background-color: #212224ff;">
+                //         <h5 class="card-title">${repoName}</h5>
+                //         <p class="card-text">By <span class="link-out">/${username}</span>.</p>
+                //         <p class="card-text">${description}</p>
+                //         <a href="#" class="btn btn-outline-light align-self-center">Dive</a>
+                //     </div>
+                // </div>
+                // `
+                userCard.addEventListener('click', event => {
+                    renderProject(repoid);
+                })
 
         userCard.innerHTML = `
                     <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg"
-                            style="background-image: url('${makeAnImg(1)}');">
-                            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg border-0"
+                            style="background-image: url('${makeAnImg(600, 350)}'); min-height: 272px; max-height: 320px;">
+                            <div id="selected-div-${repoid}" class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
                                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${repoName}</h2>
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li class="me-auto">
@@ -142,6 +149,7 @@ export function renderLanding() {
                             </div>
                         </div>
                     </div>
+
 
                 `;
         // repoCol.appendChild(userCard)

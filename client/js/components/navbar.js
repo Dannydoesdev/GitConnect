@@ -89,7 +89,9 @@ export function renderNav() {
         if (result.data.success) {
             console.log(result)
             const githubName = result.data.githubname;
-            console.log(githubName)
+          console.log(githubName)
+          console.log(result.data)
+          const id = result.data.id;
 
             // const myProfile = makeAnEl("h4", {
             //   className: "navbar-links",
@@ -154,7 +156,7 @@ export function renderNav() {
 
             const editRepoForm = makeAnEl("a", {
                 className: "nav-link",
-                textContent: "EDIT REPO",
+                textContent: "EDIT PROJECT",
                 href: "#",
                 id: "navbar-edit-repo",
             });  
@@ -215,14 +217,27 @@ export function renderNav() {
         //   textContent: "EDIT PROFILE",
         //   id: "navbar-edit-profile",
         // });
+        
+        // clearing font weight for navbar links
+        function weightClear() {
+          editProfileForm.style.fontWeight = "300"
+          editRepoForm.style.fontWeight = "300"
+          addRepoForm.style.fontWeight = "300"
+          viewProfile.style.fontWeight = "300"
+          viewProject.style.fontWeight = "300"
+        }
 
         // navBar.appendChild(editProfileForm);
         editProfileForm.addEventListener("click", () => {
+          weightClear();
+          editProfileForm.style.fontWeight = "500";
           renderProfileEdit();
         });
             
             addRepoForm.addEventListener("click", () => {
-                renderSearch();
+              weightClear();
+              addRepoForm.style.fontWeight = "500";
+              renderSearch();
             });
         // navBar.appendChild(editProfileForm);
         // const editRepoForm = makeAnEl("h4", {
@@ -256,6 +271,8 @@ export function renderNav() {
 //         navBar.appendChild(editRepoForm);
 
         editRepoForm.addEventListener("click", () => {
+          weightClear();
+          editRepoForm.style.fontWeight = "500";
           renderProjectEdit();
         });
             
@@ -275,9 +292,13 @@ export function renderNav() {
 //           });
 //         navBar.appendChild(viewProfile);
 // >>>>>>> main
-            viewProfile.addEventListener("click", () => {
-            console.log(githubName)
-          renderProfile(githubName);
+
+        viewProfile.addEventListener("click", () => {
+          weightClear();
+          viewProfile.style.fontWeight = "500";
+           console.log(id)
+          renderProfile(id);
+
         });
             
 
@@ -314,6 +335,8 @@ export function renderNav() {
 //         navBar.appendChild(viewProject);
 
         viewProject.addEventListener("click", () => {
+          weightClear();
+          viewProject.style.fontWeight = "500";
           renderProject();
         });
         } else {
@@ -327,7 +350,9 @@ export function renderNav() {
               });
             
             logInNav.addEventListener("click", () => {
-                renderLogin();
+              registerNav.style.fontWeight = "300";
+              logInNav.style.fontWeight = "500";
+              renderLogin();
             });
 
             const registerNav = makeAnEl("a", {
@@ -339,6 +364,8 @@ export function renderNav() {
             
 
             registerNav.addEventListener("click", () => {
+                logInNav.style.fontWeight = "300";
+                registerNav.style.fontWeight = "500";
                 renderRego();
             });
 
