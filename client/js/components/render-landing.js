@@ -5,6 +5,7 @@ import { renderProject } from "./render-project.js";
 
 
 export function renderLanding() {
+
     // storing cards in results
     const results = document.getElementById('results')
     const main = document.getElementById('main')
@@ -134,7 +135,7 @@ export function renderLanding() {
                     }
                 });
 
-                    userCard.innerHTML = `
+        userCard.innerHTML = `
                     <div class="col">
                         <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg border-0"
                             style="background-image: url('${makeAnImg(600, 350)}'); min-height: 272px; max-height: 320px;">
@@ -158,9 +159,7 @@ export function renderLanding() {
                             </div>
                         </div>
                     </div>
-                `
-                // repoCol.appendChild(userCard)
-                cardRow.appendChild(userCard)
+
 
 
                 // document.getElementById('profile-picture-landing').addEventListener('click', (event) => {
@@ -179,34 +178,37 @@ export function renderLanding() {
                     selectedDiv.style.backgroundColor = "rgba(0,0,0,0.14)"
                 })
 
-            })
-            
-    //         repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
-    // gitHubRepoName TEXT,
-    // userID SMALLINT REFERENCES users(id),
-    // status BIT NOT NULL, -- Available for viewing Y or N
-    // projectName TEXT,
-    // description TEXT,
-    // process TEXT,
-    // challenges TEXT,
-    // outcomes TEXT,
-    // tags TEXT,
-    // titleimage TEXT
-            
-            
-        })
-        .catch(err => {
-            console.log(err);
-        })
-// the a href should renderProject()
 
+                `;
+        // repoCol.appendChild(userCard)
+        cardRow.appendChild(userCard);
+      });
+
+      //         repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
+      // gitHubRepoName TEXT,
+      // userID SMALLINT REFERENCES users(id),
+      // status BIT NOT NULL, -- Available for viewing Y or N
+      // projectName TEXT,
+      // description TEXT,
+      // process TEXT,
+      // challenges TEXT,
+      // outcomes TEXT,
+      // tags TEXT,
+      // titleimage TEXT
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // the a href should renderProject()
 }
 
-{/* <div class="card" style="width: 18rem;">
+{
+  /* <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
-</div> */}
+</div> */
+}
