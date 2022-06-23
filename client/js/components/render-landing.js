@@ -127,9 +127,14 @@ export function renderLanding() {
                 // <img src="https://avatars.githubusercontent.com/u/99120813?v=4" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
                 //<small>/dannydoesdev</small>
 
-                userCard.addEventListener('click', event => {
-                    renderProject(repoid);
-                })
+                userCard.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('click-to-profile')) {
+                        renderProfile(userid)
+                    } else {
+                        renderProject(repoid);
+                    }
+                });
+
 
                 userCard.innerHTML = `
                     <div class="col">
@@ -138,26 +143,35 @@ export function renderLanding() {
                             <div id="selected-div-${repoid}" class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
                                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${repoName}</h2>
                                 <ul class="d-flex list-unstyled mt-auto">
-                                    <li class="me-auto">
-                                        <img src="${avatar}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
-                                    </li>
+                                    <li id="profile-picture-landing" class="me-auto">
+                                        <img src="${avatar}" alt="Bootstrap" width="32" height="32" class="click-to-profile rounded-circle border border-white">
                                     <li class="d-flex align-items-center me-3">
                                         <svg class="bi me-2" width="1em" height="1em">
                                             <use xlink:href="#geo-fill" /></svg>
                                         <small>${location}</small>
                                     </li>
-                                    <li class="d-flex align-items-center">
+                                    <li id="username-landing" class="d-flex align-items-center">
                                         <svg class="bi me-2" width="1em" height="1em">
                                             <use xlink:href="#calendar3" /></svg>
-                                        <small>/${username}</small>
+                                        <small class="click-to-profile">/${username}</small>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                `
+
+                       `;
+
+
+                // document.getElementById('profile-picture-landing').addEventListener('click', (event) => {
+                //     renderProfile(userid);
+                // })
+                // document.getElementById('username-landing').addEventListener('click', event => {
+                //     renderProject(repoid);
+                // });
+
                 // repoCol.appendChild(userCard)
-                cardRow.appendChild(userCard)
+                cardRow.appendChild(userCard);
 
                 const selectedDiv = document.getElementById(`selected-div-${repoid}`)
                 selectedDiv.addEventListener('mouseover', (target) => {
@@ -166,8 +180,9 @@ export function renderLanding() {
                 selectedDiv.addEventListener('mouseout', (target) => {
                     selectedDiv.style.backgroundColor = "rgba(0,0,0,0.14)"
                 })
-
-            });
+           
+      });
+    })
             
 
       //         repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
@@ -181,14 +196,14 @@ export function renderLanding() {
       // outcomes TEXT,
       // tags TEXT,
       // titleimage TEXT
-    })
+
     .catch((err) => {
       console.log(err);
     });
   // the a href should renderProject()
 }
 
-{
+// {
   /* <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
@@ -197,4 +212,4 @@ export function renderLanding() {
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div> */
-}
+// }
