@@ -1,14 +1,8 @@
-import { makeAnEl } from '../../utils/dom-create.js';
-import { renderProject } from './render-project.js';
-import { getCookie } from './Function-getCookie.js';
-import * as imageUploader from "./Function-cloudinary.js";
 export function renderProjectEdit(projectName) {
     const main = document.getElementById('main');
     main.innerHTML = '';
-    
     const results = document.getElementById('results')
     results.innerHTML = ""
-
     main.innerHTML = `
     <div class="container bg-dark text-white">
     <div class="row">
