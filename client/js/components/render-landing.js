@@ -1,5 +1,7 @@
 import { makeAnEl } from "../../utils/dom-create.js";
+import { makeAnImg } from '../../utils/dom-create.js';
 import { renderProject } from "./render-project.js";
+
 
 export function renderLanding() {
     // storing cards in results
@@ -46,7 +48,7 @@ export function renderLanding() {
     // `
  
     const cardContainer = makeAnEl('div', {
-        class: ['container', 'px-4', 'py-5'],
+        class: ['container-xxl', 'px-1', 'py-5'],
         id: 'custom-cards',
     }, [
         makeAnEl('h1', {
@@ -67,13 +69,13 @@ export function renderLanding() {
     results.appendChild(cardContainer)
     cardContainer.appendChild(cardRow)
 
-    const makeAnImg = (num) => {
-        num = Math.floor(Math.random() * 100)
-        return `https://picsum.photos/900/1350?&random=${num}`
+//     const makeAnImg = (num) => {
+//         num = Math.floor(Math.random() * 100)
+//         return `https://picsum.photos/900/1350?&random=${num}`
         
-//         <img src="https://picsum.photos/200/300?random=1">
-// <img src="https://picsum.photos/200/300?random=2"></img>
-    }
+// //         <img src="https://picsum.photos/200/300?random=1">
+// // <img src="https://picsum.photos/200/300?random=2"></img>
+//     }
 
 
     axios.get('/api/projects')
@@ -124,9 +126,9 @@ export function renderLanding() {
 
                     userCard.innerHTML = `
                     <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg"
-                            style="background-image: url('${makeAnImg(1)}');">
-                            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+                        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg border-0"
+                            style="background-image: url('${makeAnImg(600, 350)}');">
+                            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
                                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${repoName}</h2>
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li class="me-auto">
