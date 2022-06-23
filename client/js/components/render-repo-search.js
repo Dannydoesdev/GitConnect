@@ -60,7 +60,7 @@ export function renderSearch() {
 }
 
 export function renderRepoListBs(userName) {
-    const allReposURL = `http://api.github.com/users/${userName}/repos`;
+    const allReposURL = `https://api.github.com/users/${userName}/repos`;
     
     // get main section
     const mainPage = document.getElementById('main');
@@ -222,7 +222,7 @@ export function renderRepoListBs(userName) {
 
 function addSelectedRepos(reponame, userName) {
     console.log(`username in add selected repos is ${userName}`)
-    const addRepoURL = `http://localhost:3000/api/projects/addRepo`;
+    const addRepoURL = `https://localhost:3000/api/projects/addRepo`;
     const repoData = {
         reponame: reponame,
     }
@@ -237,7 +237,7 @@ function addSelectedRepos(reponame, userName) {
 
 // fn to search for a users repos - requires a username parameter
 function listUserRepos(userName) {
-    const allReposURL = `http://api.github.com/users/${userName}/repos`;
+    const allReposURL = `https://api.github.com/users/${userName}/repos`;
 
     // send get request to gihub api with the above URL
     axios.get(allReposURL).then((response) => {
