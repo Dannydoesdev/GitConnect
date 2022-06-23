@@ -58,10 +58,10 @@ router.post("/editform/:repoName", (req, res) => {
         let outcomes = req.body.outcomes;
     let status = req.body.status;
     
-    let id = 3;
+    // let id = 3;
 
 // THIS IS BROKEN - NEED TO FIX
-    // let id = req.session.body.id;
+    let id = req.session.body.id;
    
 
         if (!projectName) {
@@ -117,6 +117,20 @@ router.get('/', (req, res) => {
         })
     .catch(err => {
         res.status(404).json({ message: "Cannot locate repos"})
+    })
+})
+
+router.get('/:repoid', (req, res) => {
+    const repoid = req.params.repoid
+    console.log(repoid)
+    let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} JOIN ${USERS_TABLE_NAME} ON users.id = repoparameters.userid WHERE repoparameters.repoid = $1;`
+    db.query(sql,[repoid])
+    .then(results => {
+        // console.log(results)
+            res.status(200).json(results.rows)
+        })
+    .catch(err => {
+        res.status(404).json({ message: "Cannot locate repo"})
     })
 })
 

@@ -1,5 +1,7 @@
 import { makeAnEl } from "../../utils/dom-create.js";
 import { makeAnImg } from '../../utils/dom-create.js';
+import { renderProject } from "./render-project.js";
+
 
 export function renderLanding() {
     // storing cards in results
@@ -89,12 +91,15 @@ export function renderLanding() {
                 // console.log(result)
                 // set standard variables from response that we want to utilise
                 console.log(user);
+                let repoid = user.repoid
                 let username = user.githubname;
                 let projectName = user.projectname;
                 let description = user.description;
                 let avatar = user.githubavatar;
                 let repoName = user.githubreponame;
                 let location = user.githublocation;
+
+                console.log(repoid)
                 
                 const repoCol = makeAnEl('div', {
                     class: ["col-md-3", "col-sm-6"]
@@ -102,19 +107,22 @@ export function renderLanding() {
                 // repoResults.appendChild(repoCol)
     
                 const userCard = makeAnEl('div')
-                const userCardOld = makeAnEl('div')
+                // const userCardOld = makeAnEl('div')
                 
-                userCardOld.innerHTML = `
-                <div class="card" style={width: 18rem; --bs-card-border-width: 0;}>
-                    <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
-                    <div class="card-body" style="background-color: #212224ff;">
-                        <h5 class="card-title">${repoName}</h5>
-                        <p class="card-text">By <span class="link-out">/${username}</span>.</p>
-                        <p class="card-text">${description}</p>
-                        <a href="#" class="btn btn-outline-light align-self-center">Dive</a>
-                    </div>
-                </div>
-                `
+                // userCardOld.innerHTML = `
+                // <div class="card" style={width: 18rem; --bs-card-border-width: 0;}>
+                //     <img src="https://picsum.photos/600/400" class="card-img-top" alt="...">
+                //     <div class="card-body" style="background-color: #212224ff;">
+                //         <h5 class="card-title">${repoName}</h5>
+                //         <p class="card-text">By <span class="link-out">/${username}</span>.</p>
+                //         <p class="card-text">${description}</p>
+                //         <a href="#" class="btn btn-outline-light align-self-center">Dive</a>
+                //     </div>
+                // </div>
+                // `
+                userCard.addEventListener('click', event => {
+                    renderProject(repoid);
+                })
 
                     userCard.innerHTML = `
                     <div class="col">
@@ -140,11 +148,10 @@ export function renderLanding() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
                 `
                 // repoCol.appendChild(userCard)
                 cardRow.appendChild(userCard)
+
             })
             
     //         repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
