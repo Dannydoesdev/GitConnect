@@ -244,7 +244,7 @@ export function renderProfile(username) {
             <!-- Sidebar stuff -->
             <div class="row">
                 <div class="col-md-2  d-flex flex-column text-center border">
-                    <img src="${avatar ? avatar : ''}" class="mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
+                    <img src="${avatar ? avatar : 'unknown'}" class="mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
                     <h3>${githubName ? githubName : 'Name not found'}</h3>
                     <p>Devs location</p>
                     <br><br>
