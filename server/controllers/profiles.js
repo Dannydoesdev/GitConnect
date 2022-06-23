@@ -60,8 +60,8 @@ router.get("/profilepage/:userName", (req, res) => {
     // Need to keep track of info from both project and profiles table
     let profileObject = {};
 
-    let sql = `SELECT * FROM ${USERS_TABLE_NAME} WHERE githubname = $1;`;
-    let values = [userName];
+    let sql = `SELECT * FROM ${USERS_TABLE_NAME} WHERE id = $1;`;
+    let values = [id];
 
     if (userName === loggedinUserName) {
         console.log("logged in user")

@@ -1,6 +1,7 @@
 import { makeAnEl } from '../../utils/dom-create.js';
 import { renderProject } from './render-project.js';
-
+import { getCookie } from './Function-getCookie.js';
+import * as imageUploader from "./Function-cloudinary.js";
 export function renderProjectEdit(projectName) {
     const main = document.getElementById('main');
     main.innerHTML = '';
@@ -13,7 +14,7 @@ export function renderProjectEdit(projectName) {
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h1>Project Title</h1>
-            <form action="/" id="edit-project-form" method="POST">
+            <form action="/api/projects/editform/" enctype="multipart/form-data" id="edit-project-form" method="POST">
                 <div class="form-group mb-4">
                     <label for="project-name">Project Name</label>
                     <input type="text" class="form-control" id="project-name" name="project-name" placeholder="Enter your projects name">
@@ -35,40 +36,13 @@ export function renderProjectEdit(projectName) {
                     <textarea type="text" class="form-control" id="project-outcomes" name="project-outcomes" placeholder="What was the project outcome? Was it successful? What did you learn and any reflections?"></textarea>
                 </div>
                 <input type="submit" class="btn btn-lg btn-outline-light align-self-center" value="Submit">
-            </form>
+                <input id="file" name="upload" type="file" class="btn btn-lg btn-outline-light align-self-center" 
+                value="Submit" multiple="multiple">
+              <input id="repoId" type="hidden" name="repoId" value="9791112"/>
+              <input id="status" type="hidden" name="status" value="1"/>
+                </form>
         </div>
     </div>
 </div>
     `
-  
-let form = document.getElementById("edit-project-form");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-
-    const data = {
-        projectName: formData.get("project-name"),
-        description: formData.get("project-description"),
-        process: formData.get("project-process"),
-        challenges: formData.get("project-challenges"),
-        outcomes: formData.get("project-outcomes"),
-        status: 1,
-    };
-      
-      console.log(data);
-    axios
-      .post(`/api/projects/editform/${projectName}`, data)
-        .then((response) => {
-          console.log(response)
-          renderProject(projectName)
-      })
-      .catch((err) => {
-        console.log(err);
-        console.log(err.response.data);
-        let errorMessage = err.response.data.message;
-        alert(errorMessage);
-        console.log(errorMessage);
-        console.log("error");
-      });
-  });
 }
