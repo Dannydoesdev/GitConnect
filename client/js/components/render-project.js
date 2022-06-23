@@ -20,7 +20,7 @@ export function renderProject(repoid) {
             let repoName = user.githubreponame;
             let avatar = user.githubavatar;
             let location = user.githublocation;
-            
+            let userid = user.id;
             let projectName = user.projectname;
             let challenges = user.challenges;
             let outcomes = user.outcomes;
@@ -121,7 +121,7 @@ export function renderProject(repoid) {
 
             const profilePicture = document.getElementById('profile-picture')
             profilePicture.addEventListener('click', () => {
-                renderProfile(username)
+                renderProfile(userid)
             });
 
             const userBaseText = document.querySelectorAll('.user-base-text')
