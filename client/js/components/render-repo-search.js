@@ -355,7 +355,7 @@ function findRepo(clickedRepo) {
     let userName = clickedRepo.target.parentNode.dataset.userName
 
     // send the username and repo name from dataset info to github url
-    const repoURL = `http://api.github.com/repos/${userName}/${clickedRepoName}`;
+    const repoURL = `https://api.github.com/repos/${userName}/${clickedRepoName}`;
     let resultsList =   document.getElementById('results')
     
     //get individual repo info and return
@@ -428,7 +428,7 @@ function findRepo(clickedRepo) {
 function languagePct(userName, repoName) {
 
     // get url with vars
-    const langURL = `http://api.github.com/repos/${userName}/${repoName}/languages`
+    const langURL = `https://api.github.com/repos/${userName}/${repoName}/languages`
 
     // send to github api
     axios.get(langURL).then((response) => {
