@@ -156,7 +156,7 @@ export function renderNav() {
 
             const editRepoForm = makeAnEl("a", {
                 className: "nav-link",
-                textContent: "EDIT REPO",
+                textContent: "EDIT PROJECT",
                 href: "#",
                 id: "navbar-edit-repo",
             });  
