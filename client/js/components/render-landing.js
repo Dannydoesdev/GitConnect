@@ -89,12 +89,15 @@ export function renderLanding() {
                 // console.log(result)
                 // set standard variables from response that we want to utilise
                 console.log(user);
+                let repoid = user.repoid
                 let username = user.githubname;
                 let projectName = user.projectname;
                 let description = user.description;
                 let avatar = user.githubavatar;
                 let repoName = user.githubreponame;
                 let location = user.githublocation;
+
+                console.log(repoid)
                 
                 const repoCol = makeAnEl('div', {
                     class: ["col-md-3", "col-sm-6"]
@@ -116,7 +119,7 @@ export function renderLanding() {
                 // </div>
                 // `
                 userCard.addEventListener('click', event => {
-                    renderProject(projectName);
+                    renderProject(repoid);
                 })
 
                     userCard.innerHTML = `
