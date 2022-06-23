@@ -1,6 +1,7 @@
 import { makeAnImg } from '../../utils/dom-create.js';
 import { makeAnEl } from '../../utils/dom-create.js';
 import { renderProjectEdit } from './render-project-edit.js';
+import { renderProject } from './render-project.js';
 import { renderRepoListBs } from './render-repo-search.js';
 
 export function renderProfile(id) {
@@ -50,6 +51,7 @@ export function renderProfile(id) {
         let projectOneGhName
         let projectOneDescription
         let projectTwoGhName   
+        let projectOneRepoid  
 
         let profileData = result.data.user;
         // console.log(profileData)
@@ -92,6 +94,7 @@ export function renderProfile(id) {
             console.log('more than 2 projects')
           
             projectOneDescription = projectOne.description;
+            projectOneRepoid = projectOne.repoid;
             projectTwoGhName = projectTwo.githubreponame;
             projectOneGhName = projectOne.githubreponame;
             console.log(projectOneGhName)
@@ -131,7 +134,7 @@ export function renderProfile(id) {
         if (result.data.currentUser) {
             console.log('this is the current user')
             editProjectOne = makeAnEl('btn', {
-                class: ['btn', 'btn-outline-light'],
+                class: ['btn', 'click-to-edit-profile', 'btn-outline-light'],
                 innerText: `Edit ${projectOneGhName}`,
                 id: 'edit-project-1',
                 onclick: `renderEditProject(${projectOneGhName})`
@@ -221,15 +224,20 @@ export function renderProfile(id) {
 
         };
 
+        // 
       
+      
+        // <div class="bg-dark text-secondary px-4 py-2 mb-1 text-center">
+        // <div class="py-3">
+
         // <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center">
         // <div class="py-1">
         // console.log('repobtn' + addRepoBtn)
     main.innerHTML = `
             <div class="container-lg">
             <div class="row">
-                <div class="bg-dark text-secondary px-4 py-2 mb-1 text-center">
-                    <div class="py-3">
+            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1400, 320)})'")>
+            <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.65);">
                         <h1 class="display-5 fw-bold text-white">Cover Image</h1>
                         <div class="col-lg-6 mx-auto">
                             <p class="fs-5 mb-4">Cover image of profile</p>
@@ -241,24 +249,24 @@ export function renderProfile(id) {
         </div>
 
         <!-- Increase py on hero to make bigger vertically -->
-        <div class="container-lg bg-dark text-white border">
+        <div class="container-lg bg-dark text-white">
             <!-- Sidebar stuff -->
             <div class="row" id="project-row">
-                <div class="col-md-2  d-flex flex-column text-center border">
-                    <img src="${avatar ? avatar : 'unknown'}" class="mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
-                    <h3>${githubName ? githubName : 'Name not found'}</h3>
+                <div class="col-md-3 d-flex flex-column text-center">
+                    <img src="${avatar ? avatar : ''}" class="user-base-text mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
+                    <h3>${githubName ? githubName : ''}</h3>
                     <p>Devs location</p>
                     <br><br>
-                    <a href='${githubUrl}'>Visit my Git</a>
-                    <p>${aboutme} - aboutme goes here</p>
+                    <a href='${githubUrl} style='color: white'>Visit my Git</a>
+                    <p class='user-base-text'>${aboutme}</p>
                 </div>
 
-               
+        
                
 
                 <!-- Hero image of profile -->
-                <div class="col-md-9 offset-md-1 border">
-                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
+                <div id="first-repo" class="col-md-9 pe-0 text-start">
+                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 320)})'")>
                 <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                             <h1 class="display-5 fw-bold text-white">Cover Image of project 1</h1>
                             <div class="col-lg-6 mx-auto">
@@ -273,32 +281,30 @@ export function renderProfile(id) {
 
                     <!-- Title and project info -->
 
-                    <div class="row border py-2">
+                    <div class="row py-2">
                         <div class="col-md-12 text-center mb-2">
-                            <h2>${projectOneGhName ? projectOneGhName : 'no project here'}</h2>
+                            <h2 class="user-base-text text-start">${projectOneGhName ? projectOneGhName : ''}</h2>
                         </div>
                     </div>
-    
+                
 
                     <div class="row">
                         <div class="col md-12">
-                            <div class="row text-center py-2 border">
+                            <div class="row text-center py-2">
                                 <div class="col-md-6">
-                                    <h4>Project image</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                        enim sunt maiores placeat dolor at cum ab!</p>
+                                    <h4 class="text-start">Project image</h4>
+                                    <p></p>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <h4>Another project image</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                        enim sunt maiores placeat dolor at cum ab!</p>
+                                <h4 class="text-start">Another project image</h4>
+                                    <p></p>
                                 </div>
                             </div>
-                            <div class="row text-center py-4 border">
+                            <div class="row text-start py-4">
                                 <div class="col">
                                     <h4>Project Description</h4>
-                                    <p>${projectOneDescription ? projectOneDescription : 'no description here'} OR Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                                    <p class="user-base-text text-start">${projectOneDescription ? projectOneDescription : ''}</p>
                                 </div>
 
                                 <!-- <div class="col">
@@ -315,28 +321,24 @@ export function renderProfile(id) {
                             <div class="row text-center py-2 border">
                                 <div class="col">
                                     <h4>Project Description</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                        enim sunt maiores placeat dolor at cum ab!</p>
+                                    <p class="user-base-text text-start"></p>
                                 </div>
 
                                 <div class="col">
                                     <h4>Project Process</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                        enim sunt maiores placeat dolor at cum ab!</p>
+                                    <p class="user-base-text text-start"></p>
                                 </div>
                             </div>
 
                             <div class="row text-center py-4 border">
                                 <div class="col">
                                     <h4>Project Challenges</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                        enim sunt maiores placeat dolor at cum ab!</p>
+                                    <p class="user-base-text text-start"></p>
                                 </div>
 
                                 <div class="col">
                                     <h4>Project Outcomes</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                        enim sunt maiores placeat dolor at cum ab!</p>
+                                    <p class="user-base-text text-start"></p>
                                 </div>
                             </div>
                         </div> -->
@@ -347,7 +349,7 @@ export function renderProfile(id) {
                             <h5>Stuff from github</h5>
                             <p>Languages from repo</p>
                             <p>Some other cool stuff</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                            <p class="user-base-text text-start"></p>
                         </div> -->
                     </div>
                 </div>
@@ -355,6 +357,15 @@ export function renderProfile(id) {
             </div>
         </div>
         `;
+
+        document.getElementById('first-repo').addEventListener('click', function (event) {
+            if (event.target.classList.contains('click-to-edit-profile')) {
+                renderProjectEdit(projectOneGhName)
+            } else {
+                renderProject(projectOneRepoid)
+            }
+            
+        })
 
         // <!-- MAY NEED TO PUSH THIS FURTHER DOWN OR PUT IN SAME CONTAINER AS ABOVE SO DEV PROFILE INFO WORKS -->
 
@@ -448,28 +459,39 @@ export function renderProfile(id) {
             if (index > 1) {
            
             
-            const projectCol = makeAnEl('div')
+                const projectCol = makeAnEl('div')
 
-            projectCol.classList.add('col-md-12','my-5', 'border');
+                projectCol.classList.add('col-md-12', 'px-0', 'my-3');
 
-            // projectCol.classList.add('col-md-9', 'offset-md-1', 'border');
+                // projectCol.classList.add('col-md-9', 'offset-md-1', 'border');
 
-            // <div class="col-md-9 offset-md-1 border">
-            // mx-0 my-0 py-4
+                // <div class="col-md-9 offset-md-1 border">
+                // mx-0 my-0 py-4
+                
+                console.log(project.repoid)
+
+                projectCol.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('click-to-edit-profile')) {
+                        renderProjectEdit(project.githubreponame)
+                    } else {
+                        renderProject(project.repoid)
+                    }
+                })
+            
                 
                 //  <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
                 // <div class="py-1">
             projectCol.innerHTML = `
 
 
-            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
-                <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
+            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 300)})'")>
+                <div id="${project.repoid}" class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                     <h1 class="display-5 fw-bold text-white">Cover Image of project 1</h1>
                     <div class="col-lg-6 mx-auto">
                         <p class="fs-5 mb-4">Image goes here</p>
 
-                        <!-- Just testing buttons here-->
-                        <div id="edit-repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center">
+                        
+                        <div class="d-grid gap-4 d-sm-flex justify-content-sm-center">
                         </div>
                     </div>
                 </div>
@@ -477,38 +499,35 @@ export function renderProfile(id) {
 
             <!-- Title and project info -->
 
-            <div class="row border py-2">
+            <div class="row py-2">
                 <div class="col-md-12 text-center mb-2">
-                    <h2>${project.githubreponame ? project.githubreponame : 'no project added yet'}</h2>
+                <h2 class="user-base-text text-start">${project.githubreponame ? project.githubreponame : ''}</h2>
                 </div>
             </div>
 
 
             <div class="row">
                 <div class="col md-12">
-                    <div class="row text-center py-2 border">
+                    <div class="row text-center py-2">
                         <div class="col-md-6">
-                            <h4>Project image</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                enim sunt maiores placeat dolor at cum ab!</p>
+                            <h4 class="user-base-text text-start">Project image</h4>
+                            <p class="user-base-text text-start"></p>
                         </div>
 
                         <div class="col-md-6">
-                            <h4>Another project image</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                enim sunt maiores placeat dolor at cum ab!</p>
+                            <h4 class="user-base-text text-start">Another project image</h4>
+                            <p class="user-base-text text-start"></p>
                         </div>
                     </div>
-                    <div class="row text-center py-4 border">
+                    <div class="row text-center py-4">
                         <div class="col">
-                            <h4>Project Description</h4>
-                            <p>${project.description ? project.description : 'no description here'}</p>
+                            <h4 class="user-base-text text-start">Project Description</h4>
+                            <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
                         </div>
 
                         <!-- <div class="col">
                             <h4>Project Process</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                enim sunt maiores placeat dolor at cum ab!</p>
+                            <p class="user-base-text text-start"></p>
                         </div> -->
                     </div>
                 </div>
@@ -516,31 +535,27 @@ export function renderProfile(id) {
 
                 <!-- <div class="row">
                 <div class="col md-10">
-                    <div class="row text-center py-2 border">
+                    <div class="row text-center py-2">
                         <div class="col">
                             <h4>Project Description</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                enim sunt maiores placeat dolor at cum ab!</p>
+                            <p class="user-base-text text-start"></p>
                         </div>
 
                         <div class="col">
                             <h4>Project Process</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                enim sunt maiores placeat dolor at cum ab!</p>
+                            <p class="user-base-text text-start"></p>
                         </div>
                     </div>
 
                     <div class="row text-center py-4 border">
                         <div class="col">
                             <h4>Project Challenges</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                enim sunt maiores placeat dolor at cum ab!</p>
+                            <p class="user-base-text text-start"></p>
                         </div>
 
                         <div class="col">
                             <h4>Project Outcomes</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                enim sunt maiores placeat dolor at cum ab!</p>
+                            <p class="user-base-text text-start"></p>
                         </div>
                     </div>
                 </div> -->
@@ -551,18 +566,65 @@ export function renderProfile(id) {
                     <h5>Stuff from github</h5>
                     <p>Languages from repo</p>
                     <p>Some other cool stuff</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    <p class="user-base-text text-start"></p>
                 </div> -->
             </div>
         </div>
         `
-    let projectRow = document.getElementById('project-row')
+                
        
-        projectRow.appendChild(projectCol);
-    }
+         
+                // console.log(editProjectBtn);
+                console.log(project.repoid);
+                
+                let projectDiv = document.getElementById(`${project.repoid}`);
+                    // .appendChild(editProjectBtn);
+                
+                console.log(projectDiv)
+                
+                let projectRow = document.getElementById('project-row')
+       
+                projectRow.appendChild(projectCol);
+                
+
+            };
         });
         
+ 
         
+        projectData.forEach((project, index) => {
+            if (index > 1 && result.data.currentUser) {
+                console.log(project.repoid)
+                if (document.getElementById(`${project.repoid}`)) {
+                    const editProjectBtn = makeAnEl('btn', {
+                        class: ['btn', 'click-to-edit-profile', 'btn-outline-light'],
+                        innerText: `Edit ${project.githubreponame}`,
+                    });
+                    editProjectBtn.addEventListener('click', () => {
+                        renderProjectEdit(project.githubreponame)
+                    });
+                    document.getElementById(`${project.repoid}`).appendChild(editProjectBtn);
+                    // document.getElementById(`${project.repoid}`).addEventListener('click', () => {
+                    //     renderProject(project.repoid)
+                    // })
+                }
+            }
+        });
+        console.log(result.data.currentUser)
+        
+        const userBaseText = document.querySelectorAll('.user-base-text')
+        for (const each of userBaseText) {
+            if (each.textContent == "" || each.textContent == "null") {
+                each.textContent = "Not yet added"
+                each.style.color = "#a1a1a1ff"
+                each.style.fontWeight = "300"
+            } else {
+                each.style.fontWeight = "400"
+            }
+        }
+
+        console.log(userBaseText)
+
         document.getElementById('repo-buttons').appendChild(addRepoBtn);
         addRepoBtn.addEventListener('click', () => {
             renderRepoListBs(`${githubName}`)
@@ -570,7 +632,7 @@ export function renderProfile(id) {
 
 
         document.getElementById('edit-repo-buttons').appendChild(editProjectOne)
-        document.getElementById('edit-repo-buttons').appendChild(editProjectTwo)
+        // document.getElementById('edit-repo-buttons').appendChild(editProjectTwo)
         editProjectOne.addEventListener('click', () => {
             renderProjectEdit(`${projectOneGhName}`)
         });

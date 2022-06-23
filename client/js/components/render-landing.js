@@ -1,5 +1,6 @@
 import { makeAnEl } from "../../utils/dom-create.js";
 import { makeAnImg } from '../../utils/dom-create.js';
+import { renderProfile } from "./render-profile.js";
 import { renderProject } from "./render-project.js";
 
 
@@ -98,6 +99,7 @@ export function renderLanding() {
                 let avatar = user.githubavatar;
                 let repoName = user.githubreponame;
                 let location = user.githublocation;
+                let userid = user.userid;
 
                 console.log(repoid)
                 
@@ -120,9 +122,17 @@ export function renderLanding() {
                 //     </div>
                 // </div>
                 // `
-                userCard.addEventListener('click', event => {
-                    renderProject(repoid);
-                })
+
+                // <img src="https://avatars.githubusercontent.com/u/99120813?v=4" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                //<small>/dannydoesdev</small>
+
+                userCard.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('click-to-profile')) {
+                        renderProfile(userid)
+                    } else {
+                        renderProject(repoid);
+                    }
+                });
 
                     userCard.innerHTML = `
                     <div class="col">
@@ -131,18 +141,18 @@ export function renderLanding() {
                             <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
                                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${repoName}</h2>
                                 <ul class="d-flex list-unstyled mt-auto">
-                                    <li class="me-auto">
-                                        <img src="${avatar}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
+                                    <li id="profile-picture-landing" class="me-auto">
+                                        <img src="${avatar}" alt="Bootstrap" width="32" height="32" class="click-to-profile rounded-circle border border-white">
                                     </li>
                                     <li class="d-flex align-items-center me-3">
                                         <svg class="bi me-2" width="1em" height="1em">
                                             <use xlink:href="#geo-fill" /></svg>
                                         <small>${location}</small>
                                     </li>
-                                    <li class="d-flex align-items-center">
+                                    <li id="username-landing" class="d-flex align-items-center">
                                         <svg class="bi me-2" width="1em" height="1em">
                                             <use xlink:href="#calendar3" /></svg>
-                                        <small>/${username}</small>
+                                        <small class="click-to-profile">/${username}</small>
                                     </li>
                                 </ul>
                             </div>
@@ -151,6 +161,14 @@ export function renderLanding() {
                 `
                 // repoCol.appendChild(userCard)
                 cardRow.appendChild(userCard)
+
+                // document.getElementById('profile-picture-landing').addEventListener('click', (event) => {
+                //     renderProfile(userid);
+                // })
+
+                // document.getElementById('username-landing').addEventListener('click', event => {
+                //     renderProject(repoid);
+                // });
 
             })
             
