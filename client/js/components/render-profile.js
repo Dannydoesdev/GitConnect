@@ -3,9 +3,9 @@ import { makeAnEl } from '../../utils/dom-create.js';
 import { renderProjectEdit } from './render-project-edit.js';
 import { renderRepoListBs } from './render-repo-search.js';
 
-export function renderProfile(username) {
-    console.log(username)
-    username = username.toLowerCase();
+export function renderProfile(id) {
+    console.log(id)
+    // username = username.toLowerCase();
     const main = document.getElementById("main");
     main.innerHTML = "";
 
@@ -40,7 +40,7 @@ export function renderProfile(username) {
     // gitHubMemberSince TEXT
     // CONSTRAINT validate_email CHECK (email LIKE '%___@___%__%')
 
-    axios.get(`/api/profiles/profilepage/${username}`).then((result) => {
+    axios.get(`/api/profiles/profilepage/${id}`).then((result) => {
         console.log(result)
         // if (result.data.success) {
         //     console.log(result)

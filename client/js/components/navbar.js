@@ -89,7 +89,9 @@ export function renderNav() {
         if (result.data.success) {
             console.log(result)
             const githubName = result.data.githubname;
-            console.log(githubName)
+          console.log(githubName)
+          console.log(result.data)
+          const id = result.data.id;
 
             // const myProfile = makeAnEl("h4", {
             //   className: "navbar-links",
@@ -276,8 +278,8 @@ export function renderNav() {
 //         navBar.appendChild(viewProfile);
 // >>>>>>> main
             viewProfile.addEventListener("click", () => {
-            console.log(githubName)
-          renderProfile(githubName);
+            console.log(id)
+          renderProfile(id);
         });
             
 

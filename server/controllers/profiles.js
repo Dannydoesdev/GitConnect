@@ -50,26 +50,29 @@ router.post("/", (req, res) => {
 }); 
 
 // WILL NEED TO BE ABLE TO do this anonymously (IE JUST A BROWSING USER - can split to another call maybe)
-router.get("/profilepage/:userName", (req, res) => {
-    console.log(req.params.userName)
+router.get("/profilepage/:id", (req, res) => {
+    console.log(req.params.id)
     let userName = req.params.userName;
-    const loggedinUserName = req.session.body.githubname;
-    const id = req.session.body.id;
-    console.log(userName + id)
+    let id = req.params.id;
+    // const loggedinUserName = req.session.body.githubname;
+    
+    const loggedInUserId = req.session.body.id;
+    // console.log(userName + id)
 
     // Need to keep track of info from both project and profiles table
     let profileObject = {};
 
-    let sql = `SELECT * FROM ${USERS_TABLE_NAME} WHERE githubname = $1;`;
-    let values = [userName];
+    let sql = `SELECT * FROM ${USERS_TABLE_NAME} WHERE id = $1;`;
+    let values = [id];
 
-    if (userName === loggedinUserName) {
+    if (id === loggedInUserId) {
         console.log("logged in user")
         profileObject.currentUser = true;
     }
     db.query(sql, values)
         .then(dbres => {
             profileObject.user = dbres.rows[0];
+            console.log('user call =' + profileObject.user)
             // res.json(dbres.rows);
         })
         .then(() => {
@@ -82,6 +85,8 @@ router.get("/profilepage/:userName", (req, res) => {
                     profileObject.projects = dbres.rows;
                     // console.log(profileObject);
                     // res.json(dbres.rows);
+                    console.log('project call' + profileObject.projects)
+                    console.log(profileObject)
                     res.json(profileObject);
                 })
                     
