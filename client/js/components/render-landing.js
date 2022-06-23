@@ -127,48 +127,37 @@ export function renderLanding() {
                 // <img src="https://avatars.githubusercontent.com/u/99120813?v=4" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
                 //<small>/dannydoesdev</small>
 
-                userCard.addEventListener('click', (event) => {
-                    if (event.target.classList.contains('click-to-profile')) {
-                        renderProfile(userid)
-                    } else {
-                        renderProject(repoid);
-                    }
-                });
+                userCard.addEventListener('click', event => {
+                    renderProject(repoid);
+                })
 
-        userCard.innerHTML = `
+                userCard.innerHTML = `
                     <div class="col">
                         <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg border-0"
                             style="background-image: url('${makeAnImg(600, 350)}'); min-height: 272px; max-height: 320px;">
                             <div id="selected-div-${repoid}" class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
                                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${repoName}</h2>
                                 <ul class="d-flex list-unstyled mt-auto">
-                                    <li id="profile-picture-landing" class="me-auto">
-                                        <img src="${avatar}" alt="Bootstrap" width="32" height="32" class="click-to-profile rounded-circle border border-white">
+                                    <li class="me-auto">
+                                        <img src="${avatar}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
                                     </li>
                                     <li class="d-flex align-items-center me-3">
                                         <svg class="bi me-2" width="1em" height="1em">
                                             <use xlink:href="#geo-fill" /></svg>
                                         <small>${location}</small>
                                     </li>
-                                    <li id="username-landing" class="d-flex align-items-center">
+                                    <li class="d-flex align-items-center">
                                         <svg class="bi me-2" width="1em" height="1em">
                                             <use xlink:href="#calendar3" /></svg>
-                                        <small class="click-to-profile">/${username}</small>
+                                        <small>/${username}</small>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
-
-
-                // document.getElementById('profile-picture-landing').addEventListener('click', (event) => {
-                //     renderProfile(userid);
-                // })
-
-                // document.getElementById('username-landing').addEventListener('click', event => {
-                //     renderProject(repoid);
-                // });
+                `
+                // repoCol.appendChild(userCard)
+                cardRow.appendChild(userCard)
 
                 const selectedDiv = document.getElementById(`selected-div-${repoid}`)
                 selectedDiv.addEventListener('mouseover', (target) => {
@@ -178,11 +167,8 @@ export function renderLanding() {
                     selectedDiv.style.backgroundColor = "rgba(0,0,0,0.14)"
                 })
 
-
-                `;
-        // repoCol.appendChild(userCard)
-        cardRow.appendChild(userCard);
-      });
+            });
+            
 
       //         repoID TEXT PRIMARY KEY UNIQUE NOT NULL,
       // gitHubRepoName TEXT,
