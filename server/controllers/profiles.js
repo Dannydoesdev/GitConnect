@@ -65,7 +65,7 @@ router.get("/profilepage/:id", (req, res) => {
     let sql = `SELECT * FROM ${USERS_TABLE_NAME} WHERE id = $1;`;
     let values = [id];
 
-    if (id === loggedInUserId) {
+    if (id == loggedInUserId) {
         console.log("logged in user")
         profileObject.currentUser = true;
     }

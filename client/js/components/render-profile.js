@@ -107,15 +107,15 @@ export function renderProfile(id) {
                     let projectOneOutcomes = projectOne.outcomes;
         
                 
-                // let projectTwoGhName = projectTwo.githubreponame;
-                    let projectTwoTitle = projectTwo.title;
-                    let projectTwoDescription = projectTwo.description;
-                    let projectTwoImage = projectTwo.titleimage;
-                    //should add link in db
-                    let projectTwoLink = projectTwo.link;
-                    let projectTwoChallenges = projectTwo.challenges;
-                    let projectTwoProcess = projectTwo.process;
-                    let projectTwoOutcomes = projectTwo.outcomes;
+                // // let projectTwoGhName = projectTwo.githubreponame;
+                //     let projectTwoTitle = projectTwo.title;
+                //     let projectTwoDescription = projectTwo.description;
+                //     let projectTwoImage = projectTwo.titleimage;
+                //     //should add link in db
+                //     let projectTwoLink = projectTwo.link;
+                //     let projectTwoChallenges = projectTwo.challenges;
+                //     let projectTwoProcess = projectTwo.process;
+                //     let projectTwoOutcomes = projectTwo.outcomes;
         }
            
            
@@ -222,7 +222,8 @@ export function renderProfile(id) {
         };
 
       
-
+        // <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center">
+        // <div class="py-1">
         // console.log('repobtn' + addRepoBtn)
     main.innerHTML = `
             <div class="container-lg">
@@ -232,7 +233,7 @@ export function renderProfile(id) {
                         <h1 class="display-5 fw-bold text-white">Cover Image</h1>
                         <div class="col-lg-6 mx-auto">
                             <p class="fs-5 mb-4">Cover image of profile</p>
-                            <div id="repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center"></div>
+                            <div id="repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center pb-4"></div>
                         </div>
                     </div>
                 </div>
@@ -252,10 +253,13 @@ export function renderProfile(id) {
                     <p>${aboutme} - aboutme goes here</p>
                 </div>
 
+               
+               
+
                 <!-- Hero image of profile -->
                 <div class="col-md-9 offset-md-1 border">
-                    <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center">
-                        <div class="py-1">
+                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
+                <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                             <h1 class="display-5 fw-bold text-white">Cover Image of project 1</h1>
                             <div class="col-lg-6 mx-auto">
                                 <p class="fs-5 mb-4">Image goes here</p>
@@ -411,7 +415,7 @@ export function renderProfile(id) {
         //     </div>
         // </div>
     
-       //MOVE INTO AN IF LOGGED ON LATER ( BROKEN RIGHT NOW) 
+       //MOVE INTO AN IF LOGGED ON LATER ( BROKEN RIGHT NOW)
 //    const addRepoBtn = makeAnEl('btn', {
 //         class: ['btn', 'btn-lg', 'btn-outline-success'],
 //         innerText: `Add a project from Github`,
@@ -435,6 +439,11 @@ export function renderProfile(id) {
     //     let projectOneProcess = projectOne.process;
     //     let projectOneOutcomes = projectOne.outcomes;
         
+        console.log(makeAnImg(1320, 240))
+        console.log(makeAnImg(1300, 150))
+        console.log(makeAnImg(1320, 150))
+        console.log(makeAnImg(1000, 200))
+
         projectData.forEach((project, index) => {
             if (index > 1) {
            
@@ -446,12 +455,15 @@ export function renderProfile(id) {
             // projectCol.classList.add('col-md-9', 'offset-md-1', 'border');
 
             // <div class="col-md-9 offset-md-1 border">
-
+            // mx-0 my-0 py-4
+                
+                //  <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
+                // <div class="py-1">
             projectCol.innerHTML = `
 
 
-            <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center" style="background-image: url('${makeAnImg(1320, 240)}';")>
-                <div class="py-1">
+            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
+                <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                     <h1 class="display-5 fw-bold text-white">Cover Image of project 1</h1>
                     <div class="col-lg-6 mx-auto">
                         <p class="fs-5 mb-4">Image goes here</p>
