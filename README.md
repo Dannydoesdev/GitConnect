@@ -23,7 +23,7 @@ A personalised GitHub portfolio creating experience.
     Link to your social media, portfolio
 
 ## **DEMO**
-[![Demo CountPages alpha](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=yHM5VaXtpVY)
+[![Demo CountPages alpha](http://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=yHM5VaXtpVY)
 
 ## **FUNCTIONALITY**
 ---

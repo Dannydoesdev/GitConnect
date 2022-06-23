@@ -3,11 +3,11 @@
 
 
 -- USERS
-INSERT INTO users (githubName,email,userType,profiletype,firstName,lastName,photo,aboutmetitle,aboutme,mobile,portfoliolink,coverPhoto)
-VALUES ('CJunk','jsharman@hotmail.com.au',1,1,'Jericho','Sharman','https://avatars.githubusercontent.com/u/8306841?v=4','Full Stack Software Developer','yadda yadda More stuff goes here','0478816306','www.jerichosharman.com.au','https://res.cloudinary.com/dc7oti3kw/image/upload/v1655872201/CaptureGitCOnnect_s7jrvr.jpg');
-INSERT INTO users (githubName,email,userType,profiletype,firstName,lastName,photo,aboutmetitle,aboutme,mobile,portfoliolink) 
+INSERT INTO users (githubName,email,userType,profiletype,firstName,lastName,githubavatar,aboutmetitle,aboutme,mobile,portfoliolink,coverPhoto)
+VALUES ('CJunk','jsharman@hotmail.com.au',1,1,'Jericho','Sharman','https://avatars.githubusercontent.com/u/8306841?v=4','Full Stack Software Developer','yadda yadda More stuff goes here','0478816306','www.jerichosharman.com.au','http://res.cloudinary.com/dc7oti3kw/image/upload/v1656016156/klfox4abfh28nry3s8re.jpg');
+INSERT INTO users (githubName,email,userType,profiletype,firstName,lastName,githubavatar,aboutmetitle,aboutme,mobile,portfoliolink) 
 VALUES(50442868,'daniel.t.mcgee@gmail.com',1,1,'Danny','','https://avatars.githubusercontent.com/u/50442868?v=4','DEVELOPER','More about me stuff','04123423456','');
-INSERT INTO users (githubName,email,userType,profiletype,firstName,lastName,photo,aboutmetitle,aboutme,mobile,portfoliolink) 
+INSERT INTO users (githubName,email,userType,profiletype,firstName,lastName,githubavatar,aboutmetitle,aboutme,mobile,portfoliolink) 
 VALUES('misakigrim','garmonweng@gmail.com',1,1,'Garmon','','https://avatars.githubusercontent.com/u/99120813?v=4','Dev Boy','Hi, I''m me!','0410900900','');
 
 
@@ -19,6 +19,6 @@ INSERT INTO repoparameters (repoID, gitHubRepoName, userID, status, projectName,
 VALUES (9791118, 'learn-cryptography', 2, B'1', 'Learn Cryptography', 'This is an AppEngine app for learning basic crytography through analysing and decrypting a series of texts.');
 
 INSERT INTO repoparameters (repoID, gitHubRepoName, userID, status, projectName, description,projectImageUrl)
-VALUES (330517541, 'splootcode', 1, B'1', 'Sploot Code', 'An experimental coding interface that''s tree-based.','https://res.cloudinary.com/dc7oti3kw/image/upload/v1655872201/CaptureGitCOnnect_s7jrvr.jpg');
+VALUES (330517541, 'splootcode', 1, B'1', 'Sploot Code', 'An experimental coding interface that''s tree-based.','http://res.cloudinary.com/dc7oti3kw/image/upload/v1655999043/ej9zlmaleyr8mtzt2ooy.jpg');
 INSERT INTO repoparameters (repoID, gitHubRepoName, userID, status, projectName, description,projectImageUrl)
-VALUES (9791112, 'learn-cryptography', 1, B'1', 'Learn Cryptography', 'This is an AppEngine app for learning basic crytography through analysing and decrypting a series of texts.','https://res.cloudinary.com/dc7oti3kw/image/upload/v1655872201/CaptureGitCOnnect_s7jrvr.jpg');
+VALUES (9791112, 'learn-cryptography', 1, B'1', 'Learn Cryptography', 'This is an AppEngine app for learning basic crytography through analysing and decrypting a series of texts.','http://res.cloudinary.com/dc7oti3kw/image/upload/v1655999043/ej9zlmaleyr8mtzt2ooy.jpg');

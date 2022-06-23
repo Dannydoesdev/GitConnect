@@ -140,6 +140,14 @@ router.get(`/getUsers`, (req, res) => {
 router.post(`/myrepos`, (req, res) => {
   dbSelectQuery(`SELECT * FROM repoparameters;`, res);
 });
+router.post(`/reposById`, (req, res) => {
+  dbSelectQuery(`SELECT * FROM repoparameters WHERE userid = ${req.body.gitConnectId};`, res);
+});
+router.post(`/repoDetailByRepoId`, (req, res) => {
+  repoId = req.body.repoid;
+  dbSelectQuery(`SELECT * FROM repoparameters WHERE repoid = '${repoId}';`, res);
+});
+
 
 // ********************************************************************************************************************
 // INTERNAL FUNCTIONS
@@ -151,7 +159,11 @@ function dbSelectQuery(theQuery, res) {
   result = db
     .query(theQuery)
     .then((dbResults) => {
-      res.json(dbResults.rows);
+      if (dbResults.rowCount) {
+        res.json(dbResults.rows);
+      } else {
+        res.json({ message: "No data found" });
+      }
     })
     .catch((reason) => {
       console.log("INTERNAL DATABASE ERROR", reason);
