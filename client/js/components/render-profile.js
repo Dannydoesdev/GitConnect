@@ -39,7 +39,8 @@ export function renderProfile(id) {
         let lastName = profileData.lastname;
         let aboutme = profileData.aboutme;
         let mobile = profileData.mobile;
-        let projectimageurl = profileData.projectimageurl;
+       
+        // console.log(projectimageurl)
         //TYPO IN DB
         let githubUrl = profileData.githubutrl;
 
@@ -60,7 +61,7 @@ export function renderProfile(id) {
          let projectOneOutcomes = "";
          let projectOneRepoName = "";
 
-
+        let projectOneImageUrl = "";
         // NOTE - Project 1 has special requirements in styling so we call this separately
         // Need to check there is at least one project otherwise keep it blank
         if (projectData.length >= 1) {
@@ -76,6 +77,7 @@ export function renderProfile(id) {
             let projectOneProcess = projectOne.process;
             let projectOneOutcomes = projectOne.outcomes;
             projectOneRepoName = projectOne.githubreponame;
+            projectOneImageUrl = projectOne.projectimageurl;
             console.log(projectOneRepoName)
 
         }
@@ -91,7 +93,7 @@ export function renderProfile(id) {
                 class: ['btn', 'click-to-edit-profile', 'btn-outline-light'],
                 innerText: `Edit ${projectOneRepoName}`,
                 id: 'edit-project-1',
-                onclick: `renderEditProject(${projectOneRepoName})`
+                // onclick: `renderEditProject(${projectOneRepoName})`
             });
             addRepoBtn = makeAnEl('btn', {
                 class: ['btn', 'btn-lg', 'btn-outline-success'],
@@ -118,12 +120,16 @@ export function renderProfile(id) {
             });
         }
 
-          
+        //USE THIS FOR IMAGES (or similar, change makeAnImg width and height + bootstrap classes as needed)
+
+        // <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}')")>
+        
+
         // Create the main container, profile info and first project column
     main.innerHTML = `
             <div class="container-lg">
             <div class="row">
-            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1400, 320)})'")>
+            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 300)}')")>
             <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.65);">
                         <h1 class="display-5 fw-bold text-white">Cover Image</h1>
                         <div class="col-lg-6 mx-auto">
@@ -150,7 +156,7 @@ export function renderProfile(id) {
 
                 <!-- Hero image of profile -->
                 <div id="first-repo" class="col-md-9 pe-0 text-start">
-                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${projectimageurl})'")>
+                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}')")>
                 <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                             <h1 class="display-5 fw-bold text-white">${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
                             <div class="col-lg-6 mx-auto">
@@ -245,7 +251,7 @@ export function renderProfile(id) {
         // Add event listener to go to individual project page when you click div or edit project page when you click the edit btn
         document.getElementById('first-repo').addEventListener('click', function (event) {
             if (event.target.classList.contains('click-to-edit-profile')) {
-                renderProjectEdit(projectData[0]);
+                renderProjectEdit(projectOne);
             } else {
                 renderProject(projectOneRepoid)
             }
@@ -265,6 +271,7 @@ export function renderProfile(id) {
                 projectCol.classList.add('col-md-12', 'px-0', 'my-3');
                 console.log(project.repoid)
                 console.log(project)
+                // console.log(project.projectimageurl)
                 // Add an event listener to the block to go to the individual project when clicked - or edit project when button is clicked
 
                 projectCol.addEventListener('click', (event) => {
@@ -275,11 +282,13 @@ export function renderProfile(id) {
                     }
                 })
               
+// TPM FOLDER: url('/tmp/tmp-2-1656066889425.jpg')
+
                 //  <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
                 // <div class="py-1">
             projectCol.innerHTML = `
 
-            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 300)})'")>
+            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
                 <div id="${project.repoid}" class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                     <h1 class="display-5 fw-bold text-white">Cover Image of ${project.githubreponame ? project.githubreponame : 'Project'}</h1>
                     <div class="col-lg-6 mx-auto">
@@ -381,7 +390,7 @@ export function renderProfile(id) {
                 if (document.getElementById(`${project.repoid}`)) {
                     const editProjectBtn = makeAnEl('btn', {
                         class: ['btn', 'click-to-edit-profile', 'btn-outline-light'],
-                        innerText: `Edit ${project}`,
+                        innerText: `Edit ${project.githubreponame}`,
                     });
 
                     // editProjectBtn.addEventListener('click', () => {
