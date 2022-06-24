@@ -55,11 +55,14 @@ router.get("/profilepage/:id", (req, res) => {
     let userName = req.params.userName;
     let id = req.params.id;
     // const loggedinUserName = req.session.body.githubname;
+    let loggedInUserId
     
-    const loggedInUserId = req.session.body.id;
-    // console.log(userName + id)
+    if (!('body'in req.session)) {
+            loggedInUserId = null;
+        } else {
+            loggedInUserId = req.session.body.id;
+        }
 
-    // Need to keep track of info from both project and profiles table
     let profileObject = {};
 
     let sql = `SELECT * FROM ${USERS_TABLE_NAME} WHERE id = $1;`;
@@ -72,7 +75,7 @@ router.get("/profilepage/:id", (req, res) => {
     db.query(sql, values)
         .then(dbres => {
             profileObject.user = dbres.rows[0];
-            console.log('user call =' + profileObject.user)
+            // console.log('user call =' + profileObject.user)
             // res.json(dbres.rows);
         })
         .then(() => {
@@ -85,8 +88,8 @@ router.get("/profilepage/:id", (req, res) => {
                     profileObject.projects = dbres.rows;
                     // console.log(profileObject);
                     // res.json(dbres.rows);
-                    console.log('project call' + profileObject.projects)
-                    console.log(profileObject)
+                    // console.log('project call' + profileObject.projects)
+                    // console.log(profileObject)
                     res.json(profileObject);
                 })
                     
