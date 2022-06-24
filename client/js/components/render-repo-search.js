@@ -123,9 +123,6 @@ export function renderRepoListBs(userName, userid) {
             console.log(selectedReposArr);
             // send selected repos to the server
             selectedReposArr.forEach(repo => addSelectedRepos(repo, userName, userid));
-
-            // NEED TO DO AN AWAIT RESPOSNSE HERE BUT NOT SURE HOW
-            // renderProfile(userName);
         })
 
         row.appendChild(profileImg)
