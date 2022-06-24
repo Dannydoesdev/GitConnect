@@ -58,7 +58,7 @@ export function renderProjectEdit(project) {
           let errorMessage = err.response.data.message;
           alert(errorMessage);
         });
-      renderProfile(1);
+      renderProfile(project.userid);
     };
   sendingrequest();      
   });
