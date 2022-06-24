@@ -1,4 +1,4 @@
-import { makeAnImg } from "../../utils/dom-create.js";
+import { makeAnEl, makeAnImg } from "../../utils/dom-create.js";
 import { renderProfile } from "./render-profile.js";
 
 export function renderProject(repoid) {
@@ -20,6 +20,8 @@ export function renderProject(repoid) {
             let repoid = user.repoid;
             let username = user.githubname;
             let repoName = user.githubreponame;
+            let memberSince = user.githubmembersince;
+            let createdAt = user.created_at;
             let avatar = user.githubavatar;
             let location = user.githublocation;
             let userid = user.id;
@@ -29,6 +31,21 @@ export function renderProject(repoid) {
             let process = user.process; 
             let description = user.description;
             let appLink = user.app_link;
+            let langOne = user.langone;
+            let langTwo = user.langtwo;
+            let langThree = user.langthree;
+            let langFour = user.langfour;
+            let license = user.license;
+
+
+           // language display
+           let languagesList = ""
+           for (const lang of [langOne, langTwo, langThree, langFour]) {
+               if (lang != null) {
+                   languagesList += lang
+               }
+           }
+           const languages = languagesList.split(" ").join(',')
            
             main.innerHTML = `
             <!-- Increase py on hero to make bigger vertically -->
@@ -39,6 +56,7 @@ export function renderProject(repoid) {
                         <img id="profile-picture" src="${avatar ? avatar : 'unknown'}" class="mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
                         <h3>${username}</h3>
                         <p id="user-location">${location}</p>
+                        <p class="sidebar-text">Member Since: ${memberSince.slice(0,10)}</p>
                         <div>
                             <a target="_blank" href="https://twitter.com"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16" style="margin:2px;">
                                 <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
@@ -49,7 +67,8 @@ export function renderProject(repoid) {
                             <a target="_blank" href="mailto: abc@example.com"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16" style="margin:2px;">
                                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
                             </svg></a>
-                        </div>
+                        </div><br>
+
                     </div>
 
                     <!-- Hero image or carousel of project photos -->
@@ -113,16 +132,23 @@ export function renderProject(repoid) {
                             <!-- Github info pulled from API -->
 
                             <div class="col-md-2 pt-4 d-flex flex-column py-2 text-center" style="background-color: rgba(0, 0, 0, 0.10);">
-                                <h5 class="text-start">Stuff from github</h5>
-                                <p class="text-start">Languages from repo</p>
-                                <p class="text-start">Some other cool stuff</p>
-                                <p class="text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                <p class="text-start">Languages:</p>
+                                <p class="text-start sidebar-text">${languages}</p>
+                                <p class="text-start">License:</p>
+                                <p class="text-start sidebar-text">${license}</p>
+                                <p class="text-start">Created at:</p>
+                                <p class="text-start sidebar-text">${createdAt.slice(0,10)}</p>
                             </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                
+            `;
+
+            const iframeRender = makeAnEl('div')
+            iframeRender.innerHTML = `
                 <div class="container">
                     <div class="row">
                         <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center">
@@ -134,13 +160,19 @@ export function renderProject(repoid) {
                         </div>
                     </div>
                 </div>
-            `;
+                `
+            // if no app link, do not append iframe
+            if (appLink != null) {
+                main.appendChild(iframeRender)
+            }
 
+            // profile picture redirect to profile
             const profilePicture = document.getElementById('profile-picture')
             profilePicture.addEventListener('click', () => {
                 renderProfile(userid)
             });
 
+            // class for user base text
             const userBaseText = document.querySelectorAll('.user-base-text')
             for (const each of userBaseText) {
                 if (each.textContent == "" || each.textContent == "null") {
@@ -148,18 +180,32 @@ export function renderProject(repoid) {
                     each.style.color = "#a1a1a1ff"
                     each.style.fontWeight = "300"
                 } else {
-                    each.style.fontWeight = "400    "
+                    each.style.fontWeight = "400"
                 }
             }
+            // class for secondary text
+            const sidebarText = document.querySelectorAll('.sidebar-text')
+            for (const each of sidebarText) {
+                if (each.textContent == "" || each.textContent == "null") {
+                    each.textContent = "Not yet added"
+                    each.style.color = "#a1a1a1ff"
+                    each.style.fontWeight = "300"
+                } else {
+                    each.style.color = "#a1a1a1ff"
+                    each.style.fontWeight = "300"
+                    each.style.fontSize = "1em"                }
+            }
 
+            // display unknown if location null
             const userLocation = document.getElementById('user-location')
-            // console.log(userLocation)
-            // console.log(location)
             if (userLocation.textContent == "" || userLocation.textContent == "null" || userLocation.textContent == null) {
                 userLocation.textContent = "Location unknown"
                 userLocation.style.color = "#a1a1a1ff"
                 userLocation.style.fontWeight = "300"
             }
+
+            
+            
             
         })
     })
