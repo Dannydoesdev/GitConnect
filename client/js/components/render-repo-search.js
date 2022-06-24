@@ -70,7 +70,7 @@ export function renderRepoListBs(userName, userid) {
     const results = document.getElementById('results')
     results.innerHTML = "";
     results.removeAttribute('class');
-    
+
     // create a bootstrap style container to hold the page info
     const container = makeAnEl('div', {
         id: 'repo-list',
@@ -102,7 +102,7 @@ export function renderRepoListBs(userName, userid) {
         const profileImg = makeAnEl('img', {
             src: response.data[0].owner.avatar_url,
             id: 'profile-img',
-            class: ['rounded', 'mx-auto', 'mb-2', 'd-block']
+            class: ['rounded-25', 'mx-auto', 'mb-2', 'd-block']
         })
 
         // create repo heading var - rapo owner name
@@ -112,7 +112,7 @@ export function renderRepoListBs(userName, userid) {
         })
 
         const addSelectedReposBtn = makeAnEl('div', {
-            class: ['col-md-6', 'offset-md-3'],
+            class: ['col-md-6', 'mt-3', 'offset-md-3'],
         },[
             makeAnEl('button', {
             id: 'add-selected-repos-btn',
@@ -163,7 +163,7 @@ export function renderRepoListBs(userName, userid) {
             // nest the card layout as required via the makeAnEl fn
             // add desired styling to card element
             let repoDiv = makeAnEl('div', {
-                class: ['col-md-4', 'my-4'],
+                class: ['col-md-4', 'p-3', 'border-0', 'my-4'],
             }, [
                 makeAnEl('div', {
                     id: repoName,
