@@ -79,7 +79,7 @@ router.get("/profilepage/:id", (req, res) => {
             // res.json(dbres.rows);
         })
         .then(() => {
-            sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} WHERE userID = $1;`;
+            sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} WHERE userID = $1 and status ='1';`;
             values = [id];
 
             db.query(sql, values)
