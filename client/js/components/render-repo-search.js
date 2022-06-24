@@ -152,9 +152,9 @@ export function renderRepoListBs(userName, userid) {
             let repoLang = result.language;
 
 
-            if (response.fork) {
-                repoName += ' (fork)';
-            }
+            // if (response.fork) {
+            //     repoName = `${repoName} -(fork)`;
+            // }
             // create a div for each repo that is returned
             // nest the card layout as required via the makeAnEl fn
             // add desired styling to card element
@@ -252,10 +252,6 @@ export function renderRepoListBs(userName, userid) {
                 };
             };
             
-            
-
-            
-
         })  
     
     })
