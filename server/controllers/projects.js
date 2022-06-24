@@ -96,6 +96,7 @@ router.post("/editform/", (req, res) => {
               result.url,
               userID
             ];
+            console.log("THE VALUES ARE",values)
             db.query(sql, values)
               .then((dbres) => {
                 if (dbres.rowCount) {
