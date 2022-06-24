@@ -1,3 +1,4 @@
+
 export function renderProjectEdit(project) {
     console.log("Project variable = ", project);
     const main = document.getElementById('main');
