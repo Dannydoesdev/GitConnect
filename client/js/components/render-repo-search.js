@@ -59,7 +59,8 @@ export function renderSearch() {
 
 }
 
-export function renderRepoListBs(userName) {
+export function renderRepoListBs(userName, userid) {
+    console.log(`render repo list called name + id = ${userName} & ${userid}`)
     const allReposURL = `https://api.github.com/users/${userName}/repos`;
     
     // get main section
@@ -84,11 +85,12 @@ export function renderRepoListBs(userName) {
 
     // send get request to gihub api with the above URL
     axios.get(allReposURL).then((response) => {
-    
+        
         console.log(response)
 
         let userName = response.data[0].owner.login;
         console.log(`user name is ${userName} on repo search load`)
+        console.log(`user id is ${userid} on repo search load`)
 
         // create profileimg var - img type with GH profile img as src
         const profileImg = makeAnEl('img', {
@@ -120,7 +122,7 @@ export function renderRepoListBs(userName) {
             })
             console.log(selectedReposArr);
             // send selected repos to the server
-            selectedReposArr.forEach(repo => addSelectedRepos(repo, userName));
+            selectedReposArr.forEach(repo => addSelectedRepos(repo, userName, userid));
 
             // NEED TO DO AN AWAIT RESPOSNSE HERE BUT NOT SURE HOW
             // renderProfile(userName);
@@ -220,19 +222,22 @@ export function renderRepoListBs(userName) {
     })
 }
 
-function addSelectedRepos(reponame, userName) {
-    console.log(`username in add selected repos is ${userName}`)
-    const addRepoURL = `/api/projects/addRepo`;
-    const repoData = {
-        reponame: reponame,
-    }
-    axios.post(addRepoURL, repoData).then((response) => {
-        console.log(response);
-    })
-    .then(() => {
-        renderProfile(userName);
-    })
-}
+function addSelectedRepos(reponame, userName, userid) {
+    
+        console.log(`id in add selected repos is ${userid}`)
+        console.log(`username in add selected repos is ${userName}`)
+        const addRepoURL = `/api/projects/addRepo`;
+        const repoData = {
+            reponame: reponame,
+        }
+        axios.post(addRepoURL, repoData).then((response) => {
+            console.log(response);
+        })
+            .then(() => {
+                renderProfile(userid);
+            })
+};
+
 
 
 // fn to search for a users repos - requires a username parameter
