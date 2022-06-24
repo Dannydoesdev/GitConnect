@@ -13,7 +13,7 @@ export function renderProfile(id) {
     const results = document.getElementById('results')
     results.removeAttribute('class');
     results.innerHTML = ""
-
+   
     axios.get(`/api/profiles/profilepage/${id}`).then((result) => {
         console.log(result)
         
@@ -124,12 +124,15 @@ export function renderProfile(id) {
 
         // <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}')")>
         
+        // From github div:
+           // <p>Languages from repo</p>
+                            // <p>Some other cool stuff</p>
 
         // Create the main container, profile info and first project column
     main.innerHTML = `
-            <div class="container-lg">
-            <div class="row">
-            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1400, 320)}')")>
+<div class="container-lg">
+    <div class="row">
+        <div class="rounded bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1400, 320)}')")>
             <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.65);">
                         <h1 class="display-5 fw-bold text-white">Cover Image</h1>
                         <div class="col-lg-6 mx-auto">
@@ -142,110 +145,72 @@ export function renderProfile(id) {
         </div>
 
         <!-- Increase py on hero to make bigger vertically -->
-        <div class="container-lg bg-dark text-white">
+        <div class="rounded container-lg bg-dark text-white">
             <!-- Sidebar stuff -->
             <div class="row" id="project-row">
-                <div class="col-md-3 d-flex flex-column text-center">
+                <div class="rounded col-md-3 d-flex flex-column text-center">
                     <img src="${avatar ? avatar : ''}" class="user-base-text mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
                     <h3>${githubName ? githubName : ''}</h3>
                     <p>Devs location</p>
                     <br><br>
-                    <a href='${githubUrl} style='color: white'>Visit my Git</a>
+                    <img src="./img/ghlogo-w.png" alt="Githublogo" width="32" height="32" class="click-to-github mx-auto rounded-circle border border-white">
+                    <a href='${githubUrl}' style='color: white'>Visit my Git</a>
                     <p class='user-base-text'>${aboutme}</p>
                 </div>
 
                 <!-- Hero image of profile -->
-                <div id="first-repo" class="col-md-9 pe-0 text-start">
-                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}')")>
-                <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
+                <div id="first-repo" class="rounded col-md-9 pe-0 text-start">
+                    <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}')")>
+                        <div class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
+
                             <h1 class="display-5 fw-bold text-white">${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
                             <div class="col-lg-6 mx-auto">
                                 <p class="fs-5 mb-4">Image goes here</p>
-
-                                <!-- Just testing buttons here-->
-                                <div id="edit-repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center">
-                                </div>
+                                <div id="edit-repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center"></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Title and project info -->
 
-                    <div class="row py-2">
-                        <div class="col-md-12 text-center mb-2">
+                    <div class="rounded row p-3">
+                        <div class="rounded col-md-12 text-center mb-2">
                             <h2 class="user-base-text text-start">${projectOneGhName ? projectOneGhName : ''}</h2>
-                        </div>
+                        </div>                      
                     </div>
                 
-
-                    <div class="row">
-                        <div class="col md-12">
-                            <div class="row text-center py-2">
-                                <div class="col-md-6">
-                                    <h4 class="text-start">Project image</h4>
-                                    <p></p>
-                                </div>
-
-                                <div class="col-md-6">
-                                <h4 class="text-start">Another project image</h4>
-                                    <p></p>
-                                </div>
+                <div class="rounded row p-3">
+                    <div class="rounded col md-12">
+                        <div class="rounded row text-start py-4">
+                            <div class="rounded col">
+                                <h4>Project Description</h4>
+                                <p class="user-base-text text-start">${projectOneDescription ? projectOneDescription : ''}</p>
                             </div>
-                            <div class="row text-start py-4">
-                                <div class="col">
-                                    <h4>Project Description</h4>
-                                    <p class="user-base-text text-start">${projectOneDescription ? projectOneDescription : ''}</p>
-                                </div>
-
-                                <!-- <div class="col">
-                                    <h4>Project Process</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro non vel excepturi
-                                        enim sunt maiores placeat dolor at cum ab!</p>
-                                </div> -->
-                            </div>
+                            <div class="rounded col"> 
+                                <h4>GitHub info</h4>
+                                <p class="user-base-text text-start"></p>                               
+                            </div>                        
                         </div>
-
-
-                        <!-- <div class="row">
-                        <div class="col md-10">
-                            <div class="row text-center py-2 border">
-                                <div class="col">
-                                    <h4>Project Description</h4>
-                                    <p class="user-base-text text-start"></p>
-                                </div>
-
-                                <div class="col">
-                                    <h4>Project Process</h4>
-                                    <p class="user-base-text text-start"></p>
-                                </div>
-                            </div>
-
-                            <div class="row text-center py-4 border">
-                                <div class="col">
-                                    <h4>Project Challenges</h4>
-                                    <p class="user-base-text text-start"></p>
-                                </div>
-
-                                <div class="col">
-                                    <h4>Project Outcomes</h4>
-                                    <p class="user-base-text text-start"></p>
-                                </div>
-                            </div>
-                        </div> -->
-
-                        <!-- Github info pulled from API -->
-
-                        <!-- <div class="col-md-2 d-flex flex-column border py-2 text-center">
-                            <h5>Stuff from github</h5>
-                            <p>Languages from repo</p>
-                            <p>Some other cool stuff</p>
-                            <p class="user-base-text text-start"></p>
-                        </div> -->
                     </div>
                 </div>
-
+                <div class="rounded row p-3">
+                    <div class="rounded col md-12">
+                        <div class="rounded row text-center py-4">
+                            <div class="rounded col">
+                                <h4 class="text-start">Project Process</h4>
+                                <p class="user-base-text text-start">${projectOneProcess ? projectOneProcess : ''}</p>
+                            </div>
+                            <div class="rounded col">
+                                <h4 class="text-start">Project Outcomes</h4>
+                                <p class="user-base-text text-start">${projectOneOutcomes ? projectOneOutcomes : ''}</p>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</div>
         `;
 
         // Add event listener to go to individual project page when you click div or edit project page when you click the edit btn
@@ -268,7 +233,7 @@ export function renderProfile(id) {
         projectData.forEach((project, index) => {
             if (index >= 1) {
                 const projectCol = makeAnEl('div')
-                projectCol.classList.add('col-md-12', 'px-0', 'my-3');
+                projectCol.classList.add('col-md-12', 'rounded', 'px-0', 'my-3');
                 console.log(project.repoid)
                 console.log(project)
                 // console.log(project.projectimageurl)
@@ -282,99 +247,127 @@ export function renderProfile(id) {
                     }
                 })
               
-// TPM FOLDER: url('/tmp/tmp-2-1656066889425.jpg')
 
                 //  <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
                 // <div class="py-1">
             projectCol.innerHTML = `
-
-            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
-                <div id="${project.repoid}" class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
+            
+            <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:100%;background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
+                <div id="${project.repoid}" class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                     <h1 class="display-5 fw-bold text-white">Cover Image of ${project.githubreponame ? project.githubreponame : 'Project'}</h1>
                     <div class="col-lg-6 mx-auto">
-                        <p class="fs-5 mb-4">Image goes here</p>
-
-                        
-                        <div class="d-grid gap-4 d-sm-flex justify-content-sm-center">
-                        </div>
+                        <p class="fs-5 mb-4">Image goes here</p> 
+                        <div class="d-grid gap-4 d-sm-flex justify-content-sm-center"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Title and project info -->
 
-            <div class="row py-2">
-                <div class="col-md-12 text-center mb-2">
-                <h2 class="user-base-text text-start">${project.githubreponame ? project.githubreponame : ''}</h2>
+
+            <div class="rounded row p-3">
+                <div class="rounded col-md-12 text-center mb-2">
+                    <h2 class="user-base-text text-start">${project.githubreponame ? project.githubreponame : ''}</h2>
                 </div>
             </div>
 
-
-            <div class="row">
-                <div class="col md-12">
-                    <div class="row text-center py-2">
-                        <div class="col-md-6">
-                            <h4 class="user-base-text text-start">Project image</h4>
-                            <p class="user-base-text text-start"></p>
+            <div class="rounded row p-3">
+                    <div class="rounded col md-12">
+                        <div class="rounded row text-start py-4">
+                            <div class="rounded col">
+                                <h4>Project Description</h4>
+                                <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
+                            </div>
+                            <div class="rounded col"> 
+                                <h4>GitHub info</h4>
+                                <p class="user-base-text text-start"></p>                               
+                            </div>                                 
                         </div>
-
-                        <div class="col-md-6">
-                            <h4 class="user-base-text text-start">Another project image</h4>
-                            <p class="user-base-text text-start"></p>
-                        </div>
-                    </div>
-                    <div class="row text-center py-4">
-                        <div class="col">
-                            <h4 class="user-base-text text-start">Project Description</h4>
-                            <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
-                        </div>
-
-                        <!-- <div class="col">
-                            <h4>Project Process</h4>
-                            <p class="user-base-text text-start"></p>
-                        </div> -->
                     </div>
                 </div>
-
-
-                <!-- <div class="row">
-                <div class="col md-10">
-                    <div class="row text-center py-2">
-                        <div class="col">
-                            <h4>Project Description</h4>
-                            <p class="user-base-text text-start"></p>
-                        </div>
-
-                        <div class="col">
-                            <h4>Project Process</h4>
-                            <p class="user-base-text text-start"></p>
-                        </div>
+                <div class="rounded row p-3">
+                    <div class="rounded col md-12">
+                        <div class="rounded row text-center py-4">
+                            <div class="rounded col">
+                                <h4 class="text-start">Project Process</h4>
+                                <p class="user-base-text text-start">${project.process ? project.process : ''}</p>
+                            </div>
+                            <div class="rounded col">
+                                <h4 class="text-start">Project Outcomes</h4>
+                                <p class="user-base-text text-start">${project.outcomes ? project.outcomes : ''}</p>
+                            </div>
+                        </div>    
                     </div>
-
-                    <div class="row text-center py-4 border">
-                        <div class="col">
-                            <h4>Project Challenges</h4>
-                            <p class="user-base-text text-start"></p>
-                        </div>
-
-                        <div class="col">
-                            <h4>Project Outcomes</h4>
-                            <p class="user-base-text text-start"></p>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- Github info pulled from API -->
-
-                <!-- <div class="col-md-2 d-flex flex-column border py-2 text-center">
-                    <h5>Stuff from github</h5>
-                    <p>Languages from repo</p>
-                    <p>Some other cool stuff</p>
-                    <p class="user-base-text text-start"></p>
-                </div> -->
+                </div>
             </div>
-        </div>
-        `
+
+        `;
+                
+        // REMOVED:
+                
+        //  <div class="row">
+//         <div class="col md-12">
+//         <div class="row text-center py-2">
+//             <div class="col-md-6">
+//                 <h4 class="user-base-text text-start">Project image</h4>
+//                 <p class="user-base-text text-start"></p>
+//             </div>
+
+//             <div class="col-md-6">
+//                 <h4 class="user-base-text text-start">Another project image</h4>
+//                 <p class="user-base-text text-start"></p>
+//             </div>
+//         </div>
+//         <div class="row text-center py-4">
+//             <div class="col">
+//                 <h4 class="user-base-text text-start">Project Description</h4>
+//                 <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
+//             </div>
+
+//             <!-- <div class="col">
+//                 <h4>Project Process</h4>
+//                 <p class="user-base-text text-start"></p>
+//             </div> -->
+//         </div>
+//     </div>
+
+
+//     <!-- <div class="row">
+//     <div class="col md-10">
+//         <div class="row text-center py-2">
+//             <div class="col">
+//                 <h4>Project Description</h4>
+//                 <p class="user-base-text text-start"></p>
+//             </div>
+
+//             <div class="col">
+//                 <h4>Project Process</h4>
+//                 <p class="user-base-text text-start"></p>
+//             </div>
+//         </div>
+
+//         <div class="row text-center py-4 border">
+//             <div class="col">
+//                 <h4>Project Challenges</h4>
+//                 <p class="user-base-text text-start"></p>
+//             </div>
+
+//             <div class="col">
+//                 <h4>Project Outcomes</h4>
+//                 <p class="user-base-text text-start"></p>
+//             </div>
+//         </div>
+//     </div> -->
+
+//     <!-- Github info pulled from API -->
+
+//     <!-- <div class="col-md-2 d-flex flex-column border py-2 text-center">
+//         <h5>Stuff from github</h5>
+//         <p>Languages from repo</p>
+//         <p>Some other cool stuff</p>
+//         <p class="user-base-text text-start"></p>
+//     </div> -->
+// </div>
                                                   
             let projectRow = document.getElementById('project-row')      
             projectRow.appendChild(projectCol);
