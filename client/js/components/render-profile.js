@@ -154,7 +154,7 @@ export function renderProfile(id) {
                     <p>Devs location</p>
                     <br><br>
                     <img src="./img/ghlogo-w.png" alt="Githublogo" width="32" height="32" class="click-to-github mx-auto rounded-circle border border-white">
-                    <a href='${githubUrl}' style='color: white'>Visit my Git</a>
+                    <a href='${githubuserurl ? githubuserurl : ''}' style='color: white'>Visit my Git</a>
                     <p class='user-base-text'>${aboutme}</p>
                 </div>
 
