@@ -8,25 +8,34 @@ export function renderRego() {
   
   const formContainer = document.createElement("div");
   formContainer.innerHTML = `
-        <form id="sign-up-form" class="forms">
-                <fieldset>
-                    <label for="">Git Username: </label><br>
-                    <input type="text" name="username">
-                </fieldset>
-                <fieldset>
-                    <label for="">Email: </label><br>
-                    <input type="text" name="email">
-                </fieldset>
-                <fieldset>
-                    <label for="">Password: </label><br>
-                    <input type="password" name="password">
-                </fieldset>
-                <fieldset>
-                    <label for="">Confirm Password: </label><br>
-                    <input type="password" name="confirm-password">
-                </fieldset>
+
+  <div class="container-fluid bg-dark text-white px-5 py-5">
+    <div class="row">
+        <div class="col-md-6 py-5 gx-5 px-5 offset-md-3">
+            <h1>Welcome to GitConnect;</h1>
+            <form action="/" id="sign-up-form" method="POST">    
+            <div class="form-group mb-4">
+              <label for="username">Your GitHub username:</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Enter your GitHub username to use GitConnect; - we can read public info only">
+            </div> 
+            <div class="form-group mb-4">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+            </div> 
+            <div class="form-group mb-4">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter a Password">
+            </div> 
+            <div class="form-group mb-4">
+                <label for="confirm-password">Password:</label>
+                <input type="confirm-password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm your Password">
+            </div>            
                 <input type="submit" class="btn btn-lg btn-outline-light align-self-center" value="Submit">
-                
+            </form>
+        </div>
+    </div>
+</div>
+       
     `;
   
     // REMOVED THIS BUTTON

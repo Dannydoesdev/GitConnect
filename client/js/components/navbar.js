@@ -1,7 +1,7 @@
 import { makeAnEl } from "../../utils/dom-create.js";
 import { renderProjectEdit } from "./render-project-edit.js";
 import { renderProfileEdit } from "./render-profile-edit.js";
-import { renderSearch } from "./render-repo-search.js";
+import { renderSearch, renderRepoListBs } from "./render-repo-search.js";
 import { logOut } from "./home-startup.js";
 import { renderProject } from "./render-project.js";
 import { renderProfile } from "./render-profile.js";
@@ -155,7 +155,7 @@ export function renderNav() {
             
             const addRepoForm = makeAnEl("a", {
                 className: "nav-link",
-                textContent: "ADD REPO",
+                textContent: "ADD PROJECT",
                 href: "#",
                 id: "navbar-add-repo",
               });  
@@ -183,10 +183,10 @@ export function renderNav() {
             
          
             allNavItems.appendChild(editProfileForm);
-            allNavItems.appendChild(editRepoForm);
+            // allNavItems.appendChild(editRepoForm);
             allNavItems.appendChild(addRepoForm);
             allNavItems.appendChild(viewProfile);
-            allNavItems.appendChild(viewProject);
+            // allNavItems.appendChild(viewProject);
             allNavItems.appendChild(logOutNav);
 
             logOutNav.addEventListener("click", () => {
@@ -202,7 +202,7 @@ export function renderNav() {
             <button class="btn btn-outline-light" type="submit">Search</button>
           `
             
-            navBar.appendChild(searchBar)
+            // navBar.appendChild(searchBar)
             // allNavItems.appendChild(searchBar);
         // const editProfileForm = makeAnEl("h4", {
         //   className: "navbar-links",
@@ -225,12 +225,14 @@ export function renderNav() {
           editProfileForm.style.fontWeight = "500";
           renderProfileEdit();
         });
-            
-            addRepoForm.addEventListener("click", () => {
-              weightClear();
-              addRepoForm.style.fontWeight = "500";
-              renderSearch();
-            });
+          
+        addRepoForm.addEventListener("click", () => {
+          weightClear();
+          addRepoForm.style.fontWeight = "500";
+          renderRepoListBs(githubName, id)              
+        });
+
+
         // navBar.appendChild(editProfileForm);
         // const editRepoForm = makeAnEl("h4", {
         //   className: "navbar-links",
