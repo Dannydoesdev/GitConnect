@@ -54,23 +54,44 @@ export function renderProjectEdit(project) {
     `;
   let theForm = document.getElementById("edit-project-form");
   theForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const formData = new FormData(theForm);
-    const sendingrequest = async () => {
-      await axios
-        .post("/api/projects/editform_no_image/", formData)
-        .then((response) => {
-          console.log(response);
-          //   window.location = '/api/projects';
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log(err.response.data);
-          let errorMessage = err.response.data.message;
-          alert(errorMessage);
-        });
-      renderProfile(project.userid);
-    };
+      e.preventDefault();
+      console.log(document.getElementById('file').files.length);
+      const formData = new FormData(theForm);
+      let sendingrequest
+
+      if (document.getElementById('file').files.length == 0) {
+        sendingrequest = async () => {
+              await axios
+                  .post("/api/projects/editform_no_image/", formData)
+                  .then((response) => {
+                      console.log(response);
+                      //   window.location = '/api/projects';
+                  })
+                  .catch((err) => {
+                      console.log(err);
+                      console.log(err.response.data);
+                      let errorMessage = err.response.data.message;
+                      alert(errorMessage);
+                  });
+              renderProfile(project.userid);
+          };
+      } else {
+          sendingrequest = async () => {
+              await axios
+                  .post("/api/projects/editform/", formData)
+                  .then((response) => {
+                      console.log(response);
+                      //   window.location = '/api/projects';
+                  })
+                  .catch((err) => {
+                      console.log(err);
+                      console.log(err.response.data);
+                      let errorMessage = err.response.data.message;
+                      alert(errorMessage);
+                  });
+                  renderProfile(project.userid);
+          };
+      };
   sendingrequest();      
   });
 
