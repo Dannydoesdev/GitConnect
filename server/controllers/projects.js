@@ -23,11 +23,13 @@ router.post("/addRepo", (req, res) => {
     res.status(401).json({ sucess: false, message: "Must be logged in" });
   } else {
     let projectName = req.body.reponame;
+
     // console.log(projectName);
     // DONT THINK WE NEED repoID - or can be a serial primary key
     let repoID = Math.floor(Math.random() * 1000);
     let status = 1;
     // console.log(id);
+
     let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4);`;
     let values = [id, projectName, repoID, status];
     // console.log(values);
