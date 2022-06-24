@@ -1,15 +1,15 @@
-
+import { renderProfile } from "./render-profile.js";
 export function renderProjectEdit(project) {
-    console.log("Project variable = ", project);
-    const main = document.getElementById('main');
-    main.innerHTML = '';
-    const results = document.getElementById('results')
-    results.innerHTML = ""
-    main.innerHTML = `
+  console.log("Project variable = ", project);
+  const main = document.getElementById("main");
+  main.innerHTML = "";
+  const results = document.getElementById("results");
+  results.innerHTML = "";
+  main.innerHTML = `
     <div class="container bg-dark text-white">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h1>Project Title</h1>
+        <div class="col-md-6 py-4 gx-2 offset-md-3">
+            <h3>Edit Gitconnect info for ${project.githubreponame}</h3>
             <form action="/api/projects/editform/" enctype="multipart/form-data" id="edit-project-form" method="POST">
                 <div class="form-group mb-4">
                     <label for="project-name">Project Name</label>
@@ -41,4 +41,26 @@ export function renderProjectEdit(project) {
     </div>
 </div>
     `;
+  let theForm = document.getElementById("edit-project-form");
+  theForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(theForm);
+    const sendingrequest = async () => {
+      await axios
+        .post("/api/projects/editform/", formData)
+        .then((response) => {
+          console.log(response);
+          //   window.location = '/api/projects';
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(err.response.data);
+          let errorMessage = err.response.data.message;
+          alert(errorMessage);
+        });
+      renderProfile(project.userid);
+    };
+  sendingrequest();      
+  });
+
 }

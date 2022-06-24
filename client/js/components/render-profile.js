@@ -251,10 +251,9 @@ export function renderProfile(id) {
                 //  <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
                 // <div class="py-1">
             projectCol.innerHTML = `
-
-            <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
+            
+            <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:100%;background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
                 <div id="${project.repoid}" class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
-
                     <h1 class="display-5 fw-bold text-white">Cover Image of ${project.githubreponame ? project.githubreponame : 'Project'}</h1>
                     <div class="col-lg-6 mx-auto">
                         <p class="fs-5 mb-4">Image goes here</p> 
@@ -264,6 +263,7 @@ export function renderProfile(id) {
             </div>
 
             <!-- Title and project info -->
+
 
             <div class="rounded row p-3">
                 <div class="rounded col-md-12 text-center mb-2">
@@ -281,7 +281,7 @@ export function renderProfile(id) {
                             <div class="rounded col"> 
                                 <h4>GitHub info</h4>
                                 <p class="user-base-text text-start"></p>                               
-                            </div>                        
+                            </div>                                 
                         </div>
                     </div>
                 </div>
@@ -299,8 +299,9 @@ export function renderProfile(id) {
                         </div>    
                     </div>
                 </div>
-        </div>
-        `
+            </div>
+
+        `;
                 
         // REMOVED:
                 

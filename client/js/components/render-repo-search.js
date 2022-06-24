@@ -132,7 +132,7 @@ export function renderRepoListBs(userName, userid) {
                     selectedReposDataNames.push(repo.value);
                 }
             })
-            // console.log(selectedReposArr);
+
             // send selected repos to the server
             selectedReposDataArr.forEach(repoData => addSelectedRepos(repoData.name, userName, userid, repoData));
         })
