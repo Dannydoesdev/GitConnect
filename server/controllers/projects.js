@@ -97,7 +97,7 @@ router.post("/editform/", (req, res) => {
               challenges,
               outcomes,
               status,
-              file.upload.tempFilePath,
+              file.upload.tempFilePath.replace('client','.')+'.jpg',
               userID,
             ];
             console.log("THE VALUES ARE", values);
