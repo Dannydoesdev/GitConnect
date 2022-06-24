@@ -1,4 +1,6 @@
 export function renderProjectEdit(projectName) {
+
+    console.log(projectName)
     const main = document.getElementById('main');
     main.innerHTML = '';
     const results = document.getElementById('results')

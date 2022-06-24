@@ -47,7 +47,8 @@ export function renderProfile(id) {
         let projectData = result.data.projects;
   
          // Create vars outside of if statement to call in other scope - null if less than one project for new users to work
-         let projectOneDescription = "";
+        let projectOne = ""; 
+        let projectOneDescription = "";
          let projectOneRepoid = "";
          let projectOneGhName = "";
          let projectOneTitle = "";
@@ -62,14 +63,14 @@ export function renderProfile(id) {
         // NOTE - Project 1 has special requirements in styling so we call this separately
         // Need to check there is at least one project otherwise keep it blank
         if (projectData.length >= 1) {
-            let projectOne = projectData[0];
+           projectOne = projectData[0];
 
             projectOneDescription = projectOne.description;
             projectOneRepoid = projectOne.repoid;
             projectOneGhName = projectOne.githubreponame;
             let projectOneTitle = projectOne.title;
             let projectOneImage = projectOne.titleimage;
-            let projectOneLink = projectOne.link;
+            // let projectOneLink = projectOne.link;
             let projectOneChallenges = projectOne.challenges;
             let projectOneProcess = projectOne.process;
             let projectOneOutcomes = projectOne.outcomes;
@@ -381,9 +382,9 @@ export function renderProfile(id) {
                         class: ['btn', 'click-to-edit-profile', 'btn-outline-light'],
                         innerText: `Edit ${project.githubreponame}`,
                     });
-                    editProjectBtn.addEventListener('click', () => {
-                        renderProjectEdit(project)
-                    });
+                    // editProjectBtn.addEventListener('click', () => {
+                    //     renderProjectEdit(project)
+                    // });
                     document.getElementById(`${project.repoid}`).appendChild(editProjectBtn);
                 }
             }
@@ -411,9 +412,9 @@ export function renderProfile(id) {
 
         // Set up the edit project button for the first project
         document.getElementById('edit-repo-buttons').appendChild(editProjectOne)
-        editProjectOne.addEventListener('click', () => {
-            renderProjectEdit(`${projectOne}`)
-        });
+//         editProjectOne.addEventListener('click', () => {
+//             renderProjectEdit(`${projectOne}`)
+//         });
 
 });
 }
