@@ -51,7 +51,7 @@ let form = document.getElementById("edit-profile-form");
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(form);
-    const userId = getCookie(gitConnectId);
+    const userId = getCookie("gitConnectId");
     const data = {
         firstName: formData.get("first-name"),
         lastName: formData.get("last-name"),
