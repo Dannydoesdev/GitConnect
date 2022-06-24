@@ -128,6 +128,7 @@ export function renderLanding() {
                 //<small>/dannydoesdev</small>
 
                 userCard.addEventListener('click', (event) => {
+                    console.log(event.target)
                     if (event.target.classList.contains('click-to-profile')) {
                         renderProfile(userid)
                     } else {
