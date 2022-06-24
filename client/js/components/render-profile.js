@@ -223,7 +223,7 @@ export function renderProfile(id) {
         // Add event listener to go to individual project page when you click div or edit project page when you click the edit btn
         document.getElementById('first-repo').addEventListener('click', function (event) {
             if (event.target.classList.contains('click-to-edit-profile')) {
-                renderProjectEdit(projectOneRepoName)
+                renderProjectEdit(projectOneRepoid)
             } else {
                 renderProject(projectOneRepoid)
             }
@@ -247,7 +247,7 @@ export function renderProfile(id) {
 
                 projectCol.addEventListener('click', (event) => {
                     if (event.target.classList.contains('click-to-edit-profile')) {
-                        renderProjectEdit(project.githubreponame)
+                        renderProjectEdit(project.repoid)
                     } else {
                         renderProject(project.repoid)
                     }
@@ -362,7 +362,7 @@ export function renderProfile(id) {
                         innerText: `Edit ${project.githubreponame}`,
                     });
                     editProjectBtn.addEventListener('click', () => {
-                        renderProjectEdit(project.githubreponame)
+                        renderProjectEdit(project.repoid)
                     });
                     document.getElementById(`${project.repoid}`).appendChild(editProjectBtn);
                 }
@@ -391,7 +391,7 @@ export function renderProfile(id) {
         // Set up the edit project button for the first project
         document.getElementById('edit-repo-buttons').appendChild(editProjectOne)
         editProjectOne.addEventListener('click', () => {
-            renderProjectEdit(`${projectOneGhName}`)
+            renderProjectEdit(`${projectOneRepoid}`)
         });
 
 });
