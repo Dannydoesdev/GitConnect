@@ -1,9 +1,10 @@
 # **GITCONNECT**
----
-A personalised GitHub portfolio creating experience.
+The Developers & Recruiters dream. 
+
+A personalised GitHub portfolio creating experience. Browse projects, read the stories, see the code, contact the developer. 
 
 
-![alt text](https://res.cloudinary.com/dc7oti3kw/image/upload/v1655872201/CaptureGitCOnnect_s7jrvr.jpg)
+![alt text]<img src="https://res.cloudinary.com/dc7oti3kw/image/upload/v1656086608/GitConnectFrontPage_dicuzr.jpg"  width="90%" height="90%">
 
 # **INSTALATION**
 
