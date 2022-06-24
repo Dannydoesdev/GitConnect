@@ -33,62 +33,18 @@ router.post("/addRepo", (req, res) => {
     let repoID = Math.floor(Math.random() * 10000);
     let status = 1;
     let isFork = '';
-    console.log(req.body.fork)
+
     if (req.body.fork) {
       isFork = 1;
     } else {
       isFork = 0;
     }
-    console.log(req.body.licensetype)
-    console.log(`is Fork? ${isFork}`)
-
-    // let licenseArr = Object.values(req.body.license);
-    // console.log(licenseArr)
-    // let language = languageArr.join("");
-    // console.log(language)
-    // repoID TEXT PRIMARY KEY UNIQUE NOT NULL, -- eg math.random
-    // gitHubRepoName TEXT, -- namr of repo (not user)
-    // userID SMALLINT REFERENCES users(id),
-    // status BIT NOT NULL, -- Available for viewing Y or N
-    // projectName TEXT, -- gitconnect project name
-    // description TEXT, -- other stuff should be gitconnect NOT github
-    // process TEXT,
-    // challenges TEXT,
-    // outcomes TEXT,
-    // tags TEXT,
-    // titleimage TEXT,
-    // projectImageUrl TEXT,
-    // githuburl TEXT,
-    // collaborators_url TEXT,
-    // issue_events_url TEXT,
-    // branches_url TEXT,
-    // tags_url TEXT,
-    // languages_url TEXT,
-    // contributors_url TEXT,
-    // subscribers_url TEXT,
-    // commits_url TEXT,
-    // created_at TEXT,
-    // updated_at TEXT,
-    // license TEXT,
-    // langone TEXT,
-    // langtwo TEXT,
-    // langthree TEXT,
-    // langfour TEXT,
-    // htmlurl TEXT,
-    // isfork BIT, --true/false for if it is a fork
-    // stargazers_count INT, -- number of stargazers
-    // watchers_count INT, -- number of watchers
-    // subscribers_count INT, -- number of subscribers
-
-    // to add later:  langtwo, langthree, langfour,
-    // req.body.langtwo, req.body.langthree, req.body.langfour, 
+   
 
     let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status, projectName, description, githubrepourl, collaborators_url, issue_events_url, branches_url, tags_url, languages_url, contributors_url, subscribers_url, commits_url, created_at, updated_at, license, langone, htmlurl, isfork, stargazers_count, watchers_count, subscribers_count) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24);`;
     let values = [id, projectName, repoID, status, req.body.name, req.body.description, req.body.githubrepourl, req.body.collaborators_url, req.body.issue_events_url, req.body.branches_url, req.body.tags_url, req.body.languages_url, req.body.contributors_url, req.body.subscribers_url, req.body.commits_url, req.body.created_at, req.body.updated_at, req.body.licensetype, req.body.language, req.body.html_url, isFork, req.body.stargazers_count, req.body.watchers_count, req.body.subscribers_count];
 
-    console.log(values)
-    console.log(values.length)
-    console.log(JSON.stringify(req.body.license))
+
     // let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4);`;
     // let values = [id, projectName, repoID, status];
     // console.log(values);
@@ -158,7 +114,7 @@ router.post("/editform_no_image/", (req, res) => {
 });
 router.post("/editform/", (req, res) => {
   //   removing session check for testing purposes
-
+  console.log("THE req.body", req.body);
   let sessionId = req.session.id;
   if (!sessionId) {
     res.status(401).json({ sucess: false, message: "Must be logged in" });
@@ -174,16 +130,20 @@ router.post("/editform/", (req, res) => {
   let outcomes = req.body["project-outcomes"];
   let status = parseInt(req.body.status);
   let userID = req.session.body.id;
+  console.log('hello')
   if (!req.files) {
     res.send("File was not found");
     return;
   }
+  console.log('hello2')
   if (repoId) {
+    console.log('hello3')
     // CLOUDINARY SEcTion. MUST BE FIRST TO GET THE <url></url>
     const file = req.files;
     const mainresponder = res; // increase the scope
     const upload = async (req, res) => {
       try {
+        console.log('hello4')
         const result = await cloudinary.uploader.upload(file.upload.tempFilePath, (result) => {
           if (result.public_id) {
             fs.rename(file.upload.tempFilePath, file.upload.tempFilePath + ".jpg", () => {});
@@ -202,7 +162,7 @@ router.post("/editform/", (req, res) => {
                 userID,
               ];
             } else {
-              let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET description = $1, process = $3,challenges = $4, outcomes = $5, status = $6 WHERE repoID = $2 AND userId = $7;`;
+              sql = `UPDATE ${PROJECTS_TABLE_NAME} SET description = $1, process = $3,challenges = $4, outcomes = $5, status = $6 WHERE repoID = $2 AND userId = $7;`;
               values = [description, repoId, process, challenges, outcomes, status, userID];
             }
             console.log("THE VALUES ARE", values);

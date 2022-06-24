@@ -70,12 +70,12 @@ export function renderProfile(id) {
             projectOneDescription = projectOne.description;
             projectOneRepoid = projectOne.repoid;
             projectOneGhName = projectOne.githubreponame;
-            let projectOneTitle = projectOne.title;
-            let projectOneImage = projectOne.titleimage;
-            // let projectOneLink = projectOne.link;
-            let projectOneChallenges = projectOne.challenges;
-            let projectOneProcess = projectOne.process;
-            let projectOneOutcomes = projectOne.outcomes;
+            projectOneTitle = projectOne.title;
+            projectOneImage = projectOne.titleimage;
+            projectOneLink = projectOne.htmlurl;
+             projectOneChallenges = projectOne.challenges;
+             projectOneProcess = projectOne.process;
+            projectOneOutcomes = projectOne.outcomes;
             projectOneRepoName = projectOne.githubreponame;
             projectOneImageUrl = projectOne.projectimageurl;
             console.log(projectOneRepoName)
