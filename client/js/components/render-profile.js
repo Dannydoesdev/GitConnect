@@ -39,6 +39,7 @@ export function renderProfile(id) {
         let lastName = profileData.lastname;
         let aboutme = profileData.aboutme;
         let mobile = profileData.mobile;
+        let projectimageurl = profileData.projectimageurl;
         //TYPO IN DB
         let githubUrl = profileData.githubutrl;
 
@@ -148,9 +149,9 @@ export function renderProfile(id) {
 
                 <!-- Hero image of profile -->
                 <div id="first-repo" class="col-md-9 pe-0 text-start">
-                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 320)})'")>
+                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${projectimageurl})'")>
                 <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
-                            <h1 class="display-5 fw-bold text-white">Cover Image of ${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
+                            <h1 class="display-5 fw-bold text-white">${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
                             <div class="col-lg-6 mx-auto">
                                 <p class="fs-5 mb-4">Image goes here</p>
 
@@ -243,7 +244,7 @@ export function renderProfile(id) {
         // Add event listener to go to individual project page when you click div or edit project page when you click the edit btn
         document.getElementById('first-repo').addEventListener('click', function (event) {
             if (event.target.classList.contains('click-to-edit-profile')) {
-                renderProjectEdit(projectOne)
+                renderProjectEdit(projectData[0]);
             } else {
                 renderProject(projectOneRepoid)
             }
@@ -267,7 +268,7 @@ export function renderProfile(id) {
 
                 projectCol.addEventListener('click', (event) => {
                     if (event.target.classList.contains('click-to-edit-profile')) {
-                        renderProjectEdit(project)
+                        renderProjectEdit(project);
                     } else {
                         renderProject(project.repoid)
                     }
@@ -375,14 +376,14 @@ export function renderProfile(id) {
         // In order for the appending of edit buttons - a new loop is required (doesn't work in same promise above) - test
         projectData.forEach((project, index) => {
             if (index >= 1 && result.data.currentUser) {
-                console.log(project.repoid)
+                console.log("project.repoid",project.repoid)
                 if (document.getElementById(`${project.repoid}`)) {
                     const editProjectBtn = makeAnEl('btn', {
                         class: ['btn', 'click-to-edit-profile', 'btn-outline-light'],
-                        innerText: `Edit ${project.githubreponame}`,
+                        innerText: `Edit ${project}`,
                     });
                     editProjectBtn.addEventListener('click', () => {
-                        renderProjectEdit(project)
+                        renderProjectEdit(project);
                     });
                     document.getElementById(`${project.repoid}`).appendChild(editProjectBtn);
                 }
