@@ -110,10 +110,11 @@ router.post("/editform_no_image/", (req, res) => {
   const repoId = req.body.repoId;
   console.log("THE req.body", req.body);
   let description = req.body["project-description"];
-  // let projectName = req.body["project-name"];
+  let projectName = req.body["project-name"];
   let process = req.body["project-process"];
   let challenges = req.body["project-challenges"];
   let outcomes = req.body["project-outcomes"];
+  let appLink = req.body["project-link"]
   let status = parseInt(req.body.status);
   let userID = req.session.body.id;
   if (repoId) {
@@ -121,8 +122,8 @@ router.post("/editform_no_image/", (req, res) => {
     const mainresponder = res; // increase the scope
     const upload = async (req, res) => {
       try {
-        let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET description = $1, process = $3,challenges = $4, outcomes = $5, status = $6 WHERE repoID = $2 AND userId = $7;`;
-        values = [description, repoId, process, challenges, outcomes, status, userID];
+        let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET description = $1, process = $3,challenges = $4, outcomes = $5, status = $6, projectName = $8, app_link = $9 WHERE repoID = $2 AND userId = $7;`;
+        values = [description, repoId, process, challenges, outcomes, status, userID, projectName, appLink];
         console.log("THE VALUES ARE", values);
         db.query(sql, values)
           .then((dbres) => {
