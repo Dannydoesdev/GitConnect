@@ -288,9 +288,13 @@ export function renderProfile(id) {
                 // <div class="py-1">
             projectCol.innerHTML = `
 
-            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
+            <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:100%;background-image: url('${
+              project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)
+            }')">
                 <div id="${project.repoid}" class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
-                    <h1 class="display-5 fw-bold text-white">Cover Image of ${project.githubreponame ? project.githubreponame : 'Project'}</h1>
+                    <h1 class="display-5 fw-bold text-white">Cover Image of ${
+                      project.githubreponame ? project.githubreponame : "Project"
+                    }</h1>
                     <div class="col-lg-6 mx-auto">
                         <p class="fs-5 mb-4">Image goes here</p>
 
@@ -305,7 +309,7 @@ export function renderProfile(id) {
 
             <div class="row py-2">
                 <div class="col-md-12 text-center mb-2">
-                <h2 class="user-base-text text-start">${project.githubreponame ? project.githubreponame : ''}</h2>
+                <h2 class="user-base-text text-start">${project.githubreponame ? project.githubreponame : ""}</h2>
                 </div>
             </div>
 
@@ -326,7 +330,7 @@ export function renderProfile(id) {
                     <div class="row text-center py-4">
                         <div class="col">
                             <h4 class="user-base-text text-start">Project Description</h4>
-                            <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
+                            <p class="user-base-text text-start">${project.description ? project.description : ""}</p>
                         </div>
 
                         <!-- <div class="col">
@@ -374,7 +378,7 @@ export function renderProfile(id) {
                 </div> -->
             </div>
         </div>
-        `
+        `;
                                                   
             let projectRow = document.getElementById('project-row')      
             projectRow.appendChild(projectCol);
