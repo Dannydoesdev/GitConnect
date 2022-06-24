@@ -129,7 +129,7 @@ export function renderProfile(id) {
     main.innerHTML = `
             <div class="container-lg">
             <div class="row">
-            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 300)}')")>
+            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1400, 320)}')")>
             <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.65);">
                         <h1 class="display-5 fw-bold text-white">Cover Image</h1>
                         <div class="col-lg-6 mx-auto">
