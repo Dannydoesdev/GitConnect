@@ -82,5 +82,17 @@ CREATE TABLE repoparameters ( -- Repos and their paramaters.
     outcomes TEXT,
     tags TEXT,
     titleimage TEXT,
-    projectImageUrl TEXT
+    projectImageUrl TEXT,
+    githuburl TEXT,
+    collaborators_url TEXT,
+    issue_events_url TEXT,
+    branches_url TEXT,
+    tags_url TEXT,
+    languages_url TEXT,
+    contributors_url TEXT,
+    subscribers_url TEXT,
+    commits_url TEXT,
+    created_at TEXT,
+    updated_at TEXT,
+    license TEXT
 );
