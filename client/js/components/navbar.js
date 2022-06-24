@@ -4,22 +4,14 @@ import { renderProfileEdit } from "./render-profile-edit.js";
 import { renderSearch } from "./render-repo-search.js";
 import { logOut } from "./home-startup.js";
 import { renderProject } from "./render-project.js";
-
-// import { renderProfile, renderProfileTemplate } from "./render-profile.js";
-import { renderProfile, renderProfileTemplate } from "./render-profile.js";
+import { renderProfile } from "./render-profile.js";
 import { renderRego } from "./render-rego.js";
 import { renderLogin } from "./render-login.js";
-
 // import { whichPageToShow, page } from "./Function-whichPageToShow";
 
 
 export function renderNav() {
 
-//   const main = document.getElementById("main");
-
-//   const logo = document.createElement("img");
-//   logo.src = "./img/gclogo.png";
-//   logo.setAttribute("id", "navbar-logo");
     
     const navBar = document.getElementById("navbar");
     
