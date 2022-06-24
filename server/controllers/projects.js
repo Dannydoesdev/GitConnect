@@ -29,11 +29,68 @@ router.post("/addRepo", (req, res) => {
     res.status(401).json({ sucess: false, message: "Must be logged in" });
   } else {
     let projectName = req.body.reponame;
-    let repoID = Math.floor(Math.random() * 1000);
+    // let repoID = req.body.id;
+    let repoID = Math.floor(Math.random() * 10000);
     let status = 1;
+    let isFork = '';
+    console.log(req.body.fork)
+    if (req.body.fork) {
+      isFork = 1;
+    } else {
+      isFork = 0;
+    }
+    console.log(req.body.licensetype)
+    console.log(`is Fork? ${isFork}`)
 
-    let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4);`;
-    let values = [id, projectName, repoID, status];
+    // let licenseArr = Object.values(req.body.license);
+    // console.log(licenseArr)
+    // let language = languageArr.join("");
+    // console.log(language)
+    // repoID TEXT PRIMARY KEY UNIQUE NOT NULL, -- eg math.random
+    // gitHubRepoName TEXT, -- namr of repo (not user)
+    // userID SMALLINT REFERENCES users(id),
+    // status BIT NOT NULL, -- Available for viewing Y or N
+    // projectName TEXT, -- gitconnect project name
+    // description TEXT, -- other stuff should be gitconnect NOT github
+    // process TEXT,
+    // challenges TEXT,
+    // outcomes TEXT,
+    // tags TEXT,
+    // titleimage TEXT,
+    // projectImageUrl TEXT,
+    // githuburl TEXT,
+    // collaborators_url TEXT,
+    // issue_events_url TEXT,
+    // branches_url TEXT,
+    // tags_url TEXT,
+    // languages_url TEXT,
+    // contributors_url TEXT,
+    // subscribers_url TEXT,
+    // commits_url TEXT,
+    // created_at TEXT,
+    // updated_at TEXT,
+    // license TEXT,
+    // langone TEXT,
+    // langtwo TEXT,
+    // langthree TEXT,
+    // langfour TEXT,
+    // htmlurl TEXT,
+    // isfork BIT, --true/false for if it is a fork
+    // stargazers_count INT, -- number of stargazers
+    // watchers_count INT, -- number of watchers
+    // subscribers_count INT, -- number of subscribers
+
+    // to add later:  langtwo, langthree, langfour,
+    // req.body.langtwo, req.body.langthree, req.body.langfour, 
+
+    let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status, projectName, description, githuburl, collaborators_url, issue_events_url, branches_url, tags_url, languages_url, contributors_url, subscribers_url, commits_url, created_at, updated_at, license, langone, htmlurl, isfork, stargazers_count, watchers_count, subscribers_count) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24);`;
+    let values = [id, projectName, repoID, status, req.body.name, req.body.description, req.body.githuburl, req.body.collaborators_url, req.body.issue_events_url, req.body.branches_url, req.body.tags_url, req.body.languages_url, req.body.contributors_url, req.body.subscribers_url, req.body.commits_url, req.body.created_at, req.body.updated_at, req.body.licensetype, req.body.language, req.body.html_url, isFork, req.body.stargazers_count, req.body.watchers_count, req.body.subscribers_count];
+
+    console.log(values)
+    console.log(values.length)
+    console.log(JSON.stringify(req.body.license))
+    // let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4);`;
+    // let values = [id, projectName, repoID, status];
     // console.log(values);
     db.query(sql, values)
       .then((dbres) => {

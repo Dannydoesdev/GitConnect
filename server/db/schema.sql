@@ -32,7 +32,7 @@ CREATE TABLE users ( -- All users that have access to Login
     aboutme TEXT,
     mobile VARCHAR(16),
     portfoliolink TEXT,
-    githubutrl TEXT,
+    githuburl TEXT,
     gitHubAvatar TEXT,
     gitHubrepos_url TEXT,
     gitHubFullName TEXT,

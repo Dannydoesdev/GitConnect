@@ -42,7 +42,7 @@ export function renderProfile(id) {
        
         // console.log(projectimageurl)
         //TYPO IN DB
-        let githubUrl = profileData.githubutrl;
+        let githubUrl = profileData.githuburl;
 
 
         // Seperate project data in response
