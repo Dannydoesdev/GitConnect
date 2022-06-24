@@ -151,6 +151,10 @@ export function renderRepoListBs(userName, userid) {
             let repoDesc = result.description;
             let repoLang = result.language;
 
+
+            if (response.fork) {
+                repoName += ' (fork)';
+            }
             // create a div for each repo that is returned
             // nest the card layout as required via the makeAnEl fn
             // add desired styling to card element
@@ -194,10 +198,14 @@ export function renderRepoListBs(userName, userid) {
             ]);
 
 
-            
+            if (response.fork) {
+                console.log('forked!')
+                row.appendChild(repoDiv);
+            } else {
+                console.log('not forked') 
             // languagePct(userName, repoName)
             row.appendChild(repoDiv);
-
+            }
             let switchRepoButton = makeAnEl('div', {
                 class: ['ms-3', 'form-check', 'form-switch'],
                 // id: `${repoName}`,
@@ -210,6 +218,7 @@ export function renderRepoListBs(userName, userid) {
                     data: {
                         username: userName,
                         reponame: repoName,
+                        // licensetype: result.license.name,
                     },
                 }),
                 makeAnEl('label', {
@@ -233,8 +242,16 @@ export function renderRepoListBs(userName, userid) {
             for (const [key, value] of Object.entries(result)) {
                 console.log(`${key}: ${value}`);
                 let repoToggle = document.getElementById(`${repoName}-toggle`)
-                repoToggle.dataset[key] = value;
+                if (key === 'license' && value == null) {
+                    console.log('no license')
+                    repoToggle.dataset.licensetype = 'No license';
+                } else if (key === 'license' && value !== null) {
+                    repoToggle.dataset.licensetype = value.name;
+                } else {
+                    repoToggle.dataset[key] = value;
+                };
             };
+            
             
 
             
@@ -245,8 +262,9 @@ export function renderRepoListBs(userName, userid) {
 }
 
 function addSelectedRepos(reponame, userName, userid, repoData) {
-    
-    console.log(repoData)
+    // let licenseArr = Object.values(repoData.license);
+    // console.log(licenseArr)
+    // console.log(repoData)
     const repoDataObj = Object.assign({}, repoData);
     console.log(repoDataObj)
 
