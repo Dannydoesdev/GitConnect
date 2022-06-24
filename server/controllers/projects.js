@@ -187,7 +187,7 @@ router.post("/editform/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} JOIN ${USERS_TABLE_NAME} ON users.id = repoparameters.userid;`;
+  let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} JOIN ${USERS_TABLE_NAME} ON users.id = repoparameters.userid WHERE status = '1';`;
   db.query(sql)
     .then((results) => {
       res.status(200).json(results.rows);
@@ -208,4 +208,6 @@ router.get("/:repoid", (req, res) => {
       res.status(404).json({ message: "Cannot locate repo" });
     });
 });
+
+
 module.exports = router;

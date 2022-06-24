@@ -138,7 +138,7 @@ router.get(`/getUsers`, (req, res) => {
   // res.json(ret)
 });
 router.post(`/myrepos`, (req, res) => {
-  dbSelectQuery(`SELECT * FROM repoparameters;`, res);
+  dbSelectQuery(`SELECT * FROM repoparameters WHERE status='1';`, res);
 });
 
 // ********************************************************************************************************************
