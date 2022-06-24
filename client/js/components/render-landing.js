@@ -101,7 +101,7 @@ export function renderLanding() {
                 let repoName = user.githubreponame;
                 let location = user.githublocation;
                 let userid = user.userid;
-
+                let projectImageUrl = user.projectimageurl;
                 console.log(repoid)
                 
                 const repoCol = makeAnEl('div', {
@@ -140,7 +140,10 @@ export function renderLanding() {
                 userCard.innerHTML = `
                     <div class="col">
                         <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-4 shadow-lg border-0"
-                            style="background-image: url('${makeAnImg(600, 350)}'); min-height: 272px; max-height: 320px;">
+                            style="background-size:100% 100%; background-image: url('${
+                    projectImageUrl ? projectImageUrl :
+                              (makeAnImg(600, 350))
+                            }'); min-height: 272px; max-height: 320px;">
                             <div id="selected-div-${repoid}" class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1" style="background-color: rgba(0, 0, 0, 0.14);">
                                 <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">${repoName}</h2>
                                 <ul class="d-flex list-unstyled mt-auto">
