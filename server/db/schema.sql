@@ -103,5 +103,6 @@ CREATE TABLE repoparameters ( -- Repos and their paramaters.
     isfork BIT, --true/false for if it is a fork
     stargazers_count INT, -- number of stargazers
     watchers_count INT, -- number of watchers
-    subscribers_count INT -- number of subscribers
+    subscribers_count INT, -- number of subscribers
+    youtubeurl TEXT
 );
