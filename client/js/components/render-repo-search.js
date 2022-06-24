@@ -70,7 +70,7 @@ export function renderRepoListBs(userName, userid) {
     // create a bootstrap style container to hold the page info
     const container = makeAnEl('div', {
         id: 'repo-list',
-        class: ['container-fluid', 'bg-dark', 'text-white']
+        class: ['container-lg', 'bg-dark', 'text-white']
     })
 
     // crreate a bootstrap style row as required
@@ -92,11 +92,13 @@ export function renderRepoListBs(userName, userid) {
         console.log(`user name is ${userName} on repo search load`)
         console.log(`user id is ${userid} on repo search load`)
 
+        
+
         // create profileimg var - img type with GH profile img as src
         const profileImg = makeAnEl('img', {
             src: response.data[0].owner.avatar_url,
             id: 'profile-img',
-            class: ['rounded', 'mx-auto', 'd-block']
+            class: ['rounded', 'mx-auto', 'mb-2', 'd-block']
         })
 
         // create repo heading var - rapo owner name
@@ -105,24 +107,34 @@ export function renderRepoListBs(userName, userid) {
             class: 'text-center',
         })
 
-        const addSelectedReposBtn = makeAnEl('button', {
+        const addSelectedReposBtn = makeAnEl('div', {
+            class: ['col-md-6', 'offset-md-3'],
+        },[
+            makeAnEl('button', {
             id: 'add-selected-repos-btn',
             class: ['btn', 'btn-primary', 'btn-outline-light', 'btn-lg', 'mx-auto', 'd-block'],
             innerText: 'Add selected repos to project'
-        })
+            }),
+        ]);
 
         addSelectedReposBtn.addEventListener('click', () => {
-            let selectedReposArr = [];
+
+            
+            let selectedReposDataArr = [];
+            let selectedReposDataNames = [];
             let selectedRepos = document.querySelectorAll("input[type='checkbox']");
+            console.log(`selected repos are ${selectedRepos}`)
+
             selectedRepos.forEach((repo) => {
                 if (repo.checked) {
                     // console.log(repo.data)
-                    selectedReposArr.push(repo.value);
+                    selectedReposDataArr.push(repo.dataset);
+                    selectedReposDataNames.push(repo.value);
                 }
             })
-            console.log(selectedReposArr);
+            // console.log(selectedReposArr);
             // send selected repos to the server
-            selectedReposArr.forEach(repo => addSelectedRepos(repo, userName, userid));
+            selectedReposDataArr.forEach(repoData => addSelectedRepos(repoData.name, userName, userid, repoData));
         })
 
         row.appendChild(profileImg)
@@ -143,11 +155,11 @@ export function renderRepoListBs(userName, userid) {
             // nest the card layout as required via the makeAnEl fn
             // add desired styling to card element
             let repoDiv = makeAnEl('div', {
-                class: ['col-md-4', 'py-2'],
+                class: ['col-md-4', 'my-4'],
             }, [
                 makeAnEl('div', {
                     id: repoName,
-                    class: ['card', 'border-light', 'text-center', 'text-white', 'bg-dark'],
+                    class: ['card', 'text-start', 'text-white', 'bg-dark'],
                     data: {
                         repoName: repoName,
                         userName: userName,
@@ -174,7 +186,7 @@ export function renderRepoListBs(userName, userid) {
                             href: repoLink,
                             style: {
                                 color: 'white',
-                                fontSize: '18px',
+                                fontSize: '14px',
                             },
                         }),
                     ]),
@@ -182,51 +194,70 @@ export function renderRepoListBs(userName, userid) {
             ]);
 
 
-
-//             <div class="form-check form-switch">
-//   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-//   <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
-// </div>
             
             // languagePct(userName, repoName)
             row.appendChild(repoDiv);
 
             let switchRepoButton = makeAnEl('div', {
-                class: ['form-check', 'form-switch'],
-                id: `${repoName}`,
+                class: ['ms-3', 'form-check', 'form-switch'],
+                // id: `${repoName}`,
             }, [
                 makeAnEl('input', {
                     class: 'form-check-input',
                     type: 'checkbox',
-                    id: `${repoName}`,
+                    id: `${repoName}-toggle`,
                     value: `${repoName}`,
                     data: {
-                        userName: userName,
-                        repoName: repoName,
+                        username: userName,
+                        reponame: repoName,
                     },
                 }),
                 makeAnEl('label', {
                     class: 'form-check-label',
-                    for: `${userName}-${repoName}`,
+                    for: `${repoName}-toggle`,
+                    style: {
+                        color: '#366ffd',
+                        fontSize: '17px',
+                        fontWeight: 'bold',
+                    },
+                    // for: `${userName}-${repoName}`,
                     innerText: `Add ${repoName} to project list`,
                 }),
             ]);
+            // #40c438 - green
+            // #58cd51
+            // #366ffd - blue
 
             repoDiv.appendChild(switchRepoButton);
+            
+            for (const [key, value] of Object.entries(result)) {
+                console.log(`${key}: ${value}`);
+                let repoToggle = document.getElementById(`${repoName}-toggle`)
+                repoToggle.dataset[key] = value;
+            };
+            
+
+            
 
         })  
     
     })
 }
 
-function addSelectedRepos(reponame, userName, userid) {
+function addSelectedRepos(reponame, userName, userid, repoData) {
     
+    console.log(repoData)
+    const repoDataObj = Object.assign({}, repoData);
+    console.log(repoDataObj)
+
+
         console.log(`id in add selected repos is ${userid}`)
         console.log(`username in add selected repos is ${userName}`)
         const addRepoURL = `/api/projects/addRepo`;
-        const repoData = {
-            reponame: reponame,
-        }
+        // const repoData = {
+        //     reponame: reponame,
+        // }
+    
         axios.post(addRepoURL, repoData).then((response) => {
             console.log(response);
         })

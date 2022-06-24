@@ -43,7 +43,7 @@ export function makeAnEl(type, attrs, children) {
       })
     } else {
       // set the attribute on the element as is
-      el[attr] = attrs[attr]
+      el[attr] = attrs[attr];
     }
   })
 

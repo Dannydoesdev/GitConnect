@@ -14,10 +14,13 @@ router.use(fileupload({ useTempFiles: true, tempFileDir: "./client/tmp/" }));
 
 //Handle POST requests to /api/projects to create project after searching repos
 router.post("/addRepo", (req, res) => {
+
+  console.log(req.body)
   // githubname: req.session.body.githubname
-  const githubname = req.session.body.githubname;
+  // const githubname = req.session.body.githubname;
   const id = req.session.body.id;
-  console.log(req.body.githubname);
+  console.log(req.body.username);
+  console.log(req.body.reponame)
   // NEED TO PUT THIS SEARCH BEHIND A LOGGED IN USER ONLY
   if (!id) {
     res.status(401).json({ sucess: false, message: "Must be logged in" });
