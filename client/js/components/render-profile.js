@@ -39,6 +39,7 @@ export function renderProfile(id) {
         let lastName = profileData.lastname;
         let aboutme = profileData.aboutme;
         let mobile = profileData.mobile;
+        let projectimageurl = profileData.projectimageurl;
         //TYPO IN DB
         let githubUrl = profileData.githubutrl;
 
@@ -148,9 +149,9 @@ export function renderProfile(id) {
 
                 <!-- Hero image of profile -->
                 <div id="first-repo" class="col-md-9 pe-0 text-start">
-                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 320)})'")>
+                <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${projectimageurl})'")>
                 <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
-                            <h1 class="display-5 fw-bold text-white">Cover Image of ${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
+                            <h1 class="display-5 fw-bold text-white">${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
                             <div class="col-lg-6 mx-auto">
                                 <p class="fs-5 mb-4">Image goes here</p>
 
