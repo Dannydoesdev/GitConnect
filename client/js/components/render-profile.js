@@ -372,7 +372,7 @@ export function renderProfile(id) {
         });
         
  
-        // In order for the appending of edit buttons - a new loop is required (doesn't work in same promise above)
+        // In order for the appending of edit buttons - a new loop is required (doesn't work in same promise above) - test
         projectData.forEach((project, index) => {
             if (index >= 1 && result.data.currentUser) {
                 console.log(project.repoid)
