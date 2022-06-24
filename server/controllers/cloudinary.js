@@ -28,7 +28,7 @@ const fs = require("fs");
 const db = require("../db/db.js");
 const cloudinary = require("cloudinary");
 require("dotenv").config();
-router.use(fileupload({ useTempFiles: true }));
+router.use(fileupload({ useTempFiles: true, tempFileDir:"./client/tmp" }));
 
 //  ******************************* CONTROLLER INTERCEPTOR ****************************************
 router.use("/", (req, res, next) => {
@@ -87,17 +87,17 @@ router.post("/uploadimage", (req, res) => {
                 theDatabaseMessage = "Database updated correctly";
                 mainresponder.json({ status: STATUS_OK, file: "Uploaded", message: theDatabaseMessage });
               } else {
-                theDatabaseMessage = "Database did not update correctly";
+                theDatabaseMessage = "Database did not update correctly 1";
                 mainresponder.json({ status: STATUS_OK, file: "Uploaded", message: theDatabaseMessage });
               }
             })
             .catch((err) => {
-              theDatabaseMessage = "Database did not update correctly";
+              theDatabaseMessage = "Database did not update correctly 2";
               mainresponder.json({ status: STATUS_OK, file: "Uploaded", message: theDatabaseMessage });
             });
           try {
             // Delete the tmp file.
-            fs.unlinkSync(file.upload.tempFilePath);
+            //fs.unlinkSync(file.upload.tempFilePath);
             // temporary file removed
             return result;
           } catch (err) {

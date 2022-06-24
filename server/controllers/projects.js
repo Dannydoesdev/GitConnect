@@ -10,7 +10,7 @@ const PROJECTS_TABLE_NAME = "repoparameters";
 const STATUS_NOT_OK = "not ok";
 const STATUS_OK = "ok";
 
-router.use(fileupload({ useTempFiles: true }));
+router.use(fileupload({ useTempFiles: true, tempFileDir: "./client/tmp/" }));
 
 //Handle POST requests to /api/projects to create project after searching repos
 router.post("/addRepo", (req, res) => {
@@ -65,17 +65,17 @@ router.post("/editform/", (req, res) => {
   let status = parseInt(req.body.status);
   let userID = req.session.body.id;
 
-  if (!projectName) {
-    res.status(400).json({ sucess: false, message: "Please provide a project name" });
-  } else if (!description) {
-    res.status(400).json({ sucess: false, message: "Please provide a project description" });
-  } else if (!process) {
-    res.status(400).json({ sucess: false, message: "Please enter details about the process of the project" });
-  } else if (!challenges) {
-    res.status(400).json({ sucess: false, message: "Please enter details about challenges you faced" });
-  } else if (!outcomes) {
-    res.status(400).json({ sucess: false, message: "Please enter details about the project outcomes" });
-  } else { 
+  if (repoId) {
+    //   res.status(400).json({ sucess: false, message: "Please provide a project name" });
+    // } else if (!description) {
+    //   res.status(400).json({ sucess: false, message: "Please provide a project description" });
+    // } else if (!process) {
+    //   res.status(400).json({ sucess: false, message: "Please enter details about the process of the project" });
+    // } else if (!challenges) {
+    //   res.status(400).json({ sucess: false, message: "Please enter details about challenges you faced" });
+    // } else if (!outcomes) {
+    //   res.status(400).json({ sucess: false, message: "Please enter details about the project outcomes" });
+    // } else {
     // CLOUDINARY SEcTion. MUST BE FIRST TO GET THE <url></url>
     const file = req.files;
     const mainresponder = res; // increase the scope
@@ -83,7 +83,11 @@ router.post("/editform/", (req, res) => {
       try {
         const result = await cloudinary.uploader.upload(file.upload.tempFilePath, (result) => {
           if (result.public_id) {
-            fs.unlinkSync(file.upload.tempFilePath); // delete the emp file.
+            // console.log("THE RESULTS ARE",result,"FILE INFO = ",file)
+            //fs.unlinkSync(file.upload.tempFilePath); // delete the emp file.
+            fs.rename(file.upload.tempFilePath, file.upload.tempFilePath + ".jpg", () => {
+              console.log("file renamed");
+            });
             let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET projectName = $1, description = $2, process = $4,challenges = $5, outcomes = $6, status = $7, projectimageurl = $8 WHERE repoID = $3 AND userId = $9;`;
             let values = [
               projectName,
@@ -93,9 +97,10 @@ router.post("/editform/", (req, res) => {
               challenges,
               outcomes,
               status,
-              result.url,
-              userID
+              file.upload.tempFilePath,
+              userID,
             ];
+            console.log("THE VALUES ARE", values);
             db.query(sql, values)
               .then((dbres) => {
                 if (dbres.rowCount) {
