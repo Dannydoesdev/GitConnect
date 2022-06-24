@@ -10,7 +10,7 @@ const PROJECTS_TABLE_NAME = "repoparameters";
 const STATUS_NOT_OK = "not ok";
 const STATUS_OK = "ok";
 
-router.use(fileupload({ useTempFiles: true }));
+router.use(fileupload({ useTempFiles: true, tempFileDir: "./client/tmp/" }));
 
 //Handle POST requests to /api/projects to create project after searching repos
 router.post("/addRepo", (req, res) => {
@@ -83,7 +83,11 @@ router.post("/editform/", (req, res) => {
       try {
         const result = await cloudinary.uploader.upload(file.upload.tempFilePath, (result) => {
           if (result.public_id) {
-            fs.unlinkSync(file.upload.tempFilePath); // delete the emp file.
+            // console.log("THE RESULTS ARE",result,"FILE INFO = ",file)
+            //fs.unlinkSync(file.upload.tempFilePath); // delete the emp file.
+            fs.rename(file.upload.tempFilePath,file.upload.tempFilePath+'.jpg',()=>{
+              console.log("file renamed")
+            });
             let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET projectName = $1, description = $2, process = $4,challenges = $5, outcomes = $6, status = $7, projectimageurl = $8 WHERE repoID = $3 AND userId = $9;`;
             let values = [
               projectName,
@@ -93,7 +97,7 @@ router.post("/editform/", (req, res) => {
               challenges,
               outcomes,
               status,
-              result.url,
+              file.upload.tempFilePath,
               userID
             ];
             console.log("THE VALUES ARE",values)
