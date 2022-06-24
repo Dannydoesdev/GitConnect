@@ -104,5 +104,6 @@ CREATE TABLE repoparameters ( -- Repos and their paramaters.
     stargazers_count INT, -- number of stargazers
     watchers_count INT, -- number of watchers
     subscribers_count INT, -- number of subscribers
-    youtubeurl TEXT
+    youtubeurl TEXT,
+    app_link TEXT
 );

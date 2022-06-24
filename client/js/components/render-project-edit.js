@@ -5,6 +5,13 @@ export function renderProjectEdit(project) {
   main.innerHTML = "";
   const results = document.getElementById("results");
   results.innerHTML = "";
+  let appLink = "";
+        // Assign standard variables from profile response that we want to utilise
+        if (project.app_link === null) {
+            appLink = "";
+        } else {
+            appLink = project.app_link;
+        };
   main.innerHTML = `
     <div class="container bg-dark text-white">
     <div class="row">
@@ -31,6 +38,10 @@ export function renderProjectEdit(project) {
                     <label for="project-outcomes">Outcomes</label>
                     <textarea type="text" class="form-control" id="project-outcomes" name="project-outcomes" placeholder="What was the project outcome? Was it successful? What did you learn and any reflections?">${project.outcomes ? project.outcomes : ''}</textarea>
                 </div>
+                <div class="form-group mb-4">
+                    <label for="project-link">App Link</label>
+                    <textarea type="text" class="form-control" id="project-link" name="project-link" placeholder="Link to your app">${appLink ? appLink : ''}</textarea>
+                </div>
                 <input type="submit" class="btn btn-lg btn-outline-light align-self-center" value="Submit">
                 <input id="file" name="upload" type="file" class="btn btn-lg btn-outline-light align-self-center" 
                 value="Submit" multiple="multiple">
@@ -47,7 +58,7 @@ export function renderProjectEdit(project) {
     const formData = new FormData(theForm);
     const sendingrequest = async () => {
       await axios
-        .post("/api/projects/editform/", formData)
+        .post("/api/projects/editform_no_image/", formData)
         .then((response) => {
           console.log(response);
           //   window.location = '/api/projects';
