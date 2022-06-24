@@ -65,17 +65,17 @@ router.post("/editform/", (req, res) => {
   let status = parseInt(req.body.status);
   let userID = req.session.body.id;
 
-  if (!projectName) {
-    res.status(400).json({ sucess: false, message: "Please provide a project name" });
-  } else if (!description) {
-    res.status(400).json({ sucess: false, message: "Please provide a project description" });
-  } else if (!process) {
-    res.status(400).json({ sucess: false, message: "Please enter details about the process of the project" });
-  } else if (!challenges) {
-    res.status(400).json({ sucess: false, message: "Please enter details about challenges you faced" });
-  } else if (!outcomes) {
-    res.status(400).json({ sucess: false, message: "Please enter details about the project outcomes" });
-  } else { 
+  if (repoId) {
+    //   res.status(400).json({ sucess: false, message: "Please provide a project name" });
+    // } else if (!description) {
+    //   res.status(400).json({ sucess: false, message: "Please provide a project description" });
+    // } else if (!process) {
+    //   res.status(400).json({ sucess: false, message: "Please enter details about the process of the project" });
+    // } else if (!challenges) {
+    //   res.status(400).json({ sucess: false, message: "Please enter details about challenges you faced" });
+    // } else if (!outcomes) {
+    //   res.status(400).json({ sucess: false, message: "Please enter details about the project outcomes" });
+    // } else {
     // CLOUDINARY SEcTion. MUST BE FIRST TO GET THE <url></url>
     const file = req.files;
     const mainresponder = res; // increase the scope
@@ -85,8 +85,8 @@ router.post("/editform/", (req, res) => {
           if (result.public_id) {
             // console.log("THE RESULTS ARE",result,"FILE INFO = ",file)
             //fs.unlinkSync(file.upload.tempFilePath); // delete the emp file.
-            fs.rename(file.upload.tempFilePath,file.upload.tempFilePath+'.jpg',()=>{
-              console.log("file renamed")
+            fs.rename(file.upload.tempFilePath, file.upload.tempFilePath + ".jpg", () => {
+              console.log("file renamed");
             });
             let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET projectName = $1, description = $2, process = $4,challenges = $5, outcomes = $6, status = $7, projectimageurl = $8 WHERE repoID = $3 AND userId = $9;`;
             let values = [
@@ -98,9 +98,9 @@ router.post("/editform/", (req, res) => {
               outcomes,
               status,
               file.upload.tempFilePath,
-              userID
+              userID,
             ];
-            console.log("THE VALUES ARE",values)
+            console.log("THE VALUES ARE", values);
             db.query(sql, values)
               .then((dbres) => {
                 if (dbres.rowCount) {

@@ -243,7 +243,7 @@ export function renderProfile(id) {
         // Add event listener to go to individual project page when you click div or edit project page when you click the edit btn
         document.getElementById('first-repo').addEventListener('click', function (event) {
             if (event.target.classList.contains('click-to-edit-profile')) {
-                renderProjectEdit(projectOne)
+                renderProjectEdit(projectData[0]);
             } else {
                 renderProject(projectOneRepoid)
             }
@@ -267,7 +267,7 @@ export function renderProfile(id) {
 
                 projectCol.addEventListener('click', (event) => {
                     if (event.target.classList.contains('click-to-edit-profile')) {
-                        renderProjectEdit(project)
+                        renderProjectEdit(project);
                     } else {
                         renderProject(project.repoid)
                     }
@@ -375,14 +375,14 @@ export function renderProfile(id) {
         // In order for the appending of edit buttons - a new loop is required (doesn't work in same promise above) - test
         projectData.forEach((project, index) => {
             if (index >= 1 && result.data.currentUser) {
-                console.log(project.repoid)
+                console.log("project.repoid",project.repoid)
                 if (document.getElementById(`${project.repoid}`)) {
                     const editProjectBtn = makeAnEl('btn', {
                         class: ['btn', 'click-to-edit-profile', 'btn-outline-light'],
-                        innerText: `Edit ${project.githubreponame}`,
+                        innerText: `Edit ${project}`,
                     });
                     editProjectBtn.addEventListener('click', () => {
-                        renderProjectEdit(project)
+                        renderProjectEdit(project);
                     });
                     document.getElementById(`${project.repoid}`).appendChild(editProjectBtn);
                 }
