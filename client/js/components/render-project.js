@@ -49,7 +49,7 @@ export function renderProject(repoid) {
            
             main.innerHTML = `
             <!-- Increase py on hero to make bigger vertically -->
-            <div class="container-lg bg-dark text-white">
+            <div class="container-xxl bg-dark text-white">
                 <!-- Sidebar stuff -->
                 <div class="row">
                     <div class="col-md-2 pt-4 d-flex flex-column text-center" style="background-color: rgba(0, 0, 0, 0.25);">
