@@ -17,20 +17,20 @@ router.post("/addRepo", (req, res) => {
   // githubname: req.session.body.githubname
   const githubname = req.session.body.githubname;
   const id = req.session.body.id;
-  console.log(req.body.githubname);
+  // console.log(req.body.githubname);
   // NEED TO PUT THIS SEARCH BEHIND A LOGGED IN USER ONLY
   if (!id) {
     res.status(401).json({ sucess: false, message: "Must be logged in" });
   } else {
     let projectName = req.body.reponame;
-    console.log(projectName);
+    // console.log(projectName);
     // DONT THINK WE NEED repoID - or can be a serial primary key
     let repoID = Math.floor(Math.random() * 1000);
     let status = 1;
-    console.log(id);
+    // console.log(id);
     let sql = `INSERT INTO ${PROJECTS_TABLE_NAME} (userID, gitHubRepoName, repoID, status) VALUES ($1, $2, $3, $4);`;
     let values = [id, projectName, repoID, status];
-    console.log(values);
+    // console.log(values);
     db.query(sql, values)
       .then((dbres) => {
         console.log("project created");
@@ -52,6 +52,7 @@ router.post("/editform/", (req, res) => {
   if (!sessionId) {
       res.status(401).json({ sucess: false, message: "Must be logged in" });
   } 
+  console.log(req.body,"the request body")
   const repoId = req.body.repoId;
   if (!req.files) {
     res.send("File was not found");
@@ -66,16 +67,6 @@ router.post("/editform/", (req, res) => {
   let userID = req.session.body.id;
 
   if (repoId) {
-    //   res.status(400).json({ sucess: false, message: "Please provide a project name" });
-    // } else if (!description) {
-    //   res.status(400).json({ sucess: false, message: "Please provide a project description" });
-    // } else if (!process) {
-    //   res.status(400).json({ sucess: false, message: "Please enter details about the process of the project" });
-    // } else if (!challenges) {
-    //   res.status(400).json({ sucess: false, message: "Please enter details about challenges you faced" });
-    // } else if (!outcomes) {
-    //   res.status(400).json({ sucess: false, message: "Please enter details about the project outcomes" });
-    // } else {
     // CLOUDINARY SEcTion. MUST BE FIRST TO GET THE <url></url>
     const file = req.files;
     const mainresponder = res; // increase the scope
@@ -83,14 +74,13 @@ router.post("/editform/", (req, res) => {
       try {
         const result = await cloudinary.uploader.upload(file.upload.tempFilePath, (result) => {
           if (result.public_id) {
-            // console.log("THE RESULTS ARE",result,"FILE INFO = ",file)
-            //fs.unlinkSync(file.upload.tempFilePath); // delete the emp file.
             fs.rename(file.upload.tempFilePath, file.upload.tempFilePath + ".jpg", () => {
-              console.log("file renamed");
             });
-            let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET projectName = $1, description = $2, process = $4,challenges = $5, outcomes = $6, status = $7, projectimageurl = $8 WHERE repoID = $3 AND userId = $9;`;
-            let values = [
-              projectName,
+            let  sql =''
+            let values = []
+            if(file.upload.tempFilePath){
+            sql = `UPDATE ${PROJECTS_TABLE_NAME} SET description = $1, process = $3,challenges = $4, outcomes = $5, status = $6, projectimageurl = $7 WHERE repoID = $2 AND userId = $8;`;                                      
+            values = [
               description,
               repoId,
               process,
@@ -98,9 +88,22 @@ router.post("/editform/", (req, res) => {
               outcomes,
               status,
               file.upload.tempFilePath.replace('client','.')+'.jpg',
-              userID,
-            ];
-            console.log("THE VALUES ARE", values);
+              userID
+              ];
+            } else {
+             let sql = `UPDATE ${PROJECTS_TABLE_NAME} SET description = $1, process = $3,challenges = $4, outcomes = $5, status = $6 WHERE repoID = $2 AND userId = $7;`;                                      
+            values = [
+              description,
+              repoId,
+              process,
+              challenges,
+              outcomes,
+              status,
+              userID
+              ];   
+                        
+            }
+            console.log("THE VALUES ARE", values);            
             db.query(sql, values)
               .then((dbres) => {
                 if (dbres.rowCount) {
@@ -142,7 +145,6 @@ router.get("/", (req, res) => {
   let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} JOIN ${USERS_TABLE_NAME} ON users.id = repoparameters.userid;`;
   db.query(sql)
     .then((results) => {
-      console.log(results);
       res.status(200).json(results.rows);
     })
     .catch((err) => {
@@ -152,11 +154,9 @@ router.get("/", (req, res) => {
 
 router.get('/:repoid', (req, res) => {
     const repoid = req.params.repoid
-    console.log(repoid)
     let sql = `SELECT * FROM ${PROJECTS_TABLE_NAME} JOIN ${USERS_TABLE_NAME} ON users.id = repoparameters.userid WHERE repoparameters.repoid = $1;`
     db.query(sql,[repoid])
     .then(results => {
-        // console.log(results)
             res.status(200).json(results.rows)
         })
     .catch(err => {
