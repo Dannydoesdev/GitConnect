@@ -66,7 +66,7 @@ router.post(`/register`, (req, res) => {
           // Insert the discovered GitHub details into their users database
           db.query(
             `INSERT INTO ${USERS_TABLE_NAME} 
-                  (githubName,userType,profiletype,email,firstName,githuburl,gitHubAvatar,gitHubrepos_url,gitHubFullName,gitHubCompany,gitHubBlog,gitHubTwitter,gitHubHirable,gitHubLocation,gitHubBio,gitHubMemberSince) 
+                  (githubName,userType,profiletype,email,firstName,githubuserurl,gitHubAvatar,gitHubrepos_url,gitHubFullName,gitHubCompany,gitHubBlog,gitHubTwitter,gitHubHirable,gitHubLocation,gitHubBio,gitHubMemberSince) 
                   VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16);`,
             [
               req.body.gitHubName,
@@ -86,7 +86,9 @@ router.post(`/register`, (req, res) => {
               result.data.bio,
               result.data.created_at,
             ]
+          
           )
+          // console.log(values)
             // Retrieve the recently added user ID
             .then((dbres) => {
               db.query(`SELECT * FROM ${USERS_TABLE_NAME} WHERE email = $1;`, [req.body.email]).then((dbres) => {
