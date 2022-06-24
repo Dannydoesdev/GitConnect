@@ -82,17 +82,35 @@ export function renderLanding() {
 
     axios.get('/api/projects')
         .then(dbRes => {
-            console.log(dbRes)
-            const repoResults = makeAnEl('div', {
-                class: ["row", "px-3", "py-5"],
-            })
-            // results.appendChild(repoResults)
+            console.log(dbRes.data)
+            // const repoResults = makeAnEl('div', {
+            //     class: ["row", "px-3", "py-5"],
+            // })
+            // // results.appendChild(repoResults)
+            
+            // source: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+            function shuffle(array) {
+                let currentIndex = array.length,  randomIndex;
+              
+                // While there remain elements to shuffle.
+                while (currentIndex != 0) {
+              
+                  // Pick a remaining element.
+                  randomIndex = Math.floor(Math.random() * currentIndex);
+                  currentIndex--;
+              
+                  // And swap it with the current element.
+                  [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+                }
+                return array;
+              }
 
+            const randomised = shuffle(dbRes.data)
             // need to limit loop
-            dbRes.data.map((user) => {
-                // console.log(result)
+            randomised.map((user) => {
                 // set standard variables from response that we want to utilise
-                console.log(user);
+                // console.log(user);
                 let repoid = user.repoid
                 let username = user.githubname;
                 let projectName = user.projectname;
@@ -102,7 +120,7 @@ export function renderLanding() {
                 let location = user.githublocation;
                 let userid = user.userid;
                 let projectImageUrl = user.projectimageurl;
-                console.log(repoid)
+                // console.log(repoid)
                 
                 const repoCol = makeAnEl('div', {
                     class: ["col-md-3", "col-sm-6"]
@@ -128,7 +146,7 @@ export function renderLanding() {
                 //<small>/dannydoesdev</small>
 
                 userCard.addEventListener('click', (event) => {
-                    console.log(event.target)
+                    // console.log(event.target)
                     if (event.target.classList.contains('click-to-profile')) {
                         renderProfile(userid)
                     } else {
