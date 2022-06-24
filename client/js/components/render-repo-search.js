@@ -67,10 +67,14 @@ export function renderRepoListBs(userName, userid) {
     const mainPage = document.getElementById('main');
     mainPage.innerHTML = '';
 
+    const results = document.getElementById('results')
+    results.innerHTML = "";
+    results.removeAttribute('class');
+    
     // create a bootstrap style container to hold the page info
     const container = makeAnEl('div', {
         id: 'repo-list',
-        class: ['container-lg', 'bg-dark', 'text-white']
+        class: ['container-xl', 'p-5', 'gx-5', 'bg-dark', 'text-white']
     })
 
     // crreate a bootstrap style row as required
