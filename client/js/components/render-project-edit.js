@@ -1,11 +1,11 @@
-
+import { renderProfile } from "./render-profile.js";
 export function renderProjectEdit(project) {
-    console.log("Project variable = ", project);
-    const main = document.getElementById('main');
-    main.innerHTML = '';
-    const results = document.getElementById('results')
-    results.innerHTML = ""
-    main.innerHTML = `
+  console.log("Project variable = ", project);
+  const main = document.getElementById("main");
+  main.innerHTML = "";
+  const results = document.getElementById("results");
+  results.innerHTML = "";
+  main.innerHTML = `
     <div class="container bg-dark text-white">
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -41,4 +41,26 @@ export function renderProjectEdit(project) {
     </div>
 </div>
     `;
+  let theForm = document.getElementById("edit-project-form");
+  theForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(theForm);
+    const sendingrequest = async () => {
+      await axios
+        .post("/api/projects/editform/", formData)
+        .then((response) => {
+          console.log(response);
+          //   window.location = '/api/projects';
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(err.response.data);
+          let errorMessage = err.response.data.message;
+          alert(errorMessage);
+        });
+      renderProfile(1);
+    };
+  sendingrequest();      
+  });
+
 }
