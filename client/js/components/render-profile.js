@@ -22,8 +22,18 @@ export function renderProfile(id) {
         let profileData = result.data.user;
         console.log(profileData)
 
+
+
+        let avatar = "";
         // Assign standard variables from profile response that we want to utilise
-        let avatar = profileData.githubavatar;
+        if (profileData.githubavatar === null) {
+            avatar = makeAnImg(200, 300);
+        } else {
+            avatar = profileData.githubavatar;
+        };
+       
+      
+        
         let githubName = profileData.githubname;
         let firstName = profileData.firstname;
         let lastName = profileData.lastname;
@@ -56,7 +66,7 @@ export function renderProfile(id) {
 
             projectOneDescription = projectOne.description;
             projectOneRepoid = projectOne.repoid;
-            projectOneGhName = projectOne.githubname;
+            projectOneGhName = projectOne.githubreponame;
             let projectOneTitle = projectOne.title;
             let projectOneImage = projectOne.titleimage;
             let projectOneLink = projectOne.link;
@@ -80,6 +90,16 @@ export function renderProfile(id) {
                 innerText: `Edit ${projectOneRepoName}`,
                 id: 'edit-project-1',
                 onclick: `renderEditProject(${projectOneRepoName})`
+            });
+            addRepoBtn = makeAnEl('btn', {
+                class: ['btn', 'btn-lg', 'btn-outline-success'],
+                innerText: `Add a project from Github`,
+                id: 'add-project-btn',
+            });
+        } else if (result.data.currentUser && projectData.length < 1) {
+            console.log('this is not the current user')
+            editProjectOne = makeAnEl('btn', {
+                display: 'none',
             });
             addRepoBtn = makeAnEl('btn', {
                 class: ['btn', 'btn-lg', 'btn-outline-success'],
@@ -130,7 +150,7 @@ export function renderProfile(id) {
                 <div id="first-repo" class="col-md-9 pe-0 text-start">
                 <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 320)})'")>
                 <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
-                            <h1 class="display-5 fw-bold text-white">Cover Image of project 1</h1>
+                            <h1 class="display-5 fw-bold text-white">Cover Image of ${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
                             <div class="col-lg-6 mx-auto">
                                 <p class="fs-5 mb-4">Image goes here</p>
 
@@ -238,7 +258,7 @@ export function renderProfile(id) {
 
         // For projects 2 onward, we use a loop as these are standard styling
         projectData.forEach((project, index) => {
-            if (index > 1) {
+            if (index >= 1) {
                 const projectCol = makeAnEl('div')
                 projectCol.classList.add('col-md-12', 'px-0', 'my-3');
                 console.log(project.repoid)
@@ -259,7 +279,7 @@ export function renderProfile(id) {
 
             <div class="bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1320, 300)})'")>
                 <div id="${project.repoid}" class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
-                    <h1 class="display-5 fw-bold text-white">Cover Image of project 1</h1>
+                    <h1 class="display-5 fw-bold text-white">Cover Image of ${project.githubreponame ? project.githubreponame : 'Project'}</h1>
                     <div class="col-lg-6 mx-auto">
                         <p class="fs-5 mb-4">Image goes here</p>
 
@@ -354,7 +374,7 @@ export function renderProfile(id) {
  
         // In order for the appending of edit buttons - a new loop is required (doesn't work in same promise above)
         projectData.forEach((project, index) => {
-            if (index > 1 && result.data.currentUser) {
+            if (index >= 1 && result.data.currentUser) {
                 console.log(project.repoid)
                 if (document.getElementById(`${project.repoid}`)) {
                     const editProjectBtn = makeAnEl('btn', {
@@ -385,7 +405,8 @@ export function renderProfile(id) {
         // set up the 'add repo' button at the top of the page - if the user is logged in
         document.getElementById('repo-buttons').appendChild(addRepoBtn);
         addRepoBtn.addEventListener('click', () => {
-            renderRepoListBs(`${githubName}`)
+            console.log(`render repo search clicked name + id = ${githubName} & ${id}`)
+            renderRepoListBs(githubName, id)
         });
 
         // Set up the edit project button for the first project
