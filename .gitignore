@@ -12,7 +12,7 @@ testinghtmlRenderClassObject.js
 /bin/index.html
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
+client/tmp
 # Runtime data
 pids
 *.pid
