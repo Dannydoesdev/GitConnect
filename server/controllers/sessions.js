@@ -121,11 +121,6 @@ router.get(["/", `/myrepos`], (req, res) => {
   });
 });
 
-router.delete("/", isAuthenticated, (req, res) => {
-  //  LOG the user OUT. Deletes the session cookie.
-  req.session.destroy();
-  res.json({ success: true });
-});
 
 router.delete("/", (req, res) => {
   //  Attempt to delete however the user wasnt even logged in to begin with
