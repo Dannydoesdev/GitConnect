@@ -98,9 +98,16 @@ router.get("/", isAuthenticated, (req, res) => {
     success: true,
   });
 });
-router.get("/delete", isAuthenticated, (req, res) => {
-  //  LOG the user OUT. Deletes the session cookie.
+// router.get("/delete", isAuthenticated, (req, res) => {
+//   //  LOG the user OUT. Deletes the session cookie.
+//   req.session.destroy();
+//   res.json({ success: true });
+// });
+
+router.delete('/', isAuthenticated, (req, res) => {
+  console.log(req.session)
   req.session.destroy();
+  console.log(req.session)
   res.json({ success: true });
 });
 
@@ -113,11 +120,13 @@ router.get(["/", `/myrepos`], (req, res) => {
     success: false,
   });
 });
+
 router.delete("/", isAuthenticated, (req, res) => {
   //  LOG the user OUT. Deletes the session cookie.
   req.session.destroy();
   res.json({ success: true });
 });
+
 router.delete("/", (req, res) => {
   //  Attempt to delete however the user wasnt even logged in to begin with
   res.json({ success: false });
