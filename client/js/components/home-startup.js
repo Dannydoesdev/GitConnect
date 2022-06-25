@@ -1,3 +1,4 @@
+import { makeAnEl } from "../../utils/dom-create.js";
 import { renderLogin } from "./render-login.js";
 import { renderRego } from "./render-rego.js";
 // import { whichPageToShow,page } from "./Function-whichPageToShow.js";
@@ -8,35 +9,43 @@ export function renderHome() {
   const main = document.getElementById("main");
   // temporariiy removing search-boxes (sorry Danny)
   main.innerHTML = "";
+  const heroDiv = makeAnEl('div')
+  heroDiv.style.display = 'flex'
+  heroDiv.style.justifyContent = 'center'
+  main.appendChild(heroDiv)
+
   const homeLogo = document.createElement("img");
   homeLogo.src = "./img/gclogo.png";
   // setting logo
   homeLogo.setAttribute("id", "home-logo");
-  main.appendChild(homeLogo);
+  homeLogo.style.textAlign = "center"
+  heroDiv.appendChild(homeLogo);
 
   // setting login/signup
-  const loginContainer = document.createElement("div");
-  loginContainer.setAttribute("id", "login-container");
-  main.appendChild(loginContainer);
+  // const loginContainer = document.createElement("div");
+  // loginContainer.setAttribute("id", "login-container");
+  // main.appendChild(loginContainer);
 
-  const heading = document.createElement("h1");
-  heading.textContent = "Gitconnected;";
-  heading.setAttribute("id", "home-heading");
-  main.appendChild(heading);
-  // setting tagline
-  const tagline = document.createElement("h2");
-  tagline.textContent = "The best fresh talent from around Australia"; // - placeholder
-  tagline.setAttribute("id", "home-tagline");
-  main.appendChild(tagline);
+  // const heading = document.createElement("h1");
+  // heading.textContent = "Gitconnected;";
+  // heading.setAttribute("id", "home-heading");
+  // main.appendChild(heading);
+
+  // const tagline = document.createElement("h2");
+  // tagline.textContent = "The best fresh talent from around Australia"; // - placeholder
+  // tagline.setAttribute("id", "home-tagline");
+  // tagline.style.textAlign = "center"
+  // main.appendChild(tagline);
+
   // creating search box
-  const searchContainer = document.createElement("div");
-  searchContainer.setAttribute("id", "search-container");
-  main.appendChild(searchContainer);
+  // const searchContainer = document.createElement("div");
+  // searchContainer.setAttribute("id", "search-container");
+  // main.appendChild(searchContainer);
 
-  const searchLogo = document.createElement("img");
-  searchLogo.src = ""; // -- maybe not necesary
-  searchLogo.setAttribute("id", "search-logo");
-  searchContainer.appendChild(searchLogo);
+  // const searchLogo = document.createElement("img");
+  // searchLogo.src = ""; // -- maybe not necesary
+  // searchLogo.setAttribute("id", "search-logo");
+  // searchContainer.appendChild(searchLogo);
 
   // const searchBar = document.createElement("input");
   // searchBar.value = "Search";

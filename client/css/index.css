@@ -8,6 +8,7 @@
   background-image:url('../images/under_construction.jpg');
   background-image: url("../images/html_background.jpg");
   background-size: cover;
+  
 } */
 
 body {
@@ -66,11 +67,12 @@ textarea {
   color: white;
 }
 
-#home-logo .rotate {
+#home-logo {
   width: 270px;
   margin: 40px;
-  margin-bottom: 0;
-
+  margin-bottom: -30px;
+  margin-top: 0;
+  text-align: right;
 }
 
 #home-tagline {

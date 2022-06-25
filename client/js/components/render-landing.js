@@ -1,5 +1,6 @@
 import { makeAnEl } from "../../utils/dom-create.js";
 import { makeAnImg } from '../../utils/dom-create.js';
+import { renderHome } from "./home-startup.js";
 import { renderProfile } from "./render-profile.js";
 import { renderProject } from "./render-project.js";
 
@@ -10,10 +11,10 @@ export function renderLanding() {
     const results = document.getElementById('results')
     const main = document.getElementById('main')
     main.innerHTML = '';
-    // results.classList.add('container-md','my-5')
+    renderHome();
 
     // need to code as javascript
-    // results.innerHTML = `
+    // results.innerHTML = `    
     // <div class="row px-3 py-5" style="background-color: #222222;">
     // <h2 style="color: #FFFFFF;">Featured</h2>
     //     <div class="col-md-4 col-sm-6">
