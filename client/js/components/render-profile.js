@@ -33,13 +33,13 @@ export function renderProfile(id) {
         };
        
       
-        
+        let location = profileData.githublocation;
         let githubName = profileData.githubname;
         let firstName = profileData.firstname;
         let lastName = profileData.lastname;
         let aboutme = profileData.aboutme;
         let mobile = profileData.mobile;
-       
+        let memberSince = profileData.githubmembersince;
         // console.log(projectimageurl)
         //TYPO IN DB
         let githubuserurl = profileData.githubuserurl;
@@ -60,13 +60,23 @@ export function renderProfile(id) {
          let projectOneProcess = "";
          let projectOneOutcomes = "";
          let projectOneRepoName = "";
-
+        let projectOneLanguage = "";
+        let projectOneRepoUrl = "";
+        let projectOneLicense = "";
+        let projectOneCreatedAt = "";
+        let projectOneUpdatedAt = "";
         let projectOneImageUrl = "";
+
         // NOTE - Project 1 has special requirements in styling so we call this separately
         // Need to check there is at least one project otherwise keep it blank
         if (projectData.length >= 1) {
            projectOne = projectData[0];
-
+            console.log(projectOne)
+           projectOneUpdatedAt = projectOne.updated_at;
+           projectOneCreatedAt = projectOne.created_at;
+           projectOneLicense = projectOne.license;
+           projectOneLanguage = projectOne.langone;
+           projectOneRepoUrl = projectOne.githubuserurl;
             projectOneDescription = projectOne.description;
             projectOneRepoid = projectOne.repoid;
             projectOneGhName = projectOne.githubreponame;
@@ -121,20 +131,26 @@ export function renderProfile(id) {
         }
 
         //USE THIS FOR IMAGES (or similar, change makeAnImg width and height + bootstrap classes as needed)
-
+        // <p class="text-start">License:</p><p class="text-start"></p>
         // <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}')")>
         
         // From github div:
            // <p>Languages from repo</p>
                             // <p>Some other cool stuff</p>
-
+ // <p class="text-start">Languages:</p>
         // Create the main container, profile info and first project column
+
+
+{/* <p class="text-start sidebar-text" style="color: rgb(161, 161, 161);font-weight: 400;">Main Language: ${projectOneLanguage ? projectOneLanguage : ''}</p>
+                                <p class="text-start sidebar-text" style="color: rgb(161, 161, 161);font-weight: 400;">License: ${projectOneLicense ? projectOneLicense : ''}</p>
+                                <p class="text-start sidebar-text" style="color: rgb(161, 161, 161);font-weight: 400;">Created at: ${projectOneCreatedAt.slice(0,10)}</p> */}
+
     main.innerHTML = `
-<div class="container-lg">
+<div class="container-xxl">
     <div class="row">
         <div class="rounded bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${makeAnImg(1400, 320)}')")>
             <div class="py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.65);">
-                        <h1 class="display-5 fw-bold text-white"></h1>
+                        <h1 class="display-5 fw-bold text-white">${githubName}</h1>
                         <div class="col-lg-6 mx-auto">
                             <p class="fs-5 mb-4"></p>
                             <div id="repo-buttons" class="d-grid gap-4 d-sm-flex justify-content-sm-center pb-4"></div>
@@ -145,24 +161,23 @@ export function renderProfile(id) {
         </div>
 
         <!-- Increase py on hero to make bigger vertically -->
-        <div class="rounded container-lg bg-dark text-white">
+        <div class="rounded container-xxl bg-dark text-white">
             <!-- Sidebar stuff -->
             <div class="row" id="project-row">
                 <div class="rounded col-md-3 d-flex flex-column text-center">
                     <img src="${avatar ? avatar : ''}" class="user-base-text mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
                     <h3>${githubName ? githubName : ''}</h3>
-                    <p>Devs location</p>
+                    <p class='user-base-text'>${location ? location : ''}</p>
                     <br><br>
                     <img src="./img/ghlogo-w.png" alt="Githublogo" width="32" height="32" class="click-to-github mx-auto rounded-circle border border-white">
-                    <a href='${githubuserurl ? githubuserurl : ''}' style='color: white'>Visit my Git</a>
+                    <a href='https://github.com/${githubName}' style='color: white'>Visit my Git</a>
                     <p class='user-base-text'>${aboutme}</p>
                 </div>
 
                 <!-- Hero image of profile -->
                 <div id="first-repo" class="rounded col-md-9 pe-0 text-start">
-                    <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-image: url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}')")>
+                    <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:contain;background-image:url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}');")>
                         <div class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
-
                             <h1 class="display-5 fw-bold text-white">${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
                             <div class="col-lg-6 mx-auto">
                                 <p class="fs-5 mb-4"></p>
@@ -181,14 +196,17 @@ export function renderProfile(id) {
                 
                 <div class="rounded row p-3">
                     <div class="rounded col md-12">
-                        <div class="rounded row text-start py-4">
-                            <div class="rounded col">
+                        <div class="rounded row text-start py-3">
+                            <div class="rounded col py-4">
                                 <h4>Project Description</h4>
                                 <p class="user-base-text text-start">${projectOneDescription ? projectOneDescription : ''}</p>
                             </div>
-                            <div class="rounded col"> 
-                                <h4>GitHub info</h4>
-                                <p class="user-base-text text-start"></p>                               
+
+                            <div class="rounded col py-3"> 
+                                <h4>Github Info</h4>
+                                <p class="text-start sidebar-text">Main Language: ${projectOneLanguage ? projectOneLanguage : ''}</p>
+                                <p class="text-start sidebar-text">License: ${projectOneLicense ? projectOneLicense : ''}</p>
+                                <p class="text-start sidebar-text">Created at: ${projectOneCreatedAt.slice(0,10)}</p>
                             </div>                        
                         </div>
                     </div>
@@ -196,11 +214,11 @@ export function renderProfile(id) {
                 <div class="rounded row p-3">
                     <div class="rounded col md-12">
                         <div class="rounded row text-center py-4">
-                            <div class="rounded col">
+                            <div class="rounded col py-3">
                                 <h4 class="text-start">Project Process</h4>
                                 <p class="user-base-text text-start">${projectOneProcess ? projectOneProcess : ''}</p>
                             </div>
-                            <div class="rounded col">
+                            <div class="rounded col py-3">
                                 <h4 class="text-start">Project Outcomes</h4>
                                 <p class="user-base-text text-start">${projectOneOutcomes ? projectOneOutcomes : ''}</p>
                             </div>
@@ -252,7 +270,7 @@ export function renderProfile(id) {
                 // <div class="py-1">
             projectCol.innerHTML = `
             
-            <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:100%;background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
+            <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:contain;background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
                 <div id="${project.repoid}" class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                     <h1 class="display-5 fw-bold text-white">${project.githubreponame ? project.githubreponame : 'Project'}</h1>
                     <div class="col-lg-6 mx-auto">
@@ -274,13 +292,15 @@ export function renderProfile(id) {
             <div class="rounded row p-3">
                     <div class="rounded col md-12">
                         <div class="rounded row text-start py-4">
-                            <div class="rounded col">
+                            <div class="rounded col py-2">
                                 <h4>Project Description</h4>
                                 <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
                             </div>
-                            <div class="rounded col"> 
+                            <div class="rounded col py-2"> 
                                 <h4>GitHub info</h4>
-                                <p class="user-base-text text-start"></p>                               
+                                <p class="text-start sidebar-text">Main Language: ${project.langone ? project.langone : ''}</p>
+                                <p class="text-start sidebar-text">License: ${project.license ? project.license : ''}</p>
+                                <p class="text-start sidebar-text" style="color: rgb(161, 161, 161);font-weight: 300;">Created at: ${project.created_at.slice(0,10)}<p>                   
                             </div>                                 
                         </div>
                     </div>
@@ -288,11 +308,11 @@ export function renderProfile(id) {
                 <div class="rounded row p-3">
                     <div class="rounded col md-12">
                         <div class="rounded row text-center py-4">
-                            <div class="rounded col">
+                            <div class="rounded col py-2">
                                 <h4 class="text-start">Project Process</h4>
                                 <p class="user-base-text text-start">${project.process ? project.process : ''}</p>
                             </div>
-                            <div class="rounded col">
+                            <div class="rounded col py-2">
                                 <h4 class="text-start">Project Outcomes</h4>
                                 <p class="user-base-text text-start">${project.outcomes ? project.outcomes : ''}</p>
                             </div>

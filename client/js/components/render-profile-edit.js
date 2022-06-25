@@ -32,10 +32,10 @@ export function renderProfileEdit() {
                     <label for="first-name">First Name</label>
                     <input type="text" class="form-control" id="first-name" name="first-name" placeholder="Enter your first name">
                 </div>
-                <div class="form-group mb-4">
+              <div class="form-group mb-4">
                 <label for="last-name">Last Name</label>
                 <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Enter your last name">
-            </div>
+              </div>
                 <div class="form-group mb-4">
                     <label for="about-me">Intro</label>
                     <textarea type="text" class="form-control" id="about-me" name="about-me" placeholder="Bring in some personality - your brand statement, your strengths, what you like and types of projects you want to work on"></textarea>
