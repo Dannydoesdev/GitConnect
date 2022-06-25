@@ -69,9 +69,9 @@ export function renderProjectEdit(project) {
                   })
                   .catch((err) => {
                       console.log(err);
-                      console.log(err.response.data);
-                      let errorMessage = err.response.data.message;
-                      alert(errorMessage);
+                    //   console.log(err.data);
+                    //   let errorMessage = err.response.data.message;
+                    //   alert(errorMessage);
                   });
               renderProfile(project.userid);
           };
@@ -85,8 +85,8 @@ export function renderProjectEdit(project) {
                   })
                   .catch((err) => {
                       console.log(err);
-                      console.log(err.response.data);
-                      let errorMessage = err.response.data.message;
+                      console.log(err.message)
+                      let errorMessage = err.message;
                       alert(errorMessage);
                   });
                   renderProfile(project.userid);
