@@ -164,7 +164,7 @@ export function renderProfile(id) {
         <div class="rounded container-xxl bg-dark text-white">
             <!-- Sidebar stuff -->
             <div class="row" id="project-row">
-                <div class="rounded col-md-3 d-flex flex-column text-center">
+                <div class="rounded col-md-3 pt-4 d-flex flex-column text-center"  style="background-color: rgba(0, 0, 0, 0.25);">
                     <img src="${avatar ? avatar : ''}" class="user-base-text mx-auto my-4 img-thumbnail rounded-circle" alt="avatar" width="100" height="100">
                     <h3>${githubName ? githubName : ''}</h3>
                     <p class='user-base-text'>${location ? location : ''}</p>
@@ -175,7 +175,7 @@ export function renderProfile(id) {
                 </div>
 
                 <!-- Hero image of profile -->
-                <div id="first-repo" class="rounded col-md-9 pe-0 text-start">
+                <div id="first-repo" class="rounded col-md-9 pe-0 text-start" style="padding-left: 0;">
                     <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:contain;background-image:url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}');")>
                         <div class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                             <h1 class="display-5 fw-bold text-white">${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
@@ -188,21 +188,16 @@ export function renderProfile(id) {
 
                     <!-- Title and project info -->
 
-                    <div class="rounded row p-3">
-                        <div class="rounded col-md-12 text-center mb-2">
-                            <h2 class="user-base-text text-start">${projectOneGhName ? projectOneGhName : ''}</h2>
-                        </div>                      
-                    </div>
-                
-                <div class="rounded row p-3">
-                    <div class="rounded col md-12">
-                        <div class="rounded row text-start py-3">
-                            <div class="rounded col py-4">
+                    
+                <div class="rounded row" style="background-color: rgba(0, 0, 0, 0.15);">
+                    <div class="rounded col-md-12">
+                        <div class="rounded row text-start" >
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30">
                                 <h4>Project Description</h4>
                                 <p class="user-base-text text-start">${projectOneDescription ? projectOneDescription : ''}</p>
                             </div>
 
-                            <div class="rounded col py-3"> 
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30"> 
                                 <h4>Github Info</h4>
                                 <p class="text-start sidebar-text">Main Language: ${projectOneLanguage ? projectOneLanguage : ''}</p>
                                 <p class="text-start sidebar-text">License: ${projectOneLicense ? projectOneLicense : ''}</p>
@@ -211,14 +206,14 @@ export function renderProfile(id) {
                         </div>
                     </div>
                 </div>
-                <div class="rounded row p-3">
-                    <div class="rounded col md-12">
-                        <div class="rounded row text-center py-4">
-                            <div class="rounded col py-3">
+                <div class="rounded row" style="background-color: rgba(0, 0, 0, 0.15);">
+                    <div class="rounded col-md-12">
+                        <div class="rounded row text-center">
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30">
                                 <h4 class="text-start">Project Process</h4>
                                 <p class="user-base-text text-start">${projectOneProcess ? projectOneProcess : ''}</p>
                             </div>
-                            <div class="rounded col py-3">
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30">
                                 <h4 class="text-start">Project Outcomes</h4>
                                 <p class="user-base-text text-start">${projectOneOutcomes ? projectOneOutcomes : ''}</p>
                             </div>
@@ -282,20 +277,16 @@ export function renderProfile(id) {
 
             <!-- Title and project info -->
 
-            <div class="rounded row p-3">
-                <div class="rounded col-md-12 text-center mb-2">
-                    <h2 class="user-base-text text-start">${project.githubreponame ? project.githubreponame : ''}</h2>
-                </div>
-            </div>
+  
 
-            <div class="rounded row p-3">
+            <div class="rounded row" style="background-color: rgba(0, 0, 0, 0.15);">
                     <div class="rounded col md-12">
-                        <div class="rounded row text-start py-4">
-                            <div class="rounded col py-2">
+                        <div class="rounded mt-2 row text-start">
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30">
                                 <h4>Project Description</h4>
                                 <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
                             </div>
-                            <div class="rounded col py-2"> 
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30"> 
                                 <h4>GitHub info</h4>
                                 <p class="text-start sidebar-text">Main Language: ${project.langone ? project.langone : ''}</p>
                                 <p class="text-start sidebar-text">License: ${project.license ? project.license : ''}</p>
@@ -304,14 +295,14 @@ export function renderProfile(id) {
                         </div>
                     </div>
                 </div>
-                <div class="rounded row p-3">
+                <div class="rounded row" style="background-color: rgba(0, 0, 0, 0.15);">
                     <div class="rounded col md-12">
-                        <div class="rounded row text-center py-4">
-                            <div class="rounded col py-2">
+                        <div class="rounded mb-2 row text-center">
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30">
                                 <h4 class="text-start">Project Process</h4>
                                 <p class="user-base-text text-start">${project.process ? project.process : ''}</p>
                             </div>
-                            <div class="rounded col py-2">
+                            <div class="col p-4 m-3 rounded" style="background-color: #272A30">
                                 <h4 class="text-start">Project Outcomes</h4>
                                 <p class="user-base-text text-start">${project.outcomes ? project.outcomes : ''}</p>
                             </div>
