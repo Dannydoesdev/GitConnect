@@ -203,10 +203,6 @@ export function renderProject(repoid) {
                 userLocation.style.color = "#a1a1a1ff"
                 userLocation.style.fontWeight = "300"
             }
-
-            
-            
-            
         })
     })
         
