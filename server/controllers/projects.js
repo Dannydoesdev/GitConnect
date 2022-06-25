@@ -4,6 +4,7 @@ const router = express.Router();
 const fileupload = require("express-fileupload");
 const fs = require("fs");
 const cloudinary = require("cloudinary");
+const { response } = require("express");
 require("dotenv").config();
 const USERS_TABLE_NAME = "users";
 const PROJECTS_TABLE_NAME = "repoparameters";
@@ -129,6 +130,7 @@ router.post("/editform/", (req, res) => {
   let process = req.body["project-process"];
   let challenges = req.body["project-challenges"];
   let outcomes = req.body["project-outcomes"];
+  let appLink = req.body["project-link"];
   let status = parseInt(req.body.status);
   let userID = req.session.body.id;
   console.log('hello')
@@ -141,6 +143,8 @@ router.post("/editform/", (req, res) => {
     console.log('hello3')
     // CLOUDINARY SEcTion. MUST BE FIRST TO GET THE <url></url>
     const file = req.files;
+    let responseObj = {};
+    responseObj.message = {};
     const mainresponder = res; // increase the scope
     const upload = async (req, res) => {
       try {
@@ -171,18 +175,37 @@ router.post("/editform/", (req, res) => {
               .then((dbres) => {
                 if (dbres.rowCount) {
                   theDatabaseMessage = "Database updated correctly";
-                  mainresponder.json({
-                    status: STATUS_OK,
-                    file: "Uploaded",
-                    message: theDatabaseMessage,
-                  });
+                  console.log('database updated')
                 } else {
                   theDatabaseMessage = "Database did not update correctly";
+                  console.log(theDatabaseMessage)
                   mainresponder.json({
-                    status: STATUS_OK,
-                    file: "Uploaded",
+                    status: STATUS_NOT_OK,
+                    file: "File not Uploaded",
                     message: theDatabaseMessage,
                   });
+                }
+              })
+              .then(() => {
+                if (appLink) {
+                  db.query(`UPDATE ${PROJECTS_TABLE_NAME} SET app_link = $1 WHERE repoID = $3 AND userId = $2;`, [appLink, userID, repoId])
+                    .then(dbres => {
+                      console.log('app link added')
+                      theDatabaseMessage = "App link and file uploaded";
+                      mainresponder.json({
+                        status: STATUS_OK,
+                        file: "File Uploaded",
+                        message: theDatabaseMessage,
+                      });
+                      })
+                }
+                else {
+                    theDatabaseMessage =  "File uploaded with no app link"
+                    mainresponder.json({
+                      status: STATUS_OK,
+                      file: "File Uploaded",
+                      message: theDatabaseMessage,
+                    });
                 }
               })
               .catch((reason) => {
