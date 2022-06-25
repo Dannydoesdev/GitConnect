@@ -30,6 +30,7 @@ export function renderHome() {
   // heading.textContent = "Gitconnected;";
   // heading.setAttribute("id", "home-heading");
   // main.appendChild(heading);
+  // setting tagline
 
   // const tagline = document.createElement("h2");
   // tagline.textContent = "The best fresh talent from around Australia"; // - placeholder
