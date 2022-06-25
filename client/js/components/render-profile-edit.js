@@ -61,7 +61,7 @@ export function renderProfileEdit(id) {
     
     main.innerHTML = `
     <div class="container bg-dark text-white px-5 py-5">
-    <div class="row">
+      <div class="row">
         <div class="col-md-6 py-4 gx-2 offset-md-3">
             <h3>Update Profile</h3>
             <form action="/" id="edit-profile-form" method="POST">
@@ -69,10 +69,12 @@ export function renderProfileEdit(id) {
                     <label for="first-name">First Name</label>
                     <input type="text" class="form-control" id="first-name" name="first-name" value="${firstname ? firstname : ''}" placeholder="Enter your first name">
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="last-name">Last Name</label>
                     <input type="text" class="form-control" id="last-name" name="last-name" value="${lastname ? lastname : ''}" placeholder="Enter your last name">
                 </div>
+
                 <div class="form-group mb-4">
                     <label for="about-me">Intro</label>
                     <textarea type="text" class="form-control" id="about-me" name="about-me" placeholder="Bring in some personality - your brand statement, your strengths, what you like and types of projects you want to work on">${aboutme ? aboutme : ''}</textarea>
