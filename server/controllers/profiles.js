@@ -123,7 +123,4 @@ router.get("/profilepage/:id", (req, res) => {
 });
 
 
-    
-
-
 module.exports = router;

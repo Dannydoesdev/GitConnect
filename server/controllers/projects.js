@@ -30,8 +30,8 @@ router.post("/addRepo", (req, res) => {
     res.status(401).json({ sucess: false, message: "Must be logged in" });
   } else {
     let projectName = req.body.reponame;
-    // let repoID = req.body.id;
-    let repoID = Math.floor(Math.random() * 10000);
+    let repoID = req.body.id;
+    // let repoID = repoid;
     let status = 1;
     let isFork = '';
 
