@@ -74,7 +74,7 @@ export function renderProject(repoid) {
                     <!-- Hero image or carousel of project photos -->
                     <div class="col-md-10">
                         <div class="row">
-                            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${user.projectimageurl ? user.projectimageurl: makeAnImg(1400, 320)}')">
+                            <div class="bg-dark text-secondary px-0 mx-0 my-0 py-0 text-center" style="background-image: url('${user.projectimageurl ? user.projectimageurl: makeAnImg(1400, 320)}'); background-size: cover;">
                                 <div class="py-1">
                                     <h1 class="display-5 fw-bold text-white" style="height:300px"></h1>
                                     <div class="col-lg-6 mx-auto">
