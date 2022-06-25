@@ -12,7 +12,6 @@ export function renderLanding() {
     const main = document.getElementById('main')
     main.innerHTML = '';
     renderHome();
-    // results.classList.add('container-md','my-5')
 
     // need to code as javascript
     // results.innerHTML = `    
