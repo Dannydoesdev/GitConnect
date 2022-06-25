@@ -261,8 +261,8 @@ export function renderProfile(id) {
                 })
               
 
-                //  <div class="bg-dark text-secondary px-4 py-2 mb-3 text-center" style="background-image: url('${makeAnImg(1320, 240)})'")>
-                // <div class="py-1">
+    
+
             projectCol.innerHTML = `
             
             <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:cover;background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
@@ -313,71 +313,6 @@ export function renderProfile(id) {
 
         `;
                 
-        // REMOVED:
-                
-        //  <div class="row">
-//         <div class="col md-12">
-//         <div class="row text-center py-2">
-//             <div class="col-md-6">
-//                 <h4 class="user-base-text text-start">Project image</h4>
-//                 <p class="user-base-text text-start"></p>
-//             </div>
-
-//             <div class="col-md-6">
-//                 <h4 class="user-base-text text-start">Another project image</h4>
-//                 <p class="user-base-text text-start"></p>
-//             </div>
-//         </div>
-//         <div class="row text-center py-4">
-//             <div class="col">
-//                 <h4 class="user-base-text text-start">Project Description</h4>
-//                 <p class="user-base-text text-start">${project.description ? project.description : ''}</p>
-//             </div>
-
-//             <!-- <div class="col">
-//                 <h4>Project Process</h4>
-//                 <p class="user-base-text text-start"></p>
-//             </div> -->
-//         </div>
-//     </div>
-
-
-//     <!-- <div class="row">
-//     <div class="col md-10">
-//         <div class="row text-center py-2">
-//             <div class="col">
-//                 <h4>Project Description</h4>
-//                 <p class="user-base-text text-start"></p>
-//             </div>
-
-//             <div class="col">
-//                 <h4>Project Process</h4>
-//                 <p class="user-base-text text-start"></p>
-//             </div>
-//         </div>
-
-//         <div class="row text-center py-4 border">
-//             <div class="col">
-//                 <h4>Project Challenges</h4>
-//                 <p class="user-base-text text-start"></p>
-//             </div>
-
-//             <div class="col">
-//                 <h4>Project Outcomes</h4>
-//                 <p class="user-base-text text-start"></p>
-//             </div>
-//         </div>
-//     </div> -->
-
-//     <!-- Github info pulled from API -->
-
-//     <!-- <div class="col-md-2 d-flex flex-column border py-2 text-center">
-//         <h5>Stuff from github</h5>
-//         <p>Languages from repo</p>
-//         <p>Some other cool stuff</p>
-//         <p class="user-base-text text-start"></p>
-//     </div> -->
-// </div>
                                                   
             let projectRow = document.getElementById('project-row')      
             projectRow.appendChild(projectCol);
@@ -396,10 +331,7 @@ export function renderProfile(id) {
                         innerText: `Edit ${project.githubreponame}`,
                     });
 
-                    // editProjectBtn.addEventListener('click', () => {
-                    //     renderProjectEdit(project)
-                    // });
-
+                 
                     document.getElementById(`${project.repoid}`).appendChild(editProjectBtn);
                 }
             }

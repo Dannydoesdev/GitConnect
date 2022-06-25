@@ -31,7 +31,7 @@ router.post("/addRepo", (req, res) => {
   } else {
     let projectName = req.body.reponame;
     // let repoID = req.body.id;
-    let repoID = Math.floor(Math.random() * 10000);
+    let repoID = repoid;
     let status = 1;
     let isFork = '';
 
