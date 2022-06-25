@@ -83,8 +83,8 @@ export function renderProfile(id) {
             projectOneTitle = projectOne.title;
             projectOneImage = projectOne.titleimage;
             projectOneLink = projectOne.htmlurl;
-             projectOneChallenges = projectOne.challenges;
-             projectOneProcess = projectOne.process;
+            projectOneChallenges = projectOne.challenges;
+            projectOneProcess = projectOne.process;
             projectOneOutcomes = projectOne.outcomes;
             projectOneRepoName = projectOne.githubreponame;
             projectOneImageUrl = projectOne.projectimageurl;
@@ -281,7 +281,6 @@ export function renderProfile(id) {
             </div>
 
             <!-- Title and project info -->
-
 
             <div class="rounded row p-3">
                 <div class="rounded col-md-12 text-center mb-2">
