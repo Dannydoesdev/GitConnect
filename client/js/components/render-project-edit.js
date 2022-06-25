@@ -15,7 +15,7 @@ export function renderProjectEdit(project) {
   main.innerHTML = `
     <div class="container bg-dark text-white">
     <div class="row">
-        <div class="col-md-6 py-4 gx-2 offset-md-3">
+        <div class="col-md-6 py-4 gx-2 offset-md-3" style="background-color: rgba(0, 0, 0, 0.25);">
             <h3>Edit Gitconnect info for ${project.githubreponame}</h3>
             <form action="/api/projects/editform/" enctype="multipart/form-data" id="edit-project-form" method="POST">
                 <div class="form-group mb-4">

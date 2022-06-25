@@ -176,7 +176,7 @@ export function renderProfile(id) {
 
                 <!-- Hero image of profile -->
                 <div id="first-repo" class="rounded col-md-9 pe-0 text-start" style="padding-left: 0;">
-                    <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:contain;background-image:url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}');")>
+                    <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:cover;background-image:url('${projectOneImageUrl ? projectOneImageUrl : makeAnImg(1320, 300)}');")>
                         <div class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                             <h1 class="display-5 fw-bold text-white">${projectOneGhName ? projectOneGhName : 'First Project'}</h1>
                             <div class="col-lg-6 mx-auto">
@@ -265,7 +265,7 @@ export function renderProfile(id) {
                 // <div class="py-1">
             projectCol.innerHTML = `
             
-            <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:contain;background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
+            <div class="rounded bg-dark text-secondary mx-0 my-0 py-0 text-center" style="background-size:cover;background-image: url('${project.projectimageurl ? project.projectimageurl : makeAnImg(1320, 300)}')">
                 <div id="${project.repoid}" class="rounded py-5 h-100 w-100" style="background-color: rgba(0, 0, 0, 0.25);">
                     <h1 class="display-5 fw-bold text-white">${project.githubreponame ? project.githubreponame : 'Project'}</h1>
                     <div class="col-lg-6 mx-auto">
