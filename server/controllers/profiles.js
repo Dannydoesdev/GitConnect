@@ -7,17 +7,22 @@ const USERS_TABLE_NAME = "users"
 const PROJECTS_TABLE_NAME = "repoParameters"
 
 //Handle POST requests to /api/projects to create profiles
-router.post("/", (req, res) => {
+router.post("/:userid", (req, res) => {
     
+    let userid = req.params.userid
+    let loggedInUserid = req.session.body.id;
     // removing session check for testing purposes
+    console.log("THE USERID IS", userid);
+    console.log("THE LOGGED IN USERID IS", loggedInUserid);
 
-    // let sessionId = req.session.id;
-    // if (!sessionId) {
-    //     res.status(401).json({ sucess: false, message: "Must be logged in" });
-    // } else {
+    if (userid != loggedInUserid) {
+        res.status(400).json({ sucess: false, message: "You can only edit your own profile" });
+    } else {
         let firstName = req.body.firstName;
         let lastName = req.body.lastName;
         let aboutme = req.body.aboutme;
+        let location = req.body.location;
+        let portfoliolink = req.body.portfoliolink;
 
         //should change this to allow any data to be updated without blocking the request
         if (!firstName) {
@@ -26,27 +31,43 @@ router.post("/", (req, res) => {
             res.status(400).json({ sucess: false, message: "Please provide a last name" });
         } else if (!aboutme) {
             res.status(400).json({ sucess: false, message: "Please enter some details in 'about me'" });
-        } 
+        }
         else {
-            // testing manual insertion of some info
-            let userID = req.session.body.id;
-            
             let sql = `UPDATE ${USERS_TABLE_NAME} SET firstName = $1, lastName = $2, aboutme = $3 WHERE id = $4;`;
-            let values = [firstName, lastName, aboutme, userID];
-            console.log(values);
-            
+            let values = [firstName, lastName, aboutme, userid];
             db.query(sql, values)
                 .then(dbres => {
-                    console.log('profile created')
-                    res.json({ sucess: true, message: "Profile created" });
+                    console.log('Profile updated')
+                    // res.json({ sucess: true, message: "Profile created" });
+                })
+                .then(() => {
+                    if (portfoliolink) {
+                        db.query(`UPDATE ${USERS_TABLE_NAME} SET portfoliolink = $1 WHERE id = $2;`, [portfoliolink, userid])
+                            .then(dbres => {
+                                console.log('portfolio added')
+                                // res.json({ sucess: true, message: "Profile created" });
+                            })
+                    }
+                })
+                .then(() => {
+                    if (location) {
+                        db.query(`UPDATE ${USERS_TABLE_NAME} SET gitHubLocation = $1 WHERE id = $2;`, [location, userid])
+                            .then(dbres => {
+                                console.log('location added')
+                                res.json({ sucess: true, message: "Profile updated" });
+                            })
+                    }
+                    else {res.json({ sucess: true, message: "Profile updated" });}
                 })
                 .catch(reason => {
                     console.log(reason)
                     res.status(500).json({ sucess: false, message: 'Unknown error occured' });
                 })
+              
+                    
 
         }
-    // }
+    }
 }); 
 
 // WILL NEED TO BE ABLE TO do this anonymously (IE JUST A BROWSING USER - can split to another call maybe)

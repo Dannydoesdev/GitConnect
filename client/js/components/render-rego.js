@@ -28,7 +28,7 @@ export function renderRego() {
             </div> 
             <div class="form-group mb-4">
                 <label for="confirm-password">Password:</label>
-                <input type="confirm-password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm your Password">
+                <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm your Password">
             </div>            
                 <input type="submit" class="btn btn-lg btn-outline-light align-self-center" value="Submit">
             </form>
