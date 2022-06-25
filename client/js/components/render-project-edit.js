@@ -39,8 +39,8 @@ export function renderProjectEdit(project) {
                     <textarea type="text" class="form-control" id="project-outcomes" name="project-outcomes" placeholder="What was the project outcome? Was it successful? What did you learn and any reflections?">${project.outcomes ? project.outcomes : ''}</textarea>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="project-link">App Link</label>
-                    <textarea type="text" class="form-control" id="project-link" name="project-link" placeholder="Link to your app">${appLink ? appLink : ''}</textarea>
+                    <label for="project-link">Live site link</label>
+                    <textarea type="text" class="form-control" id="project-link" name="project-link" placeholder="Link to your live site to host it in the project page">${appLink ? appLink : ''}</textarea>
                 </div>
                 <input type="submit" class="btn btn-lg btn-outline-light align-self-center" value="Submit">
                 <input id="file" name="upload" type="file" class="btn btn-lg btn-outline-light align-self-center" 
