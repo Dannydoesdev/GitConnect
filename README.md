@@ -10,12 +10,12 @@ Browse projects // Create and cutomise a profile // Add projects easily, directl
 
 ### [Find the live site by clicking here](https://git--connect.herokuapp.com/)
 
-### Note that 'v2' is under construction, and can be found below
+#### Note that 'v2' is under construction, and can be found below
 ---
 ## Contact
 
 ### You can find us at [Dannys Linkedin](https://www.linkedin.com/in/danieltmcgee/) + [Jericho's Github](https://github.com/Cjunk) + [Garmon's Github](https://github.com/misakigrim)
-### Please reach out if you want to contribute to this project! Very open to it
+#### Please reach out if you want to contribute to this project! Very open to it
 --- 
 ## Introduction
 
@@ -47,18 +47,22 @@ As a developer, I want a place where I can view interesting and inspiring projec
 As a recruiter/hiring engineer, I want a place where I can seek out and contact fresh talent so that I can proactively bring great engineers into our businesses
 
 ---
+
 ## Features:
 
 -   Easy to get register (or browse without an account)
--   Pull your repos direct from Github and showcase as projects
--   Upload repo images
--   Create repo stories
--   Personalise your portfolio
--   Provide contact details and Bio
--   Link to your social media, portfolio
+-   Landing page for viewing other GitConnect profiles and projects
+-   Github API integration for importing repos easily as GitConnect Projects
+-   A project page is created for each repo you import
+-   Project editing tools for 'GitConnect specific' information on the projects
+-   Upload project images & create stories for your project
+-   A profile page is created for each user that you can personalise
+-   Provide contact details, bio & social media links
 
 ---
+
 ## v1 Stack:
+
 - Node.JS
 - Express
 - PSQL database
@@ -67,18 +71,6 @@ As a recruiter/hiring engineer, I want a place where I can seek out and contact 
 - Bootstrap
 - Github API integration
 - Heroku hosting
-
---- 
-
-## Features:
-
-- Simple registration
-- Github API integration for importing repos as GitConnect Projects
-- Project editing tools for 'GitConnect specific' information on the projects
-- Profile editing tools
-- A profile page for each user
-- A project page for each projects
-- Landing page for viewing other GitConnect profiles and projects
 
 ---
 
@@ -90,7 +82,8 @@ As a recruiter/hiring engineer, I want a place where I can seek out and contact 
 
 ## Project Resources
 
-[Miro diagramming](https://miro.com/app/board/uXjVOtuEbWo=/)
+[Miro wireframes & UX flows](https://miro.com/app/board/uXjVOtuEbWo=/)
+
 [Figma designs](https://www.figma.com/file/K4HYl8z5A7Ajd0Elbadnva/GitConnect?node-id=0%3A1)
 
 ---
