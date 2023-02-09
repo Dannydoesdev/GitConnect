@@ -82,9 +82,9 @@ As a recruiter/hiring engineer, I want a place where I can seek out and contact 
 
 ## Project Resources
 
-[Miro wireframes & UX flows](https://miro.com/app/board/uXjVOtuEbWo=/)
+[Miro wireframes & UX flows](https://miro.com/app/board/uXjVOtuEbWo=/?moveToWidget=3458764527755801662&cot=14)
 
-[Figma designs](https://www.figma.com/file/K4HYl8z5A7Ajd0Elbadnva/GitConnect?node-id=0%3A1)
+[Figma designs & research](https://www.figma.com/file/K4HYl8z5A7Ajd0Elbadnva/GitConnect?node-id=0%3A1)
 
 ---
 ## **SECURITY**
